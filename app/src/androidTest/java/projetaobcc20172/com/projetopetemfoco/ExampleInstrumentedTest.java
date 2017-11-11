@@ -1,4 +1,4 @@
-package projetaobcc20172.com.petemfoco;
+package projetaobcc20172.com.projetopetemfoco;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Pet Em Foco</string>
+    <string name="title_cadastro_usuario">Cadastro de Usuário</string>
     <string name="entrar">Entrar</string>
     <string name="cadastrar">Cadastrar</string>
     <!-- Strings related to login -->
@@ -15,4 +16,11 @@
         completions."
     </string>
     <string name="pergunta_nao_possui_cadastro">Não possui cadastro?</string>
+    <string name="digite_seu_nome">Digite seu nome</string>
+    <string name="digite_seu_email">Digite seu email</string>
+    <string name="digite_sua_senha">Digite sua senha</string>
+    <string name="repita_sua_senha">Repita sua senha</string>
+    <string name="nome">Nome</string>
+    <string name="confirmar_sua_senha">Confirme sua senha</string>
+
 </resources>

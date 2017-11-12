@@ -23,6 +23,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.MainActivity" />
-        <activity android:name=".activity.CadastroUsuarioActivity"></activity>
+        <activity android:name=".activity.CadastroUsuarioActivity"
+            android:label="@string/title_cadastro_usuario"></activity>
     </application>
 </manifest>

@@ -30,7 +30,7 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
     private EditText nome, email, senha, senha2;
     private Button botaoCadastrar;
     private Usuario usuario;
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)//permite que essa variavel seja vista pela classe de teste
     Toast mToast;
     private FirebaseAuth autenticacao;
 
@@ -39,11 +39,11 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_usuario);
 
-        nome = (EditText)findViewById(R.id.editText_nome);
-        email = (EditText)findViewById(R.id.editText_email);
-        senha = (EditText)findViewById(R.id.editText_senha);
-        senha2 = (EditText)findViewById(R.id.editText_senha2);
-        botaoCadastrar = (Button)findViewById(R.id.botao_cadastrar);
+        nome = findViewById(R.id.editText_nome);
+        email = findViewById(R.id.editText_email);
+        senha = findViewById(R.id.editText_senha);
+        senha2 = findViewById(R.id.editText_senha2);
+        botaoCadastrar = findViewById(R.id.botao_cadastrar);
 
         botaoCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override

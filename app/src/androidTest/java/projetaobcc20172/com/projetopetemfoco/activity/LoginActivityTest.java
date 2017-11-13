@@ -24,6 +24,7 @@ import static org.hamcrest.CoreMatchers.not;
 
 /**
  * Created by raul on 10/11/17.
+ * Classe que realiza os testes automatizados para login
  */
 public class LoginActivityTest{
 
@@ -50,7 +51,7 @@ public class LoginActivityTest{
         Espresso.closeSoftKeyboard();
         loginActivityRule.getActivity().getToast().cancel();
     }
-
+    //Teste que simula uma tentatica de login com um cadastro não existente
     @Test
     public void testeLoginNaoCadastrado() {
         //preenche o campo de e-mail com o texto do "loginInvalido"
@@ -63,14 +64,14 @@ public class LoginActivityTest{
         Espresso.onView(ViewMatchers.withText(R.string.erro_login_invalido_Toast)).inRoot(withDecorView(not(is(loginActivityRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
         this.limparCampos();
     }
-
+    //Teste que simula um login com todos os campos de texto em branco
     @Test
     public void testeCamposEmBranco(){
         Espresso.onView(ViewMatchers.withId(R.id.botao_login)).perform(ViewActions.click());
         Espresso.onView(ViewMatchers.withText(R.string.erro_login_invalido_Toast)).inRoot(withDecorView(not(is(loginActivityRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
         this.limparCampos();
     }
-
+    //Teste que simula um login com o campo de senha em branco
     @Test
     public void testeSenhaEmBranco(){
         Espresso.onView(ViewMatchers.withId(R.id.editText_email)).perform(ViewActions.typeText(this.loginValido));

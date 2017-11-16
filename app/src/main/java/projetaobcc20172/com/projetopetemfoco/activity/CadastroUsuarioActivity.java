@@ -94,10 +94,8 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
 
                     Toast.makeText(CadastroUsuarioActivity.this, "Erro ao cadastrar usuário: " + erro, Toast.LENGTH_LONG ).show();
                 }
-
             }
         });
-
     }
 
     public void abrirLoginUsuario(){

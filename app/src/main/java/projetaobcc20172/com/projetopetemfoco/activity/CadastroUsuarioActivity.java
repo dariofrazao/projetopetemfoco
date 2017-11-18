@@ -123,6 +123,4 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
-
-
 }

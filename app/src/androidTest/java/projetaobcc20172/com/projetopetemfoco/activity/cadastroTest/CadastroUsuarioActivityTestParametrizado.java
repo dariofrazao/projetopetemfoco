@@ -1,3 +1,4 @@
+
 package projetaobcc20172.com.projetopetemfoco.activity.cadastroTest;
 
 import android.support.test.espresso.Espresso;
@@ -21,7 +22,7 @@ import static org.hamcrest.CoreMatchers.not;
  * Essa classe é responsavel por executar os testes automatizados
  * Para o cadastro de um usuário
  */
-
+/*
 @RunWith(Parameterized.class)
 public class CadastroUsuarioActivityTestParametrizado extends CadastroUsuarioTestMae {
     //Essas variaveis guardam valores que são preenchidos nos campos
@@ -29,11 +30,12 @@ public class CadastroUsuarioActivityTestParametrizado extends CadastroUsuarioTes
     private String nome = "Teste"; //nome do usuário
     @Parameterized.Parameter(0)
     public String nomeInvalido;
-
+*/
 
     /*Pametros que são serão utilizados nos teste. Cada parametro desse
     faz com o teste seja executado uma vez.
     */
+    /*
     @Parameterized.Parameters
     public static Collection<Object[]> data() {
         return Arrays.asList(new Object[][]{{"*nome"}, {"?nome"}, {"$nome"}, {"&nome"}, {"(nome"}, {"{nome"}});
@@ -48,3 +50,4 @@ public class CadastroUsuarioActivityTestParametrizado extends CadastroUsuarioTes
 
 
 }
+    */

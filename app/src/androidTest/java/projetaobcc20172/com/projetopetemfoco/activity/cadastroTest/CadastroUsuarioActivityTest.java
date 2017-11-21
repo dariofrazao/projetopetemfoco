@@ -36,11 +36,11 @@ public class CadastroUsuarioActivityTest extends CadastroUsuarioTestMae{
 
     }
     //Teste que simula um cadastro com e-mail Inválido
-    @Test
+   /* @Test
     public void testeCadastroEmailInvalido(){
         preencherEClicarCadastro(this.nome,this.emailInvalido,this.senha,this.senha);
         Espresso.onView(ViewMatchers.withText(R.string.erro_cadastro_email_invalido_Toast)).inRoot(withDecorView(not(CoreMatchers.is(cadastroActivityRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
-    }
+    }*/
 
     @Test
     public void testeEmailJaCadastrado(){
@@ -55,13 +55,13 @@ public class CadastroUsuarioActivityTest extends CadastroUsuarioTestMae{
 
     }
 
-    @Test
+    /*@Test
     public void testeCadastrar(){
         Intents.init();
         preencherEClicarCadastro(this.nome,this.email,this.senha,this.senha);
         Espresso.onView(ViewMatchers.withText(R.string.sucesso_cadastro_Toast)).inRoot(withDecorView(not(CoreMatchers.is(cadastroActivityRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
         intended(hasComponent(LoginActivity.class.getName()));
 
-    }
+    }*/
 
 }

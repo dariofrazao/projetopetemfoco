@@ -11,28 +11,28 @@ cache:
  -$HOME/.gradle/wrapper/
  
  env:
- global:
- - ANDROID_API=26
- - EMULATOR_API=21
- - ANDROID_BUILD_TOOLS=26.0.2
- - ADB_INSTALL_TIMEOUT=5 # minutes
+  global:
+  - ANDROID_API=26
+  - EMULATOR_API=21
+  - ANDROID_BUILD_TOOLS=26.0.2
+  - ADB_INSTALL_TIMEOUT=5 # minutes
  
  android:
- components:
- - tools
- - platform-tools
- - build-tools-$ANDROID_BUILD_TOOLS
- - android-$ANDROID_API
- - android-$EMULATOR_API_LEVEL
- - extra-google-m2repository
- - extra-android-m2repository # for design library
- - addon-google_apis-google-19 # google play services
- - sys-img-armeabi-v7a-addon-google_apis-google-$ANDROID_API_LEVEL
- - sys-img-armeabi-v7a-addon-google_apis-google-$EMULATOR_API_LEVEL
- licenses:
- - android-sdk-preview-license-.+
- - android-sdk-license-.+
- - google-gdk-license-.+
+  components:
+  - tools
+  - platform-tools
+  - build-tools-$ANDROID_BUILD_TOOLS
+  - android-$ANDROID_API
+  - android-$EMULATOR_API_LEVEL
+  - extra-google-m2repository
+  - extra-android-m2repository # for design library
+  - addon-google_apis-google-19 # google play services
+  - sys-img-armeabi-v7a-addon-google_apis-google-$ANDROID_API_LEVEL
+  - sys-img-armeabi-v7a-addon-google_apis-google-$EMULATOR_API_LEVEL
+  licenses:
+  - android-sdk-preview-license-.+
+  - android-sdk-license-.+
+  - google-gdk-license-.+
  
  before_install:
 - mkdir "$ANDROID_HOME/licenses" || true
@@ -48,6 +48,4 @@ before_script:
 - android-wait-for-emulator
 - adb shell input keyevent 82 &
 
-script:
-- "./gradlew clean build connectedCheck -PdisablePreDex --stacktrace"
 

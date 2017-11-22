@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -29,7 +30,7 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
     private EditText nome, email, senha, senha2;
     private Button botaoCadastrar;
     private Usuario usuario;
-    private android.support.v7.widget.Toolbar toolbar;
+    private Toolbar toolbar;
 
     private FirebaseAuth autenticacao;
 
@@ -37,7 +38,7 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_usuario);
 
-        toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.tb_cadastro);
+        toolbar = (Toolbar) findViewById(R.id.tb_cadastro);
         nome = (EditText)findViewById(R.id.editText_nome);
         email = (EditText)findViewById(R.id.editText_email);
         senha = (EditText)findViewById(R.id.editText_senha);

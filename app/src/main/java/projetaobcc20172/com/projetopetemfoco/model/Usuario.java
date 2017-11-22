@@ -7,6 +7,7 @@ import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoFirebase;
 
 public class Usuario {
 
+    //Atributos do usuário
     private String id;
     private String nome;
     private String email;
@@ -16,9 +17,9 @@ public class Usuario {
 
     }
 
-    public void salvar(){
-        DatabaseReference referenciaFirebase = ConfiguracaoFirebase.getFirebase();
-        referenciaFirebase.child("usuarios").child( getId() ).setValue( this );
+    public void salvar(){ //Método para salvar usuário no banco de dados do Firebase
+        DatabaseReference referenciaFirebase = ConfiguracaoFirebase.getFirebase(); //Chama a referência do Firebase
+        referenciaFirebase.child("usuarios").child( getId() ).setValue( this ); //Cria os nós dos usuário no banco de dados
     }
 
     @Exclude

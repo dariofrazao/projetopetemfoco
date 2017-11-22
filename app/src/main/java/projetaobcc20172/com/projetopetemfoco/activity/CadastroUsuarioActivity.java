@@ -30,7 +30,7 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
     private EditText nome, email, senha, senha2;
     private Button botaoCadastrar;
     private Usuario usuario;
-    private Toolbar toolbar;
+
 
     private FirebaseAuth autenticacao;
 
@@ -38,6 +38,7 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_usuario);
 
+        Toolbar toolbar;
         toolbar = (Toolbar) findViewById(R.id.tb_cadastro);
         nome = (EditText)findViewById(R.id.editText_nome);
         email = (EditText)findViewById(R.id.editText_email);

@@ -1,13 +1,17 @@
 package projetaobcc20172.com.projetopetemfoco.activity;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -28,14 +32,15 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
     private EditText nome, email, senha, senha2;
     private Button botaoCadastrar;
     private Usuario usuario;
+    private android.support.v7.widget.Toolbar toolbar;
 
     private FirebaseAuth autenticacao;
 
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_usuario);
 
+        toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.tb_cadastro);
         nome = (EditText)findViewById(R.id.editText_nome);
         email = (EditText)findViewById(R.id.editText_email);
         senha = (EditText)findViewById(R.id.editText_senha);
@@ -52,7 +57,21 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
                 cadastrarUsuario();
             }
         });
+
+        // Configura toolbar
+        toolbar.setTitle("Cadastro de Usuário");
+        toolbar.setTitleTextColor(Color.WHITE);
+        toolbar.setNavigationIcon(R.drawable.ic_action_arrow_left_white);
+        setSupportActionBar(toolbar);
     }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
+
 
     private void cadastrarUsuario(){
 

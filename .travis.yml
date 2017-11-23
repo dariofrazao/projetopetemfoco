@@ -37,6 +37,8 @@ before_script:
 
 script:
     - datahora=`TZ=America/Recife date "+%A %d/%m/%Y %T"`' America/Recife'
+    #integracao com teste do espresso
+    - ./gradlew connectedAndroidTest
 
 before_install:
     - chmod +x gradlew

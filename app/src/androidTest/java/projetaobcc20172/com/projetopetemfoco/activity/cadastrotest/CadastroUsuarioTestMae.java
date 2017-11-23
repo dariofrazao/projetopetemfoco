@@ -4,11 +4,7 @@ import android.support.test.espresso.Espresso;
 import android.support.test.espresso.action.ViewActions;
 import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.rule.ActivityTestRule;
-
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Rule;
-
 import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.activity.CadastroUsuarioActivity;
 
@@ -22,12 +18,12 @@ import projetaobcc20172.com.projetopetemfoco.activity.CadastroUsuarioActivity;
 public class CadastroUsuarioTestMae {
     //Essas variaveis guardam valores que são preenchidos nos campos
     //Existentes na tela de cadastro
-    String nome = "Teste"; //nome do usuário
-    String emailJaUtilizado = "raulpedrouag@gmail.com";
-    String emailInvalido = "teste@231234gemeiul.com.br2";
-    String email = "luar.pedro@yahoo.com.br";
-    String senha = "12345e";
-    String senha2 = "12345ew1";
+    protected String nome = "Teste"; //nome do usuário
+    protected String emailJaUtilizado = "raulpedrouag@gmail.com";
+    protected String emailInvalido = "teste@231234gemeiul.com.br2";
+    protected String email = "luar.pedro@yahoo.com.br";
+    protected String senha = "12345e";
+    protected String senha2 = "12345ew1";
 
     //Atributo que identifca qual activity seŕa testada
     @Rule
@@ -46,8 +42,10 @@ public class CadastroUsuarioTestMae {
         Espresso.onView(ViewMatchers.withId(R.id.botao_cadastrar)).perform(ViewActions.click());
     }
     //método que executa algo antes de iniciar os testes.
+   /*
     @Before
     public void setUp() throws Exception {
+
     }
 
     @After
@@ -56,4 +54,5 @@ public class CadastroUsuarioTestMae {
         //Para acomponhar se a mudança de tela ocorreu corretamente
         //Thread.sleep(1000);
     }
+    */
 }

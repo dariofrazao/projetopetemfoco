@@ -31,7 +31,7 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
     private Button botaoCadastrar;
     private Usuario usuario;
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)//permite que essa variavel seja vista pela classe de teste
-    Toast mToast;
+    private Toast mToast;
     private FirebaseAuth autenticacao;
 
     @Override
@@ -103,17 +103,17 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
                             e.printStackTrace();
                         }
 
-                        mToast = mToast.makeText(CadastroUsuarioActivity.this, erro, Toast.LENGTH_LONG);
+                        mToast = mToast.makeText(CadastroUsuarioActivity.this, erro, Toast.LENGTH_SHORT);
                         mToast.show();
                     }
 
                 }
             });
         } catch (SenhasDiferentesException e) {
-            mToast = mToast.makeText(CadastroUsuarioActivity.this, R.string.erro_cadastro_senhas_diferentes_Toast, Toast.LENGTH_LONG);
+            mToast = mToast.makeText(CadastroUsuarioActivity.this, R.string.erro_cadastro_senhas_diferentes_Toast, Toast.LENGTH_SHORT);
             mToast.show();
         } catch (Exception e) {
-            mToast = mToast.makeText(CadastroUsuarioActivity.this, R.string.erro_cadastro_campos_obrigatorios_Toast, Toast.LENGTH_LONG);
+            mToast = mToast.makeText(CadastroUsuarioActivity.this, R.string.erro_cadastro_campos_obrigatorios_Toast, Toast.LENGTH_SHORT);
             mToast.show();
         }
     }

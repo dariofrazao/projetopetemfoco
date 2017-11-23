@@ -1,4 +1,4 @@
-package projetaobcc20172.com.projetopetemfoco.activity.loginTests;
+package projetaobcc20172.com.projetopetemfoco.activity.logintests;
 
 import android.support.test.espresso.Espresso;
 import android.support.test.espresso.action.ViewActions;

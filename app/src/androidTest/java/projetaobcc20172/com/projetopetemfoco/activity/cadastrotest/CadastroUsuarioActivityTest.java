@@ -1,18 +1,12 @@
-package projetaobcc20172.com.projetopetemfoco.activity.cadastroTest;
+package projetaobcc20172.com.projetopetemfoco.activity.cadastrotest;
 
 import android.support.test.espresso.Espresso;
 import android.support.test.espresso.action.ViewActions;
-import android.support.test.espresso.intent.Intents;
 import android.support.test.espresso.matcher.ViewMatchers;
-
 import org.hamcrest.CoreMatchers;
 import org.junit.Test;
 import projetaobcc20172.com.projetopetemfoco.R;
-import projetaobcc20172.com.projetopetemfoco.activity.LoginActivity;
-
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
-import static android.support.test.espresso.intent.Intents.intended;
-import static android.support.test.espresso.intent.matcher.IntentMatchers.hasComponent;
 import static android.support.test.espresso.matcher.RootMatchers.withDecorView;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static org.hamcrest.CoreMatchers.not;
@@ -24,6 +18,12 @@ import static org.hamcrest.CoreMatchers.not;
  */
 
 public class CadastroUsuarioActivityTest extends CadastroUsuarioTestMae{
+
+    @Test
+    public void testeEmailJaCadastrado(){
+        preencherEClicarCadastro(this.nome,this.emailJaUtilizado,this.senha,this.senha);
+        Espresso.onView(ViewMatchers.withText(R.string.erro_cadastro_email_usado_Toast)).inRoot(withDecorView(not(CoreMatchers.is(cadastroActivityRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
+    }
 
     @Test
     public void testeCadastroCampoAusente(){
@@ -42,11 +42,6 @@ public class CadastroUsuarioActivityTest extends CadastroUsuarioTestMae{
         Espresso.onView(ViewMatchers.withText(R.string.erro_cadastro_email_invalido_Toast)).inRoot(withDecorView(not(CoreMatchers.is(cadastroActivityRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
     }*/
 
-    @Test
-    public void testeEmailJaCadastrado(){
-        preencherEClicarCadastro(this.nome,this.emailJaUtilizado,this.senha,this.senha);
-        Espresso.onView(ViewMatchers.withText(R.string.erro_cadastro_email_usado_Toast)).inRoot(withDecorView(not(CoreMatchers.is(cadastroActivityRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
-    }
     //Teste que simula um cadastro com senha e senha de confirmação diferentes
     @Test
     public void testeCadastrarSenhasDif(){

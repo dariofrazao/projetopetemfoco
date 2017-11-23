@@ -1,4 +1,4 @@
-package projetaobcc20172.com.projetopetemfoco.activity.cadastroTest;
+package projetaobcc20172.com.projetopetemfoco.activity.cadastrotest;
 
 import android.support.test.espresso.Espresso;
 import android.support.test.espresso.action.ViewActions;
@@ -22,12 +22,12 @@ import projetaobcc20172.com.projetopetemfoco.activity.CadastroUsuarioActivity;
 public class CadastroUsuarioTestMae {
     //Essas variaveis guardam valores que são preenchidos nos campos
     //Existentes na tela de cadastro
-    public String nome = "Teste"; //nome do usuário
-    public String emailJaUtilizado = "raulpedrouag@gmail.com";
-    public String emailInvalido = "teste@231234gemeiul.com.br2";
-    public String email = "luar.pedro@yahoo.com.br";
-    public String senha = "12345e";
-    public String senha2 = "12345ew1";
+    String nome = "Teste"; //nome do usuário
+    String emailJaUtilizado = "raulpedrouag@gmail.com";
+    String emailInvalido = "teste@231234gemeiul.com.br2";
+    String email = "luar.pedro@yahoo.com.br";
+    String senha = "12345e";
+    String senha2 = "12345ew1";
 
     //Atributo que identifca qual activity seŕa testada
     @Rule
@@ -54,6 +54,6 @@ public class CadastroUsuarioTestMae {
     public void tearDown() throws Exception {
         //deixa o app parado por 5 segundos
         //Para acomponhar se a mudança de tela ocorreu corretamente
-        //Thread.sleep(5000);
+        //Thread.sleep(1000);
     }
 }

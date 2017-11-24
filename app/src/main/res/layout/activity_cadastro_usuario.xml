@@ -3,129 +3,152 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="0dp"
+    android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="projetaobcc20172.com.projetopetemfoco.activity.CadastroUsuarioActivity">
+
+    <include
+        android:id="@+id/tb_cadastro"
+        layout="@layout/toolbar"></include>
+
     <LinearLayout
 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tb_cadastro"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin">
+
         <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:id="@+id/scrollView"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
             <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="1">
-                <View
-                    android:layout_width="fill_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginBottom="2dp" />
-                <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="@string/nome"
-                    android:id="@+id/TexViewCadastroNomeUsuario"
-                    android:layout_margin="6dp"
-                    android:textStyle="bold" />
-                <EditText
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:ems="10"
-                    android:id="@+id/editText_nome"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginTop="31dp"
-                    android:layout_margin="4dp"
-                    android:hint="@string/digite_seu_nome" />
-                <View
-                    android:layout_width="fill_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginBottom="2dp" />
-                <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="@string/prompt_email"
-                    android:id="@+id/TexViewCadastroEmailUsuario"
-                    android:layout_margin="6dp"
-                    android:textStyle="bold" />
-                <EditText
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textEmailAddress"
-                    android:ems="10"
-                    android:id="@+id/editText_email"
-                    android:hint="@string/digite_seu_email"
-                    android:layout_margin="4dp"
-                    android:layout_below="@+id/editText_nome"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true" />
-                <View
-                    android:layout_width="fill_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginBottom="2dp" />
-                <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="@string/prompt_password"
-                    android:id="@+id/TexViewCadastroSenhaUsuario"
-                    android:layout_margin="6dp"
-                    android:textStyle="bold" />
-                <EditText
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textPassword"
-                    android:ems="10"
-                    android:id="@+id/editText_senha"
-                    android:hint="@string/digite_sua_senha"
-                    android:layout_margin="4dp"
-                    android:layout_below="@+id/editText_email"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true" />
-                <View
-                    android:layout_width="fill_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginBottom="2dp" />
-                <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="@string/confirmar_sua_senha"
-                    android:id="@+id/TexViewCadastroRepetirSenhaUsuario"
-                    android:layout_margin="6dp"
-                    android:textStyle="bold" />
-                <EditText
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textPassword"
-                    android:ems="10"
-                    android:layout_margin="4dp"
-                    android:id="@+id/editText_senha2"
-                    android:hint="@string/repita_sua_senha"
-                    android:layout_below="@+id/editText_senha"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true" />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
 
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginBottom="2dp" />
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginTop="2dp" />
+
+                <TextView
+                    android:id="@+id/TexViewCadastroNomeUsuario"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="6dp"
+                    android:text="@string/nome"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/editText_nome"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_margin="4dp"
+                    android:layout_marginTop="31dp"
+                    android:ems="10"
+                    android:hint="@string/digite_seu_nome"
+                    android:inputType="text" />
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginTop="2dp" />
+
+                <TextView
+                    android:id="@+id/TexViewCadastroEmailUsuario"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="6dp"
+                    android:text="@string/prompt_email"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/editText_email"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/editText_nome"
+                    android:layout_margin="4dp"
+                    android:ems="10"
+                    android:hint="@string/digite_seu_email"
+                    android:inputType="textEmailAddress" />
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginTop="2dp" />
+
+                <TextView
+                    android:id="@+id/TexViewCadastroSenhaUsuario"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="6dp"
+                    android:text="@string/prompt_password"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/editText_senha"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/editText_email"
+                    android:layout_margin="4dp"
+                    android:ems="10"
+                    android:hint="@string/digite_sua_senha"
+                    android:inputType="textPassword" />
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginTop="2dp" />
+
+                <TextView
+                    android:id="@+id/TexViewCadastroRepetirSenhaUsuario"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="6dp"
+                    android:text="@string/confirmar_sua_senha"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/editText_senha2"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/editText_senha"
+                    android:layout_margin="4dp"
+                    android:ems="10"
+                    android:hint="@string/repita_sua_senha"
+                    android:inputType="textPassword" />
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginTop="2dp" />
+
                 <Button
                     android:id="@+id/botao_cadastrar"
                     android:layout_width="fill_parent"
@@ -133,12 +156,18 @@
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
                     android:layout_below="@+id/editText_senha2"
-                    android:background="@drawable/shapebutton"
                     android:layout_marginTop="24dp"
+                    android:background="@drawable/shapebutton"
                     android:text="@string/cadastrar" />
 
+
             </LinearLayout>
+
         </ScrollView>
+
     </LinearLayout>
 
+
 </RelativeLayout>
+
+

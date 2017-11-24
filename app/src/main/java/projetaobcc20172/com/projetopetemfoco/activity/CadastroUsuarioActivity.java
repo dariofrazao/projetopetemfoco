@@ -90,11 +90,9 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
 
         senha2.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public void onFocusChange(View v,boolean hasFocus){
-                if(!hasFocus){
-                    if(!senha.getText().toString().equals(senha2.getText().toString())){
-                        Toast.makeText(CadastroUsuarioActivity.this, "As senhas devem ser iguais", Toast.LENGTH_LONG ).show();
-                    }
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus && !senha.getText().toString().equals(senha2.getText().toString())) {
+                    Toast.makeText(CadastroUsuarioActivity.this, "As senhas devem ser iguais", Toast.LENGTH_LONG).show();
                 }
             }
         });

@@ -10,10 +10,11 @@ import android.widget.Button;
 import com.google.firebase.auth.FirebaseAuth;
 
 import projetaobcc20172.com.projetopetemfoco.R;
+import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoFirebase;
 
 public class MainActivity extends AppCompatActivity {
 
-    private FirebaseAuth usuarioFirebase;
+     private FirebaseAuth autenticacao;
 
 
 
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Button sair;
+        autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
 
         sair = (Button)findViewById(R.id.botao_sair);
 
@@ -37,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void deslogarUsuario(){
 
-        usuarioFirebase.signOut();
+        autenticacao.signOut();
 
         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
         startActivity(intent);

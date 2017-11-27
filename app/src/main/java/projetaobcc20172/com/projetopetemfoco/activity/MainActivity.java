@@ -14,7 +14,7 @@ import projetaobcc20172.com.projetopetemfoco.R;
 public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth usuarioFirebase;
-    private Button sair;
+
 
 
 
@@ -22,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Button sair;
 
         sair = (Button)findViewById(R.id.botao_sair);
 

@@ -25,7 +25,7 @@ import projetaobcc20172.com.projetopetemfoco.helper.Base64Custom;
 import projetaobcc20172.com.projetopetemfoco.helper.Preferencias;
 
 public class LoginActivity extends AppCompatActivity {
-
+    //testando pullrequest
     private EditText email, senha;
     private Button login, cadastrar;
     private FirebaseAuth autenticacao;
@@ -33,6 +33,8 @@ public class LoginActivity extends AppCompatActivity {
     private String identificadorUsuarioLogado;
     private DatabaseReference firebase;
     private ValueEventListener valueEventListenerUsuario;
+    private Toast mToast;
+    private static Boolean loginAutomatico = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,19 +42,21 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         //Verifica se o usuário já está logado
-        verificarUsuarioLogado();
+        if(loginAutomatico){
+            verificarUsuarioLogado();
+        }
 
-        email = (EditText)findViewById(R.id.editText_email);
-        senha = (EditText)findViewById(R.id.editText_senha);
-        login = (Button)findViewById(R.id.botao_login);
-        cadastrar = (Button)findViewById(R.id.botao_cadastrar);
+        email = findViewById(R.id.editText_email);
+        senha = findViewById(R.id.editText_senha);
+        login = findViewById(R.id.botao_login);
+        cadastrar = findViewById(R.id.botao_cadastrar);
 
         cadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(LoginActivity.this, CadastroUsuarioActivity.class);
                 startActivity(intent);
-                //finish();
+                finish();
             }
         });
 
@@ -69,51 +73,56 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void validarLogin(){
+        try {
+            autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
+            autenticacao.signInWithEmailAndPassword(
+                    usuario.getEmail(),
+                    usuario.getSenha()
+            ).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
 
-        autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
-        autenticacao.signInWithEmailAndPassword(
-                usuario.getEmail(),
-                usuario.getSenha()
-        ).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()) {
+                        identificadorUsuarioLogado = Base64Custom.codificarBase64(usuario.getEmail());
 
-                if( task.isSuccessful() ){
-                    identificadorUsuarioLogado = Base64Custom.codificarBase64(usuario.getEmail());
+                        firebase = ConfiguracaoFirebase.getFirebase()
+                                .child("usuarios")
+                                .child(identificadorUsuarioLogado);
 
-                    firebase = ConfiguracaoFirebase.getFirebase()
-                            .child("usuarios")
-                            .child( identificadorUsuarioLogado );
+                        valueEventListenerUsuario = new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
 
-                    valueEventListenerUsuario = new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
+                                Usuario usuarioRecuperado = dataSnapshot.getValue(Usuario.class);
 
-                            Usuario usuarioRecuperado = dataSnapshot.getValue( Usuario.class );
+                                Preferencias preferencias = new Preferencias(LoginActivity.this);
+                                preferencias.salvarDados(identificadorUsuarioLogado, usuarioRecuperado.getNome());
 
-                            Preferencias preferencias = new Preferencias(LoginActivity.this);
-                            preferencias.salvarDados( identificadorUsuarioLogado, usuarioRecuperado.getNome() );
+                            }
 
-                        }
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
 
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
+                            }
+                        };
 
-                        }
-                    };
-
-                    firebase.addListenerForSingleValueEvent( valueEventListenerUsuario );
+                        firebase.addListenerForSingleValueEvent(valueEventListenerUsuario);
 
 
+                        abrirTelaPrincipal();
+                        mToast = mToast.makeText(LoginActivity.this,R.string.sucesso_login_Toast, Toast.LENGTH_SHORT);
+                        mToast.show();
+                    } else {
+                        mToast = mToast.makeText(LoginActivity.this, R.string.erro_login_invalido_Toast, Toast.LENGTH_SHORT);
+                        mToast.show();
+                    }
 
-                    abrirTelaPrincipal();
-                    Toast.makeText(LoginActivity.this, "Sucesso ao fazer login!", Toast.LENGTH_LONG ).show();
-                }else{
-                    Toast.makeText(LoginActivity.this, "Erro ao fazer login!", Toast.LENGTH_LONG ).show();
                 }
-
-            }
-        });
+            });
+        }catch (Exception e){
+            mToast = mToast.makeText(LoginActivity.this, R.string.erro_login_invalido_Toast, Toast.LENGTH_SHORT);
+            mToast.show();
+        }
     }
 
     private void abrirTelaPrincipal(){
@@ -124,8 +133,17 @@ public class LoginActivity extends AppCompatActivity {
 
     private void verificarUsuarioLogado(){
         autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
-        if( autenticacao.getCurrentUser() != null ){
+        if( autenticacao.getCurrentUser() != null){
             abrirTelaPrincipal();
         }
     }
+
+    public static void setLoginAutomatico(Boolean login){
+        loginAutomatico = login;
+    }
+
+    public Toast getToast(){
+        return this.mToast;
+    }
+
 }

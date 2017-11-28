@@ -6,8 +6,8 @@ import android.support.test.espresso.intent.Intents;
 import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.rule.ActivityTestRule;
 
+
 import org.junit.After;
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -47,12 +47,12 @@ public class LoginActivityTest {
         Espresso.closeSoftKeyboard();
         Espresso.onView(ViewMatchers.withId(R.id.botao_login)).perform(ViewActions.click());
     }
-
+/*
     @Before
     public void setUp() throws Exception {
 
     }
-
+*/
     //Teste que simula uma tentatica de login com um cadastro não existente
     @Test
     public void testeLoginNaoCadastrado() {
@@ -93,7 +93,6 @@ public class LoginActivityTest {
 
     @After
     public void tearDown() throws Exception {
-       // Thread.sleep(5000);
+        Thread.sleep(1000);
     }
-
 }

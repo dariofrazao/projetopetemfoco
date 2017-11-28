@@ -1,14 +1,19 @@
-package projetaobcc20172.com.projetopetemfoco.activity.cadastrotest;
+package projetaobcc20172.com.projetopetemfoco.cadastrotest;
 
 import android.support.test.espresso.Espresso;
 import android.support.test.espresso.action.ViewActions;
 import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.rule.ActivityTestRule;
 
+
+import org.junit.After;
 import org.junit.Rule;
+
+import java.util.Random;
 
 import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.activity.CadastroUsuarioActivity;
+
 
 
 /**
@@ -22,8 +27,8 @@ public class CadastroUsuarioTestMae {
     //Existentes na tela de cadastro
     protected String nome = "Teste"; //nome do usuário
     protected String emailJaUtilizado = "raulpedrouag@gmail.com";
-    protected String emailInvalido = "teste@231234gemeiul.com.br2";
-    protected String email = "luar.pedro@yahoo.com.br";
+    protected String emailInvalido = "testesdakjdkas--*@ffss";
+    protected String email = "luar13.pedro@yahoo.com.br";
     protected String senha = "12345e";
     protected String senha2 = "12345ew1";
 
@@ -49,12 +54,23 @@ public class CadastroUsuarioTestMae {
     public void setUp() throws Exception {
 
     }
+*/
 
     @After
     public void tearDown() throws Exception {
-        //deixa o app parado por 5 segundos
-        //Para acomponhar se a mudança de tela ocorreu corretamente
-        //Thread.sleep(1000);
+        Thread.sleep(1000);
     }
-    */
+
+   //Gera um email aleatorio para realizar cadastro
+   protected void gerarEmailTeste(){
+       int x;
+       Random ran = new Random();
+       String emailInicio = "teste";
+       String emailFim = "@gmail.com";
+       for(int i=0;i<=10;i=i+1){
+           x = ran.nextInt(50);
+           emailInicio = emailInicio + x;
+       }
+       this.email = emailInicio+emailFim;
+   }
 }

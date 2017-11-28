@@ -1,15 +1,20 @@
-package projetaobcc20172.com.projetopetemfoco.activity.cadastrotest;
+package projetaobcc20172.com.projetopetemfoco.cadastrotest;
 
 import android.support.test.espresso.Espresso;
 import android.support.test.espresso.action.ViewActions;
+import android.support.test.espresso.intent.Intents;
 import android.support.test.espresso.matcher.ViewMatchers;
 
 import org.hamcrest.CoreMatchers;
 import org.junit.Test;
 
 import projetaobcc20172.com.projetopetemfoco.R;
+import projetaobcc20172.com.projetopetemfoco.activity.LoginActivity;
+
 
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.intent.Intents.intended;
+import static android.support.test.espresso.intent.matcher.IntentMatchers.hasComponent;
 import static android.support.test.espresso.matcher.RootMatchers.withDecorView;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static org.hamcrest.CoreMatchers.not;
@@ -39,11 +44,11 @@ public class CadastroUsuarioActivityTest extends CadastroUsuarioTestMae {
 
     }
     //Teste que simula um cadastro com e-mail Inválido
-   /* @Test
+    @Test
     public void testeCadastroEmailInvalido(){
         preencherEClicarCadastro(this.nome,this.emailInvalido,this.senha,this.senha);
         Espresso.onView(ViewMatchers.withText(R.string.erro_cadastro_email_invalido_Toast)).inRoot(withDecorView(not(CoreMatchers.is(cadastroActivityRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
-    }*/
+    }
 
     //Teste que simula um cadastro com senha e senha de confirmação diferentes
     @Test
@@ -53,13 +58,13 @@ public class CadastroUsuarioActivityTest extends CadastroUsuarioTestMae {
 
     }
 
-    /*@Test
+    @Test
     public void testeCadastrar(){
+        this.gerarEmailTeste();
         Intents.init();
         preencherEClicarCadastro(this.nome,this.email,this.senha,this.senha);
         Espresso.onView(ViewMatchers.withText(R.string.sucesso_cadastro_Toast)).inRoot(withDecorView(not(CoreMatchers.is(cadastroActivityRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
         intended(hasComponent(LoginActivity.class.getName()));
-
-    }*/
+    }
 
 }

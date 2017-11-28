@@ -61,7 +61,7 @@ public class CadastroUsuarioActivityTest extends CadastroUsuarioTestMae {
     //Teste que simula um cadastro com senha fraca (menos que 6 caracteres)
     @Test
     public void testeCadastrarSenhaFraca(){
-        preencherEClicarCadastro(this.nome,this.email,this.senha3,this.senha4);
+        preencherEClicarCadastro(this.nome,this.email,this.senha3,this.senha3);
         Espresso.onView(ViewMatchers.withText(R.string.erro_cadastro_senha_invalida_Toast)).inRoot(withDecorView(not(CoreMatchers.is(cadastroActivityRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
 
     }
@@ -74,6 +74,7 @@ public class CadastroUsuarioActivityTest extends CadastroUsuarioTestMae {
         preencherEClicarCadastro(this.nome,this.email,this.senha,this.senha);
         Espresso.onView(ViewMatchers.withText(R.string.sucesso_cadastro_Toast)).inRoot(withDecorView(not(CoreMatchers.is(cadastroActivityRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
         intended(hasComponent(LoginActivity.class.getName()));
+        Intents.release();
     }
 
 }

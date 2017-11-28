@@ -50,9 +50,10 @@ public class LoginActivityTest {
 /*
     @Before
     public void setUp() throws Exception {
-
+        Thread.sleep(2000);
     }
-*/
+    */
+
     //Teste que simula uma tentatica de login com um cadastro não existente
     @Test
     public void testeLoginNaoCadastrado() {
@@ -89,10 +90,11 @@ public class LoginActivityTest {
         Espresso.onView(ViewMatchers.withText(R.string.sucesso_login_Toast)).inRoot(withDecorView(not(is(loginActivityRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
         //Verifica se houve mudança de activity(mudou a tela)
         intended(hasComponent(MainActivity.class.getName()));
+        Intents.release();
     }
 
     @After
     public void tearDown() throws Exception {
-        Thread.sleep(1000);
+        Thread.sleep(2000);
     }
 }

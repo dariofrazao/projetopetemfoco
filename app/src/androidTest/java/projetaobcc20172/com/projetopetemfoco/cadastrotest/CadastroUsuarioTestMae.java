@@ -31,6 +31,8 @@ public class CadastroUsuarioTestMae {
     protected String email = "luar13.pedro@yahoo.com.br";
     protected String senha = "12345e";
     protected String senha2 = "12345ew1";
+    protected String senha3 = "12345";
+    protected String senha4 = "12345";
 
     //Atributo que identifca qual activity seŕa testada
     @Rule

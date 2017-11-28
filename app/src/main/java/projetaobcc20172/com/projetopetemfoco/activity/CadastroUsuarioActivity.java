@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseNetworkException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
@@ -117,6 +118,8 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
                             erro = getResources().getString(R.string.erro_cadastro_email_invalido_Toast);
                         } catch (FirebaseAuthUserCollisionException e) {
                             erro = getResources().getString(R.string.erro_cadastro_email_usado_Toast);
+                        } catch (FirebaseNetworkException e) {
+                            erro = getResources().getString(R.string.erro_cadastro_sem_conexao);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }

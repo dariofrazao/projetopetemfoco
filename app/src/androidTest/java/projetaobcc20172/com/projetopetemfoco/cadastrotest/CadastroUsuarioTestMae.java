@@ -32,7 +32,6 @@ public class CadastroUsuarioTestMae {
     protected String senha = "12345e";
     protected String senha2 = "12345ew1";
     protected String senha3 = "12345";
-    protected String senha4 = "12345";
 
     //Atributo que identifca qual activity seŕa testada
     @Rule
@@ -60,7 +59,7 @@ public class CadastroUsuarioTestMae {
 
     @After
     public void tearDown() throws Exception {
-        Thread.sleep(1000);
+        Thread.sleep(2000);
     }
 
    //Gera um email aleatorio para realizar cadastro

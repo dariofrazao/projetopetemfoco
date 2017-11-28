@@ -1,5 +1,6 @@
 package projetaobcc20172.com.projetopetemfoco.activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -35,6 +36,7 @@ public class LoginActivity extends AppCompatActivity {
     private ValueEventListener valueEventListenerUsuario;
     private Toast mToast;
     private static Boolean loginAutomatico = false;
+    private ProgressDialog mProgressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +68,7 @@ public class LoginActivity extends AppCompatActivity {
                 usuario = new Usuario();
                 usuario.setEmail( email.getText().toString() );
                 usuario.setSenha( senha.getText().toString() );
+                exibirProgresso();
                 validarLogin();
 
             }
@@ -112,9 +115,11 @@ public class LoginActivity extends AppCompatActivity {
                         abrirTelaPrincipal();
                         mToast = mToast.makeText(LoginActivity.this,R.string.sucesso_login_Toast, Toast.LENGTH_SHORT);
                         mToast.show();
+                        mProgressDialog.dismiss();
                     } else {
                         mToast = mToast.makeText(LoginActivity.this, R.string.erro_login_invalido_Toast, Toast.LENGTH_SHORT);
                         mToast.show();
+                        mProgressDialog.dismiss();
                     }
 
                 }
@@ -122,6 +127,7 @@ public class LoginActivity extends AppCompatActivity {
         }catch (Exception e){
             mToast = mToast.makeText(LoginActivity.this, R.string.erro_login_invalido_Toast, Toast.LENGTH_SHORT);
             mToast.show();
+            mProgressDialog.dismiss();
         }
     }
 
@@ -144,6 +150,16 @@ public class LoginActivity extends AppCompatActivity {
 
     public Toast getToast(){
         return this.mToast;
+    }
+
+    private void exibirProgresso() {
+        if (mProgressDialog == null) {
+            mProgressDialog = new ProgressDialog(this);
+            mProgressDialog.setCancelable(false);
+            mProgressDialog.setMessage("Verificando Dados...");
+            mProgressDialog.setIndeterminate(true);
+        }
+        mProgressDialog.show();
     }
 
 }

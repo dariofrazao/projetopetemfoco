@@ -83,7 +83,7 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
         }
     }
 
-    private void verificarNome() throws CampoObrAusenteException {
+    private void verificarCamposObrigatorios() throws CampoObrAusenteException {
         if(nome.getText().toString().isEmpty()
                 || senha.getText().toString().isEmpty()
                 || senha2.getText().toString().isEmpty()){
@@ -92,7 +92,7 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
     }
     private void cadastrarUsuario() {
         try {
-            this.verificarNome();
+            this.verificarCamposObrigatorios();
             this.verificarSenha();
             autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
             autenticacao.createUserWithEmailAndPassword(

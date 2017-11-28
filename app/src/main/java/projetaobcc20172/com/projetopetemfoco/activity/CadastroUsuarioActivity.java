@@ -23,6 +23,7 @@ import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 
 import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoFirebase;
+import projetaobcc20172.com.projetopetemfoco.excecoes.NomeAusenteException;
 import projetaobcc20172.com.projetopetemfoco.excecoes.SenhasDiferentesException;
 import projetaobcc20172.com.projetopetemfoco.helper.Base64Custom;
 import projetaobcc20172.com.projetopetemfoco.helper.Preferencias;
@@ -76,14 +77,21 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
         return true;
     }
     //Verifica se a senha 1 é igual a senha 2
-    private void verificarSenhar() throws SenhasDiferentesException {
+    private void verificarSenha() throws SenhasDiferentesException {
         if(!senha.getText().toString().equals(senha2.getText().toString())){
             throw new SenhasDiferentesException();
         }
     }
+
+    private void verificarNome() throws NomeAusenteException{
+        if(nome.getText().toString().isEmpty()){
+            throw  new NomeAusenteException();
+        }
+    }
     private void cadastrarUsuario() {
         try {
-            this.verificarSenhar();
+            this.verificarNome();
+            this.verificarSenha();
             autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
             autenticacao.createUserWithEmailAndPassword(
                     usuario.getEmail(),
@@ -133,7 +141,10 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
         } catch (SenhasDiferentesException e) {
             mToast = mToast.makeText(CadastroUsuarioActivity.this, R.string.erro_cadastro_senhas_diferentes_Toast, Toast.LENGTH_SHORT);
             mToast.show();
-        } catch (Exception e) {
+        } catch (NomeAusenteException e) {
+            mToast = mToast.makeText(CadastroUsuarioActivity.this, R.string.erro_cadastro_campos_obrigatorios_Toast, Toast.LENGTH_SHORT);
+            mToast.show();
+        } catch (Exception e){
             mToast = mToast.makeText(CadastroUsuarioActivity.this, R.string.erro_cadastro_campos_obrigatorios_Toast, Toast.LENGTH_SHORT);
             mToast.show();
         }

@@ -43,6 +43,13 @@ public class CadastroUsuarioActivityTest extends CadastroUsuarioTestMae {
         Espresso.onView(ViewMatchers.withText(R.string.erro_cadastro_campos_obrigatorios_Toast)).inRoot(withDecorView(not(CoreMatchers.is(cadastroActivityRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
 
     }
+
+    @Test
+    public void testeCadastroCampoAusenteNome(){
+        preencherEClicarCadastro("",this.email,this.senha,this.senha);
+        Espresso.onView(ViewMatchers.withText(R.string.erro_cadastro_campos_obrigatorios_Toast)).inRoot(withDecorView(not(CoreMatchers.is(cadastroActivityRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
+    }
+
     //Teste que simula um cadastro com e-mail Inválido
     @Test
     public void testeCadastroEmailInvalido(){

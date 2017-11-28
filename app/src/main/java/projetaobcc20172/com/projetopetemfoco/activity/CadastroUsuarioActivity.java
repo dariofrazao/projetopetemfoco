@@ -23,7 +23,7 @@ import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 
 import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoFirebase;
-import projetaobcc20172.com.projetopetemfoco.excecoes.NomeAusenteException;
+import projetaobcc20172.com.projetopetemfoco.excecoes.CampoObrAusenteException;
 import projetaobcc20172.com.projetopetemfoco.excecoes.SenhasDiferentesException;
 import projetaobcc20172.com.projetopetemfoco.helper.Base64Custom;
 import projetaobcc20172.com.projetopetemfoco.helper.Preferencias;
@@ -83,9 +83,11 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
         }
     }
 
-    private void verificarNome() throws NomeAusenteException{
-        if(nome.getText().toString().isEmpty()){
-            throw  new NomeAusenteException();
+    private void verificarNome() throws CampoObrAusenteException {
+        if(nome.getText().toString().isEmpty()
+                || senha.getText().toString().isEmpty()
+                || senha2.getText().toString().isEmpty()){
+            throw  new CampoObrAusenteException();
         }
     }
     private void cadastrarUsuario() {
@@ -141,7 +143,7 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
         } catch (SenhasDiferentesException e) {
             mToast = mToast.makeText(CadastroUsuarioActivity.this, R.string.erro_cadastro_senhas_diferentes_Toast, Toast.LENGTH_SHORT);
             mToast.show();
-        } catch (NomeAusenteException e) {
+        } catch (CampoObrAusenteException e) {
             mToast = mToast.makeText(CadastroUsuarioActivity.this, R.string.erro_cadastro_campos_obrigatorios_Toast, Toast.LENGTH_SHORT);
             mToast.show();
         } catch (Exception e){

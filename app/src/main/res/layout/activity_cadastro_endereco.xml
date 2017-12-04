@@ -221,7 +221,6 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
-                    android:layout_below="@+id/editText_endereco_cep"
                     android:layout_marginTop="24dp"
                     android:background="@drawable/shapebutton"
                     android:text="@string/cadastrar" />

@@ -17,6 +17,7 @@
     <string name ="erro_cadastro_senha_invalida_Toast">Erro ao cadastrar usuário: Escolha uma senha que contenha pelo menos 6 caracteres.</string>
     <string name ="erro_cadastro_email_usado_Toast">Erro ao cadastrar usuário: Já existe uma conta com esse e-mail.</string>
     <string name ="erro_cadastro_campos_obrigatorios_Toast">Erro ao cadastrar usuário: Preencha todos os campos</string>
+    <string name ="erro_cadastro_endereco_campos_obrigatorios_Toast">Erro ao cadastrar endereço: Preencha todos os campos</string>
     <string name ="erro_cadastro_senhas_diferentes_Toast">Erro ao cadastrar usuário: Os campos de senha devem ser iguais.</string>
     <string name ="erro_cadastro_sem_conexao">Erro ao cadastrar usuário: Verifique a sua conexão</string>
     <string name ="erro_cadastro_nome_usuario_Toast">Erro ao cadastrar usuário: O nome de usuário inválido.</string>
@@ -32,5 +33,20 @@
     <string name="repita_sua_senha">Repita sua senha</string>
     <string name="nome">Nome</string>
     <string name="confirmar_sua_senha">Confirme sua senha</string>
+    <string name="endereco_logradouro">Logradouro</string>
+    <string name="digite_seu_logradouro">Digite seu logradouro</string>
+    <string name="endereco_numero">Número</string>
+    <string name="digite_seu_numero">Digite seu número</string>
+    <string name="endereco_complemento">Complemento</string>
+    <string name="digite_seu_complemento">Digite o complemento</string>
+    <string name="endereco_bairro">Bairro</string>
+    <string name="digite_seu_bairro">Digite seu bairro</string>
+    <string name="endereco_cidade">Cidade</string>
+    <string name="digite_sua_cidade">Digite sua cidade</string>
+    <string name="endereco_cep">CEP</string>
+    <string name="digite_seu_cep">Digite seu CEP</string>
+    <string name="endereco_uf">Estado</string>
+    <string name="escolha_sua_uf">Escolha seu estado</string>
+
 
 </resources>

@@ -16,31 +16,38 @@ public class MainActivity extends AppCompatActivity {
 
      private FirebaseAuth autenticacao;
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button sair;
+        Button cadastrarPet, sair; //Botões de cadastrar o pet e Logout de usuário
         autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
 
-        sair = (Button)findViewById(R.id.botao_sair);
+        sair = findViewById(R.id.botao_sair);
+        cadastrarPet = findViewById(R.id.botao_cadastrar_pet);
 
+        //Ação do botão de deslogar o usuário
         sair.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 deslogarUsuario();
             }
         });
+
+        //Ação do botão de cadastrar o pet, que abre a tela para o seu cadastro
+        cadastrarPet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, CadastroPetActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
+    //Método para deslogar usuário da aplicação e retornar a tela de Login
     private void deslogarUsuario(){
-
         autenticacao.signOut();
-
         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
         startActivity(intent);
         finish();

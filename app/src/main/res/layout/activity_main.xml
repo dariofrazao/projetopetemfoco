@@ -7,11 +7,20 @@
     tools:context="projetaobcc20172.com.projetopetemfoco.activity.MainActivity">
 
     <Button
-        android:id="@+id/botao_sair"
+        android:id="@+id/botao_cadastrar_pet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="101dp"
+        android:text="Cadastrar Pet" />
+
+    <Button
+        android:id="@+id/botao_sair"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/botao_cadastrar_pet"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="28dp"
         android:text="Sair" />
 </RelativeLayout>

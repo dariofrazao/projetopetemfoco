@@ -21,7 +21,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button cadastrarPet, sair; //Botões de cadastrar o pet e Logout de usuário
+        Button cadastrarPet; //Botão de cadastrar o pet
+        Button sair; //Botão de Logout do usuário
         autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
 
         sair = findViewById(R.id.botao_sair);

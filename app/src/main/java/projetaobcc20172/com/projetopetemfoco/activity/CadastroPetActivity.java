@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.Toast;
 
 import projetaobcc20172.com.projetopetemfoco.R;
 
@@ -63,7 +64,9 @@ public class CadastroPetActivity extends AppCompatActivity implements OnItemSele
         porteSpinner.getItemAtPosition(i);
     }
 
+    //Método que exibe mensagem se um item do Spinner não for exibido
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
+        Toast.makeText(this, "Nada foi selecionado no tipo ou porte do pet", Toast.LENGTH_SHORT).show();
     }
 }

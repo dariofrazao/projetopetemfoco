@@ -12,16 +12,16 @@
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
-    <string name ="erro_login_invalido_Toast">Erro ao fazer login!</string>
-    <string name ="erro_cadastro_email_invalido_Toast">Erro ao cadastrar usuário: Email indicado não é válido.</string>
-    <string name ="erro_cadastro_senha_invalida_Toast">Erro ao cadastrar usuário: Escolha uma senha que contenha pelo menos 6 caracteres.</string>
-    <string name ="erro_cadastro_email_usado_Toast">Erro ao cadastrar usuário: Já existe uma conta com esse e-mail.</string>
-    <string name ="erro_cadastro_campos_obrigatorios_Toast">Erro ao cadastrar usuário: Preencha todos os campos</string>
-    <string name ="erro_cadastro_senhas_diferentes_Toast">Erro ao cadastrar usuário: Os campos de senha devem ser iguais.</string>
-    <string name ="erro_cadastro_sem_conexao">Erro ao cadastrar usuário: Verifique a sua conexão</string>
-    <string name ="erro_cadastro_nome_usuario_Toast">Erro ao cadastrar usuário: O nome de usuário inválido.</string>
-    <string name ="sucesso_login_Toast">Sucesso ao fazer login!</string>
-    <string name ="sucesso_cadastro_Toast">Sucesso ao cadastrar usuário</string>
+    <string name="erro_login_invalido_Toast">Erro ao fazer login!</string>
+    <string name="erro_cadastro_email_invalido_Toast">Erro ao cadastrar usuário: Email indicado não é válido.</string>
+    <string name="erro_cadastro_senha_invalida_Toast">Erro ao cadastrar usuário: Escolha uma senha que contenha pelo menos 6 caracteres.</string>
+    <string name="erro_cadastro_email_usado_Toast">Erro ao cadastrar usuário: Já existe uma conta com esse e-mail.</string>
+    <string name="erro_cadastro_campos_obrigatorios_Toast">Erro ao cadastrar usuário: Preencha todos os campos</string>
+    <string name="erro_cadastro_senhas_diferentes_Toast">Erro ao cadastrar usuário: Os campos de senha devem ser iguais.</string>
+    <string name="erro_cadastro_sem_conexao">Erro ao cadastrar usuário: Verifique a sua conexão</string>
+    <string name="erro_cadastro_nome_usuario_Toast">Erro ao cadastrar usuário: O nome de usuário inválido.</string>
+    <string name="sucesso_login_Toast">Sucesso ao fazer login!</string>
+    <string name="sucesso_cadastro_Toast">Sucesso ao cadastrar usuário</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
@@ -32,5 +32,12 @@
     <string name="repita_sua_senha">Repita sua senha</string>
     <string name="nome">Nome</string>
     <string name="confirmar_sua_senha">Confirme sua senha</string>
+    <string name="title_activity_cadastro_servico">Cadastrar Novo Serviço</string>
+    <string name="nome_servico">Nome do Serviço</string>
+    <string name="valor">Valor</string>
+    <string name="descricao">Descrição</string>
+    <string name="digite_nome_servico">Digite o nome do serviço</string>
+    <string name="digite_valor_servico">R$0,00</string>
+    <string name="digite_descricao_servico">Digite a descrição do serviço</string>
 
 </resources>

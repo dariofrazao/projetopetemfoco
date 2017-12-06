@@ -82,8 +82,9 @@
                     android:layout_margin="4dp"
                     android:layout_marginTop="31dp"
                     android:ems="10"
+                    android:maxLength="5"
                     android:hint="@string/digite_seu_numero"
-                    android:inputType="text" />
+                    android:inputType="numberSigned"/>
 
                 <View
                     android:layout_width="fill_parent"
@@ -182,7 +183,7 @@
                     android:layout_marginTop="31dp"
                     android:ems="10"
                     android:hint="@string/escolha_sua_uf"
-                    android:entries="@array/uf2"
+                    android:entries="@array/uf"
                     android:spinnerMode="dropdown"/>
 
                 <View
@@ -207,6 +208,7 @@
                     android:layout_margin="4dp"
                     android:layout_marginTop="31dp"
                     android:ems="10"
+                    android:maxLength="9"
                     android:hint="@string/digite_seu_cep"
                     android:inputType="text" />
 

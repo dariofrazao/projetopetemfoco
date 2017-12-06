@@ -32,6 +32,7 @@ import projetaobcc20172.com.projetopetemfoco.helper.Base64Custom;
 import projetaobcc20172.com.projetopetemfoco.helper.Preferencias;
 import projetaobcc20172.com.projetopetemfoco.model.Endereco;
 import projetaobcc20172.com.projetopetemfoco.model.Usuario;
+import projetaobcc20172.com.projetopetemfoco.utils.MaskUtil;
 
 public class CadastroEnderecoActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -58,6 +59,7 @@ public class CadastroEnderecoActivity extends AppCompatActivity implements Adapt
         bairro = findViewById(R.id.editText_endereco_bairro);
         cidade = findViewById(R.id.editText_endereco_cidade);
         cep = findViewById(R.id.editText_endereco_cep);
+        cep.addTextChangedListener(MaskUtil.insert(cep, MaskUtil.MaskType.CEP));
         uf = findViewById(R.id.spinner_endereco_uf);
         final String[] array_spinner = {"ACRE", "ALAGOAS", "AMAPA", "AMAZONAS", "BAHIA", "CEARA", "DISTRITO FEDERAL", "ESPIRITO SANTO",
                 "GOIAS", "MARANHAO", "MATO GROSSO", "MATO GROSSO DO SUL", "MINAS GERAIS", "PARA", "PARAIBA", "PARANA", "PERNAMBUCO", "PIAUI",
@@ -67,7 +69,6 @@ public class CadastroEnderecoActivity extends AppCompatActivity implements Adapt
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         uf.setAdapter(adapter);
         uf.setOnItemSelectedListener(this);
-
         botaoCadastrarEndereco = findViewById(R.id.botao_finalizar_cadastro_endereco);
         botaoCadastrarEndereco.setOnClickListener(new View.OnClickListener() {
             @Override

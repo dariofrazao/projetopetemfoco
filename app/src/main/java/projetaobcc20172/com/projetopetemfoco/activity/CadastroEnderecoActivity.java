@@ -11,6 +11,7 @@ import android.support.annotation.VisibleForTesting;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,8 +31,9 @@ import projetaobcc20172.com.projetopetemfoco.excecoes.CampoEnderecoObrAusenteExc
 import projetaobcc20172.com.projetopetemfoco.helper.Base64Custom;
 import projetaobcc20172.com.projetopetemfoco.helper.Preferencias;
 import projetaobcc20172.com.projetopetemfoco.model.Endereco;
+import projetaobcc20172.com.projetopetemfoco.model.Usuario;
 
-public class CadastroEnderecoActivity extends AppCompatActivity {
+public class CadastroEnderecoActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private EditText logradouro, numero, complemento, bairro, cidade, cep;
     private Spinner uf;
@@ -57,15 +59,16 @@ public class CadastroEnderecoActivity extends AppCompatActivity {
         cidade = findViewById(R.id.editText_endereco_cidade);
         cep = findViewById(R.id.editText_endereco_cep);
         uf = findViewById(R.id.spinner_endereco_uf);
-        String[] array_spinner = {"ACRE", "ALAGOAS", "AMAPA", "AMAZONAS", "BAHIA", "CEARA", "DISTRITO FEDERAL", "ESPIRITO SANTO",
+        final String[] array_spinner = {"ACRE", "ALAGOAS", "AMAPA", "AMAZONAS", "BAHIA", "CEARA", "DISTRITO FEDERAL", "ESPIRITO SANTO",
                 "GOIAS", "MARANHAO", "MATO GROSSO", "MATO GROSSO DO SUL", "MINAS GERAIS", "PARA", "PARAIBA", "PARANA", "PERNAMBUCO", "PIAUI",
                 "RIO DE JANEIRO", "RIO GRANDE DO NORTE", "RIO GRANDE DO SUL", "RONDONIA", "RORAIMA", "SANTA CATARINA",
                 "SAO PAULO", "SERGIPE", "TOCANTINS"};
         ArrayAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, array_spinner);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         uf.setAdapter(adapter);
+        uf.setOnItemSelectedListener(this);
 
-        botaoCadastrarEndereco = findViewById(R.id.botao_endereco_cadastrar);
+        botaoCadastrarEndereco = findViewById(R.id.botao_finalizar_cadastro_endereco);
         botaoCadastrarEndereco.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -76,7 +79,7 @@ public class CadastroEnderecoActivity extends AppCompatActivity {
                 endereco.setBairro(bairro.getText().toString());
                 endereco.setCidade(cidade.getText().toString());
                 endereco.setCep(cep.getText().toString());
-                endereco.setUf(uf.getAdapter().toString());
+                endereco.setUf(array_spinner[(int) uf.getSelectedItemId()]);
                 cadastrarEndereco();
             }
         });
@@ -93,6 +96,7 @@ public class CadastroEnderecoActivity extends AppCompatActivity {
         onBackPressed();
         return true;
     }
+
 
     private void verificarCamposObrigatorios() throws CampoEnderecoObrAusenteException {
         if (logradouro.getText().toString().isEmpty()
@@ -114,7 +118,11 @@ public class CadastroEnderecoActivity extends AppCompatActivity {
     private void cadastrarEndereco() {
         try {
             this.verificarCamposObrigatorios();
-            endereco.salvar();
+            Intent i = getIntent();
+            Usuario usuario = (Usuario) i.getSerializableExtra("Usuario");
+            usuario.setEndereco(endereco);
+            usuario.salvar();
+            abrirLoginUsuario();
         } catch (CampoEnderecoObrAusenteException e) {
             mToast = mToast.makeText(CadastroEnderecoActivity.this, R.string.erro_cadastro_endereco_campos_obrigatorios_Toast, Toast.LENGTH_SHORT);
             mToast.show();
@@ -124,9 +132,20 @@ public class CadastroEnderecoActivity extends AppCompatActivity {
         }
     }
 
-    public void abrirCadastro() {
-        Intent intent = new Intent(CadastroEnderecoActivity.this, CadastroUsuarioActivity.class);
+    public void abrirLoginUsuario(){
+        Intent intent = new Intent(CadastroEnderecoActivity.this, LoginActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        uf.getItemAtPosition(position);
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+        mToast = mToast.makeText(CadastroEnderecoActivity.this, R.string.erro_cadastro_endereco_campos_obrigatorios_Toast, Toast.LENGTH_SHORT);
+        mToast.show();
     }
 }

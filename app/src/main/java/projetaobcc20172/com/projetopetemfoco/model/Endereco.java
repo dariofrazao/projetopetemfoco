@@ -21,11 +21,6 @@ public class Endereco {
 
     }
 
-    public void salvar(){ //Método para salvar endereço no banco de dados do Firebase
-        DatabaseReference referenciaFirebase = ConfiguracaoFirebase.getFirebase(); //Chama a referência do Firebase
-        referenciaFirebase.child("endereco").child( getId() ).setValue( this ); //Cria os nós dos endereços no banco de dados
-    }
-
     @Exclude
     public String getId() {
         return id;

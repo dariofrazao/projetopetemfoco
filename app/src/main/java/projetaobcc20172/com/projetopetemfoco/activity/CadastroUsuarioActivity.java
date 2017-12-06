@@ -49,7 +49,7 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
         email = findViewById(R.id.editText_email);
         senha = findViewById(R.id.editText_senha);
         senha2 = findViewById(R.id.editText_senha2);
-        botaoCadastrar = findViewById(R.id.botao_cadastrar);
+        botaoCadastrar = findViewById(R.id.botao_cadastrar_endereco);
 
         botaoCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,7 +115,8 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
                         mToast = mToast.makeText(CadastroUsuarioActivity.this, R.string.sucesso_cadastro_Toast, Toast.LENGTH_LONG);
                         mToast.show();
 
-                        abrirLoginUsuario();
+                        abrirCadastroEndereco(usuario);
+  //                      abrirLoginUsuario();
 
                     } else {
 
@@ -152,10 +153,10 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
         }
     }
 
-    public void abrirLoginUsuario(){
-        Intent intent = new Intent(CadastroUsuarioActivity.this, LoginActivity.class);
+     public void abrirCadastroEndereco(Usuario usuario){
+        Intent intent = new Intent(CadastroUsuarioActivity.this, CadastroEnderecoActivity.class);
+        intent.putExtra("Usuario", usuario);
         startActivity(intent);
         finish();
     }
-
 }

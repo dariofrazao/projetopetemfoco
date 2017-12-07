@@ -47,7 +47,7 @@ public class CadastroUsuarioTestMae {
         Espresso.closeSoftKeyboard();
         Espresso.onView(ViewMatchers.withId(R.id.editText_senha2)).perform(ViewActions.typeText(senha2));
         Espresso.closeSoftKeyboard();
-        Espresso.onView(ViewMatchers.withId(R.id.botao_cadastrar)).perform(ViewActions.click());
+        Espresso.onView(ViewMatchers.withId(R.id.botao_cadastrar_endereco)).perform(ViewActions.click());
     }
     //método que executa algo antes de iniciar os testes.
    /*

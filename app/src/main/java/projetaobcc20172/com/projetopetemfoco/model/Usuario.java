@@ -3,15 +3,18 @@ package projetaobcc20172.com.projetopetemfoco.model;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Exclude;
 
+import java.io.Serializable;
+
 import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoFirebase;
 
-public class Usuario {
+public class Usuario implements Serializable{
 
     //Atributos do usuário
     private String id;
     private String nome;
     private String email;
     private String senha;
+    private Endereco endereco;
 
     public Usuario(){
 
@@ -55,4 +58,8 @@ public class Usuario {
     public void setSenha(String senha) {
         this.senha = senha;
     }
+
+    public Endereco getEndereco() { return endereco; }
+
+    public void setEndereco(Endereco endereco) { this.endereco = endereco; }
 }

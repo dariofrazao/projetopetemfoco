@@ -210,7 +210,7 @@
                     android:ems="10"
                     android:maxLength="9"
                     android:hint="@string/digite_seu_cep"
-                    android:inputType="text" />
+                    android:inputType="numberSigned" />
 
                 <View
                     android:layout_width="fill_parent"

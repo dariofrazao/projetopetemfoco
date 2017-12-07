@@ -24,6 +24,7 @@
     <string name="erro_cadastro_nome_usuario_Toast">Erro ao cadastrar usuário: O nome de usuário inválido.</string>
     <string name="sucesso_login_Toast">Sucesso ao fazer login!</string>
     <string name="sucesso_cadastro_Toast">Sucesso ao cadastrar usuário</string>
+    <string name="sucesso_cadastro_proxima_etapa_Toast">Sucesso! Pronto para a próxima etapa</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email completions."</string>
     <string name="pergunta_nao_possui_cadastro">Não possui cadastro?</string>
     <string name="digite_seu_nome">Digite seu nome</string>

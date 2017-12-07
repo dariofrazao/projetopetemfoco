@@ -41,7 +41,8 @@ public class CadastroEnderecoActivity extends AppCompatActivity implements Adapt
     private Button botaoCadastrarEndereco;
     private Endereco endereco;
 
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE) //permite que essa variavel seja vista pela classe de teste
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    //permite que essa variavel seja vista pela classe de teste
     private Toast mToast;
     private DatabaseReference databaseReference;
 
@@ -61,10 +62,10 @@ public class CadastroEnderecoActivity extends AppCompatActivity implements Adapt
         cep = findViewById(R.id.editText_endereco_cep);
         cep.addTextChangedListener(MaskUtil.insert(cep, MaskUtil.MaskType.CEP));
         uf = findViewById(R.id.spinner_endereco_uf);
-        final String[] array_spinner = {"ACRE", "ALAGOAS", "AMAPA", "AMAZONAS", "BAHIA", "CEARA", "DISTRITO FEDERAL", "ESPIRITO SANTO",
-                "GOIAS", "MARANHAO", "MATO GROSSO", "MATO GROSSO DO SUL", "MINAS GERAIS", "PARA", "PARAIBA", "PARANA", "PERNAMBUCO", "PIAUI",
-                "RIO DE JANEIRO", "RIO GRANDE DO NORTE", "RIO GRANDE DO SUL", "RONDONIA", "RORAIMA", "SANTA CATARINA",
-                "SAO PAULO", "SERGIPE", "TOCANTINS"};
+        final String[] array_spinner = {"AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES",
+                "GO", "MA", "MG", "MS", "MG", "PA", "PB", "PA", "PE", "PI",
+                "RJ", "RN", "RS", "RO", "RR", "SC",
+                "SP", "SE", "TO"};
         ArrayAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, array_spinner);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         uf.setAdapter(adapter);
@@ -123,6 +124,8 @@ public class CadastroEnderecoActivity extends AppCompatActivity implements Adapt
             Usuario usuario = (Usuario) i.getSerializableExtra("Usuario");
             usuario.setEndereco(endereco);
             usuario.salvar();
+            mToast = mToast.makeText(CadastroEnderecoActivity.this, R.string.sucesso_cadastro_Toast, Toast.LENGTH_LONG);
+            mToast.show();
             abrirLoginUsuario();
         } catch (CampoEnderecoObrAusenteException e) {
             mToast = mToast.makeText(CadastroEnderecoActivity.this, R.string.erro_cadastro_endereco_campos_obrigatorios_Toast, Toast.LENGTH_SHORT);
@@ -133,7 +136,7 @@ public class CadastroEnderecoActivity extends AppCompatActivity implements Adapt
         }
     }
 
-    public void abrirLoginUsuario(){
+    public void abrirLoginUsuario() {
         Intent intent = new Intent(CadastroEnderecoActivity.this, LoginActivity.class);
         startActivity(intent);
         finish();

@@ -41,8 +41,7 @@ public class CadastroEnderecoActivity extends AppCompatActivity implements Adapt
     private Button botaoCadastrarEndereco;
     private Endereco endereco;
 
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
-    //permite que essa variavel seja vista pela classe de teste
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE) //permite que essa variavel seja vista pela classe de teste
     private Toast mToast;
     private DatabaseReference databaseReference;
 
@@ -62,10 +61,9 @@ public class CadastroEnderecoActivity extends AppCompatActivity implements Adapt
         cep = findViewById(R.id.editText_endereco_cep);
         cep.addTextChangedListener(MaskUtil.insert(cep, MaskUtil.MaskType.CEP));
         uf = findViewById(R.id.spinner_endereco_uf);
-        final String[] array_spinner = {"AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES",
-                "GO", "MA", "MG", "MS", "MG", "PA", "PB", "PA", "PE", "PI",
-                "RJ", "RN", "RS", "RO", "RR", "SC",
-                "SP", "SE", "TO"};
+        final String[] array_spinner = {"AC", "AL", "AP", "AM", "BA", "CE", "DF",
+            "ES", "GO", "MA", "MG", "MS", "MG", "PA", "PB", "PA", "PE", "PI",
+            "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO"};
         ArrayAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, array_spinner);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         uf.setAdapter(adapter);
@@ -74,15 +72,15 @@ public class CadastroEnderecoActivity extends AppCompatActivity implements Adapt
         botaoCadastrarEndereco.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                endereco = new Endereco();
-                endereco.setLogradouro(logradouro.getText().toString());
-                endereco.setNumero(numero.getText().toString());
-                endereco.setComplemento(complemento.getText().toString());
-                endereco.setBairro(bairro.getText().toString());
-                endereco.setCidade(cidade.getText().toString());
-                endereco.setCep(cep.getText().toString());
-                endereco.setUf(array_spinner[(int) uf.getSelectedItemId()]);
-                cadastrarEndereco();
+            endereco = new Endereco();
+            endereco.setLogradouro(logradouro.getText().toString());
+            endereco.setNumero(numero.getText().toString());
+            endereco.setComplemento(complemento.getText().toString());
+            endereco.setBairro(bairro.getText().toString());
+            endereco.setCidade(cidade.getText().toString());
+            endereco.setCep(cep.getText().toString());
+            endereco.setUf(array_spinner[(int) uf.getSelectedItemId()]);
+            cadastrarEndereco();
             }
         });
 
@@ -99,20 +97,19 @@ public class CadastroEnderecoActivity extends AppCompatActivity implements Adapt
         return true;
     }
 
-
     private void verificarCamposObrigatorios() throws CampoEnderecoObrAusenteException {
         if (logradouro.getText().toString().isEmpty()
-                ||
-                numero.getText().toString().isEmpty()
-                ||
-                complemento.getText().toString().isEmpty()
-                ||
-                bairro.getText().toString().isEmpty()
-                ||
-                cidade.getText().toString().isEmpty()
-                ||
-                cep.getText().toString().isEmpty()
-                ) {
+            ||
+            numero.getText().toString().isEmpty()
+            ||
+            complemento.getText().toString().isEmpty()
+            ||
+            bairro.getText().toString().isEmpty()
+            ||
+            cidade.getText().toString().isEmpty()
+            ||
+            cep.getText().toString().isEmpty()
+            ) {
             throw new CampoEnderecoObrAusenteException();
         }
     }

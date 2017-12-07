@@ -51,7 +51,7 @@ public class LoginActivity extends AppCompatActivity {
         email = findViewById(R.id.editText_email);
         senha = findViewById(R.id.editText_senha);
         login = findViewById(R.id.botao_login);
-        cadastrar = findViewById(R.id.botao_cadastrar);
+        cadastrar = findViewById(R.id.botao_cadastrar_novo_usuario);
 
         cadastrar.setOnClickListener(new View.OnClickListener() {
             @Override

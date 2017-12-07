@@ -42,15 +42,13 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_usuario);
-
         Toolbar toolbar;
         toolbar = (Toolbar) findViewById(R.id.tb_cadastro);
         nome = findViewById(R.id.editText_nome);
         email = findViewById(R.id.editText_email);
         senha = findViewById(R.id.editText_senha);
         senha2 = findViewById(R.id.editText_senha2);
-        botaoCadastrar = findViewById(R.id.botao_cadastrar);
-
+        botaoCadastrar = findViewById(R.id.botao_cadastrar_endereco);
         botaoCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -61,14 +59,11 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
                 cadastrarUsuario();
             }
         });
-
         // Configura toolbar
         toolbar.setTitle("Cadastro de Usuário");
         toolbar.setTitleTextColor(Color.WHITE);
         toolbar.setNavigationIcon(R.drawable.ic_action_arrow_left_white);
         setSupportActionBar(toolbar);
-
-
     }
 
     @Override
@@ -101,24 +96,16 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
             ).addOnCompleteListener(CadastroUsuarioActivity.this, new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
-
                     if (task.isSuccessful()) {
-
-
                         String identificadorUsuario = Base64Custom.codificarBase64(usuario.getEmail());
                         usuario.setId(identificadorUsuario);
-                        usuario.salvar();
-
+                        //usuario.salvar();
                         Preferencias preferencias = new Preferencias(CadastroUsuarioActivity.this);
                         preferencias.salvarDados(identificadorUsuario, usuario.getNome());
-
-                        mToast = mToast.makeText(CadastroUsuarioActivity.this, R.string.sucesso_cadastro_Toast, Toast.LENGTH_LONG);
+                        mToast = mToast.makeText(CadastroUsuarioActivity.this, R.string.sucesso_cadastro_proxima_etapa_Toast, Toast.LENGTH_LONG);
                         mToast.show();
-
-                        abrirLoginUsuario();
-
+                        abrirCadastroEndereco(usuario);
                     } else {
-
                         String erro = "";
                         try {
                             throw task.getException();
@@ -133,11 +120,9 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
-
                         mToast = mToast.makeText(CadastroUsuarioActivity.this, erro, Toast.LENGTH_SHORT);
                         mToast.show();
                     }
-
                 }
             });
         } catch (SenhasDiferentesException e) {
@@ -152,10 +137,10 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
         }
     }
 
-    public void abrirLoginUsuario(){
-        Intent intent = new Intent(CadastroUsuarioActivity.this, LoginActivity.class);
+     public void abrirCadastroEndereco(Usuario usuario){
+        Intent intent = new Intent(CadastroUsuarioActivity.this, CadastroEnderecoActivity.class);
+        intent.putExtra("Usuario", usuario);
         startActivity(intent);
         finish();
     }
-
 }

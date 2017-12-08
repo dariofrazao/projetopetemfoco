@@ -1,10 +1,5 @@
 package projetaobcc20172.com.projetopetemfoco.model;
 
-
-import com.google.firebase.database.DatabaseReference;
-
-import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoFirebase;
-
 public class Pet {
     private String idUsuario;
     private String nome;
@@ -13,10 +8,8 @@ public class Pet {
     private String porte;
     private String raça;
     private String genero;
-    //private DatabaseReference firebase;
 
     public Pet(){
-
     }
 
     public String getNome() {
@@ -59,8 +52,6 @@ public class Pet {
         this.idade = idade;
     }
 
-
-
     public String getRaça() {
         return raça;
     }
@@ -68,8 +59,6 @@ public class Pet {
     public void setRaça(String raça) {
         this.raça = raça;
     }
-
-
 
     public String getIdUsuario() {
         return idUsuario;

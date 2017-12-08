@@ -100,24 +100,20 @@
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent">
 
-                    <EditText
-                        android:id="@+id/editText_idade_pet"
+                    <Spinner
+                        android:id="@+id/idadeSpinner"
+                        android:layout_margin="4dp"
                         android:layout_width="120dp"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentStart="true"
-                        android:layout_below="@+id/editText_nome_pet"
-                        android:layout_margin="4dp"
-                        android:ems="10"
-                        android:hint="@string/digite_idade_pet"
-                        android:inputType="textEmailAddress" />
+                        android:layout_below="@+id/TexViewCadastroIdadePet"/>
 
                     <Spinner
                         android:id="@+id/tipoSpinner"
+                        android:layout_margin="4dp"
+                        android:layout_below="@+id/TexViewCadastroTipoPet"
                         android:paddingLeft="20dp"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp" />
+                        android:layout_height="wrap_content"/>
                 </LinearLayout>
 
 
@@ -213,7 +209,7 @@
                     android:layout_marginTop="10dp" />
 
                 <Button
-                    android:id="@+id/botao_cadastrar"
+                    android:id="@+id/botao_cadastrar_pet"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
@@ -221,7 +217,7 @@
                     android:layout_below="@+id/editText_senha2"
                     android:layout_marginTop="24dp"
                     android:background="@drawable/shapebutton"
-                    android:text="@string/cadastrar" />
+                    android:text="Cadastrar" />
 
             </LinearLayout>
 

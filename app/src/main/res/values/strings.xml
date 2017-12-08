@@ -18,17 +18,7 @@
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
-    <string name="erro_login_invalido_Toast">Erro ao fazer login!</string>
-    <string name="erro_cadastro_email_invalido_Toast">Erro ao cadastrar usuário: Email indicado não é válido.</string>
-    <string name="erro_cadastro_senha_invalida_Toast">Erro ao cadastrar usuário: Escolha uma senha que contenha pelo menos 6 caracteres.</string>
-    <string name="erro_cadastro_email_usado_Toast">Erro ao cadastrar usuário: Já existe uma conta com esse e-mail.</string>
-    <string name="erro_cadastro_campos_obrigatorios_Toast">Erro ao cadastrar usuário: Preencha todos os campos</string>
     <string name="erro_cadastro_endereco_campos_obrigatorios_Toast">Erro ao cadastrar endereço: Preencha todos os campos</string>
-    <string name="erro_cadastro_senhas_diferentes_Toast">Erro ao cadastrar usuário: Os campos de senha devem ser iguais.</string>
-    <string name="erro_cadastro_sem_conexao">Erro ao cadastrar usuário: Verifique a sua conexão</string>
-    <string name="erro_cadastro_nome_usuario_Toast">Erro ao cadastrar usuário: O nome de usuário inválido.</string>
-    <string name="sucesso_login_Toast">Sucesso ao fazer login!</string>
-    <string name="sucesso_cadastro_Toast">Sucesso ao cadastrar usuário</string>
     <string name="sucesso_cadastro_proxima_etapa_Toast">Sucesso! Pronto para a próxima etapa</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email completions."</string>
     <string name="erro_login_invalido_Toast">Erro ao fazer login!</string>
@@ -36,14 +26,13 @@
     <string name="erro_cadastro_senha_invalida_Toast">Erro ao cadastrar usuário: Escolha uma senha que contenha pelo menos 6 caracteres.</string>
     <string name="erro_cadastro_email_usado_Toast">Erro ao cadastrar usuário: Já existe uma conta com esse e-mail.</string>
     <string name="erro_cadastro_campos_obrigatorios_Toast">Erro ao cadastrar usuário: Preencha todos os campos</string>
+    <string name="erro_cadastro_campos_obrigatorios_Pet">Erro ao cadastrar pet: Preencha o campo nome</string>
     <string name="erro_cadastro_senhas_diferentes_Toast">Erro ao cadastrar usuário: Os campos de senha devem ser iguais.</string>
     <string name="erro_cadastro_sem_conexao">Erro ao cadastrar usuário: Verifique a sua conexão</string>
     <string name="erro_cadastro_nome_usuario_Toast">Erro ao cadastrar usuário: O nome de usuário inválido.</string>
     <string name="sucesso_login_Toast">Sucesso ao fazer login!</string>
     <string name="sucesso_cadastro_Toast">Sucesso ao cadastrar usuário</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
-    </string>
+    <string name="sucesso_cadastro_Pet">Pet cadastrado com sucesso!</string>
     <string name="pergunta_nao_possui_cadastro">Não possui cadastro?</string>
     <string name="digite_seu_nome">Digite seu nome</string>
     <string name="digite_seu_email">Digite seu email</string>

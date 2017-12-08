@@ -62,5 +62,7 @@
     <string name="macho">Macho</string>
     <string name="femea">Fêmea</string>
     <string name="digite_raca_pet">Digite a raça do seu pet</string>
+    
+    <string name="tb_cadastro_pet">Cadastro de Pet</string>
 
 </resources>

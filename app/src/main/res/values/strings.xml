@@ -3,6 +3,7 @@
     <string name="title_cadastro_usuario">Cadastro de Usuário</string>
     <string name="entrar">Entrar</string>
     <string name="cadastrar">Cadastrar</string>
+    <string name="salvar">Salvar</string>
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Senha</string>
@@ -32,12 +33,36 @@
     <string name="repita_sua_senha">Repita sua senha</string>
     <string name="nome">Nome</string>
     <string name="confirmar_sua_senha">Confirme sua senha</string>
+
+    <!--Strings relacionadas a serviço-->
     <string name="title_activity_cadastro_servico">Cadastrar Novo Serviço</string>
+    <string name="editar_servico">Editar Serviço</string>
     <string name="nome_servico">Nome do Serviço</string>
     <string name="valor">Valor</string>
     <string name="descricao">Descrição</string>
     <string name="digite_nome_servico">Digite o nome do serviço</string>
     <string name="digite_valor_servico">R$0,00</string>
     <string name="digite_descricao_servico">Digite a descrição do serviço</string>
+    <string name="servico">Serviço</string>
+
+    <!--Strings de erro-->
+    <string name="erro_ao_cadastrar">Erro ao cadastrar</string>
+    <string name="erro_ao_atualizar">Erro ao atualizar</string>
+    <string name="preencha_campo_nome">Preencha o campo nome.</string>
+    <string name="preencha_campo_descricao">Preencha o campo descrição.</string>
+    <string name="preencha_campo_valor">Preencha o campo valor</string>
+
+    <!--Strings de mensagens ao usuário-->
+    <string name="sucesso_cadastro">Cadastro Efetuado com Sucesso!</string>
+    <string name="sucesso_remocao">Remoção Efetuada com Sucesso!</string>
+    <string name="sucesso_atualizacao">Atualização Efetuada com Sucesso!</string>
+    <string name="falha_cadastro">Cadastro Falhou!</string>
+    <string name="falha_remocao">Remoção Falhou!</string>
+    <string name="falha_atualizacao">Atualização Falhou!</string>
+    <string name="pergunta_do_sistema">Pergunta do Sistema</string>
+    <string name="atencao">Atenção!</string>
+    <string name="sair">Sair</string>
+    <string name="pergunta_confirma_dados_serao_perdidos">Os dados não salvos serão perdidos. Confirma?</string>
+
 
 </resources>

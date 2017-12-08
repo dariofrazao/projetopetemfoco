@@ -108,19 +108,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
+                    android:id="@+id/etCadastroDescricaoServico"
                     android:inputType="textMultiLine"
                     android:hint="@string/digite_descricao_servico" />
 
                 <Button
-                    android:id="@+id/botao_cadastrar"
+                    android:id="@+id/btnSalvarServico"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
-                    android:layout_below="@+id/editText_senha2"
                     android:layout_marginTop="24dp"
                     android:background="@drawable/shapebutton"
-                    android:text="@string/cadastrar" />
+                    android:text="@string/salvar" />
 
 
             </LinearLayout>

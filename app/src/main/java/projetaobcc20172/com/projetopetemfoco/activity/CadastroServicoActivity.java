@@ -9,9 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Locale;
 
@@ -119,6 +116,12 @@ public class CadastroServicoActivity extends AppCompatActivity {
 
                 ServicoDaoImpl servicoDao =  new ServicoDaoImpl(this);
                 servicoDao.inserir(mServico, "ZEBob3RtYWlsLmNvbQ==");
+                // limpa os campos da view
+                limparCampos();
+                mServico = null;
+
+                // volta para a tela anterior
+                CadastroServicoActivity.super.onBackPressed();
             }
             // é atualização de dados
             // TODO: Implemantar o caso de atualização de dados.
@@ -167,5 +170,14 @@ public class CadastroServicoActivity extends AppCompatActivity {
         Utils.mostrarPerguntaSimNao(this, getString(R.string.atencao),
                     getString(R.string.pergunta_confirma_dados_serao_perdidos), dialogClickListener,
                     dialogClickListener);
+    }
+
+    /**
+     * Limpa todos os campos.
+     */
+    public void limparCampos(){
+        mEtDescricao.setText("");
+        mEtValor.setText("0");
+        mEtDescricao.setText("");
     }
 }

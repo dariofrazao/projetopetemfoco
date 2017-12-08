@@ -25,7 +25,7 @@ import projetaobcc20172.com.projetopetemfoco.model.Pet;
 
 public class CadastroPetActivity extends AppCompatActivity{
 
-    private Spinner tipoSpinner, porteSpinner, idadeSpinner;
+    private Spinner mSpinnerTipo, mSpinnerPorte, mSpinnerIdade;
     private String[] stateIdade = {"Menos de 1 ano", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11",
             "12", "13", "14", "15", "16", "17", "18"}; //Array com as idades dos animais
     private String[] stateTipo = {"Cão", "Gato", "Pássaro", "Peixe"}; //Array com os tipos de animais
@@ -55,25 +55,25 @@ public class CadastroPetActivity extends AppCompatActivity{
         setSupportActionBar(toolbar);
 
         //Preparar o adaptar do Spinner para exibir os tipos dos pets
-        tipoSpinner = findViewById(R.id.tipoSpinner);
+        mSpinnerTipo = findViewById(R.id.tipoSpinner);
         ArrayAdapter<String> adapter_state = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, stateTipo);
         adapter_state.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        tipoSpinner.setAdapter(adapter_state);
+        mSpinnerTipo.setAdapter(adapter_state);
 
         //Preparar o adaptar do Spinner para exibir os portes dos pets
-        porteSpinner = findViewById(R.id.porteSpinner);
+        mSpinnerPorte = findViewById(R.id.porteSpinner);
         ArrayAdapter<String> adapter_state2 = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, statePorte);
         adapter_state2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        porteSpinner.setAdapter(adapter_state2);
+        mSpinnerPorte.setAdapter(adapter_state2);
 
         //Preparar o adaptar do Spinner para exibir as idades dos pets
-        idadeSpinner = findViewById(R.id.idadeSpinner);
+        mSpinnerIdade = findViewById(R.id.idadeSpinner);
         ArrayAdapter<String> adapter_state3 = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, stateIdade);
         adapter_state3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        idadeSpinner.setAdapter(adapter_state3);
+        mSpinnerIdade.setAdapter(adapter_state3);
 
         nome = findViewById(R.id.editText_nome_pet);
         raça = findViewById(R.id.editText_raca_pet);
@@ -89,14 +89,14 @@ public class CadastroPetActivity extends AppCompatActivity{
                 //Recuperar demais dados do pet informados pelo usuário
                 pet = new Pet();
                 pet.setNome(nome.getText().toString());
-                pet.setIdade(idadeSpinner.getSelectedItem().toString());
-                pet.setTipo(tipoSpinner.getSelectedItem().toString());
+                pet.setIdade(mSpinnerIdade.getSelectedItem().toString());
+                pet.setTipo(mSpinnerTipo.getSelectedItem().toString());
                 radioGroup = findViewById(R.id.genero_radio_group);
                 //Recupera o texto do item selecionado no gênero do pet
                 String itemSelecionado = ((RadioButton)findViewById(radioGroup.getCheckedRadioButtonId())).getText().toString();
                 pet.setGenero(itemSelecionado);
                 pet.setRaça(raça.getText().toString());
-                pet.setPorte(porteSpinner.getSelectedItem().toString());
+                pet.setPorte(mSpinnerPorte.getSelectedItem().toString());
                 //Chamar o método para salvar o pet no banco
                 salvarPet(idUsuarioLogado, pet);
 

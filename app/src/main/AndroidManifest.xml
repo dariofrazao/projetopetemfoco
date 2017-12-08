@@ -25,6 +25,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.MainActivity" />
+
+        <activity
+            android:name=".activity.CadastroPetActivity"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".activity.CadastroEnderecoActivity" />
         <activity
             android:name=".activity.CadastroUsuarioActivity"
             android:label="@string/title_cadastro_usuario"
@@ -32,7 +37,7 @@
         <activity
             android:name=".activity.CadastroServicoActivity"
             android:label="@string/title_activity_cadastro_servico"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme"/>
     </application>
 
 </manifest>

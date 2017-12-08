@@ -62,4 +62,14 @@ public class MascaraDinheiro implements TextWatcher{
                 2, BigDecimal.ROUND_FLOOR).divide(new BigDecimal(100), BigDecimal.ROUND_FLOOR
         );
     }
+
+    /**
+     * Remove a mascara de dinheiro.
+     * @param editText componente onde o texto foi digitado
+     * @return {String} sem o prefixo que identifica a moeda, pronta para ser formatada para Double.
+     */
+    public static String removerMascara(EditText editText){
+        return editText.getText().toString().replace("R$", "")
+                .replace(".", "").replace(",", ".");
+    }
 }

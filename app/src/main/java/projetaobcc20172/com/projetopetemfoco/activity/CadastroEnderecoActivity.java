@@ -4,9 +4,10 @@ package projetaobcc20172.com.projetopetemfoco.activity;
  */
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
+import android.preference.PreferenceManager;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -17,19 +18,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.FirebaseNetworkException;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
 import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.excecoes.CampoEnderecoObrAusenteException;
 import projetaobcc20172.com.projetopetemfoco.helper.Base64Custom;
-import projetaobcc20172.com.projetopetemfoco.helper.Preferencias;
 import projetaobcc20172.com.projetopetemfoco.model.Endereco;
 import projetaobcc20172.com.projetopetemfoco.model.Usuario;
 import projetaobcc20172.com.projetopetemfoco.utils.MaskUtil;
@@ -43,7 +34,6 @@ public class CadastroEnderecoActivity extends AppCompatActivity implements Adapt
 
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE) //permite que essa variavel seja vista pela classe de teste
     private Toast mToast;
-    private DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +41,7 @@ public class CadastroEnderecoActivity extends AppCompatActivity implements Adapt
         setContentView(R.layout.activity_cadastro_endereco);
 
         Toolbar toolbar;
-        toolbar = (Toolbar) findViewById(R.id.tb_endereco);
+        toolbar = findViewById(R.id.tb_endereco);
 
         logradouro = findViewById(R.id.editText_endereco_logradouro);
         numero = findViewById(R.id.editText_endereco_numero);
@@ -64,23 +54,28 @@ public class CadastroEnderecoActivity extends AppCompatActivity implements Adapt
         final String[] array_spinner = {"AC", "AL", "AP", "AM", "BA", "CE", "DF",
             "ES", "GO", "MA", "MG", "MS", "MG", "PA", "PB", "PA", "PE", "PI",
             "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO"};
+
         ArrayAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, array_spinner);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         uf.setAdapter(adapter);
         uf.setOnItemSelectedListener(this);
+
         botaoCadastrarEndereco = findViewById(R.id.botao_finalizar_cadastro_endereco);
         botaoCadastrarEndereco.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            endereco = new Endereco();
-            endereco.setLogradouro(logradouro.getText().toString());
-            endereco.setNumero(numero.getText().toString());
-            endereco.setComplemento(complemento.getText().toString());
-            endereco.setBairro(bairro.getText().toString());
-            endereco.setCidade(cidade.getText().toString());
-            endereco.setCep(cep.getText().toString());
-            endereco.setUf(array_spinner[(int) uf.getSelectedItemId()]);
-            cadastrarEndereco();
+
+                //Recuperar os campos do endereço informados pelo usuário
+                endereco = new Endereco();
+                endereco.setLogradouro(logradouro.getText().toString());
+                endereco.setNumero(numero.getText().toString());
+                endereco.setComplemento(complemento.getText().toString());
+                endereco.setBairro(bairro.getText().toString());
+                endereco.setCidade(cidade.getText().toString());
+                endereco.setCep(cep.getText().toString());
+                endereco.setUf(array_spinner[(int) uf.getSelectedItemId()]);
+                //Chama o método para cadastrar o usuário
+                cadastrarEndereco();
             }
         });
 
@@ -97,6 +92,7 @@ public class CadastroEnderecoActivity extends AppCompatActivity implements Adapt
         return true;
     }
 
+    //Método para verificar se os campos do endereço estão em branco
     private void verificarCamposObrigatorios() throws CampoEnderecoObrAusenteException {
         if (logradouro.getText().toString().isEmpty()
             ||
@@ -114,8 +110,10 @@ public class CadastroEnderecoActivity extends AppCompatActivity implements Adapt
         }
     }
 
+    //Método que recupera os dados básicos do usuário, adicionando o endereço para salvar no banco
     private void cadastrarEndereco() {
         try {
+
             this.verificarCamposObrigatorios();
             Intent i = getIntent();
             Usuario usuario = (Usuario) i.getSerializableExtra("Usuario");
@@ -123,14 +121,18 @@ public class CadastroEnderecoActivity extends AppCompatActivity implements Adapt
             usuario.salvar();
             mToast = mToast.makeText(CadastroEnderecoActivity.this, R.string.sucesso_cadastro_Toast, Toast.LENGTH_LONG);
             mToast.show();
+            String identificadorUsuario = Base64Custom.codificarBase64(usuario.getEmail());
+            usuario.setId(identificadorUsuario);
+            salvarPreferencias("id", identificadorUsuario);
             abrirLoginUsuario();
-        } catch (CampoEnderecoObrAusenteException e) {
+
+            } catch (CampoEnderecoObrAusenteException e) {
             mToast = mToast.makeText(CadastroEnderecoActivity.this, R.string.erro_cadastro_endereco_campos_obrigatorios_Toast, Toast.LENGTH_SHORT);
             mToast.show();
-        } catch (Exception e) {
+            } catch (Exception e) {
             mToast = mToast.makeText(CadastroEnderecoActivity.this, R.string.erro_cadastro_endereco_campos_obrigatorios_Toast, Toast.LENGTH_SHORT);
             mToast.show();
-        }
+            }
     }
 
     public void abrirLoginUsuario() {
@@ -148,5 +150,13 @@ public class CadastroEnderecoActivity extends AppCompatActivity implements Adapt
     public void onNothingSelected(AdapterView<?> parent) {
         mToast = mToast.makeText(CadastroEnderecoActivity.this, R.string.erro_cadastro_endereco_campos_obrigatorios_Toast, Toast.LENGTH_SHORT);
         mToast.show();
+    }
+
+    //Método que salva o id do usuário nas preferências para login automático ao abrir aplicativo
+    private void salvarPreferencias(String key, String value){
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(key, value);
+        editor.commit();
     }
 }

@@ -6,12 +6,43 @@
     android:layout_height="match_parent"
     tools:context="projetaobcc20172.com.projetopetemfoco.activity.MainActivity">
 
-    <Button
-        android:id="@+id/botao_sair"
-        android:layout_width="wrap_content"
+    <include
+        android:id="@+id/tb_main"
+        layout="@layout/toolbar" ></include>
+
+    <ListView
+        android:id="@+id/lv_pets"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="101dp"
-        android:text="Sair" />
+        android:padding="8dp"
+        android:layout_below="@+id/tb_main"
+        android:layout_above="@+id/ll_main"></ListView>
+
+    <LinearLayout
+        android:id="@+id/ll_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@android:color/white"
+        android:layout_alignParentBottom="true">
+
+        <Button
+            android:id="@+id/botao_cadastrar_pet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:text="Cadastrar Pet" />
+
+        <Button
+            android:id="@+id/botao_sair"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/botao_cadastrar_pet"
+            android:layout_centerHorizontal="true"
+            android:text="Sair" />
+
+    </LinearLayout>
+
+
 </RelativeLayout>

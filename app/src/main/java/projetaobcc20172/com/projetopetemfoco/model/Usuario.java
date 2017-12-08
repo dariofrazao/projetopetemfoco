@@ -14,7 +14,9 @@ public class Usuario implements Serializable{
     private String nome;
     private String email;
     private String senha;
+    private String senha2;
     private Endereco endereco;
+    private Pet pet;
 
     public Usuario(){
 
@@ -59,7 +61,23 @@ public class Usuario implements Serializable{
         this.senha = senha;
     }
 
+    public String getSenha2() {
+        return senha2;
+    }
+
+    public void setSenha2(String senha2) {
+        this.senha2 = senha2;
+    }
+
     public Endereco getEndereco() { return endereco; }
 
     public void setEndereco(Endereco endereco) { this.endereco = endereco; }
+
+    public Pet getPet() {
+        return pet;
+    }
+
+    public void setPet(Pet pet) {
+        this.pet = pet;
+    }
 }

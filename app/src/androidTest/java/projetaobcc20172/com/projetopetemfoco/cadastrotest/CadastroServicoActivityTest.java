@@ -11,7 +11,8 @@ import org.junit.Test;
 
 import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.activity.CadastroServicoActivity;
-import projetaobcc20172.com.projetopetemfoco.activity.CadastroUsuarioActivity;
+
+import static junit.framework.Assert.fail;
 
 /**
  * Classe que testa a tela de cadastro de serviços.
@@ -53,6 +54,12 @@ public class CadastroServicoActivityTest {
 
     public void testeCampoNomeNaoInformado(){
         preencherEClicarCadastro("", this.mValor, this.mDescricao);
+        fail("Não implementado");
+    }
+
+    public void testeTodosCamposInformados() {
+        preencherEClicarCadastro(this.mNome, this.mValor, this.mDescricao);
+        fail("Não implementado");
     }
 
 }

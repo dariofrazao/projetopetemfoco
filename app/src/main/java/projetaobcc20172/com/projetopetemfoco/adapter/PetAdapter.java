@@ -13,7 +13,7 @@ import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.model.Pet;
 
 //Classe que monta uma View para exibir os pets cadastrados do usuário
-public class PetAdapter extends ArrayAdapter<Pet>{
+public class PetAdapter extends ArrayAdapter<Pet> {
 
     private ArrayList<Pet> pets;
     private Context context;
@@ -30,7 +30,7 @@ public class PetAdapter extends ArrayAdapter<Pet>{
         View view = null;
 
         // Verifica se a lista está preenchida
-        if( pets != null ){
+        if (pets != null) {
 
             // inicializar objeto para montagem da view
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);

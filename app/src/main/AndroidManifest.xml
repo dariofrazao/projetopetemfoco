@@ -28,7 +28,7 @@
 
         <activity
             android:name=".activity.CadastroPetActivity"
-            android:windowSoftInputMode="stateHidden"/>
+            android:windowSoftInputMode="stateHidden" />
         <activity android:name=".activity.CadastroEnderecoActivity" />
         <activity
             android:name=".activity.CadastroUsuarioActivity"
@@ -37,7 +37,7 @@
         <activity
             android:name=".activity.CadastroServicoActivity"
             android:label="@string/title_activity_cadastro_servico"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>

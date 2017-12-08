@@ -38,7 +38,7 @@ public class CadastroUsuarioActivityTest extends CadastroUsuarioTestMae {
         //Escreve no campo de e-mail o conteúdo do atributo "emailJaUtilizado"
         Espresso.onView(ViewMatchers.withId(R.id.editText_email)).perform(ViewActions.typeText(this.emailJaUtilizado));
         Espresso.closeSoftKeyboard();//Fecha o teclado
-        Espresso.onView(ViewMatchers.withId(R.id.botao_cadastrar)).perform(ViewActions.click());//Clica no botão cadastrar
+        Espresso.onView(ViewMatchers.withId(R.id.botao_cadastrar_endereco)).perform(ViewActions.click());//Clica no botão cadastrar
         //Verifica se a mensagem que aparece no Toast é a correta
         Espresso.onView(ViewMatchers.withText(R.string.erro_cadastro_campos_obrigatorios_Toast)).inRoot(withDecorView(not(CoreMatchers.is(cadastroActivityRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
 

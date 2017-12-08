@@ -32,6 +32,10 @@
         <activity
             android:name=".activity.CadastroPetActivity"
             android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".activity.CadastroEnderecoActivity" />
+        <activity android:name=".activity.CadastroUsuarioActivity"
+            android:windowSoftInputMode="stateHidden"
+            android:label="@string/title_cadastro_usuario"/>
     </application>
 
 </manifest>

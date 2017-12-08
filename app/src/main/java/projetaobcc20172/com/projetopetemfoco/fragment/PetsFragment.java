@@ -23,14 +23,12 @@ import projetaobcc20172.com.projetopetemfoco.model.Pet;
 //Sua utilização é útil para dividir uma mesma tela em mais partes.
 public class PetsFragment extends Fragment {
 
-    private ListView listView;
+
     private ArrayAdapter<Pet> adapter;
     private ArrayList<Pet> pets;
     private DatabaseReference firebase;
     private ValueEventListener valueEventListenerPets;
 
-    public PetsFragment() {
-    }
 
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
@@ -40,7 +38,7 @@ public class PetsFragment extends Fragment {
 
         // Monta listview e adapter
         pets = new ArrayList<>();
-        listView = view.findViewById(R.id.lv_pets);
+        ListView listView = view.findViewById(R.id.lv_pets);
         adapter = new PetAdapter(getActivity(), pets);
         listView.setAdapter(adapter);
 
@@ -59,7 +57,7 @@ public class PetsFragment extends Fragment {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
+                // vazio
             }
         };
         return view;

@@ -1,9 +1,8 @@
 package projetaobcc20172.com.projetopetemfoco.model;
 
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Exclude;
 
-import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoFirebase;
+
 
 public class Endereco {
 

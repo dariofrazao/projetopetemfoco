@@ -7,8 +7,6 @@ import android.content.DialogInterface;
 import android.net.ConnectivityManager;
 import android.widget.Toast;
 
-import projetaobcc20172.com.projetopetemfoco.R;
-import projetaobcc20172.com.projetopetemfoco.activity.CadastroUsuarioActivity;
 
 /**
  * Classe de Rotinas úteis.

@@ -1,6 +1,5 @@
 package projetaobcc20172.com.projetopetemfoco.database.services;
 
-import android.content.Context;
 
 import java.util.List;
 

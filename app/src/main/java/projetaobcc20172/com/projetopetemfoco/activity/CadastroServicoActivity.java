@@ -1,6 +1,6 @@
 package projetaobcc20172.com.projetopetemfoco.activity;
 
-import android.content.Context;
+
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -28,18 +28,13 @@ import projetaobcc20172.com.projetopetemfoco.utils.Utils;
 public class CadastroServicoActivity extends AppCompatActivity {
 
     private EditText mEtNome, mEtValor, mEtDescricao;
-    private Button mBtnCadastrar;
-    private Toolbar mToolbar;
-    private DatabaseReference mFornecedorRef;
 
     private Servico mServico;
-    private FirebaseAuth autenticacao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_servico);
-        mFornecedorRef = FirebaseDatabase.getInstance().getReference().child("fornecedor");
         inicializarComponentes();
     }
 
@@ -48,9 +43,9 @@ public class CadastroServicoActivity extends AppCompatActivity {
      */
     private void inicializarComponentes() {
 
-        mToolbar = findViewById(R.id.toolbar);
-        mToolbar.setNavigationIcon(R.drawable.ic_action_arrow_left_white);
-        setSupportActionBar(mToolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setNavigationIcon(R.drawable.ic_action_arrow_left_white);
+        setSupportActionBar(toolbar);
 
         mEtNome =  findViewById(R.id.etCadastroNomeServico);
         mEtValor =  findViewById(R.id.etCadastroValorServico);
@@ -60,8 +55,8 @@ public class CadastroServicoActivity extends AppCompatActivity {
 
         mEtValor.addTextChangedListener(new MascaraDinheiro(mEtValor, mLocal));
 
-        mBtnCadastrar = findViewById(R.id.btnSalvarServico);
-        mBtnCadastrar.setOnClickListener(new View.OnClickListener() {
+        Button btnCadastrar = findViewById(R.id.btnSalvarServico);
+        btnCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 cadastrarAtualizar();
@@ -126,10 +121,8 @@ public class CadastroServicoActivity extends AppCompatActivity {
                 servicoDao.inserir(mServico, "ZEBob3RtYWlsLmNvbQ==");
             }
             // é atualização de dados
-            else{
+            // TODO: Implemantar o caso de atualização de dados.
 
-                // TODO: Implemantar o caso de atualização de dados.
-            }
 
         } catch (ValidacaoException e) {
             e.printStackTrace();
@@ -164,6 +157,8 @@ public class CadastroServicoActivity extends AppCompatActivity {
 
                     case DialogInterface.BUTTON_NEGATIVE:
                         // Botão não foi clicado
+                        break;
+                    default:
                         break;
                 }
             }

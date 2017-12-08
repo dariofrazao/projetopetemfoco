@@ -1,6 +1,5 @@
 package projetaobcc20172.com.projetopetemfoco.utils;
 
-import android.os.Build;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
@@ -31,12 +30,12 @@ public class MascaraDinheiro implements TextWatcher{
 
     @Override
     public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
+        // alterações antes do texto mudar
     }
 
     @Override
     public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
+        // alterações quando o texto esta mudando
     }
 
     @Override

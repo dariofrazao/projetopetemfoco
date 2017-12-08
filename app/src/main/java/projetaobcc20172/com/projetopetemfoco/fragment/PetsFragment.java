@@ -1,10 +1,6 @@
 package projetaobcc20172.com.projetopetemfoco.fragment;
 
 import android.app.Fragment;
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,8 +17,6 @@ import java.util.ArrayList;
 
 import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.adapter.PetAdapter;
-import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoFirebase;
-import projetaobcc20172.com.projetopetemfoco.helper.Preferencias;
 import projetaobcc20172.com.projetopetemfoco.model.Pet;
 
 //Classe que monta um Fragmente (pedaço de tela para exibir os pets)

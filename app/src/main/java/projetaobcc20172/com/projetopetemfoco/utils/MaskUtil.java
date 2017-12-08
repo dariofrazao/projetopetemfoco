@@ -8,7 +8,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
 
-//Classe que especifica máscaras a serem utilizadas nos cadastros
+
 public class MaskUtil {
     private static final String CPFMask = "###.###.###-##";
     private static final String CNPJMask = "##.###.###/####-##";

@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -26,8 +28,6 @@ public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth autenticacao;
     private DatabaseReference firebase;
-    private String idUsuarioLogado;
-    private ListView listView;
     private ArrayList<Pet> pets;
     private ArrayAdapter<Pet> adapter;
     private ValueEventListener valueEventListenerPet;
@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
 
         //Recuperar id do usuário logado
+        String idUsuarioLogado;
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         idUsuarioLogado = preferences.getString("id","");
 
@@ -57,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
         sair = findViewById(R.id.botao_sair);
         cadastrarPet = findViewById(R.id.botao_cadastrar_pet);
+        ListView listView;
         listView = findViewById(R.id.lv_pets);
 
         // Monta listview e adapter
@@ -83,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
+                Toast.makeText(MainActivity.this, "Erro na leitura do banco de dados", Toast.LENGTH_SHORT).show();
             }
         };
         firebase.addValueEventListener(valueEventListenerPet);

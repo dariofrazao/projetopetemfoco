@@ -27,12 +27,23 @@ public class MainActivity extends AppCompatActivity {
         Button sair;
         autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
 
-        sair = (Button)findViewById(R.id.botao_sair);
+        sair = findViewById(R.id.botao_sair);
 
         sair.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 deslogarUsuario();
+            }
+        });
+
+        Button cadastroServico;
+        cadastroServico =  findViewById(R.id.btnCadastroServico);
+        cadastroServico.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.setClass(MainActivity.this, CadastroServicoActivity.class);
+                startActivity(intent);
             }
         });
     }

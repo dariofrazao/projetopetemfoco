@@ -99,7 +99,7 @@ public class LoginActivity extends AppCompatActivity {
                                 Usuario usuarioRecuperado = dataSnapshot.getValue(Usuario.class);
 
                                 Preferencias preferencias = new Preferencias(LoginActivity.this);
-                                preferencias.salvarDados(identificadorUsuarioLogado, usuarioRecuperado.getNome());
+                                if(usuarioRecuperado != null) preferencias.salvarDados(identificadorUsuarioLogado, usuarioRecuperado.getNome());
 
                             }
 

@@ -49,7 +49,7 @@ public class CadastroPetActivity extends AppCompatActivity{
         toolbar = findViewById(R.id.tb_cadastro_pet);
 
         // Configura toolbar
-        toolbar.setTitle("Cadastro de Pet");
+        toolbar.setTitle(R.string.tb_cadastro_pet);
         toolbar.setTitleTextColor(Color.WHITE);
         toolbar.setNavigationIcon(R.drawable.ic_action_arrow_left_white);
         setSupportActionBar(toolbar);

@@ -78,9 +78,11 @@ public class MaskUtil {
             }
 
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // vazio
             }
 
             public void afterTextChanged(Editable s) {
+                // vazio
             }
         };
     }

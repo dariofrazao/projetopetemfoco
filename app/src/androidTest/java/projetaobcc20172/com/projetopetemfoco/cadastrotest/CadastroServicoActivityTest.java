@@ -35,8 +35,7 @@ public class CadastroServicoActivityTest {
      * @param valor valor a ser atribuído ao serviço.
      * @param descicao descricao a ser atribuída ao serviço.
      */
-    @Test
-    public void preencherEClicarCadastro(String nome,String valor,String descicao){
+    private void preencherEClicarCadastro(String nome, String valor, String descicao) {
         Espresso.onView(ViewMatchers.withId(R.id.etCadastroNomeServico)).perform(ViewActions.typeText(nome));
         Espresso.closeSoftKeyboard();
         Espresso.onView(ViewMatchers.withId(R.id.etCadastroValorServico)).perform(ViewActions.typeText(valor));

@@ -2,6 +2,8 @@ package projetaobcc20172.com.projetopetemfoco.model;
 
 import com.google.firebase.database.Exclude;
 
+
+
 public class Endereco {
 
     //Atributos do endereço

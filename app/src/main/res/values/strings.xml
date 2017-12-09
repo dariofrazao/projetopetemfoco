@@ -11,6 +11,9 @@
     <string name="prompt_genero_pet">Gênero</string>
     <string name="prompt_raca_pet">Raça</string>
     <string name="prompt_porte_pet">Porte</string>
+    <string name="prompt_telefone">Telefone</string>
+    <string name="prompt_cpf_cnpj">CPF/CNPJ</string>
+    <string name="prompt_horario">Horário de Funcionamento</string>
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="error_invalid_email">This email address is invalid</string>
@@ -25,6 +28,13 @@
     <string name="erro_cadastro_senhas_diferentes_Toast">Erro ao cadastrar usuário: Os campos de senha devem ser iguais.</string>
     <string name="erro_cadastro_sem_conexao">Erro ao cadastrar usuário: Verifique a sua conexão</string>
     <string name="erro_cadastro_nome_usuario_Toast">Erro ao cadastrar usuário: O nome de usuário inválido.</string>
+    <string name="erro_cadastro_fornecedor_email_invalido_Toast">Erro ao cadastrar fornecedor: Email indicado não é válido.</string>
+    <string name="erro_cadastro_fornecedor_senha_invalida_Toast">Erro ao cadastrar fornecedor: Escolha uma senha que contenha pelo menos 6 caracteres.</string>
+    <string name="erro_cadastro_fornecedor_email_usado_Toast">Erro ao cadastrar fornecedor: Já existe uma conta com esse e-mail.</string>
+    <string name="erro_cadastro_fornecedor_campos_obrigatorios_Toast">Erro ao cadastrar fornecedor: Preencha todos os campos</string>
+    <string name="erro_cadastro_fornecedor_senhas_diferentes_Toast">Erro ao cadastrar fornecedor: Os campos de senha devem ser iguais.</string>
+    <string name="erro_cadastro_fornecedor_sem_conexao">Erro ao cadastrar fornecedor: Verifique a sua conexão</string>
+    <string name="erro_cadastro_fornecedor_nome_fornecedor_Toast">Erro ao cadastrar fornecedor: O nome de fornecedor inválido.</string>
     <string name="sucesso_login_Toast">Sucesso ao fazer login!</string>
     <string name="sucesso_cadastro_Toast">Sucesso ao cadastrar usuário</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
@@ -33,6 +43,8 @@
     <string name="pergunta_nao_possui_cadastro">Não possui cadastro?</string>
     <string name="digite_seu_nome">Digite seu nome</string>
     <string name="digite_seu_email">Digite seu email</string>
+    <string name="digite_seu_telefone">Digite seu telefone</string>
+    <string name="digite_seu_cpj_cnpj">Digite seu CPF/CNPJ</string>
     <string name="digite_sua_senha">Digite sua senha</string>
     <string name="repita_sua_senha">Repita sua senha</string>
     <string name="nome">Nome</string>
@@ -43,4 +55,18 @@
     <string name="femea">Fêmea</string>
     <string name="digite_raca_pet">Digite a raça do seu pet</string>
 
+    <!--lista com horários dos fornecedores><-->
+    <string-array name="horarios">
+        <item name=" "></item>
+        <item name=" ">Manhã</item>
+        <item name=" "></item>
+        <item name=" "  marginTop="6dp">Tarde</item>
+        <item name=" "></item>
+        <item name=" ">Noite</item>
+        <item name=" "></item>
+        <item name=" ">Horário Comercial</item>
+        <item name=" "></item>
+        <item name=" ">24 horas</item>
+        <item name=" "></item>
+    </string-array>
 </resources>

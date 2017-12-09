@@ -28,7 +28,7 @@ import projetaobcc20172.com.projetopetemfoco.helper.Preferencias;
 public class LoginActivity extends AppCompatActivity {
     //testando pullrequest
     private EditText email, senha;
-    private Button login, cadastrar;
+    private Button login, cadastrar, cadastrar_fornecedor;
     private FirebaseAuth autenticacao;
     private Usuario usuario;
     private String identificadorUsuarioLogado;
@@ -52,11 +52,21 @@ public class LoginActivity extends AppCompatActivity {
         senha = findViewById(R.id.editText_senha);
         login = findViewById(R.id.botao_login);
         cadastrar = findViewById(R.id.botao_cadastrar);
+        cadastrar_fornecedor = findViewById(R.id.botao_cadastrar_fornecedor);
 
         cadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(LoginActivity.this, CadastroUsuarioActivity.class);
+                startActivity(intent);
+                //finish();
+            }
+        });
+
+        cadastrar_fornecedor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this, CadastroFornecedorActivity.class);
                 startActivity(intent);
                 //finish();
             }

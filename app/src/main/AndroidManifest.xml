@@ -30,7 +30,10 @@
             android:label="@string/title_cadastro_usuario"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".activity.CadastroPetActivity"
+        android:name=".activity.CadastroPetActivity"
+        android:windowSoftInputMode="stateHidden"/>
+        <activity
+            android:name=".activity.CadastroFornecedorActivity"
             android:windowSoftInputMode="stateHidden"/>
     </application>
 

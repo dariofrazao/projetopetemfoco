@@ -16,7 +16,7 @@ public class Usuario implements Serializable{
     private String senha;
     private String senha2;
     private Endereco endereco;
-    private String valor;
+    private String valor = "0";
     private Pet pet;
 
     public Usuario(){

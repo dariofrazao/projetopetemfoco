@@ -45,11 +45,12 @@ import projetaobcc20172.com.projetopetemfoco.model.Usuario;
 
 public class CadastroFornecedorActivity extends AppCompatActivity {
 
-    private EditText nome, email, senha, senha2, telefone, cpf_cnpj, valor, valor2;
+    private EditText nome, email, senha, senha2, telefone, cpf_cnpj;
     private String item_selecionado;
     private Spinner meus_horarios;
     private Button botaoCadastrar;
     private Fornecedor fornecedor;
+    private Usuario usuario;
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)//permite que essa variavel seja vista pela classe de teste
     private Toast mToast;
     private FirebaseAuth autenticacao;
@@ -69,8 +70,6 @@ public class CadastroFornecedorActivity extends AppCompatActivity {
         meus_horarios = findViewById(R.id.Spinner_horarios_funcionamento);
         senha = findViewById(R.id.editText_senha_fornecedor);
         senha2 = findViewById(R.id.editText_senha2_fornecedor);
-        valor = findViewById(R.id.editText_valor_fornecedor);
-        valor2 = findViewById(R.id.editText_valor_usuario);
         botaoCadastrar = findViewById(R.id.botao_cadastrar_fornecedor);
 
         ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.horarios, android.R.layout.simple_spinner_item);
@@ -91,14 +90,13 @@ public class CadastroFornecedorActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 fornecedor = new Fornecedor();
+                usuario = new Usuario();
                 fornecedor.setNome( nome.getText().toString() );
                 fornecedor.setEmail(email.getText().toString());
                 fornecedor.setTelefone(telefone.getText().toString());
                 fornecedor.setCpf_cnpj(cpf_cnpj.getText().toString());
                 fornecedor.setHorarios(item_selecionado);
                 fornecedor.setSenha(senha.getText().toString());
-                fornecedor.setValor(valor.getText().toString());
-                fornecedor.setValor(valor2.getText().toString());
                 cadastrarFornecedor();
             }
         });
@@ -137,7 +135,6 @@ public class CadastroFornecedorActivity extends AppCompatActivity {
     }
     private void cadastrarFornecedor() {
         try {
-            Toast.makeText(CadastroFornecedorActivity.this, fornecedor.getValor(), Toast.LENGTH_SHORT).show();
             this.verificarCamposObrigatorios();
             this.verificarSenha();
             autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
@@ -153,8 +150,9 @@ public class CadastroFornecedorActivity extends AppCompatActivity {
                         fornecedor.setId(identificadorFornecedor);
                         mToast = mToast.makeText(CadastroFornecedorActivity.this, R.string.sucesso_cadastro_proxima_etapa_Toast, Toast.LENGTH_LONG);
                         mToast.show();
+                        usuario.setValor("1");
                         //Aqui será chamado a continuação do cadastro do fornecedor, levando-o ao cadastro do endereço
-                        abrirCadastroEndereco(fornecedor);
+                        abrirCadastroEndereco(usuario, fornecedor);
                     } else {
 
                         String erro = "";
@@ -197,8 +195,10 @@ public class CadastroFornecedorActivity extends AppCompatActivity {
     }
 
     //Método que chama a activity para cadastrar o endereço, passando os dados básicos aqui cadastrados
-    public void abrirCadastroEndereco(Fornecedor fornecedor){
+    public void abrirCadastroEndereco(Usuario usuario, Fornecedor fornecedor){
+        autenticacao.signOut();
         Intent intent = new Intent(CadastroFornecedorActivity.this, CadastroEnderecoActivity.class);
+        intent.putExtra("Usuario", usuario);
         intent.putExtra("Fornecedor", fornecedor);
         startActivity(intent);
         finish();

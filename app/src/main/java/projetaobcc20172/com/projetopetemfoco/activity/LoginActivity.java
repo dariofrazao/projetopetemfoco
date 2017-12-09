@@ -7,6 +7,7 @@ import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,17 +16,22 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+
+import org.xml.sax.helpers.LocatorImpl;
+
 import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoFirebase;
+import projetaobcc20172.com.projetopetemfoco.model.Fornecedor;
 import projetaobcc20172.com.projetopetemfoco.model.Usuario;
 import projetaobcc20172.com.projetopetemfoco.helper.Base64Custom;
 
 public class LoginActivity extends AppCompatActivity {
-    //testando pullrequest
+
     private EditText email, senha;
     private Button login, cadastrar, cadastrar_fornecedor;
     private FirebaseAuth autenticacao;
     private Usuario usuario;
+    private Fornecedor fornecedor;
     private String identificadorUsuarioLogado;
     private Toast mToast;
     //private static Boolean loginAutomatico = false;
@@ -45,11 +51,25 @@ public class LoginActivity extends AppCompatActivity {
         senha = findViewById(R.id.editText_senha);
         login = findViewById(R.id.botao_login);
         cadastrar = findViewById(R.id.botao_cadastrar_novo_usuario);
+        cadastrar_fornecedor = findViewById(R.id.botao_cadastrar_fornecedor);
+
+        //usuario.setValor("0");
+
+        //salvarTipoFornecedor(fornecedor);
 
         cadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(LoginActivity.this, CadastroUsuarioActivity.class);
+                startActivity(intent);
+                //finish();
+            }
+        });
+
+        cadastrar_fornecedor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this, CadastroFornecedorActivity.class);
                 startActivity(intent);
                 //finish();
             }
@@ -139,4 +159,5 @@ public class LoginActivity extends AppCompatActivity {
         editor.putString(key, value);
         editor.commit();
     }
+
 }

@@ -149,18 +149,6 @@
                     android:layout_marginBottom="2dp"
                     android:layout_marginTop="2dp" />
 
-                <EditText
-                    android:id="@+id/editText_valor"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_below="@+id/editText_senha"
-                    android:layout_margin="4dp"
-                    android:ems="10"
-                    android:hint="Digite 0"
-                    android:inputType="text" />
-
                 <Button
                     android:id="@+id/botao_cadastrar_endereco"
                     android:layout_width="fill_parent"

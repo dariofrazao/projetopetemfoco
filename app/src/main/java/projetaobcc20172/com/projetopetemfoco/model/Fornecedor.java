@@ -21,7 +21,7 @@ public class Fornecedor implements Serializable {
     private String cpf_cnpj;
     private String horarios;
     private String senha;
-    private String valor;
+    private String valor = "1";
     private Endereco endereco;
 
 

@@ -32,6 +32,8 @@ public class CadastroEnderecoActivity extends AppCompatActivity implements Adapt
     private Spinner uf;
     private Button botaoCadastrarEndereco;
     private Endereco endereco;
+    private Usuario usuario;
+    private Fornecedor fornecedor;
 
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE) //permite que essa variavel seja vista pela classe de teste
     private Toast mToast;
@@ -61,6 +63,10 @@ public class CadastroEnderecoActivity extends AppCompatActivity implements Adapt
         uf.setAdapter(adapter);
         uf.setOnItemSelectedListener(this);
 
+        Intent i = getIntent();
+        usuario = (Usuario) i.getSerializableExtra("Usuario");
+        fornecedor = (Fornecedor) i.getSerializableExtra("Fornecedor");
+
         botaoCadastrarEndereco = findViewById(R.id.botao_finalizar_cadastro_endereco);
         botaoCadastrarEndereco.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,19 +83,10 @@ public class CadastroEnderecoActivity extends AppCompatActivity implements Adapt
                 endereco.setUf(array_spinner[(int) uf.getSelectedItemId()]);
                 //Chama o método para cadastrar o usuário
 
-                Intent i = getIntent();
-                Usuario usuario = (Usuario) i.getSerializableExtra("Usuario");
-                usuario.setValor("1");
-                Intent i2 = getIntent();
-                Fornecedor fornecedor = (Fornecedor) i2.getSerializableExtra("Fornecedor");
-                fornecedor.setValor("1");
-
-
-
                 if (usuario.getValor().equals("0")) {
                     cadastrarEnderecoUsuario();
                 }
-                else if (fornecedor.equals("1")){
+                else{
                     cadastrarEnderecoFornecedor();
                 }
 
@@ -130,9 +127,6 @@ public class CadastroEnderecoActivity extends AppCompatActivity implements Adapt
     //Método que recupera os dados básicos do usuário, adicionando o endereço para salvar no banco
     private void cadastrarEnderecoUsuario() {
 
-        Intent i = getIntent();
-        Usuario usuario = (Usuario) i.getSerializableExtra("Usuario");
-
             try {
                 usuario.setEndereco(endereco);
                 this.verificarCamposObrigatorios();
@@ -154,9 +148,6 @@ public class CadastroEnderecoActivity extends AppCompatActivity implements Adapt
     }
 
     private void cadastrarEnderecoFornecedor(){
-
-        Intent i = getIntent();
-        Fornecedor fornecedor = (Fornecedor) i.getSerializableExtra("Fornecedor");
             try {
 
                 fornecedor.setEndereco(endereco);

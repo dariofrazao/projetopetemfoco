@@ -1,4 +1,4 @@
-package projetaobcc20172.com.projetopetemfoco.cadastrotest;
+package projetaobcc20172.com.projetopetemfoco.test.cadastrotest;
 
 import android.support.test.espresso.Espresso;
 import android.support.test.espresso.action.ViewActions;

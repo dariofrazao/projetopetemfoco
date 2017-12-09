@@ -1,4 +1,4 @@
-package projetaobcc20172.com.projetopetemfoco.cadastrotest;
+package projetaobcc20172.com.projetopetemfoco.test.cadastrotest;
 
 import android.support.test.espresso.Espresso;
 import android.support.test.espresso.action.ViewActions;
@@ -6,6 +6,7 @@ import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.rule.ActivityTestRule;
 
 
+import org.hamcrest.CoreMatchers;
 import org.junit.After;
 import org.junit.Rule;
 
@@ -14,6 +15,10 @@ import java.util.Random;
 import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.activity.CadastroUsuarioActivity;
 
+import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.matcher.RootMatchers.withDecorView;
+import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static org.hamcrest.CoreMatchers.not;
 
 
 /**
@@ -47,8 +52,16 @@ public class CadastroUsuarioTestMae {
         Espresso.closeSoftKeyboard();
         Espresso.onView(ViewMatchers.withId(R.id.editText_senha2)).perform(ViewActions.typeText(senha2));
         Espresso.closeSoftKeyboard();
+    }
+
+    public void clicarCadastrar(){
         Espresso.onView(ViewMatchers.withId(R.id.botao_cadastrar)).perform(ViewActions.click());
     }
+
+    public void checarTost(String msgEsperada){
+        Espresso.onView(ViewMatchers.withText(msgEsperada)).inRoot(withDecorView(not(CoreMatchers.is(cadastroActivityRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
+    }
+
     //método que executa algo antes de iniciar os testes.
    /*
     @Before

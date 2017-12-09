@@ -8,17 +8,17 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="projetaobcc20172.com.projetopetemfoco.activity.CadastroUsuarioActivity">
+    tools:context="projetaobcc20172.com.projetopetemfoco.activity.CadastroEnderecoActivity">
 
     <include
-        android:id="@+id/tb_cadastro"
+        android:id="@+id/tb_endereco"
         layout="@layout/toolbar"></include>
 
     <LinearLayout
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tb_cadastro"
+        android:layout_below="@+id/tb_endereco"
         android:paddingBottom="@dimen/activity_vertical_margin"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
@@ -40,18 +40,16 @@
                     android:layout_height="1dp"
                     android:layout_marginBottom="2dp"
                     android:layout_marginTop="2dp" />
-
                 <TextView
-                    android:id="@+id/TexViewCadastroNomeUsuario"
+                    android:id="@+id/TexViewEnderecoLogradouro"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="6dp"
-                    android:text="@string/nome"
+                    android:text="@string/endereco_logradouro"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textStyle="bold" />
-
                 <EditText
-                    android:id="@+id/editText_nome"
+                    android:id="@+id/editText_endereco_logradouro"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
@@ -59,7 +57,7 @@
                     android:layout_margin="4dp"
                     android:layout_marginTop="31dp"
                     android:ems="10"
-                    android:hint="@string/digite_seu_nome"
+                    android:hint="@string/digite_seu_logradouro"
                     android:inputType="text" />
 
                 <View
@@ -67,107 +65,171 @@
                     android:layout_height="1dp"
                     android:layout_marginBottom="2dp"
                     android:layout_marginTop="2dp" />
-
                 <TextView
-                    android:id="@+id/TexViewCadastroEmailUsuario"
+                    android:id="@+id/TexViewEnderecoNumero"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="6dp"
-                    android:text="@string/prompt_email"
+                    android:text="@string/endereco_numero"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textStyle="bold" />
-
                 <EditText
-                    android:id="@+id/editText_email"
+                    android:id="@+id/editText_endereco_numero"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
-                    android:layout_below="@+id/editText_nome"
                     android:layout_margin="4dp"
+                    android:layout_marginTop="31dp"
                     android:ems="10"
-                    android:hint="@string/digite_seu_email"
-                    android:inputType="textEmailAddress" />
+                    android:maxLength="5"
+                    android:hint="@string/digite_seu_numero"
+                    android:inputType="numberSigned"/>
 
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
                     android:layout_marginBottom="2dp"
                     android:layout_marginTop="2dp" />
-
                 <TextView
-                    android:id="@+id/TexViewCadastroSenhaUsuario"
+                    android:id="@+id/TexViewEnderecoComplemento"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="6dp"
-                    android:text="@string/prompt_password"
+                    android:text="@string/endereco_complemento"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textStyle="bold" />
-
                 <EditText
-                    android:id="@+id/editText_senha"
+                    android:id="@+id/editText_endereco_complemento"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
-                    android:layout_below="@+id/editText_email"
                     android:layout_margin="4dp"
+                    android:layout_marginTop="31dp"
                     android:ems="10"
-                    android:hint="@string/digite_sua_senha"
-                    android:inputType="textPassword" />
+                    android:hint="@string/digite_seu_complemento"
+                    android:inputType="text" />
 
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
                     android:layout_marginBottom="2dp"
                     android:layout_marginTop="2dp" />
-
                 <TextView
-                    android:id="@+id/TexViewCadastroRepetirSenhaUsuario"
+                    android:id="@+id/TexViewEnderecoBairro"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="6dp"
-                    android:text="@string/confirmar_sua_senha"
+                    android:text="@string/endereco_bairro"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textStyle="bold" />
-
                 <EditText
-                    android:id="@+id/editText_senha2"
+                    android:id="@+id/editText_endereco_bairro"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
-                    android:layout_below="@+id/editText_senha"
                     android:layout_margin="4dp"
+                    android:layout_marginTop="31dp"
                     android:ems="10"
-                    android:hint="@string/repita_sua_senha"
-                    android:inputType="textPassword" />
+                    android:hint="@string/digite_seu_bairro"
+                    android:inputType="text" />
 
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
                     android:layout_marginBottom="2dp"
                     android:layout_marginTop="2dp" />
+                <TextView
+                    android:id="@+id/TexViewEnderecoCidade"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="6dp"
+                    android:text="@string/endereco_cidade"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textStyle="bold" />
+                <EditText
+                    android:id="@+id/editText_endereco_cidade"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_margin="4dp"
+                    android:layout_marginTop="31dp"
+                    android:ems="10"
+                    android:hint="@string/digite_sua_cidade"
+                    android:inputType="text" />
 
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginTop="2dp" />
+                <TextView
+                    android:id="@+id/TexViewEnderecoUf"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="6dp"
+                    android:text="@string/endereco_uf"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textStyle="bold" />
+                <Spinner android:id="@+id/spinner_endereco_uf"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_margin="4dp"
+                    android:layout_marginTop="31dp"
+                    android:ems="10"
+                    android:hint="@string/escolha_sua_uf"
+                    android:entries="@array/uf"
+                    android:spinnerMode="dropdown"/>
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginTop="2dp" />
+                <TextView
+                    android:id="@+id/TexViewEnderecoCep"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="6dp"
+                    android:text="@string/endereco_cep"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textStyle="bold" />
+                <EditText
+                    android:id="@+id/editText_endereco_cep"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_margin="4dp"
+                    android:layout_marginTop="31dp"
+                    android:ems="10"
+                    android:maxLength="9"
+                    android:hint="@string/digite_seu_cep"
+                    android:inputType="numberSigned" />
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginTop="2dp" />
                 <Button
-                    android:id="@+id/botao_cadastrar_endereco"
+                    android:id="@+id/botao_finalizar_cadastro_endereco"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
-                    android:layout_below="@+id/editText_senha2"
                     android:layout_marginTop="24dp"
                     android:background="@drawable/shapebutton"
-                    android:text=  "@string/cadastrar_endereco" />
-
+                    android:text="@string/finalizar_cadastro" />
 
             </LinearLayout>
-
         </ScrollView>
-
     </LinearLayout>
-
-
 </RelativeLayout>
 
 

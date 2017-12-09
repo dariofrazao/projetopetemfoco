@@ -11,7 +11,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseNetworkException;
@@ -20,13 +19,11 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
-
 import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoFirebase;
 import projetaobcc20172.com.projetopetemfoco.excecoes.CampoObrAusenteException;
 import projetaobcc20172.com.projetopetemfoco.excecoes.SenhasDiferentesException;
 import projetaobcc20172.com.projetopetemfoco.helper.Base64Custom;
-import projetaobcc20172.com.projetopetemfoco.helper.Preferencias;
 import projetaobcc20172.com.projetopetemfoco.model.Usuario;
 
 public class CadastroUsuarioActivity extends AppCompatActivity {
@@ -40,17 +37,16 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_usuario);
-
         Toolbar toolbar;
         toolbar = (Toolbar) findViewById(R.id.tb_cadastro);
         nome = findViewById(R.id.editText_nome);
         email = findViewById(R.id.editText_email);
         senha = findViewById(R.id.editText_senha);
         senha2 = findViewById(R.id.editText_senha2);
-        botaoCadastrar = findViewById(R.id.botao_cadastrar);
-
+        botaoCadastrar = findViewById(R.id.botao_cadastrar_endereco);
         botaoCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -67,8 +63,6 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
         toolbar.setTitleTextColor(Color.WHITE);
         toolbar.setNavigationIcon(R.drawable.ic_action_arrow_left_white);
         setSupportActionBar(toolbar);
-
-
     }
 
     @Override
@@ -76,6 +70,7 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
         onBackPressed();
         return true;
     }
+
     //Verifica se a senha 1 é igual a senha 2
     private void verificarSenha() throws SenhasDiferentesException {
         if(!senha.getText().toString().equals(senha2.getText().toString())){
@@ -83,6 +78,7 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
         }
     }
 
+    //Verifica se existem campos obrigatórios não preenchidos
     private void verificarCamposObrigatorios() throws CampoObrAusenteException {
         if(nome.getText().toString().isEmpty()
                 || senha.getText().toString().isEmpty()
@@ -90,6 +86,8 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
             throw  new CampoObrAusenteException();
         }
     }
+
+    //Método para cadastrar o usuário no FirebaseAuthentication
     private void cadastrarUsuario() {
         try {
             this.verificarCamposObrigatorios();
@@ -101,24 +99,14 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
             ).addOnCompleteListener(CadastroUsuarioActivity.this, new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
-
                     if (task.isSuccessful()) {
-
-
                         String identificadorUsuario = Base64Custom.codificarBase64(usuario.getEmail());
                         usuario.setId(identificadorUsuario);
-                        usuario.salvar();
-
-                        Preferencias preferencias = new Preferencias(CadastroUsuarioActivity.this);
-                        preferencias.salvarDados(identificadorUsuario, usuario.getNome());
-
-                        mToast = mToast.makeText(CadastroUsuarioActivity.this, R.string.sucesso_cadastro_Toast, Toast.LENGTH_LONG);
+                        mToast = mToast.makeText(CadastroUsuarioActivity.this, R.string.sucesso_cadastro_proxima_etapa_Toast, Toast.LENGTH_LONG);
                         mToast.show();
-
-                        abrirLoginUsuario();
-
+                        //Aqui será chamado a continuação do cadastro do usuário, levando-o ao cadastro do endereço
+                        abrirCadastroEndereco(usuario);
                     } else {
-
                         String erro = "";
                         try {
                             throw task.getException();
@@ -133,11 +121,9 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
-
                         mToast = mToast.makeText(CadastroUsuarioActivity.this, erro, Toast.LENGTH_SHORT);
                         mToast.show();
                     }
-
                 }
             });
         } catch (SenhasDiferentesException e) {
@@ -146,14 +132,16 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
         } catch (CampoObrAusenteException e) {
             mToast = mToast.makeText(CadastroUsuarioActivity.this, R.string.erro_cadastro_campos_obrigatorios_Toast, Toast.LENGTH_SHORT);
             mToast.show();
-        } catch (Exception e){
+        } catch (Exception e) {
             mToast = mToast.makeText(CadastroUsuarioActivity.this, R.string.erro_cadastro_campos_obrigatorios_Toast, Toast.LENGTH_SHORT);
             mToast.show();
         }
     }
 
-    public void abrirLoginUsuario(){
-        Intent intent = new Intent(CadastroUsuarioActivity.this, LoginActivity.class);
+    //Método que chama a activity para cadastrar o endereço, passando os dados básicos aqui cadastrados
+    public void abrirCadastroEndereco(Usuario usuario){
+        Intent intent = new Intent(CadastroUsuarioActivity.this, CadastroEnderecoActivity.class);
+        intent.putExtra("Usuario", usuario);
         startActivity(intent);
         finish();
     }

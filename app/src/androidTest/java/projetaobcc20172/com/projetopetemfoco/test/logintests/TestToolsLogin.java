@@ -22,9 +22,4 @@ public class EspressoLogin {
         Espresso.closeSoftKeyboard();
     }
 
-    public static void clicarLogin(){
-        Espresso.onView(ViewMatchers.withId(R.id.botao_login)).perform(ViewActions.click());
-    }
-
-
 }

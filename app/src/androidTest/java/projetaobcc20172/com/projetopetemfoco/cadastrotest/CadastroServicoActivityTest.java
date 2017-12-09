@@ -7,7 +7,6 @@ import android.support.test.rule.ActivityTestRule;
 
 import org.junit.After;
 import org.junit.Rule;
-import org.junit.Test;
 
 import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.activity.CadastroServicoActivity;

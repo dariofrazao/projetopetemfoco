@@ -22,6 +22,7 @@ import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.excecoes.CampoEnderecoObrAusenteException;
 import projetaobcc20172.com.projetopetemfoco.helper.Base64Custom;
 import projetaobcc20172.com.projetopetemfoco.model.Endereco;
+import projetaobcc20172.com.projetopetemfoco.model.Fornecedor;
 import projetaobcc20172.com.projetopetemfoco.model.Usuario;
 import projetaobcc20172.com.projetopetemfoco.utils.MaskUtil;
 
@@ -75,7 +76,23 @@ public class CadastroEnderecoActivity extends AppCompatActivity implements Adapt
                 endereco.setCep(cep.getText().toString());
                 endereco.setUf(array_spinner[(int) uf.getSelectedItemId()]);
                 //Chama o método para cadastrar o usuário
-                cadastrarEndereco();
+
+                Intent i = getIntent();
+                Usuario usuario = (Usuario) i.getSerializableExtra("Usuario");
+                usuario.setValor("1");
+                Intent i2 = getIntent();
+                Fornecedor fornecedor = (Fornecedor) i2.getSerializableExtra("Fornecedor");
+                fornecedor.setValor("1");
+
+
+
+                if (usuario.getValor().equals("0")) {
+                    cadastrarEnderecoUsuario();
+                }
+                else if (fornecedor.equals("1")){
+                    cadastrarEnderecoFornecedor();
+                }
+
             }
         });
 
@@ -111,29 +128,56 @@ public class CadastroEnderecoActivity extends AppCompatActivity implements Adapt
     }
 
     //Método que recupera os dados básicos do usuário, adicionando o endereço para salvar no banco
-    private void cadastrarEndereco() {
-        try {
+    private void cadastrarEnderecoUsuario() {
 
-            this.verificarCamposObrigatorios();
-            Intent i = getIntent();
-            Usuario usuario = (Usuario) i.getSerializableExtra("Usuario");
-            usuario.setEndereco(endereco);
-            usuario.salvar();
-            mToast = mToast.makeText(CadastroEnderecoActivity.this, R.string.sucesso_cadastro_Toast, Toast.LENGTH_LONG);
+        Intent i = getIntent();
+        Usuario usuario = (Usuario) i.getSerializableExtra("Usuario");
+
+            try {
+                usuario.setEndereco(endereco);
+                this.verificarCamposObrigatorios();
+                usuario.salvar();
+                mToast = mToast.makeText(CadastroEnderecoActivity.this, R.string.sucesso_cadastro_Toast, Toast.LENGTH_LONG);
+                mToast.show();
+                String identificadorUsuario = Base64Custom.codificarBase64(usuario.getEmail());
+                usuario.setId(identificadorUsuario);
+                salvarPreferencias("id", identificadorUsuario);
+                abrirLoginUsuario();
+
+            } catch(CampoEnderecoObrAusenteException e){
+            mToast = mToast.makeText(CadastroEnderecoActivity.this, R.string.erro_cadastro_endereco_campos_obrigatorios_Toast, Toast.LENGTH_SHORT);
             mToast.show();
-            String identificadorUsuario = Base64Custom.codificarBase64(usuario.getEmail());
-            usuario.setId(identificadorUsuario);
-            salvarPreferencias("id", identificadorUsuario);
-            abrirLoginUsuario();
+        } catch(Exception e){
+            mToast = mToast.makeText(CadastroEnderecoActivity.this, R.string.erro_cadastro_endereco_campos_obrigatorios_Toast, Toast.LENGTH_SHORT);
+            mToast.show();
+        }
+    }
+
+    private void cadastrarEnderecoFornecedor(){
+
+        Intent i = getIntent();
+        Fornecedor fornecedor = (Fornecedor) i.getSerializableExtra("Fornecedor");
+            try {
+
+                fornecedor.setEndereco(endereco);
+                this.verificarCamposObrigatorios();
+                fornecedor.salvar();
+                mToast = mToast.makeText(CadastroEnderecoActivity.this, R.string.sucesso_cadastro_Toast, Toast.LENGTH_LONG);
+                mToast.show();
+                String identificadorUsuario = Base64Custom.codificarBase64(fornecedor.getEmail());
+                fornecedor.setId(identificadorUsuario);
+                salvarPreferencias("id", identificadorUsuario);
+                abrirLoginUsuario();
 
             } catch (CampoEnderecoObrAusenteException e) {
-            mToast = mToast.makeText(CadastroEnderecoActivity.this, R.string.erro_cadastro_endereco_campos_obrigatorios_Toast, Toast.LENGTH_SHORT);
-            mToast.show();
+                mToast = mToast.makeText(CadastroEnderecoActivity.this, R.string.erro_cadastro_endereco_campos_obrigatorios_Toast, Toast.LENGTH_SHORT);
+                mToast.show();
             } catch (Exception e) {
-            mToast = mToast.makeText(CadastroEnderecoActivity.this, R.string.erro_cadastro_endereco_campos_obrigatorios_Toast, Toast.LENGTH_SHORT);
-            mToast.show();
+                mToast = mToast.makeText(CadastroEnderecoActivity.this, R.string.erro_cadastro_endereco_campos_obrigatorios_Toast, Toast.LENGTH_SHORT);
+                mToast.show();
             }
-    }
+        }
+
 
     public void abrirLoginUsuario() {
         Intent intent = new Intent(CadastroEnderecoActivity.this, LoginActivity.class);

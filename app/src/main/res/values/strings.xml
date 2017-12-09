@@ -3,6 +3,7 @@
     <string name="title_cadastro_usuario">Cadastro de Usuário</string>
     <string name="entrar">Entrar</string>
     <string name="cadastrar_novo_usuario">Cadastrar</string>
+    <string name="cadastrar_novo_fornecedor">Cadastrar</string>
     <string name="cadastrar_endereco">Continuar o Cadastro</string>
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
@@ -82,7 +83,7 @@
         <item name=" "></item>
         <item name=" ">Manhã</item>
         <item name=" "></item>
-        <item name=" "  marginTop="6dp">Tarde</item>
+        <item name=" " >Tarde</item>
         <item name=" "></item>
         <item name=" ">Noite</item>
         <item name=" "></item>

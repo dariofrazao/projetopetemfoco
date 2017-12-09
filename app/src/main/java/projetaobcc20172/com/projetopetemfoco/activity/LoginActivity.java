@@ -45,21 +45,11 @@ public class LoginActivity extends AppCompatActivity {
         senha = findViewById(R.id.editText_senha);
         login = findViewById(R.id.botao_login);
         cadastrar = findViewById(R.id.botao_cadastrar_novo_usuario);
-        cadastrar_fornecedor = findViewById(R.id.botao_cadastrar_fornecedor);
 
         cadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(LoginActivity.this, CadastroUsuarioActivity.class);
-                startActivity(intent);
-                //finish();
-            }
-        });
-
-        cadastrar_fornecedor.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this, CadastroFornecedorActivity.class);
                 startActivity(intent);
                 //finish();
             }

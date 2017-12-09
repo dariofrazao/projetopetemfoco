@@ -16,6 +16,7 @@ public class Usuario implements Serializable{
     private String senha;
     private String senha2;
     private Endereco endereco;
+    private String valor;
     private Pet pet;
 
     public Usuario(){
@@ -79,5 +80,13 @@ public class Usuario implements Serializable{
 
     public void setPet(Pet pet) {
         this.pet = pet;
+    }
+
+    public String getValor() {
+        return valor;
+    }
+
+    public void setValor(String valor) {
+        this.valor = valor;
     }
 }

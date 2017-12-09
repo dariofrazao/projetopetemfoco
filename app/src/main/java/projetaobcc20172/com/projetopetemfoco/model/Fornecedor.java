@@ -3,14 +3,17 @@ package projetaobcc20172.com.projetopetemfoco.model;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Exclude;
 
+import java.io.Serializable;
+
 import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoFirebase;
 
 /**
  * Created by renat on 06/12/2017.
  */
 
-public class Fornecedor {
-    //Atributos do usuário
+public class Fornecedor implements Serializable {
+
+    //Atributos do fornecedor
     private String id;
     private String nome;
     private String email;
@@ -18,13 +21,15 @@ public class Fornecedor {
     private String cpf_cnpj;
     private String horarios;
     private String senha;
-
+    private String valor;
+    private Endereco endereco;
 
 
     public Fornecedor(){
 
     }
-    public void salvar(){ //Método para salvar usuário no banco de dados do Firebase
+
+    public void salvar(){ //Método para salvar fornecedor no banco de dados do Firebase
         DatabaseReference referenciaFirebase = ConfiguracaoFirebase.getFirebase(); //Chama a referência do Firebase
         referenciaFirebase.child("fornecedor").child( getId() ).setValue( this ); //Cria os nós dos usuário no banco de dados
     }
@@ -84,5 +89,19 @@ public class Fornecedor {
         this.senha = senha;
     }
 
+    public Endereco getEndereco() {
+        return endereco;
+    }
 
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
+
+    public String getValor() {
+        return valor;
+    }
+
+    public void setValor(String valor) {
+        this.valor = valor;
+    }
 }

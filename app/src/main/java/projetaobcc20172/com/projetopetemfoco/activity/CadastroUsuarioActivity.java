@@ -28,7 +28,7 @@ import projetaobcc20172.com.projetopetemfoco.model.Usuario;
 
 public class CadastroUsuarioActivity extends AppCompatActivity {
 
-    private EditText nome, email, senha, senha2;
+    private EditText nome, email, senha, senha2, valor;
     private Button botaoCadastrar;
     private Usuario usuario;
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)//permite que essa variavel seja vista pela classe de teste
@@ -46,6 +46,7 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
         email = findViewById(R.id.editText_email);
         senha = findViewById(R.id.editText_senha);
         senha2 = findViewById(R.id.editText_senha2);
+        valor = findViewById(R.id.editText_valor);
         botaoCadastrar = findViewById(R.id.botao_cadastrar_endereco);
         botaoCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,6 +55,8 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
                 usuario.setNome( nome.getText().toString() );
                 usuario.setEmail(email.getText().toString());
                 usuario.setSenha(senha.getText().toString());
+                usuario.setValor(valor.getText().toString());
+                //usuario.setValor(usuario.getValor());
                 cadastrarUsuario();
             }
         });
@@ -90,6 +93,7 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
     //Método para cadastrar o usuário no FirebaseAuthentication
     private void cadastrarUsuario() {
         try {
+            Toast.makeText(CadastroUsuarioActivity.this, usuario.getValor(), Toast.LENGTH_SHORT).show();
             this.verificarCamposObrigatorios();
             this.verificarSenha();
             autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();

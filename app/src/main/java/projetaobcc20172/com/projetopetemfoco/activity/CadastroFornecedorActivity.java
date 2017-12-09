@@ -1,8 +1,10 @@
 package projetaobcc20172.com.projetopetemfoco.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.app.AppCompatActivity;
@@ -25,6 +27,7 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import projetaobcc20172.com.projetopetemfoco.R;
@@ -41,7 +44,8 @@ import projetaobcc20172.com.projetopetemfoco.model.Usuario;
  */
 
 public class CadastroFornecedorActivity extends AppCompatActivity {
-    private EditText nome, email, senha, senha2, telefone, cpf_cnpj;
+
+    private EditText nome, email, senha, senha2, telefone, cpf_cnpj, valor, valor2;
     private String item_selecionado;
     private Spinner meus_horarios;
     private Button botaoCadastrar;
@@ -62,9 +66,11 @@ public class CadastroFornecedorActivity extends AppCompatActivity {
         email = findViewById(R.id.editText_email_fornecedor);
         telefone = findViewById(R.id.Telefone_fornecedor);
         cpf_cnpj = findViewById(R.id.CPF_CNPJ_fornecedor);
-        meus_horarios = (Spinner) findViewById(R.id.Spinner_horarios_funcionamento);
+        meus_horarios = findViewById(R.id.Spinner_horarios_funcionamento);
         senha = findViewById(R.id.editText_senha_fornecedor);
         senha2 = findViewById(R.id.editText_senha2_fornecedor);
+        valor = findViewById(R.id.editText_valor_fornecedor);
+        valor2 = findViewById(R.id.editText_valor_usuario);
         botaoCadastrar = findViewById(R.id.botao_cadastrar_fornecedor);
 
         ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.horarios, android.R.layout.simple_spinner_item);
@@ -91,6 +97,8 @@ public class CadastroFornecedorActivity extends AppCompatActivity {
                 fornecedor.setCpf_cnpj(cpf_cnpj.getText().toString());
                 fornecedor.setHorarios(item_selecionado);
                 fornecedor.setSenha(senha.getText().toString());
+                fornecedor.setValor(valor.getText().toString());
+                fornecedor.setValor(valor2.getText().toString());
                 cadastrarFornecedor();
             }
         });
@@ -129,6 +137,7 @@ public class CadastroFornecedorActivity extends AppCompatActivity {
     }
     private void cadastrarFornecedor() {
         try {
+            Toast.makeText(CadastroFornecedorActivity.this, fornecedor.getValor(), Toast.LENGTH_SHORT).show();
             this.verificarCamposObrigatorios();
             this.verificarSenha();
             autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
@@ -140,19 +149,12 @@ public class CadastroFornecedorActivity extends AppCompatActivity {
                 public void onComplete(@NonNull Task<AuthResult> task) {
 
                     if (task.isSuccessful()) {
-
                         String identificadorFornecedor = Base64Custom.codificarBase64(fornecedor.getEmail());
                         fornecedor.setId(identificadorFornecedor);
-                        fornecedor.salvar();
-
-                        Preferencias preferencias = new Preferencias(CadastroFornecedorActivity.this);
-                        preferencias.salvarDados(identificadorFornecedor, fornecedor.getNome());
-
-                        mToast = mToast.makeText(CadastroFornecedorActivity.this, R.string.sucesso_cadastro_Toast, Toast.LENGTH_LONG);
+                        mToast = mToast.makeText(CadastroFornecedorActivity.this, R.string.sucesso_cadastro_proxima_etapa_Toast, Toast.LENGTH_LONG);
                         mToast.show();
-
-                        abrirLoginFornecedor();
-
+                        //Aqui será chamado a continuação do cadastro do fornecedor, levando-o ao cadastro do endereço
+                        abrirCadastroEndereco(fornecedor);
                     } else {
 
                         String erro = "";
@@ -193,4 +195,13 @@ public class CadastroFornecedorActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
+    //Método que chama a activity para cadastrar o endereço, passando os dados básicos aqui cadastrados
+    public void abrirCadastroEndereco(Fornecedor fornecedor){
+        Intent intent = new Intent(CadastroFornecedorActivity.this, CadastroEnderecoActivity.class);
+        intent.putExtra("Fornecedor", fornecedor);
+        startActivity(intent);
+        finish();
+    }
+
 }

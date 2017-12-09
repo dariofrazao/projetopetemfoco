@@ -96,10 +96,6 @@ public class CadastroEnderecoActivity extends AppCompatActivity implements Adapt
     private void verificarCamposObrigatorios() throws CampoEnderecoObrAusenteException {
         if (logradouro.getText().toString().isEmpty()
             ||
-            numero.getText().toString().isEmpty()
-            ||
-            complemento.getText().toString().isEmpty()
-            ||
             bairro.getText().toString().isEmpty()
             ||
             cidade.getText().toString().isEmpty()
@@ -113,17 +109,16 @@ public class CadastroEnderecoActivity extends AppCompatActivity implements Adapt
     //Método que recupera os dados básicos do usuário, adicionando o endereço para salvar no banco
     private void cadastrarEndereco() {
         try {
-
             this.verificarCamposObrigatorios();
             Intent i = getIntent();
             Usuario usuario = (Usuario) i.getSerializableExtra("Usuario");
+            String identificadorUsuario = Base64Custom.codificarBase64(usuario.getEmail());
+            usuario.setId(identificadorUsuario);
+            salvarPreferencias("id", identificadorUsuario);
             usuario.setEndereco(endereco);
             usuario.salvar();
             mToast = mToast.makeText(CadastroEnderecoActivity.this, R.string.sucesso_cadastro_Toast, Toast.LENGTH_LONG);
             mToast.show();
-            String identificadorUsuario = Base64Custom.codificarBase64(usuario.getEmail());
-            usuario.setId(identificadorUsuario);
-            salvarPreferencias("id", identificadorUsuario);
             abrirLoginUsuario();
 
             } catch (CampoEnderecoObrAusenteException e) {

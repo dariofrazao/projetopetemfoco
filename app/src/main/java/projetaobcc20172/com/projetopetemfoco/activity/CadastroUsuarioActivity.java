@@ -24,6 +24,7 @@ import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoFirebase;
 import projetaobcc20172.com.projetopetemfoco.excecoes.CampoObrAusenteException;
 import projetaobcc20172.com.projetopetemfoco.excecoes.SenhasDiferentesException;
 import projetaobcc20172.com.projetopetemfoco.helper.Base64Custom;
+import projetaobcc20172.com.projetopetemfoco.model.Fornecedor;
 import projetaobcc20172.com.projetopetemfoco.model.Usuario;
 
 public class CadastroUsuarioActivity extends AppCompatActivity {
@@ -31,6 +32,7 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
     private EditText nome, email, senha, senha2;
     private Button botaoCadastrar;
     private Usuario usuario;
+    private Fornecedor fornecedor;
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)//permite que essa variavel seja vista pela classe de teste
     private Toast mToast;
     private FirebaseAuth autenticacao;
@@ -41,7 +43,7 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_usuario);
         Toolbar toolbar;
-        toolbar = (Toolbar) findViewById(R.id.tb_cadastro);
+        toolbar = findViewById(R.id.tb_cadastro);
         nome = findViewById(R.id.editText_nome);
         email = findViewById(R.id.editText_email);
         senha = findViewById(R.id.editText_senha);
@@ -51,7 +53,8 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 usuario = new Usuario();
-                usuario.setNome( nome.getText().toString() );
+                fornecedor = new Fornecedor();
+                usuario.setNome(nome.getText().toString());
                 usuario.setEmail(email.getText().toString());
                 usuario.setSenha(senha.getText().toString());
                 cadastrarUsuario();
@@ -104,8 +107,10 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
                         usuario.setId(identificadorUsuario);
                         mToast = mToast.makeText(CadastroUsuarioActivity.this, R.string.sucesso_cadastro_proxima_etapa_Toast, Toast.LENGTH_LONG);
                         mToast.show();
+                        fornecedor.setValor("0");
+
                         //Aqui será chamado a continuação do cadastro do usuário, levando-o ao cadastro do endereço
-                        abrirCadastroEndereco(usuario);
+                        abrirCadastroEndereco(usuario, fornecedor);
                     } else {
                         String erro = "";
                         try {
@@ -139,9 +144,11 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
     }
 
     //Método que chama a activity para cadastrar o endereço, passando os dados básicos aqui cadastrados
-    public void abrirCadastroEndereco(Usuario usuario){
+    public void abrirCadastroEndereco(Usuario usuario, Fornecedor fornecedor){
+        autenticacao.signOut();
         Intent intent = new Intent(CadastroUsuarioActivity.this, CadastroEnderecoActivity.class);
         intent.putExtra("Usuario", usuario);
+        intent.putExtra("Fornecedor", fornecedor);
         startActivity(intent);
         finish();
     }

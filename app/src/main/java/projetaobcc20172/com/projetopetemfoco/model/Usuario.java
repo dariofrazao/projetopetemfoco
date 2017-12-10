@@ -9,13 +9,14 @@ import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoFirebase;
 
 public class Usuario implements Serializable{
 
-    //Atributos do usuário
+    //Atributos do usuário consumidor
     private String id;
     private String nome;
     private String email;
     private String senha;
     private String senha2;
     private Endereco endereco;
+    private String valor = "0";
     private Pet pet;
 
     public Usuario(){
@@ -79,5 +80,13 @@ public class Usuario implements Serializable{
 
     public void setPet(Pet pet) {
         this.pet = pet;
+    }
+
+    public String getValor() {
+        return valor;
+    }
+
+    public void setValor(String valor) {
+        this.valor = valor;
     }
 }

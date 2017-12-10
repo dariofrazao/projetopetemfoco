@@ -15,6 +15,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+
 import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoFirebase;
 import projetaobcc20172.com.projetopetemfoco.model.Usuario;
@@ -23,7 +24,7 @@ import projetaobcc20172.com.projetopetemfoco.helper.Base64Custom;
 public class LoginActivity extends AppCompatActivity {
 
     private EditText email, senha;
-    private Button login, cadastrar;
+    private Button login, cadastrar, cadastrar_fornecedor;
     private FirebaseAuth autenticacao;
     private Usuario usuario;
     private String identificadorUsuarioLogado;
@@ -45,11 +46,21 @@ public class LoginActivity extends AppCompatActivity {
         senha = findViewById(R.id.editText_senha);
         login = findViewById(R.id.botao_login);
         cadastrar = findViewById(R.id.botao_cadastrar_novo_usuario);
+        cadastrar_fornecedor = findViewById(R.id.botao_cadastrar_fornecedor);
 
         cadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(LoginActivity.this, CadastroUsuarioActivity.class);
+                startActivity(intent);
+                //finish();
+            }
+        });
+
+        cadastrar_fornecedor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this, CadastroFornecedorActivity.class);
                 startActivity(intent);
                 //finish();
             }
@@ -82,6 +93,7 @@ public class LoginActivity extends AppCompatActivity {
                     //Se o login foi realizado com sucesso
                     if (task.isSuccessful()) {
                         identificadorUsuarioLogado = Base64Custom.codificarBase64(usuario.getEmail());
+
                         //Salva o id do usuário logado nas preferências
                         salvarPreferencias("id", identificadorUsuarioLogado);
                         abrirTelaPrincipal();
@@ -93,6 +105,7 @@ public class LoginActivity extends AppCompatActivity {
                         mToast.show();
                         mProgressDialog.dismiss();
                     }
+
                 }
             });
         }catch (Exception e){
@@ -138,4 +151,5 @@ public class LoginActivity extends AppCompatActivity {
         editor.putString(key, value);
         editor.commit();
     }
+
 }

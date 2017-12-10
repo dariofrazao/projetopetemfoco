@@ -5,7 +5,8 @@ import android.content.SharedPreferences;
 
 import java.util.HashMap;
 
-public class Preferencias { //Classe para armazenar dados do usuário (preferências) ao iniciar novamente o aplicativo
+//Classe para armazenar dados do usuário (preferências) ao iniciar novamente o aplicativo
+public class Preferencias {
 
     private Context contexto;
     private SharedPreferences preferences;

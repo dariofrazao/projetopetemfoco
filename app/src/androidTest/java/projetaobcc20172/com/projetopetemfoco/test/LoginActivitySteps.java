@@ -23,13 +23,13 @@ public class LoginActivitySteps extends ActivityInstrumentationTestCase2<LoginAc
     */
 
 //    @Given("^eu informo meu */w e */w$")
- //   public void preencher(String login,String senha){
-  //      EspressoLogin.preencher(login,senha);
+ //   public void preencherEclicar(String login,String senha){
+  //      TestToolsLogin.preencherEclicar(login,senha);
  //   }
 
    // @When("^Eu clicar em \"logar\"$")
  /*   public void clicar(){
-        EspressoLogin.clicarLogin();
+        TestToolsLogin.clicarLogin();
     }*/
 
   //  @Then("^Eu recebo a mensagem: */w$")

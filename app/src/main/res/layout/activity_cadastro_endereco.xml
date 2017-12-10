@@ -25,21 +25,26 @@
         android:paddingTop="@dimen/activity_vertical_margin">
 
         <ScrollView
-            android:id="@+id/scrollView"
+            android:id="@+id/endereco_scroll"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:visibility="visible"
+            tools:visibility="visible">
 
             <LinearLayout
+                android:id="@+id/end_scroll"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:visibility="visible">
 
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
                     android:layout_marginBottom="2dp"
                     android:layout_marginTop="2dp" />
+
                 <TextView
                     android:id="@+id/TexViewEnderecoLogradouro"
                     android:layout_width="fill_parent"
@@ -48,6 +53,7 @@
                     android:text="@string/endereco_logradouro"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textStyle="bold" />
+
                 <EditText
                     android:id="@+id/editText_endereco_logradouro"
                     android:layout_width="fill_parent"
@@ -65,6 +71,7 @@
                     android:layout_height="1dp"
                     android:layout_marginBottom="2dp"
                     android:layout_marginTop="2dp" />
+
                 <TextView
                     android:id="@+id/TexViewEnderecoNumero"
                     android:layout_width="fill_parent"
@@ -73,6 +80,7 @@
                     android:text="@string/endereco_numero"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textStyle="bold" />
+
                 <EditText
                     android:id="@+id/editText_endereco_numero"
                     android:layout_width="fill_parent"
@@ -82,15 +90,16 @@
                     android:layout_margin="4dp"
                     android:layout_marginTop="31dp"
                     android:ems="10"
-                    android:maxLength="5"
                     android:hint="@string/digite_seu_numero"
-                    android:inputType="numberSigned"/>
+                    android:inputType="numberSigned"
+                    android:maxLength="5" />
 
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
                     android:layout_marginBottom="2dp"
                     android:layout_marginTop="2dp" />
+
                 <TextView
                     android:id="@+id/TexViewEnderecoComplemento"
                     android:layout_width="fill_parent"
@@ -99,6 +108,7 @@
                     android:text="@string/endereco_complemento"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textStyle="bold" />
+
                 <EditText
                     android:id="@+id/editText_endereco_complemento"
                     android:layout_width="fill_parent"
@@ -116,6 +126,7 @@
                     android:layout_height="1dp"
                     android:layout_marginBottom="2dp"
                     android:layout_marginTop="2dp" />
+
                 <TextView
                     android:id="@+id/TexViewEnderecoBairro"
                     android:layout_width="fill_parent"
@@ -124,6 +135,7 @@
                     android:text="@string/endereco_bairro"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textStyle="bold" />
+
                 <EditText
                     android:id="@+id/editText_endereco_bairro"
                     android:layout_width="fill_parent"
@@ -141,6 +153,7 @@
                     android:layout_height="1dp"
                     android:layout_marginBottom="2dp"
                     android:layout_marginTop="2dp" />
+
                 <TextView
                     android:id="@+id/TexViewEnderecoCidade"
                     android:layout_width="fill_parent"
@@ -149,6 +162,7 @@
                     android:text="@string/endereco_cidade"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textStyle="bold" />
+
                 <EditText
                     android:id="@+id/editText_endereco_cidade"
                     android:layout_width="fill_parent"
@@ -166,6 +180,7 @@
                     android:layout_height="1dp"
                     android:layout_marginBottom="2dp"
                     android:layout_marginTop="2dp" />
+
                 <TextView
                     android:id="@+id/TexViewEnderecoUf"
                     android:layout_width="fill_parent"
@@ -174,7 +189,9 @@
                     android:text="@string/endereco_uf"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textStyle="bold" />
-                <Spinner android:id="@+id/spinner_endereco_uf"
+
+                <Spinner
+                    android:id="@+id/spinner_endereco_uf"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
@@ -182,15 +199,16 @@
                     android:layout_margin="4dp"
                     android:layout_marginTop="31dp"
                     android:ems="10"
-                    android:hint="@string/escolha_sua_uf"
                     android:entries="@array/uf"
-                    android:spinnerMode="dropdown"/>
+                    android:hint="@string/escolha_sua_uf"
+                    android:spinnerMode="dropdown" />
 
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
                     android:layout_marginBottom="2dp"
                     android:layout_marginTop="2dp" />
+
                 <TextView
                     android:id="@+id/TexViewEnderecoCep"
                     android:layout_width="fill_parent"
@@ -199,6 +217,7 @@
                     android:text="@string/endereco_cep"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textStyle="bold" />
+
                 <EditText
                     android:id="@+id/editText_endereco_cep"
                     android:layout_width="fill_parent"
@@ -208,15 +227,16 @@
                     android:layout_margin="4dp"
                     android:layout_marginTop="31dp"
                     android:ems="10"
-                    android:maxLength="9"
                     android:hint="@string/digite_seu_cep"
-                    android:inputType="numberSigned" />
+                    android:inputType="numberSigned"
+                    android:maxLength="9" />
 
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
                     android:layout_marginBottom="2dp"
                     android:layout_marginTop="2dp" />
+
                 <Button
                     android:id="@+id/botao_finalizar_cadastro_endereco"
                     android:layout_width="fill_parent"

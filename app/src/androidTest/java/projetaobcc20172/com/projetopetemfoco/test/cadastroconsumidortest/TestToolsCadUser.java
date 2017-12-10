@@ -1,8 +1,4 @@
-package projetaobcc20172.com.projetopetemfoco.test.cadastrousuariotest;
-
-import android.support.test.espresso.Espresso;
-import android.support.test.espresso.action.ViewActions;
-import android.support.test.espresso.matcher.ViewMatchers;
+package projetaobcc20172.com.projetopetemfoco.test.cadastroconsumidortest;
 
 import java.util.Random;
 
@@ -20,17 +16,12 @@ public class TestToolsCadUser {
 
     //Metodo que preenche os campos e clica no botao de cadastrar
     protected static void preencherEclicar(String nome, String email, String senha1, String senha2){
-        Espresso.onView(ViewMatchers.withId(R.id.editText_nome)).perform(ViewActions.typeText(nome));
-        Espresso.closeSoftKeyboard();
-        Espresso.onView(ViewMatchers.withId(R.id.editText_email)).perform(ViewActions.typeText(email));
-        Espresso.closeSoftKeyboard();
-        Espresso.onView(ViewMatchers.withId(R.id.editText_senha)).perform(ViewActions.typeText(senha1));
-        Espresso.closeSoftKeyboard();
-        Espresso.onView(ViewMatchers.withId(R.id.editText_senha2)).perform(ViewActions.typeText(senha2));
-        Espresso.closeSoftKeyboard();
+        TestTools.digitarCampo(R.id.editText_nome,nome);
+        TestTools.digitarCampo(R.id.editText_email,email);
+        TestTools.digitarCampo(R.id.editText_senha,senha1);
+        TestTools.digitarCampo(R.id.editText_senha2,senha2);
         TestTools.clicarBotao(R.id.botao_cadastrar_endereco);
     }
-
 
    //Gera um email aleatorio para realizar cadastro
    protected static String gerarEmailTeste(int num){

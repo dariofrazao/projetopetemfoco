@@ -96,10 +96,6 @@ public class CadastroEnderecoActivity extends AppCompatActivity implements Adapt
     private void verificarCamposObrigatorios() throws CampoEnderecoObrAusenteException {
         if (logradouro.getText().toString().isEmpty()
             ||
-            numero.getText().toString().isEmpty()
-            ||
-            complemento.getText().toString().isEmpty()
-            ||
             bairro.getText().toString().isEmpty()
             ||
             cidade.getText().toString().isEmpty()

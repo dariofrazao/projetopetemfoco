@@ -1,25 +1,18 @@
 package projetaobcc20172.com.projetopetemfoco.test.logintests;
 
-import android.support.test.espresso.Espresso;
-import android.support.test.espresso.action.ViewActions;
-import android.support.test.espresso.matcher.ViewMatchers;
-
 import projetaobcc20172.com.projetopetemfoco.R;
+import projetaobcc20172.com.projetopetemfoco.test.TestTools;
 
 /**
  * Created by raul on 08/11/17.
  * Classe que armazena os métodos que interagem com a tela de login para realizar os teste.
  */
-public class EspressoLogin {
+public class TestToolsLogin {
 
-
-    public static void preencher(String login,String senha){
-        //preenche o campo de e-mail com o texto do "loginInvalido"
-        Espresso.onView(ViewMatchers.withId(R.id.editText_email)).perform(ViewActions.typeText(login));
-        //Fecha o teclado
-        Espresso.closeSoftKeyboard();
-        Espresso.onView(ViewMatchers.withId(R.id.editText_senha)).perform(ViewActions.typeText(senha));
-        Espresso.closeSoftKeyboard();
+    protected static void preencherEclicar(String login, String senha){
+        TestTools.digitarCampo(R.id.editText_email,login);
+        TestTools.digitarCampo(R.id.editText_senha,senha);
+        TestTools.clicarBotao(R.id.botao_login);
     }
 
 }

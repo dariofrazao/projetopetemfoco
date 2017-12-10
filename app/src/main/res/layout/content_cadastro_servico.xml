@@ -113,14 +113,15 @@
                     android:hint="@string/digite_descricao_servico" />
 
                 <Button
-                    android:id="@+id/btnSalvarServico"
+                    android:id="@+id/botao_salvar_servico"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
                     android:layout_marginTop="24dp"
                     android:background="@drawable/shapebutton"
-                    android:text="@string/salvar" />
+                    android:text="@string/salvar"
+                    android:visibility="visible" />
 
 
             </LinearLayout>

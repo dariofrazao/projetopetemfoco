@@ -4,6 +4,7 @@ import android.support.test.espresso.intent.Intents;
 import android.support.test.rule.ActivityTestRule;
 
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -33,6 +34,17 @@ public class CadastroUsuarioActivityTest {
     @Rule
     public ActivityTestRule<CadastroUsuarioActivity> cadUserActivityRule = new ActivityTestRule<>(CadastroUsuarioActivity.class);
 
+
+    @Before
+    public void setUp() throws Exception {
+        //Desloga caso já esteja logado.
+        //Evita erros nos testes
+        try{
+            TestTools.clicarBotao(R.id.botao_sair);
+        }catch (Exception e){
+            e.getMessage();
+        }
+    }
 
     private void preencherComInfoCorretas(){
         String email = TestToolsCadUser.gerarEmailTeste(10);
@@ -98,8 +110,7 @@ public class CadastroUsuarioActivityTest {
     public void testeCadastrar(){
         Intents.init();
         this.preencherComInfoCorretas();
-        EnderecoActivityTest end = new EnderecoActivityTest();
-        end.testeEnderecoCorreto();
+        new EnderecoActivityTest().testeEnderecoCorreto();
     }
 
     @Test
@@ -108,8 +119,7 @@ public class CadastroUsuarioActivityTest {
     public void testeCadastrarEndNum(){
         Intents.init();
         this.preencherComInfoCorretas();
-        EnderecoActivityTest end = new EnderecoActivityTest();
-        end.testeEnderecoCorretoSemNumero();
+        new EnderecoActivityTest().testeEnderecoCorretoSemNumero();
     }
 
     @Test
@@ -118,8 +128,7 @@ public class CadastroUsuarioActivityTest {
     public void testeCadastrarComplemento(){
         Intents.init();
         this.preencherComInfoCorretas();
-        EnderecoActivityTest end = new EnderecoActivityTest();
-        end.testeEnderecoCorretoSemCompl();
+        new EnderecoActivityTest().testeEnderecoCorretoSemCompl();
     }
 
     @After

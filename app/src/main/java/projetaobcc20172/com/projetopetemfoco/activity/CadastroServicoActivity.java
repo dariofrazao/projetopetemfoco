@@ -3,6 +3,7 @@ package projetaobcc20172.com.projetopetemfoco.activity;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.annotation.VisibleForTesting;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -27,6 +28,8 @@ public class CadastroServicoActivity extends AppCompatActivity {
     private EditText mEtNome, mEtValor, mEtDescricao;
 
     private Servico mServico;
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    public String msgErro;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +55,7 @@ public class CadastroServicoActivity extends AppCompatActivity {
 
         mEtValor.addTextChangedListener(new MascaraDinheiro(mEtValor, mLocal));
 
-        Button btnCadastrar = findViewById(R.id.btnSalvarServico);
+        Button btnCadastrar = findViewById(R.id.botao_salvar_servico);
         btnCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -67,16 +70,16 @@ public class CadastroServicoActivity extends AppCompatActivity {
         else acao = "atualizar";
         if(mEtNome.getText().toString().isEmpty()){
 
-            String msg = Utils.formatarMensagemErro(acao, getString(R.string.preencha_campo_nome));
-            throw new ValidacaoException(msg);
+            this.msgErro = Utils.formatarMensagemErro(acao, getString(R.string.preencha_campo_nome));
+            throw new ValidacaoException(this.msgErro );
         }
         if(mEtValor.getText().toString().isEmpty()){
-            String msg = Utils.formatarMensagemErro(acao, getString(R.string.preencha_campo_valor));
-            throw new ValidacaoException(msg);
+            this.msgErro  = Utils.formatarMensagemErro(acao, getString(R.string.preencha_campo_valor));
+            throw new ValidacaoException(this.msgErro );
         }
         if(mEtDescricao.getText().toString().isEmpty()){
-            String msg = Utils.formatarMensagemErro(acao, getString(R.string.preencha_campo_descricao));
-            throw new ValidacaoException(msg);
+            this.msgErro  = Utils.formatarMensagemErro(acao, getString(R.string.preencha_campo_descricao));
+            throw new ValidacaoException(this.msgErro );
         }
     }
 

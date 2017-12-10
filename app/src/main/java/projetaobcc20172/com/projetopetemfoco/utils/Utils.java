@@ -25,6 +25,7 @@ public class Utils {
      * @param activity Activity atual
      * @return {true} se há conectividade
      */
+
     public static boolean checarConexaoInternet(Activity activity){
         ConnectivityManager connectivityManager = (ConnectivityManager) activity.getSystemService(Context.CONNECTIVITY_SERVICE);
 

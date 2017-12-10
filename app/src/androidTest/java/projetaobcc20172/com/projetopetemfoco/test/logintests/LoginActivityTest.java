@@ -4,6 +4,7 @@ import android.support.test.espresso.intent.Intents;
 import android.support.test.rule.ActivityTestRule;
 
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -27,6 +28,18 @@ public class LoginActivityTest {
 
     @Rule
     public ActivityTestRule <LoginActivity> loginActivityRule = new ActivityTestRule<>(LoginActivity.class);
+
+
+    @Before
+    public void setUp() throws Exception {
+        //Desloga caso já esteja logado.
+        //Evita erros nos testes
+        try{
+            TestTools.clicarBotao(R.id.botao_sair);
+        }catch (Exception e){
+            e.getMessage();
+        }
+    }
 
     //Teste que simula uma tentatica de login com um cadastro não existente
     @Test
@@ -60,7 +73,6 @@ public class LoginActivityTest {
         TestToolsLogin.preencherEclicar(this.loginValido,this.senhaValida);
         TestTools.verificarMudancaActivity(MainActivity.class.getName());
         TestTools.checarToast(R.string.sucesso_login_Toast);
-        TestTools.clicarBotao(R.id.botao_sair);
     }
 
     @After

@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+
 import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.excecoes.CampoEnderecoObrAusenteException;
 import projetaobcc20172.com.projetopetemfoco.helper.Base64Custom;
@@ -32,7 +33,8 @@ public class CadastroEnderecoActivity extends AppCompatActivity implements Adapt
     private Button botaoCadastrarEndereco;
     private Endereco endereco;
 
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE) //permite que essa variavel seja vista pela classe de teste
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    //permite que essa variavel seja vista pela classe de teste
     private Toast mToast;
 
     @Override
@@ -52,8 +54,8 @@ public class CadastroEnderecoActivity extends AppCompatActivity implements Adapt
         cep.addTextChangedListener(MaskUtil.insert(cep, MaskUtil.MaskType.CEP));
         uf = findViewById(R.id.spinner_endereco_uf);
         final String[] array_spinner = {"AC", "AL", "AP", "AM", "BA", "CE", "DF",
-            "ES", "GO", "MA", "MG", "MS", "MG", "PA", "PB", "PA", "PE", "PI",
-            "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO"};
+                "ES", "GO", "MA", "MG", "MS", "MG", "PA", "PB", "PA", "PE", "PI",
+                "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO"};
 
         ArrayAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, array_spinner);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
@@ -95,17 +97,17 @@ public class CadastroEnderecoActivity extends AppCompatActivity implements Adapt
     //Método para verificar se os campos do endereço estão em branco
     private void verificarCamposObrigatorios() throws CampoEnderecoObrAusenteException {
         if (logradouro.getText().toString().isEmpty()
-            ||
-            numero.getText().toString().isEmpty()
-            ||
-            complemento.getText().toString().isEmpty()
-            ||
-            bairro.getText().toString().isEmpty()
-            ||
-            cidade.getText().toString().isEmpty()
-            ||
-            cep.getText().toString().isEmpty()
-            ) {
+                ||
+                numero.getText().toString().isEmpty()
+                ||
+                complemento.getText().toString().isEmpty()
+                ||
+                bairro.getText().toString().isEmpty()
+                ||
+                cidade.getText().toString().isEmpty()
+                ||
+                cep.getText().toString().isEmpty()
+                ) {
             throw new CampoEnderecoObrAusenteException();
         }
     }
@@ -126,13 +128,13 @@ public class CadastroEnderecoActivity extends AppCompatActivity implements Adapt
             salvarPreferencias("id", identificadorUsuario);
             abrirLoginUsuario();
 
-            } catch (CampoEnderecoObrAusenteException e) {
+        } catch (CampoEnderecoObrAusenteException e) {
             mToast = mToast.makeText(CadastroEnderecoActivity.this, R.string.erro_cadastro_endereco_campos_obrigatorios_Toast, Toast.LENGTH_SHORT);
             mToast.show();
-            } catch (Exception e) {
+        } catch (Exception e) {
             mToast = mToast.makeText(CadastroEnderecoActivity.this, R.string.erro_cadastro_endereco_campos_obrigatorios_Toast, Toast.LENGTH_SHORT);
             mToast.show();
-            }
+        }
     }
 
     public void abrirLoginUsuario() {
@@ -153,7 +155,7 @@ public class CadastroEnderecoActivity extends AppCompatActivity implements Adapt
     }
 
     //Método que salva o id do usuário nas preferências para login automático ao abrir aplicativo
-    private void salvarPreferencias(String key, String value){
+    private void salvarPreferencias(String key, String value) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(key, value);

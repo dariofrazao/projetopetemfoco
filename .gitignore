@@ -1,9 +1,52 @@
-*.iml
-.gradle
-/local.properties
-/.idea/workspace.xml
-/.idea/libraries
-.DS_Store
-/build
-/captures
-.externalNativeBuild
+# built application files
+ *.apk
+ *.ap_
+ 
+ # files for the dex VM
+ *.dex
+ 
+ # java class files
+ *.class
+ 
+ # generated files
+ bin/
+ gen/
+ 
+ # Eclipse project files
+	
+ .metadata
+ .classpath
+ .project
+ .externalToolBuilders/
+ .settings/
+ lint.xml
+ project.properties
+ 
+ .gradle
+ .idea/
+ .idea/workspace.xml
+ /build
+ **/build
+ **/production
+ 
+ # Local Configuration file (sdk path, etc.)
+ local.properties
+ 
+ # Android Studio
+ import-summary.txt
+ *.iml
+ *.iws
+ *.ipr
+ *.swp
+ 
+ # others
+ *.o
+ *.so
+ *.log
+ .DS_Store
+ Thumbs.db
+.gitignore
+.iml
+build.gradle
+misc.xml
+modules.xml

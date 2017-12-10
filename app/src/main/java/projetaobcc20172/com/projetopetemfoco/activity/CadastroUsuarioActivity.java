@@ -139,7 +139,7 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
     }
 
     //Método que chama a activity para cadastrar o endereço, passando os dados básicos aqui cadastrados
-    public void abrirCadastroEndereco(Usuario usuario){
+    public void abrirCadastroEndereco(Usuario usuario) {
         Intent intent = new Intent(CadastroUsuarioActivity.this, CadastroEnderecoActivity.class);
         intent.putExtra("Usuario", usuario);
         startActivity(intent);

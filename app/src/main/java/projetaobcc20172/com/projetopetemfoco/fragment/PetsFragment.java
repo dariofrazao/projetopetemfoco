@@ -59,7 +59,7 @@ public class PetsFragment extends Fragment {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
+                // vazio
             }
         };
         return view;

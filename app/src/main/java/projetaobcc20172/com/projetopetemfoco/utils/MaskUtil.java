@@ -8,7 +8,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
 
-//Classe que especifica máscaras a serem utilizadas nos cadastros
+
 public class MaskUtil {
     private static final String CPFMask = "###.###.###-##";
     private static final String CNPJMask = "##.###.###/####-##";
@@ -20,9 +20,9 @@ public class MaskUtil {
 
     private static String getDefaultMask(String str) {
         String defaultMask = CPFMask;
-        if (str.length() == 14){
+        if (str.length() == 14) {
             defaultMask = CNPJMask;
-        }else if(str.length() == 8){
+        } else if (str.length() == 8) {
             defaultMask = CEPMask;
         }
         return defaultMask;
@@ -77,12 +77,17 @@ public class MaskUtil {
                 editText.setSelection(maskAux.length());
             }
 
-            public void beforeTextChanged(CharSequence s, int start, int count,int after) {}
-            public void afterTextChanged(Editable s) {}
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // vazio
+            }
+
+            public void afterTextChanged(Editable s) {
+                // vazio
+            }
         };
     }
 
-    public enum MaskType{
-        CPF,CNPJ,CEP
+    public enum MaskType {
+        CPF, CNPJ, CEP
     }
 }

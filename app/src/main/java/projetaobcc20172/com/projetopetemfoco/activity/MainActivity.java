@@ -18,6 +18,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.adapter.PetAdapter;
@@ -42,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         //Recuperar id do usuário logado
         String idUsuarioLogado;
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        idUsuarioLogado = preferences.getString("id","");
+        idUsuarioLogado = preferences.getString("id", "");
 
         Button cadastrarPet; //Botão de cadastrar o pet
         Button sair; //Botão de Logout do usuário
@@ -75,8 +76,8 @@ public class MainActivity extends AppCompatActivity {
                 pets.clear();
 
                 // Recupera pets
-                for ( DataSnapshot dados: dataSnapshot.getChildren() ){
-                    Pet pet = dados.getValue( Pet.class );
+                for (DataSnapshot dados : dataSnapshot.getChildren()) {
+                    Pet pet = dados.getValue(Pet.class);
                     pets.add(pet);
                 }
                 //Notificar o adaptar que exibe a lista de pets se houver alteração no banco
@@ -103,6 +104,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, CadastroPetActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        Button cadastroServico;
+        cadastroServico =  findViewById(R.id.btnCadastroServico);
+        cadastroServico.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.setClass(MainActivity.this, CadastroServicoActivity.class);
                 startActivity(intent);
             }
         });

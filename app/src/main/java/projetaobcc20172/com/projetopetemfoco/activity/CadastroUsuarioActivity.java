@@ -43,7 +43,7 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_usuario);
         Toolbar toolbar;
-        toolbar = (Toolbar) findViewById(R.id.tb_cadastro);
+        toolbar = findViewById(R.id.tb_cadastro);
         nome = findViewById(R.id.editText_nome);
         email = findViewById(R.id.editText_email);
         senha = findViewById(R.id.editText_senha);
@@ -54,10 +54,9 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
             public void onClick(View view) {
                 usuario = new Usuario();
                 fornecedor = new Fornecedor();
-                usuario.setNome( nome.getText().toString() );
+                usuario.setNome(nome.getText().toString());
                 usuario.setEmail(email.getText().toString());
                 usuario.setSenha(senha.getText().toString());
-                //usuario.setValor(usuario.getValor());
                 cadastrarUsuario();
             }
         });
@@ -109,6 +108,7 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
                         mToast = mToast.makeText(CadastroUsuarioActivity.this, R.string.sucesso_cadastro_proxima_etapa_Toast, Toast.LENGTH_LONG);
                         mToast.show();
                         fornecedor.setValor("0");
+
                         //Aqui será chamado a continuação do cadastro do usuário, levando-o ao cadastro do endereço
                         abrirCadastroEndereco(usuario, fornecedor);
                     } else {

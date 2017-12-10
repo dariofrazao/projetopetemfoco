@@ -35,6 +35,7 @@ import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoFirebase;
 import projetaobcc20172.com.projetopetemfoco.excecoes.CampoObrAusenteException;
 import projetaobcc20172.com.projetopetemfoco.excecoes.SenhasDiferentesException;
 import projetaobcc20172.com.projetopetemfoco.helper.Base64Custom;
+import projetaobcc20172.com.projetopetemfoco.helper.MaskUtil;
 import projetaobcc20172.com.projetopetemfoco.helper.Preferencias;
 import projetaobcc20172.com.projetopetemfoco.model.Fornecedor;
 import projetaobcc20172.com.projetopetemfoco.model.Usuario;
@@ -46,8 +47,8 @@ import projetaobcc20172.com.projetopetemfoco.model.Usuario;
 public class CadastroFornecedorActivity extends AppCompatActivity {
 
     private EditText nome, email, senha, senha2, telefone, cpf_cnpj;
-    private String item_selecionado;
-    private Spinner meus_horarios;
+    private Spinner mSpinnerHorarios;
+    private String[] stateHorarios = {"Manhã", "Tarde", "Noite", "Horário Comercial", "24 horas"};
     private Button botaoCadastrar;
     private Fornecedor fornecedor;
     private Usuario usuario;
@@ -67,24 +68,16 @@ public class CadastroFornecedorActivity extends AppCompatActivity {
         email = findViewById(R.id.editText_email_fornecedor);
         telefone = findViewById(R.id.Telefone_fornecedor);
         cpf_cnpj = findViewById(R.id.CPF_CNPJ_fornecedor);
-        meus_horarios = findViewById(R.id.Spinner_horarios_funcionamento);
+        cpf_cnpj.addTextChangedListener(MaskUtil.insert(cpf_cnpj, MaskUtil.MaskType.CEP));
         senha = findViewById(R.id.editText_senha_fornecedor);
         senha2 = findViewById(R.id.editText_senha2_fornecedor);
         botaoCadastrar = findViewById(R.id.botao_cadastrar_fornecedor);
 
-        ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.horarios, android.R.layout.simple_spinner_item);
-        meus_horarios.setAdapter(adapter);
-        final AdapterView.OnItemSelectedListener escolha = new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                item_selecionado = meus_horarios.getSelectedItem().toString();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-            }
-        };
-        meus_horarios.setOnItemSelectedListener(escolha);
+        //Preparar o adaptar do Spinner para exibir os horários de atendimento do fornecedor
+        mSpinnerHorarios = findViewById(R.id.horariosSpinner);
+        ArrayAdapter<String> adapter_state = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_dropdown_item, getResources().getStringArray(R.array.horariosFornecedor));
+        mSpinnerHorarios.setAdapter(adapter_state);
 
         botaoCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,7 +88,7 @@ public class CadastroFornecedorActivity extends AppCompatActivity {
                 fornecedor.setEmail(email.getText().toString());
                 fornecedor.setTelefone(telefone.getText().toString());
                 fornecedor.setCpf_cnpj(cpf_cnpj.getText().toString());
-                fornecedor.setHorarios(item_selecionado);
+                fornecedor.setHorarios(mSpinnerHorarios.getSelectedItem().toString());
                 fornecedor.setSenha(senha.getText().toString());
                 cadastrarFornecedor();
             }
@@ -106,10 +99,7 @@ public class CadastroFornecedorActivity extends AppCompatActivity {
         toolbar.setTitleTextColor(Color.WHITE);
         toolbar.setNavigationIcon(R.drawable.ic_action_arrow_left_white);
         setSupportActionBar(toolbar);
-
-
     }
-
 
     @Override
     public boolean onSupportNavigateUp() {
@@ -123,16 +113,19 @@ public class CadastroFornecedorActivity extends AppCompatActivity {
         }
     }
 
+    //Verifica se existem campos obrigatórios não preenchidos
     private void verificarCamposObrigatorios() throws CampoObrAusenteException {
         if(     nome.getText().toString().isEmpty()
                 || senha.getText().toString().isEmpty()
                 || senha2.getText().toString().isEmpty()
                 || telefone.getText().toString().isEmpty()
                 || cpf_cnpj.getText().toString().isEmpty()
-                || item_selecionado.toString().isEmpty()){
+                || mSpinnerHorarios.toString().isEmpty()){
             throw  new CampoObrAusenteException();
         }
     }
+
+    //Método para cadastrar o fornecedor no FirebaseAuthentication
     private void cadastrarFornecedor() {
         try {
             this.verificarCamposObrigatorios();

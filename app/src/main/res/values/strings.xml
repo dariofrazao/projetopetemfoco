@@ -22,7 +22,7 @@
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
-    <string name="erro_cadastro_endereco_campos_obrigatorios_Toast">Erro ao cadastrar endereço: Preencha todos os campos</string>
+    <string name="erro_cadastro_endereco_campos_obrigatorios_Toast">Erro ao cadastrar endereço: Preencha pelo menos o logradouro, bairro, cidade e CEP</string>
     <string name="sucesso_cadastro_proxima_etapa_Toast">Sucesso! Pronto para a próxima etapa</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email completions."</string>
     <string name="erro_login_invalido_Toast">Erro ao fazer login!</string>
@@ -43,6 +43,7 @@
     <string name="erro_cadastro_fornecedor_nome_fornecedor_Toast">Erro ao cadastrar fornecedor: O nome de fornecedor inválido.</string>
     <string name="sucesso_login_Toast">Sucesso ao fazer login!</string>
     <string name="sucesso_cadastro_Toast">Sucesso ao cadastrar usuário</string>
+    <string name="sucesso_cadastro_Fornecedor">Sucesso ao cadastrar fornecedor</string>
     <string name="sucesso_cadastro_Pet">Pet cadastrado com sucesso!</string>
     <string name="pergunta_nao_possui_cadastro">Não possui cadastro?</string>
     <string name="digite_seu_nome">Digite seu nome</string>
@@ -78,18 +79,4 @@
     
     <string name="tb_cadastro_pet">Cadastro de Pet</string>
 
-    <!--lista com horários dos fornecedores><-->
-    <string-array name="horarios">
-        <item name=" "></item>
-        <item name=" ">Manhã</item>
-        <item name=" "></item>
-        <item name=" " >Tarde</item>
-        <item name=" "></item>
-        <item name=" ">Noite</item>
-        <item name=" "></item>
-        <item name=" ">Horário Comercial</item>
-        <item name=" "></item>
-        <item name=" ">24 horas</item>
-        <item name=" "></item>
-    </string-array>
 </resources>

@@ -81,6 +81,7 @@ public class Fornecedor implements Serializable {
         this.horarios = horarios;
     }
 
+    @Exclude
     public String getSenha() {
         return senha;
     }

@@ -10,7 +10,7 @@ public class Endereco {
     private String numero;
     private String complemento;
     private String bairro;
-    private String cidade;
+    private String localidade;
     private String uf;
     private String cep;
 
@@ -59,12 +59,12 @@ public class Endereco {
         this.bairro = bairro;
     }
 
-    public String getCidade() {
-        return cidade;
+    public String getLocalidade() {
+        return localidade;
     }
 
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
+    public void setLocalidade(String localidade) {
+        this.localidade = localidade;
     }
 
     public String getUf() {

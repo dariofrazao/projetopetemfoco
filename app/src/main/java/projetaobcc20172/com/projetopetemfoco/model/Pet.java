@@ -1,6 +1,8 @@
 package projetaobcc20172.com.projetopetemfoco.model;
 
 public class Pet {
+
+    //Atributos do pet
     private String idUsuario;
     private String nome;
     private String tipo;

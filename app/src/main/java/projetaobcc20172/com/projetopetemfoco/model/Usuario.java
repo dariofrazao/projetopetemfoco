@@ -9,7 +9,7 @@ import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoFirebase;
 
 public class Usuario implements Serializable{
 
-    //Atributos do usuário
+    //Atributos do usuário consumidor
     private String id;
     private String nome;
     private String email;

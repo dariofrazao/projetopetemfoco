@@ -2,7 +2,8 @@ package projetaobcc20172.com.projetopetemfoco.helper;
 
 import android.util.Base64;
 
-public class Base64Custom { //Classe para codificação e decodificação de texto
+//Classe para codificação e decodificação de texto
+public class Base64Custom {
 
     public static String codificarBase64(String texto){ //Método para codificar texto na Base64
         return Base64.encodeToString(texto.getBytes(), Base64.DEFAULT).replaceAll("(\\n|\\r)","");

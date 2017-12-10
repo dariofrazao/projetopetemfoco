@@ -132,7 +132,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     //Método que salva o id do usuário nas preferências para login automático ao abrir aplicativo
-    private void salvarPreferencias(String key, String value){
+    private void salvarPreferencias(String key, String value) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(key, value);

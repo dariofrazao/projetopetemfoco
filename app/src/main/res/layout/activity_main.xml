@@ -8,7 +8,7 @@
 
     <include
         android:id="@+id/tb_main"
-        layout="@layout/toolbar" ></include>
+        layout="@layout/toolbar"></include>
 
     <ListView
         android:id="@+id/lv_pets"
@@ -44,5 +44,14 @@
 
     </LinearLayout>
 
+
+    <Button
+        android:id="@+id/btnCadastroServico"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="160dp"
+        android:text="@string/title_activity_cadastro_servico" />
 
 </RelativeLayout>

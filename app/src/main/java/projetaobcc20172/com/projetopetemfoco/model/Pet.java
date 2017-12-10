@@ -9,7 +9,7 @@ public class Pet {
     private String raça;
     private String genero;
 
-    public Pet(){
+    public Pet() {
     }
 
     public String getNome() {

@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoFirebase;
 
-public class Usuario implements Serializable{
+public class Usuario implements Serializable {
 
     //Atributos do usuário
     private String id;
@@ -69,9 +69,13 @@ public class Usuario implements Serializable{
         this.senha2 = senha2;
     }
 
-    public Endereco getEndereco() { return endereco; }
+    public Endereco getEndereco() {
+        return endereco;
+    }
 
-    public void setEndereco(Endereco endereco) { this.endereco = endereco; }
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
 
     public Pet getPet() {
         return pet;

@@ -24,7 +24,7 @@ public class Preferencias { //Classe para armazenar dados do usuário (preferên
 
     }
 
-    public void salvarDados(String identificadorUsuario){
+    public void salvarDados(String identificadorUsuario) {
 
         editor.putString(CHAVE_IDENTIFICADOR, identificadorUsuario); //Colocar nas preferências a chave identificadora do usuário
         //editor.putString(CHAVE_NOME, nomeUsuario); //Colocar nas preferências a chave com o nome do usuário

@@ -17,13 +17,15 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
+
 import com.google.firebase.database.DatabaseReference;
+
 import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoFirebase;
 import projetaobcc20172.com.projetopetemfoco.excecoes.CampoObrAusenteException;
 import projetaobcc20172.com.projetopetemfoco.model.Pet;
 
-public class CadastroPetActivity extends AppCompatActivity{
+public class CadastroPetActivity extends AppCompatActivity {
 
     private Spinner mSpinnerTipo, mSpinnerPorte, mSpinnerIdade;
     private String[] stateIdade = {"Menos de 1 ano", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11",
@@ -37,7 +39,8 @@ public class CadastroPetActivity extends AppCompatActivity{
     private DatabaseReference firebase;
     private String idUsuarioLogado;
 
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE) //permite que essa variavel seja vista pela classe de teste
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    //permite que essa variavel seja vista pela classe de teste
     private Toast mToast;
 
     @Override
@@ -93,7 +96,7 @@ public class CadastroPetActivity extends AppCompatActivity{
                 pet.setTipo(mSpinnerTipo.getSelectedItem().toString());
                 radioGroup = findViewById(R.id.genero_radio_group);
                 //Recupera o texto do item selecionado no gênero do pet
-                String itemSelecionado = ((RadioButton)findViewById(radioGroup.getCheckedRadioButtonId())).getText().toString();
+                String itemSelecionado = ((RadioButton) findViewById(radioGroup.getCheckedRadioButtonId())).getText().toString();
                 pet.setGenero(itemSelecionado);
                 pet.setRaça(raça.getText().toString());
                 pet.setPorte(mSpinnerPorte.getSelectedItem().toString());
@@ -113,13 +116,13 @@ public class CadastroPetActivity extends AppCompatActivity{
 
     //Método que verifica campos obrigatórios ausentes
     private void verificarCamposObrigatorios() throws CampoObrAusenteException {
-        if(nome.getText().toString().isEmpty()){
-            throw  new CampoObrAusenteException();
+        if (nome.getText().toString().isEmpty()) {
+            throw new CampoObrAusenteException();
         }
     }
 
     //Método que salva o pet no banco
-    private boolean salvarPet(String idRemetente, Pet pet){
+    private boolean salvarPet(String idRemetente, Pet pet) {
         try {
             this.verificarCamposObrigatorios();
             firebase = ConfiguracaoFirebase.getFirebase().child("usuarios");
@@ -127,20 +130,20 @@ public class CadastroPetActivity extends AppCompatActivity{
             Toast.makeText(CadastroPetActivity.this, R.string.sucesso_cadastro_Pet, Toast.LENGTH_SHORT).show();
             abrirTelaPrincipal();
 
-        }catch (CampoObrAusenteException e) {
-                mToast = mToast.makeText(CadastroPetActivity.this, R.string.erro_cadastro_campos_obrigatorios_Pet, Toast.LENGTH_SHORT);
-                mToast.show();
-        }catch ( Exception e){
+        } catch (CampoObrAusenteException e) {
+            mToast = mToast.makeText(CadastroPetActivity.this, R.string.erro_cadastro_campos_obrigatorios_Pet, Toast.LENGTH_SHORT);
+            mToast.show();
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
         return true;
     }
 
-    private void abrirTelaPrincipal(){
+    private void abrirTelaPrincipal() {
         Intent intent = new Intent(CadastroPetActivity.this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity( intent );
+        startActivity(intent);
     }
 
     //Método que recupera o id do usuário logado, para salvar o pet no nó do usuário que o está cadastrando

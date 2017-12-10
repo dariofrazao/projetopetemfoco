@@ -24,12 +24,12 @@ public class CadastroUsuarioActivityTest {
 
     //Essas variaveis guardam valores que são preenchidos nos campos
     //Existentes na tela de cadastro
-    private  String nome = "Teste"; //nome do usuário
-    private  String emailJaUtilizado = "raulpedrouag@gmail.com";
-    private  String emailInvalido = "testesdakjdkas--*@ffss";
-    private  String email = "luar13.pedro@yahoo.com.br";
-    private  String senha = "12345e";
-    private  String senha2 = "12345ew1";
+    private  String mNome = "Teste"; //mNome do usuário
+    private  String mEmailJaUtilizado = "raulpedrouag@gmail.com";
+    private  String mEmailInvalido = "testesdakjdkas--*@ffss";
+    private  String mEmail = "luar13.pedro@yahoo.com.br";
+    private  String mSenha = "12345e";
+    private  String mSenha2 = "12345ew1";
 
     @Rule
     public ActivityTestRule<CadastroUsuarioActivity> cadUserActivityRule = new ActivityTestRule<>(CadastroUsuarioActivity.class);
@@ -48,14 +48,14 @@ public class CadastroUsuarioActivityTest {
 
     private void preencherComInfoCorretas(){
         String email = TestToolsCadUser.gerarEmailTeste(10);
-        TestToolsCadUser.preencherEclicar(this.nome,email,this.senha,this.senha);
+        TestToolsCadUser.preencherEclicar(this.mNome,email,this.mSenha,this.mSenha);
         TestTools.checarToast(R.string.sucesso_cadastro_proxima_etapa_Toast);
         TestTools.verificarMudancaActivity(CadastroEnderecoActivity.class.getName());
     }
 
     @Test
     public void testeEmailJaCadastrado(){
-        TestToolsCadUser.preencherEclicar(this.nome,this.emailJaUtilizado,this.senha,this.senha);
+        TestToolsCadUser.preencherEclicar(this.mNome,this.mEmailJaUtilizado,this.mSenha,this.mSenha);
         TestTools.checarToast(R.string.erro_cadastro_email_usado_Toast);
     }
 
@@ -67,42 +67,42 @@ public class CadastroUsuarioActivityTest {
 
     @Test
     public void testeCadastroCampoAusenteNome(){
-        TestToolsCadUser.preencherEclicar("",this.email,this.senha,this.senha);
+        TestToolsCadUser.preencherEclicar("",this.mEmail,this.mSenha,this.mSenha);
         TestTools.checarToast(R.string.erro_cadastro_campos_obrigatorios_Toast);
     }
 
     @Test
     public void testeCadastroCampoAusenteSenha1(){
-        TestToolsCadUser.preencherEclicar(this.nome,this.email,"",this.senha);
+        TestToolsCadUser.preencherEclicar(this.mNome,this.mEmail,"",this.mSenha);
         TestTools.checarToast(R.string.erro_cadastro_campos_obrigatorios_Toast);
     }
 
     @Test
     public void testeCadastroCampoAusenteSenha2(){
-        TestToolsCadUser.preencherEclicar(this.nome,this.email,this.senha,"");
+        TestToolsCadUser.preencherEclicar(this.mNome,this.mEmail,this.mSenha,"");
         TestTools.checarToast(R.string.erro_cadastro_campos_obrigatorios_Toast);
     }
 
     //Teste que simula um cadastro com e-mail Inválido
     @Test
     public void testeCadastroEmailInvalido(){
-        TestToolsCadUser.preencherEclicar(this.nome,this.emailInvalido,this.senha,this.senha);
+        TestToolsCadUser.preencherEclicar(this.mNome,this.mEmailInvalido,this.mSenha,this.mSenha);
         TestTools.checarToast(R.string.erro_cadastro_email_invalido_Toast);
     }
 
-    //Teste que simula um cadastro com senha e senha de confirmação diferentes
+    //Teste que simula um cadastro com mSenha e mSenha de confirmação diferentes
     @Test
     public void testeCadastrarSenhasDif(){
-        TestToolsCadUser.preencherEclicar(this.nome,this.email,this.senha,this.senha2);
+        TestToolsCadUser.preencherEclicar(this.mNome,this.mEmail,this.mSenha,this.mSenha2);
         TestTools.checarToast(R.string.erro_cadastro_senhas_diferentes_Toast);
 
     }
 
-    //Teste que simula um cadastro com senha fraca (menos que 6 caracteres)
+    //Teste que simula um cadastro com mSenha fraca (menos que 6 caracteres)
     @Test
     public void testeCadastrarSenhaFraca(){
         String senha3 = "12345";
-        TestToolsCadUser.preencherEclicar(this.nome,this.email, senha3, senha3);
+        TestToolsCadUser.preencherEclicar(this.mNome,this.mEmail, senha3, senha3);
         TestTools.checarToast(R.string.erro_cadastro_senha_invalida_Toast);
     }
 

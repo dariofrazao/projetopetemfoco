@@ -21,10 +21,10 @@ import projetaobcc20172.com.projetopetemfoco.test.TestTools;
 
 public class LoginActivityTest {
 
-    private static String loginInvalido = "joaoNaoCadastrado@gmail.com";
-    private static String senhaInvalida = "senhaInvalida";
-    private static String loginValido = "raulpedrouag@gmail.com";
-    private static String senhaValida = "123456";
+    private static String sLoginInvalido = "joaoNaoCadastrado@gmail.com";
+    private static String sSenhaInvalida = "senhaInvalida";
+    private static String sLoginValido = "raulpedrouag@gmail.com";
+    private static String sSenhaValida = "123456";
 
     @Rule
     public ActivityTestRule <LoginActivity> loginActivityRule = new ActivityTestRule<>(LoginActivity.class);
@@ -44,7 +44,7 @@ public class LoginActivityTest {
     //Teste que simula uma tentatica de login com um cadastro não existente
     @Test
     public void testeLoginNaoCadastrado() {
-        TestToolsLogin.preencherEclicar(this.loginInvalido,this.senhaValida);
+        TestToolsLogin.preencherEclicar(sLoginInvalido,sSenhaInvalida);
         TestTools.checarToast(R.string.erro_login_invalido_Toast);
     }
 
@@ -57,20 +57,20 @@ public class LoginActivityTest {
     //Teste que simula um login com o campo de senha em branco
     @Test
     public void testeSenhaEmBranco(){
-        TestToolsLogin.preencherEclicar(this.loginValido,"");
+        TestToolsLogin.preencherEclicar(sLoginValido,"");
         TestTools.checarToast(R.string.erro_login_invalido_Toast);
     }
 
     @Test
     public void testeSenhaInvalida(){
-        TestToolsLogin.preencherEclicar(this.loginValido,this.senhaInvalida);
+        TestToolsLogin.preencherEclicar(sLoginValido,sSenhaInvalida);
         TestTools.checarToast(R.string.erro_login_invalido_Toast);
     }
 
     @Test
     public void testeUsuarioCadastrado(){
         Intents.init();//Para realizar teste de mudança dela deve-se sempre add esse método no começo do método
-        TestToolsLogin.preencherEclicar(this.loginValido,this.senhaValida);
+        TestToolsLogin.preencherEclicar(sLoginValido, sSenhaValida);
         TestTools.verificarMudancaActivity(MainActivity.class.getName());
         TestTools.checarToast(R.string.sucesso_login_Toast);
     }

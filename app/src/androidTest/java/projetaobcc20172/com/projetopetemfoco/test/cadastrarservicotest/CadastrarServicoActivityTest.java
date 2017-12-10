@@ -1,6 +1,6 @@
 package projetaobcc20172.com.projetopetemfoco.test.cadastrarservicotest;
 
-import android.support.test.espresso.intent.Intents;
+import android.support.test.espresso.Espresso;
 import android.support.test.rule.ActivityTestRule;
 
 import org.junit.After;
@@ -16,16 +16,19 @@ import projetaobcc20172.com.projetopetemfoco.test.logintests.LoginActivityTest;
 
 /**
  * Created by raul on 10/12/17.
+ * Esse teste eh um pouco diferente dos outro,pois, neste ele primeiro realiza um login para depois
+ * realizar o teste de cadastrar servico. Foi feito assim para simular uma interação mais próximo a ação
+ * do usuário além de evitar erros causados por executar activity sem um usuário associado
  */
 
 public class CadastrarServicoActivityTest {
-    private String nomeServico = "Banho";
-    private String descricao = "Deixa seu pet cheiroso";
-    private String valor = "60,00";
-
-
+    private String mNomeServico = "Banho";
+    private String mDescricao = "Deixa seu pet cheiroso";
+    private String mValor = "60,00";
+/*
+    @Rule
     public ActivityTestRule<CadastroServicoActivity> cadServicoActivityRule = new ActivityTestRule<>(CadastroServicoActivity.class);
-
+*/
     @Rule
     public ActivityTestRule <LoginActivity> loginActivityRule = new ActivityTestRule<>(LoginActivity.class);
 
@@ -36,47 +39,49 @@ public class CadastrarServicoActivityTest {
         }catch (Exception e){
             e.getMessage();
         }
+
         LoginActivityTest log = new LoginActivityTest();
         log.testeUsuarioCadastrado();
+
     }
     @Test
     public void testeCadServico(){
-        Intents.init();
         TestTools.clicarBotao(R.id.btnCadastroServico);
-        TestToolsCadServico.preencherEClicar(this.nomeServico,this.valor,this.descricao);
-        TestTools.clicarBotao(R.id.botao_salvar_servico);
+        TestToolsCadServico.preencherEClicar(this.mNomeServico,this.mValor,this.mDescricao);
         TestTools.checarToast(R.string.sucesso_cadastro);
     }
 
     @Test
     public void testeCamposEmBranco(){
-        TestTools.clicarBotao(R.id.botao_salvar_servico);
-        TestTools.checarToast(cadServicoActivityRule.getActivity().msgErro);
+        TestTools.clicarBotao(R.id.btnCadastroServico);
+        Espresso.closeSoftKeyboard();//Fecha o teclado.Por alguma razão nesta tela ele sempre começa aberto
+        TestTools.clicarBotao(R.id.btnSalvarServico);
+        TestTools.checarToast(((CadastroServicoActivity)TestTools.activityAtual()).mMsgErro);
     }
     @Test
     public void testeCampoObgAusenteNome(){
-        TestToolsCadServico.preencherEClicar("",this.valor,this.descricao);
-        TestTools.clicarBotao(R.id.botao_salvar_servico);
-        TestTools.checarToast(cadServicoActivityRule.getActivity().msgErro);
+        TestTools.clicarBotao(R.id.btnCadastroServico);
+        TestToolsCadServico.preencherEClicar("",this.mValor,this.mDescricao);
+        TestTools.checarToast(((CadastroServicoActivity)TestTools.activityAtual()).mMsgErro);
     }
 
     @Test
     public void testeCamposObgAusenteValor(){
-        TestToolsCadServico.preencherEClicar(this.nomeServico,"",this.descricao);
-        TestTools.clicarBotao(R.id.botao_salvar_servico);
-        TestTools.checarToast(cadServicoActivityRule.getActivity().msgErro);
+        TestTools.clicarBotao(R.id.btnCadastroServico);
+        TestToolsCadServico.preencherEClicar(this.mNomeServico,"",this.mDescricao);
+        TestTools.checarToast(((CadastroServicoActivity)TestTools.activityAtual()).mMsgErro);
     }
 
     @Test
     public void testeCamposObgAusenteDescricao(){
-        TestToolsCadServico.preencherEClicar(this.nomeServico,this.valor,"");
-        TestTools.clicarBotao(R.id.botao_salvar_servico);
-        TestTools.checarToast(cadServicoActivityRule.getActivity().msgErro);
+        TestTools.clicarBotao(R.id.btnCadastroServico);
+        TestToolsCadServico.preencherEClicar(this.mNomeServico,this.mValor,"");
+        TestTools.checarToast(((CadastroServicoActivity)TestTools.activityAtual()).mMsgErro);
     }
 
     @After
     public void tearDown() throws Exception {
-        Thread.sleep(2000);
+        Thread.sleep(3000);
     }
 
 }

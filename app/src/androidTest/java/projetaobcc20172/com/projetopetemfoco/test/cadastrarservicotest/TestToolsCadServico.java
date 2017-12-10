@@ -12,5 +12,6 @@ public class TestToolsCadServico {
         TestTools.digitarCampo(R.id.etCadastroNomeServico,nomeServico);
         TestTools.digitarCampo(R.id.etCadastroValorServico,valor);
         TestTools.digitarCampo(R.id.etCadastroDescricaoServico,descricao);
+        TestTools.clicarBotao(R.id.btnSalvarServico);
     }
 }

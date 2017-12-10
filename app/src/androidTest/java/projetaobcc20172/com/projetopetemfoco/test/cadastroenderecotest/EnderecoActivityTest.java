@@ -18,14 +18,14 @@ import projetaobcc20172.com.projetopetemfoco.test.TestTools;
 
 public class EnderecoActivityTest {
 
-    private static String logradouro = "setor norte";
-    private static String numero = "42";
-    private static String complemento = "prox. palacio de naboo";
-    private static String bairro = "gunga";
-    private static String cidade = "Naboo";
-    private static String uf = "PE";
-    private static String cep = "55299-510";
-    private static int botaoCadEnd = R.id.botao_finalizar_cadastro_endereco;
+    private static String sLogradouro = "setor norte";
+    private static String sNumero = "42";
+    private static String sComplemento = "prox. palacio de naboo";
+    private static String sBairro = "gunga";
+    private static String sCidade = "Naboo";
+    private static String sUf = "PE";
+    private static String sCep = "55299-510";
+    private static int sBotaoCadEnd = R.id.botao_finalizar_cadastro_endereco;
 
     @Rule
     public ActivityTestRule<CadastroEnderecoActivity> cadEndActivityRule = new ActivityTestRule<>(CadastroEnderecoActivity.class);
@@ -36,7 +36,7 @@ public class EnderecoActivityTest {
     }
 
     private void clicarEVerificarCorreto(){
-        TestTools.clicarBotaoComScroll(this.botaoCadEnd);
+        TestTools.clicarBotaoComScroll(sBotaoCadEnd);
         TestTools.checarToast(R.string.sucesso_cadastro_Toast);
         TestTools.verificarMudancaActivity(MainActivity.class.getName());
         TestTools.clicarBotao(R.id.botao_sair);
@@ -44,61 +44,61 @@ public class EnderecoActivityTest {
 
     public void testeEnderecoCorreto(){
         Intents.init();
-        TestToolsCadEndereco.preencher(this.logradouro,this.numero,this.complemento,this.bairro,
-                this.cidade,this.uf,this.cep);
+        TestToolsCadEndereco.preencher(sLogradouro, sNumero, sComplemento, sBairro,
+                sCidade, sUf, sCep);
         this.clicarEVerificarCorreto();
     }
 
     public void testeEnderecoCorretoSemNumero(){
         Intents.init();
-        TestToolsCadEndereco.preencher(this.logradouro,"",this.complemento,this.bairro,
-                this.cidade,this.uf,this.cep);
+        TestToolsCadEndereco.preencher(sLogradouro,"", sComplemento, sBairro,
+                sCidade, sUf, sCep);
         this.clicarEVerificarCorreto();
     }
 
     public void testeEnderecoCorretoSemCompl(){
         Intents.init();
-        TestToolsCadEndereco.preencher(this.logradouro,this.numero,"",this.bairro,
-                this.cidade,this.uf,this.cep);
+        TestToolsCadEndereco.preencher(sLogradouro, sNumero,"", sBairro,
+                sCidade, sUf, sCep);
         this.clicarEVerificarCorreto();
     }
 
     @Test
     public void testeEnderecoCamposEmBranco(){
-        TestTools.clicarBotaoComScroll(this.botaoCadEnd);
+        TestTools.clicarBotaoComScroll(sBotaoCadEnd);
         TestTools.checarToast(R.string.erro_cadastro_endereco_campos_obrigatorios_Toast);
     }
 
     @Test
     public void testeEnderecoCampoObgLogradouro(){
-        TestToolsCadEndereco.preencher("",this.numero,this.complemento,this.bairro,
-                this.cidade,this.uf,this.cep);
-        TestTools.clicarBotaoComScroll(this.botaoCadEnd);
+        TestToolsCadEndereco.preencher("", sNumero, sComplemento, sBairro,
+                sCidade, sUf, sCep);
+        TestTools.clicarBotaoComScroll(sBotaoCadEnd);
         TestTools.checarToast(R.string.erro_cadastro_endereco_campos_obrigatorios_Toast);
     }
 
     @Test
     public void testeEnderecoCampoObgBairro(){
-        TestToolsCadEndereco.preencher(this.logradouro,this.numero,this.complemento,"",
-                this.cidade,this.uf,this.cep);
-        TestTools.clicarBotaoComScroll(this.botaoCadEnd);
+        TestToolsCadEndereco.preencher(sLogradouro, sNumero, sComplemento,"",
+                sCidade, sUf, sCep);
+        TestTools.clicarBotaoComScroll(sBotaoCadEnd);
         TestTools.checarToast(R.string.erro_cadastro_endereco_campos_obrigatorios_Toast);
     }
 
     @Test
     public void testeEnderecoCampoObgCidade(){
-        TestToolsCadEndereco.preencher(this.logradouro,this.numero,this.complemento,this.bairro,
-                "",this.uf,this.cep);
-        TestTools.clicarBotaoComScroll(this.botaoCadEnd);
+        TestToolsCadEndereco.preencher(sLogradouro, sNumero, sComplemento, sBairro,
+                "", sUf, sCep);
+        TestTools.clicarBotaoComScroll(sBotaoCadEnd);
         TestTools.checarToast(R.string.erro_cadastro_endereco_campos_obrigatorios_Toast);
     }
 
 
     @Test
     public void testeEnderecoCampoObgCep(){
-        TestToolsCadEndereco.preencher(this.logradouro,this.numero,this.complemento,this.bairro,
-                this.cidade,this.uf,"");
-        TestTools.clicarBotao(this.botaoCadEnd);
+        TestToolsCadEndereco.preencher(sLogradouro, sNumero, sComplemento, sBairro,
+                sCidade, sUf,"");
+        TestTools.clicarBotao(sBotaoCadEnd);
         TestTools.checarToast(R.string.erro_cadastro_endereco_campos_obrigatorios_Toast);
     }
 }

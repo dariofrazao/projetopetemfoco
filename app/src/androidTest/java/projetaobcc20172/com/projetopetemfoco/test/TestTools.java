@@ -39,11 +39,7 @@ public class TestTools {
         Activity act = TestTools.activityAtual();
         Espresso.onView(ViewMatchers.withText(msg)).inRoot(withDecorView(not(is(act.getWindow().getDecorView())))).check(matches(isDisplayed()));
     }
-    /*
-    public static void checarToast(int rMsg,Activity act){
-        Espresso.onView(ViewMatchers.withText(act.getResources().getString(rMsg))).inRoot(withDecorView(not(is(act.getWindow().getDecorView())))).check(matches(isDisplayed()));
-    }
-    */
+
     //Verifica se a mudança de activity(tela) ocorreu como esperada
     public static void verificarMudancaActivity(String nomeActivity){
         intended(hasComponent(nomeActivity));

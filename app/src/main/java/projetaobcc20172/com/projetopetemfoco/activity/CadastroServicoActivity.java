@@ -29,7 +29,7 @@ public class CadastroServicoActivity extends AppCompatActivity {
 
     private Servico mServico;
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
-    public String msgErro;
+    public String mMsgErro;//Essa vairavel eh private. Ela só é tratada com publica pelas classes de teste
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +55,7 @@ public class CadastroServicoActivity extends AppCompatActivity {
 
         mEtValor.addTextChangedListener(new MascaraDinheiro(mEtValor, mLocal));
 
-        Button btnCadastrar = findViewById(R.id.botao_salvar_servico);
+        Button btnCadastrar = findViewById(R.id.btnSalvarServico);
         btnCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -70,16 +70,16 @@ public class CadastroServicoActivity extends AppCompatActivity {
         else acao = "atualizar";
         if(mEtNome.getText().toString().isEmpty()){
 
-            this.msgErro = Utils.formatarMensagemErro(acao, getString(R.string.preencha_campo_nome));
-            throw new ValidacaoException(this.msgErro );
+            this.mMsgErro = Utils.formatarMensagemErro(acao, getString(R.string.preencha_campo_nome));
+            throw new ValidacaoException(this.mMsgErro);
         }
         if(mEtValor.getText().toString().isEmpty()){
-            this.msgErro  = Utils.formatarMensagemErro(acao, getString(R.string.preencha_campo_valor));
-            throw new ValidacaoException(this.msgErro );
+            this.mMsgErro = Utils.formatarMensagemErro(acao, getString(R.string.preencha_campo_valor));
+            throw new ValidacaoException(this.mMsgErro);
         }
         if(mEtDescricao.getText().toString().isEmpty()){
-            this.msgErro  = Utils.formatarMensagemErro(acao, getString(R.string.preencha_campo_descricao));
-            throw new ValidacaoException(this.msgErro );
+            this.mMsgErro = Utils.formatarMensagemErro(acao, getString(R.string.preencha_campo_descricao));
+            throw new ValidacaoException(this.mMsgErro);
         }
     }
 
@@ -132,7 +132,7 @@ public class CadastroServicoActivity extends AppCompatActivity {
 
         } catch (ValidacaoException e) {
             e.printStackTrace();
-            Utils.mostrarMensagemLonga(this, e.getMessage());
+            Utils.mostrarMensagemCurta(this, e.getMessage());
         }
     }
 

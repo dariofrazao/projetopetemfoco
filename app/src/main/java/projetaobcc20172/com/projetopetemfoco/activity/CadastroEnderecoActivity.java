@@ -31,7 +31,6 @@ public class CadastroEnderecoActivity extends AppCompatActivity implements Adapt
 
     private EditText mLogradouro, mNumero, mComplemento, mBairro, mCidade, mCep;
     private Spinner mUf;
-    private Button mBtnCadastrarEndereco;
     private Endereco mEndereco;
 
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
@@ -63,7 +62,7 @@ public class CadastroEnderecoActivity extends AppCompatActivity implements Adapt
         mUf.setAdapter(adapter);
         mUf.setOnItemSelectedListener(this);
 
-        mBtnCadastrarEndereco = findViewById(R.id.botao_finalizar_cadastro_endereco);
+        Button mBtnCadastrarEndereco = findViewById(R.id.botao_finalizar_cadastro_endereco);
         mBtnCadastrarEndereco.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

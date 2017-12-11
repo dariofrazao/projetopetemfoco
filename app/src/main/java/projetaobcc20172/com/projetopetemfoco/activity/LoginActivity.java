@@ -22,11 +22,11 @@ import projetaobcc20172.com.projetopetemfoco.helper.Base64Custom;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private EditText email, senha;
-    private Button login, cadastrar;
-    private FirebaseAuth autenticacao;
-    private Usuario usuario;
-    private String identificadorUsuarioLogado;
+    private EditText mEmail, mSenha;
+    private Button mLogin, mCadastrar;
+    private FirebaseAuth mAutenticacao;
+    private Usuario mUsuario;
+    private String mIdentificadorUserLogado;
     private Toast mToast;
     //private static Boolean loginAutomatico = false;
     private ProgressDialog mProgressDialog;
@@ -41,12 +41,12 @@ public class LoginActivity extends AppCompatActivity {
         verificarUsuarioLogado();
         //}
 
-        email = findViewById(R.id.editText_email);
-        senha = findViewById(R.id.editText_senha);
-        login = findViewById(R.id.botao_login);
-        cadastrar = findViewById(R.id.botao_cadastrar_novo_usuario);
+        mEmail = findViewById(R.id.editText_email);
+        mSenha = findViewById(R.id.editText_senha);
+        mLogin = findViewById(R.id.botao_login);
+        mCadastrar = findViewById(R.id.botao_cadastrar_novo_usuario);
 
-        cadastrar.setOnClickListener(new View.OnClickListener() {
+        mCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(LoginActivity.this, CadastroUsuarioActivity.class);
@@ -55,12 +55,12 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        login.setOnClickListener(new View.OnClickListener() {
+        mLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                usuario = new Usuario();
-                usuario.setEmail( email.getText().toString() );
-                usuario.setSenha( senha.getText().toString() );
+                mUsuario = new Usuario();
+                mUsuario.setEmail( mEmail.getText().toString() );
+                mUsuario.setSenha( mSenha.getText().toString() );
                 exibirProgresso();
                 validarLogin();
 
@@ -68,22 +68,22 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    //Método que valida o login do usuário junto ao Firebase
+    //Método que valida o mLogin do usuário junto ao Firebase
     private void validarLogin(){
         try {
-            autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
-            autenticacao.signInWithEmailAndPassword(
-                    usuario.getEmail(),
-                    usuario.getSenha()
+            mAutenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
+            mAutenticacao.signInWithEmailAndPassword(
+                    mUsuario.getEmail(),
+                    mUsuario.getSenha()
             ).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
 
-                    //Se o login foi realizado com sucesso
+                    //Se o mLogin foi realizado com sucesso
                     if (task.isSuccessful()) {
-                        identificadorUsuarioLogado = Base64Custom.codificarBase64(usuario.getEmail());
+                        mIdentificadorUserLogado = Base64Custom.codificarBase64(mUsuario.getEmail());
                         //Salva o id do usuário logado nas preferências
-                        salvarPreferencias("id", identificadorUsuarioLogado);
+                        salvarPreferencias("id", mIdentificadorUserLogado);
                         abrirTelaPrincipal();
                         mToast = mToast.makeText(LoginActivity.this,R.string.sucesso_login_Toast, Toast.LENGTH_SHORT);
                         mToast.show();
@@ -110,17 +110,17 @@ public class LoginActivity extends AppCompatActivity {
 
     //Método que verifica se o usuário já está logado no app
     private void verificarUsuarioLogado(){
-        autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
-        if( autenticacao.getCurrentUser() != null){
+        mAutenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
+        if( mAutenticacao.getCurrentUser() != null){
             abrirTelaPrincipal();
         }
     }
 
-    /*public static void setLoginAutomatico(Boolean login){
-        loginAutomatico = login;
+    /*public static void setLoginAutomatico(Boolean mLogin){
+        loginAutomatico = mLogin;
     }*/
 
-    //Método que exibe o progresso do login
+    //Método que exibe o progresso do mLogin
     private void exibirProgresso() {
         if (mProgressDialog == null) {
             mProgressDialog = new ProgressDialog(this);
@@ -131,7 +131,7 @@ public class LoginActivity extends AppCompatActivity {
         mProgressDialog.show();
     }
 
-    //Método que salva o id do usuário nas preferências para login automático ao abrir aplicativo
+    //Método que salva o id do usuário nas preferências para mLogin automático ao abrir aplicativo
     private void salvarPreferencias(String key, String value) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = sharedPreferences.edit();

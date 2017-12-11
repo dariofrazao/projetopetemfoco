@@ -120,7 +120,8 @@
                     android:layout_alignParentStart="true"
                     android:layout_marginTop="24dp"
                     android:background="@drawable/shapebutton"
-                    android:text="@string/salvar" />
+                    android:text="@string/salvar"
+                    android:visibility="visible" />
 
 
             </LinearLayout>

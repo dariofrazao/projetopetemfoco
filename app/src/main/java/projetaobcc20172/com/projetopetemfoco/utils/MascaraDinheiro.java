@@ -68,6 +68,9 @@ public class MascaraDinheiro implements TextWatcher{
      * @return {String} sem o prefixo que identifica a moeda, pronta para ser formatada para Double.
      */
     public static String removerMascara(EditText editText){
+        if(editText.getText().toString().equals("")) {
+            return "0";
+        }
         return editText.getText().toString().replace("R$", "")
                 .replace(".", "").replace(",", ".");
     }

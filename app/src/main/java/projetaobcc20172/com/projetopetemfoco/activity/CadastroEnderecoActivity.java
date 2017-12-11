@@ -20,18 +20,18 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import projetaobcc20172.com.projetopetemfoco.R;
-import projetaobcc20172.com.projetopetemfoco.excecoes.CampoEnderecoObrAusenteException;
+import projetaobcc20172.com.projetopetemfoco.excecoes.CampoObrAusenteException;
 import projetaobcc20172.com.projetopetemfoco.helper.Base64Custom;
 import projetaobcc20172.com.projetopetemfoco.model.Endereco;
 import projetaobcc20172.com.projetopetemfoco.model.Usuario;
 import projetaobcc20172.com.projetopetemfoco.utils.MaskUtil;
+import projetaobcc20172.com.projetopetemfoco.utils.VerificadorDeObjetos;
 
 public class CadastroEnderecoActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-    private EditText logradouro, numero, complemento, bairro, cidade, cep;
-    private Spinner uf;
-    private Button botaoCadastrarEndereco;
-    private Endereco endereco;
+    private EditText mLogradouro, mNumero, mComplemento, mBairro, mCidade, mCep;
+    private Spinner mUf;
+    private Endereco mEndereco;
 
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     //permite que essa variavel seja vista pela classe de teste
@@ -45,37 +45,37 @@ public class CadastroEnderecoActivity extends AppCompatActivity implements Adapt
         Toolbar toolbar;
         toolbar = findViewById(R.id.tb_endereco);
 
-        logradouro = findViewById(R.id.editText_endereco_logradouro);
-        numero = findViewById(R.id.editText_endereco_numero);
-        complemento = findViewById(R.id.editText_endereco_complemento);
-        bairro = findViewById(R.id.editText_endereco_bairro);
-        cidade = findViewById(R.id.editText_endereco_cidade);
-        cep = findViewById(R.id.editText_endereco_cep);
-        cep.addTextChangedListener(MaskUtil.insert(cep, MaskUtil.MaskType.CEP));
-        uf = findViewById(R.id.spinner_endereco_uf);
+        mLogradouro = findViewById(R.id.editText_endereco_logradouro);
+        mNumero = findViewById(R.id.editText_endereco_numero);
+        mComplemento = findViewById(R.id.editText_endereco_complemento);
+        mBairro = findViewById(R.id.editText_endereco_bairro);
+        mCidade = findViewById(R.id.editText_endereco_cidade);
+        mCep = findViewById(R.id.editText_endereco_cep);
+        mCep.addTextChangedListener(MaskUtil.insert(mCep, MaskUtil.MaskType.CEP));
+        mUf = findViewById(R.id.spinner_endereco_uf);
         final String[] array_spinner = {"AC", "AL", "AP", "AM", "BA", "CE", "DF",
                 "ES", "GO", "MA", "MG", "MS", "MG", "PA", "PB", "PA", "PE", "PI",
                 "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO"};
 
         ArrayAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, array_spinner);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
-        uf.setAdapter(adapter);
-        uf.setOnItemSelectedListener(this);
+        mUf.setAdapter(adapter);
+        mUf.setOnItemSelectedListener(this);
 
-        botaoCadastrarEndereco = findViewById(R.id.botao_finalizar_cadastro_endereco);
-        botaoCadastrarEndereco.setOnClickListener(new View.OnClickListener() {
+        Button mBtnCadastrarEndereco = findViewById(R.id.botao_finalizar_cadastro_endereco);
+        mBtnCadastrarEndereco.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 //Recuperar os campos do endereço informados pelo usuário
-                endereco = new Endereco();
-                endereco.setLogradouro(logradouro.getText().toString());
-                endereco.setNumero(numero.getText().toString());
-                endereco.setComplemento(complemento.getText().toString());
-                endereco.setBairro(bairro.getText().toString());
-                endereco.setCidade(cidade.getText().toString());
-                endereco.setCep(cep.getText().toString());
-                endereco.setUf(array_spinner[(int) uf.getSelectedItemId()]);
+                mEndereco = new Endereco();
+                mEndereco.setLogradouro(mLogradouro.getText().toString());
+                mEndereco.setNumero(mNumero.getText().toString());
+                mEndereco.setComplemento(mComplemento.getText().toString());
+                mEndereco.setBairro(mBairro.getText().toString());
+                mEndereco.setCidade(mCidade.getText().toString());
+                mEndereco.setCep(mCep.getText().toString());
+                mEndereco.setUf(array_spinner[(int) mUf.getSelectedItemId()]);
                 //Chama o método para cadastrar o usuário
                 cadastrarEndereco();
             }
@@ -94,32 +94,14 @@ public class CadastroEnderecoActivity extends AppCompatActivity implements Adapt
         return true;
     }
 
-    //Método para verificar se os campos do endereço estão em branco
-    private void verificarCamposObrigatorios() throws CampoEnderecoObrAusenteException {
-        if (logradouro.getText().toString().isEmpty()
-                ||
-                numero.getText().toString().isEmpty()
-                ||
-                complemento.getText().toString().isEmpty()
-                ||
-                bairro.getText().toString().isEmpty()
-                ||
-                cidade.getText().toString().isEmpty()
-                ||
-                cep.getText().toString().isEmpty()
-                ) {
-            throw new CampoEnderecoObrAusenteException();
-        }
-    }
 
     //Método que recupera os dados básicos do usuário, adicionando o endereço para salvar no banco
     private void cadastrarEndereco() {
         try {
-
-            this.verificarCamposObrigatorios();
+            VerificadorDeObjetos.vDadosObrEndereco(mEndereco);
             Intent i = getIntent();
             Usuario usuario = (Usuario) i.getSerializableExtra("Usuario");
-            usuario.setEndereco(endereco);
+            usuario.setEndereco(mEndereco);
             usuario.salvar();
             mToast = mToast.makeText(CadastroEnderecoActivity.this, R.string.sucesso_cadastro_Toast, Toast.LENGTH_LONG);
             mToast.show();
@@ -128,7 +110,7 @@ public class CadastroEnderecoActivity extends AppCompatActivity implements Adapt
             salvarPreferencias("id", identificadorUsuario);
             abrirLoginUsuario();
 
-        } catch (CampoEnderecoObrAusenteException e) {
+        } catch (CampoObrAusenteException e) {
             mToast = mToast.makeText(CadastroEnderecoActivity.this, R.string.erro_cadastro_endereco_campos_obrigatorios_Toast, Toast.LENGTH_SHORT);
             mToast.show();
         } catch (Exception e) {
@@ -145,7 +127,7 @@ public class CadastroEnderecoActivity extends AppCompatActivity implements Adapt
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        uf.getItemAtPosition(position);
+        mUf.getItemAtPosition(position);
     }
 
     @Override

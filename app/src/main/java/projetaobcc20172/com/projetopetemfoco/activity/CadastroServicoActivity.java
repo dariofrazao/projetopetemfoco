@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-
 import java.util.Locale;
 
 import projetaobcc20172.com.projetopetemfoco.R;
@@ -18,6 +17,7 @@ import projetaobcc20172.com.projetopetemfoco.excecoes.ValidacaoException;
 import projetaobcc20172.com.projetopetemfoco.model.Servico;
 import projetaobcc20172.com.projetopetemfoco.utils.MascaraDinheiro;
 import projetaobcc20172.com.projetopetemfoco.utils.Utils;
+import projetaobcc20172.com.projetopetemfoco.utils.VerificadorDeObjetos;
 
 /**
  * Activity de cadastro de serviços
@@ -27,6 +27,11 @@ public class CadastroServicoActivity extends AppCompatActivity {
     private EditText mEtNome, mEtValor, mEtDescricao;
 
     private Servico mServico;
+
+    /*
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    public String mMsgErro;//Essa vairavel eh private. Ela só é tratada com publica pelas classes de teste
+*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,26 +65,25 @@ public class CadastroServicoActivity extends AppCompatActivity {
             }
         });
     }
-
+/*
     private void validarCampos() throws ValidacaoException {
         String acao;
         if(verificarNovoCadastro()) acao = "cadastrar";
         else acao = "atualizar";
         if(mEtNome.getText().toString().isEmpty()){
-
-            String msg = Utils.formatarMensagemErro(acao, getString(R.string.preencha_campo_nome));
-            throw new ValidacaoException(msg);
+            this.mMsgErro = Utils.formatarMensagemErro(acao, getString(R.string.preencha_campo_nome));
+            throw new ValidacaoException(this.mMsgErro);
         }
         if(mEtValor.getText().toString().isEmpty()){
-            String msg = Utils.formatarMensagemErro(acao, getString(R.string.preencha_campo_valor));
-            throw new ValidacaoException(msg);
+            this.mMsgErro = Utils.formatarMensagemErro(acao, getString(R.string.preencha_campo_valor));
+            throw new ValidacaoException(this.mMsgErro);
         }
         if(mEtDescricao.getText().toString().isEmpty()){
-            String msg = Utils.formatarMensagemErro(acao, getString(R.string.preencha_campo_descricao));
-            throw new ValidacaoException(msg);
+            this.mMsgErro = Utils.formatarMensagemErro(acao, getString(R.string.preencha_campo_descricao));
+            throw new ValidacaoException(this.mMsgErro);
         }
     }
-
+*/
 
     /**
      * Verifica se é um novo cadastro ou uma atualização de cadastro.
@@ -104,7 +108,6 @@ public class CadastroServicoActivity extends AppCompatActivity {
      */
     private void cadastrarAtualizar(){
         try {
-            this.validarCampos();
 
             Double valor = Double.parseDouble(MascaraDinheiro.removerMascara(mEtValor));
 
@@ -113,7 +116,7 @@ public class CadastroServicoActivity extends AppCompatActivity {
                 mServico = new Servico(mEtNome.getText().toString(),
                         valor,
                         mEtDescricao.getText().toString());
-
+                VerificadorDeObjetos.vDadosServico(mServico,this);
                 ServicoDaoImpl servicoDao =  new ServicoDaoImpl(this);
                 servicoDao.inserir(mServico, "ZEBob3RtYWlsLmNvbQ==");
                 // limpa os campos da view
@@ -129,7 +132,7 @@ public class CadastroServicoActivity extends AppCompatActivity {
 
         } catch (ValidacaoException e) {
             e.printStackTrace();
-            Utils.mostrarMensagemLonga(this, e.getMessage());
+            Utils.mostrarMensagemCurta(this, e.getMessage());
         }
     }
 

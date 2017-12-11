@@ -1,70 +1,75 @@
 package projetaobcc20172.com.projetopetemfoco.model;
 
 public class Pet {
-    private String idUsuario;
-    private String nome;
-    private String tipo;
-    private String idade;
-    private String porte;
-    private String raça;
-    private String genero;
+    private String mIdUsuario;
+    private String mNome;
+    private String mTipo;
+    private String mIdade;
+    private String mPorte;
+    private String mRaca;
+    private String mGenero;
 
     public Pet() {
     }
 
+    public Pet(String nome,String raca){
+        this.mNome = nome;
+        this.mRaca = raca;
+    }
+
     public String getNome() {
-        return nome;
+        return mNome;
     }
 
     public void setNome(String nome) {
-        this.nome = nome;
+        this.mNome = nome;
     }
 
     public String getTipo() {
-        return tipo;
+        return mTipo;
     }
 
     public void setTipo(String tipo) {
-        this.tipo = tipo;
+        this.mTipo = tipo;
     }
 
     public String getPorte() {
-        return porte;
+        return mPorte;
     }
 
     public void setPorte(String porte) {
-        this.porte = porte;
+        this.mPorte = porte;
     }
 
     public String getGenero() {
-        return genero;
+        return mGenero;
     }
 
     public void setGenero(String genero) {
-        this.genero = genero;
+        this.mGenero = genero;
     }
 
     public String getIdade() {
-        return idade;
+        return mIdade;
     }
 
     public void setIdade(String idade) {
-        this.idade = idade;
+        this.mIdade = idade;
     }
 
     public String getRaça() {
-        return raça;
+        return mRaca;
     }
 
     public void setRaça(String raça) {
-        this.raça = raça;
+        this.mRaca = raça;
     }
 
     public String getIdUsuario() {
-        return idUsuario;
+        return mIdUsuario;
     }
 
     public void setIdUsuario(String idUsuario) {
-        this.idUsuario = idUsuario;
+        this.mIdUsuario = idUsuario;
     }
 }

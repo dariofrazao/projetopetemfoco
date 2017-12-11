@@ -30,11 +30,9 @@ import projetaobcc20172.com.projetopetemfoco.utils.VerificadorDeObjetos;
 public class CadastroUsuarioActivity extends AppCompatActivity {
 
     private EditText mNome, mEmail, mSenha, mSenha2;
-    private Button mBtnCadastrar;
     private Usuario mUsuario;
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)//permite que essa variavel seja vista pela classe de teste
     public Toast mToast;
-    private FirebaseAuth mAutenticacao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +45,7 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
         mEmail = findViewById(R.id.editText_email);
         mSenha = findViewById(R.id.editText_senha);
         mSenha2 = findViewById(R.id.editText_senha2);
-        mBtnCadastrar = findViewById(R.id.botao_cadastrar_endereco);
+        Button mBtnCadastrar = findViewById(R.id.botao_cadastrar_endereco);
         mBtnCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -76,6 +74,7 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
     //Método para cadastrar o usuário no FirebaseAuthentication
     private void cadastrarUsuario() {
         try {
+            FirebaseAuth mAutenticacao;
             VerificadorDeObjetos.vDadosUsuario(mUsuario);
             mAutenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
             mAutenticacao.createUserWithEmailAndPassword(

@@ -3,7 +3,6 @@ package projetaobcc20172.com.projetopetemfoco.helper;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import java.util.HashMap;
 
 public class Preferencias { //Classe para armazenar dados do usuário (preferências) ao iniciar novamente o aplicativo
 

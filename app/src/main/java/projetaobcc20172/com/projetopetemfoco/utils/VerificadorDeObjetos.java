@@ -37,6 +37,7 @@ public class VerificadorDeObjetos {
                     end.getCidade().isEmpty()
                     ||
                     end.getUf().isEmpty()
+                    || end.getCep().isEmpty()
                     ) {
                 throw new CampoObrAusenteException();
             }

@@ -8,9 +8,10 @@ Scenario: Informar as informações requisitadas e logar na aplicação ou receb
     When Eu clicar em "logar"
     Then Eu recebo a mensagem: <mensagem>
 
-    Exemples:
+    Examples:
        | email                       | senha          | mensagem                |
        | raulpedrouag@gmail.com      | 123456e        | Sucesso ao fazer login! |
        | joaoNaoCadastrado@gmail.com | senhaInvalida  | Erro ao fazer login!    |
+       |                             |                | Erro ao fazer login!    |
        | raulpedrouag@gmail.com      |                | Erro ao fazer login!    |
        |                             | 123456e        | Erro ao fazer login!    |

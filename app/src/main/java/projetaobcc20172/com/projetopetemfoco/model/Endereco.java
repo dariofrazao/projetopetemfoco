@@ -14,11 +14,12 @@ public class Endereco {
     private String mUf;
     private String mCep;
 
-    public Endereco(String logradouro,String bairro,String cidade,String uf) {
+    public Endereco(String logradouro,String bairro,String cidade,String uf,String cep) {
         this.mLogradouro = logradouro;
         this.mBairro = bairro;
         this.mCidade = cidade;
         this.mUf = uf;
+        this.mCep = cep;
     }
 
     public Endereco(){}

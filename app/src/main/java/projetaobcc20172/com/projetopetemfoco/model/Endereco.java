@@ -2,8 +2,6 @@ package projetaobcc20172.com.projetopetemfoco.model;
 
 import com.google.firebase.database.Exclude;
 
-
-
 public class Endereco {
 
     //Atributos do endereço
@@ -16,9 +14,14 @@ public class Endereco {
     private String uf;
     private String cep;
 
-    public Endereco() {
-
+    public Endereco(String logradouro,String bairro,String cidade,String uf) {
+        this.logradouro = logradouro;
+        this.bairro = bairro;
+        this.cidade = cidade;
+        this.uf = uf;
     }
+
+    public Endereco(){}
 
     @Exclude
     public String getId() {

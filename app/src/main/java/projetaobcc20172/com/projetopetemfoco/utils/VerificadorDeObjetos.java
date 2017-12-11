@@ -2,7 +2,6 @@ package projetaobcc20172.com.projetopetemfoco.utils;
 
 import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.activity.CadastroServicoActivity;
-import projetaobcc20172.com.projetopetemfoco.excecoes.CampoEnderecoObrAusenteException;
 import projetaobcc20172.com.projetopetemfoco.excecoes.CampoObrAusenteException;
 import projetaobcc20172.com.projetopetemfoco.excecoes.SenhasDiferentesException;
 import projetaobcc20172.com.projetopetemfoco.excecoes.ValidacaoException;
@@ -30,8 +29,8 @@ public class VerificadorDeObjetos {
     }
 
     //Método responsável por avaliar se um obj endereco possui todas os atributos obrigatorios
-    public static void vDadosObrEndereco(Endereco end) throws CampoEnderecoObrAusenteException {
-        if (end.getLogradouro().isEmpty()
+    public static void vDadosObrEndereco(Endereco end) throws CampoObrAusenteException {
+        if (        end.getLogradouro().isEmpty()
                     ||
                     end.getBairro().isEmpty()
                     ||
@@ -39,7 +38,7 @@ public class VerificadorDeObjetos {
                     ||
                     end.getUf().isEmpty()
                     ) {
-                throw new CampoEnderecoObrAusenteException();
+                throw new CampoObrAusenteException();
             }
     }
 

@@ -1,11 +1,50 @@
 package projetaobcc20172.com.projetopetemfoco;
 
-/**
- * Created by raul on 10/12/17.
- */
+
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+
+import java.util.Arrays;
+import projetaobcc20172.com.projetopetemfoco.excecoes.CampoObrAusenteException;
+import projetaobcc20172.com.projetopetemfoco.excecoes.SenhasDiferentesException;
+import projetaobcc20172.com.projetopetemfoco.model.Usuario;
+import projetaobcc20172.com.projetopetemfoco.utils.VerificadorDeObjetos;
+
+/*Dicas de como criar testes https://github.com/junit-team/junit4/wiki/parameterized-tests
+* Essa classe realiza os testes unitários para o cadastro de usuarios.
+* */
+@RunWith(Parameterized.class)
 public class UnitTestCadastroUsuario {
 
-    @Test(expected=CampoObrAusenteException)
-    Public void ver
+
+    /*Paramentros que serão utlizados pelo teste de campo obrigatorio
+    basicamente é um produto cartesiano com as combinações possiveis de
+    campos ausêntes
+    */
+    @Parameterized.Parameters
+    public static Iterable<? extends Object> data() {
+        return Arrays.asList(
+                new Usuario("","",""),
+                new Usuario("teste","",""),
+                new Usuario("teste","email",""),
+                new Usuario("teste","","senha1"),
+                new Usuario("","email","senha1"));
+        };
+
+    @Parameterized.Parameter
+    public Usuario userTest;
+
+    @Test (expected=CampoObrAusenteException.class)
+    public void testCampoObgUsuario() throws CampoObrAusenteException, SenhasDiferentesException {
+        VerificadorDeObjetos.vDadosUsuario(userTest);
+    }
+
+    @Test(expected = SenhasDiferentesException.class)
+    public void testSenhasDiferentes() throws CampoObrAusenteException, SenhasDiferentesException {
+        Usuario testSenha = new Usuario("teste","email","senha1");
+        testSenha.setSenha2("senhaDiferente");
+        VerificadorDeObjetos.vDadosUsuario(testSenha);
+    }
+
 }

@@ -20,7 +20,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import projetaobcc20172.com.projetopetemfoco.R;
-import projetaobcc20172.com.projetopetemfoco.excecoes.CampoEnderecoObrAusenteException;
+import projetaobcc20172.com.projetopetemfoco.excecoes.CampoObrAusenteException;
 import projetaobcc20172.com.projetopetemfoco.helper.Base64Custom;
 import projetaobcc20172.com.projetopetemfoco.model.Endereco;
 import projetaobcc20172.com.projetopetemfoco.model.Usuario;
@@ -111,7 +111,7 @@ public class CadastroEnderecoActivity extends AppCompatActivity implements Adapt
             salvarPreferencias("id", identificadorUsuario);
             abrirLoginUsuario();
 
-        } catch (CampoEnderecoObrAusenteException e) {
+        } catch (CampoObrAusenteException e) {
             mToast = mToast.makeText(CadastroEnderecoActivity.this, R.string.erro_cadastro_endereco_campos_obrigatorios_Toast, Toast.LENGTH_SHORT);
             mToast.show();
         } catch (Exception e) {

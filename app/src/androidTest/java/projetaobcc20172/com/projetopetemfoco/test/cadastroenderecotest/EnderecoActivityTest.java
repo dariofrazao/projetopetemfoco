@@ -32,10 +32,15 @@ public class EnderecoActivityTest {
 
     @Before
     public void setUp() throws Exception {
-        Thread.sleep(4000);
+        Thread.sleep(3000);
     }
 
     private void clicarEVerificarCorreto(){
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         TestTools.clicarBotaoComScroll(sBotaoCadEnd);
         TestTools.checarToast(R.string.sucesso_cadastro_Toast);
         TestTools.verificarMudancaActivity(MainActivity.class.getName());
@@ -59,6 +64,13 @@ public class EnderecoActivityTest {
     public void testeEnderecoCorretoSemCompl(){
         Intents.init();
         TestToolsCadEndereco.preencher(sLogradouro, sNumero,"", sBairro,
+                sCidade, sUf, sCep);
+        this.clicarEVerificarCorreto();
+    }
+
+    public void testeEnderecoCorretoSemComplENumero(){
+        Intents.init();
+        TestToolsCadEndereco.preencher(sLogradouro, "","", sBairro,
                 sCidade, sUf, sCep);
         this.clicarEVerificarCorreto();
     }

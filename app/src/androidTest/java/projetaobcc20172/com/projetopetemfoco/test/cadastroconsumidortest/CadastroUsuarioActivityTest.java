@@ -44,6 +44,7 @@ public class CadastroUsuarioActivityTest {
         }catch (Exception e){
             e.getMessage();
         }
+        Thread.sleep(3000);
     }
 
     private void preencherComInfoCorretas(){
@@ -68,6 +69,12 @@ public class CadastroUsuarioActivityTest {
     @Test
     public void testeCadastroCampoAusenteNome(){
         TestToolsCadUser.preencherEclicar("",this.mEmail,this.mSenha,this.mSenha);
+        TestTools.checarToast(R.string.erro_cadastro_campos_obrigatorios_Toast);
+    }
+
+    @Test
+    public void testeCadastroCampoAusenteEmail(){
+        TestToolsCadUser.preencherEclicar(this.mNome,"",this.mSenha,this.mSenha);
         TestTools.checarToast(R.string.erro_cadastro_campos_obrigatorios_Toast);
     }
 
@@ -129,6 +136,15 @@ public class CadastroUsuarioActivityTest {
         Intents.init();
         this.preencherComInfoCorretas();
         new EnderecoActivityTest().testeEnderecoCorretoSemCompl();
+    }
+
+    @Test
+    //Teste que avalia o cadastro de um consumidor sem
+    //a informação de complemento e de número no endereço
+    public void testeCadastrarComplementoENumero(){
+        Intents.init();
+        this.preencherComInfoCorretas();
+        new EnderecoActivityTest().testeEnderecoCorretoSemComplENumero();
     }
 
     @After

@@ -17,23 +17,27 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
+
 import com.google.firebase.database.DatabaseReference;
+
 import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoFirebase;
 import projetaobcc20172.com.projetopetemfoco.excecoes.CampoObrAusenteException;
 import projetaobcc20172.com.projetopetemfoco.model.Pet;
+import projetaobcc20172.com.projetopetemfoco.utils.VerificadorDeObjetos;
 
-public class CadastroPetActivity extends AppCompatActivity{
+public class CadastroPetActivity extends AppCompatActivity {
 
     private Spinner mSpinnerTipo, mSpinnerPorte, mSpinnerIdade;
-    private Button cadastrarPet;
-    private EditText nome, raça;
-    private RadioGroup radioGroup;
-    private Pet pet;
-    private DatabaseReference firebase;
-    private String idUsuarioLogado;
+    private Button mCadastrarPet;
+    private EditText mNome, mRaca;
+    private RadioGroup mRadioGroup;
+    private Pet mPet;
+    private DatabaseReference mFirebase;
+    private String mIdUsuarioLogado;
 
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE) //permite que essa variavel seja vista pela classe de teste
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    //permite que essa variavel seja vista pela classe de teste
     private Toast mToast;
 
     @Override
@@ -68,32 +72,32 @@ public class CadastroPetActivity extends AppCompatActivity{
                 android.R.layout.simple_spinner_dropdown_item, getResources().getStringArray(R.array.idadePet));
         mSpinnerIdade.setAdapter(adapter_state3);
 
-        nome = findViewById(R.id.editText_nome_pet);
-        raça = findViewById(R.id.editText_raca_pet);
+        mNome = findViewById(R.id.editText_nome_pet);
+        mRaca = findViewById(R.id.editText_raca_pet);
 
-        cadastrarPet = findViewById(R.id.botao_cadastrar_pet);
-        cadastrarPet.setOnClickListener(new View.OnClickListener() {
+        mCadastrarPet = findViewById(R.id.botao_cadastrar_pet);
+        mCadastrarPet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 //Recuperar id do usuário logado
-                idUsuarioLogado = getPreferences("id", CadastroPetActivity.this);
+                mIdUsuarioLogado = getPreferences("id", CadastroPetActivity.this);
 
-                //Recuperar demais dados do pet informados pelo usuário
-                pet = new Pet();
-                pet.setNome(nome.getText().toString());
-                pet.setIdade(mSpinnerIdade.getSelectedItem().toString());
-                pet.setTipo(mSpinnerTipo.getSelectedItem().toString());
-                radioGroup = findViewById(R.id.genero_radio_group);
+                //Recuperar demais dados do mPet informados pelo usuário
+                mPet = new Pet();
+                mPet.setNome(mNome.getText().toString());
+                mPet.setIdade(mSpinnerIdade.getSelectedItem().toString());
+                mPet.setTipo(mSpinnerTipo.getSelectedItem().toString());
+                mRadioGroup = findViewById(R.id.genero_radio_group);
 
-                //Recupera o texto do item selecionado no gênero do pet
-                String itemSelecionado = ((RadioButton)findViewById(radioGroup.getCheckedRadioButtonId())).getText().toString();
-                pet.setGenero(itemSelecionado);
-                pet.setRaça(raça.getText().toString());
-                pet.setPorte(mSpinnerPorte.getSelectedItem().toString());
+                //Recupera o texto do item selecionado no gênero do mPet
+                String itemSelecionado = ((RadioButton) findViewById(mRadioGroup.getCheckedRadioButtonId())).getText().toString();
+                mPet.setGenero(itemSelecionado);
+                mPet.setRaça(mRaca.getText().toString());
+                mPet.setPorte(mSpinnerPorte.getSelectedItem().toString());
 
-                //Chamar o método para salvar o pet no banco
-                salvarPet(idUsuarioLogado, pet);
+                //Chamar o método para salvar o mPet no banco
+                salvarPet(mIdUsuarioLogado, mPet);
 
             }
         });
@@ -106,39 +110,33 @@ public class CadastroPetActivity extends AppCompatActivity{
         return true;
     }
 
-    //Método que verifica campos obrigatórios ausentes
-    private void verificarCamposObrigatorios() throws CampoObrAusenteException {
-        if(nome.getText().toString().isEmpty()){
-            throw  new CampoObrAusenteException();
-        }
-    }
 
-    //Método que salva o pet no banco
-    private boolean salvarPet(String idRemetente, Pet pet){
+    //Método que salva o mPet no banco
+    private boolean salvarPet(String idRemetente, Pet pet) {
         try {
-            this.verificarCamposObrigatorios();
-            firebase = ConfiguracaoFirebase.getFirebase().child("usuarios");
-            firebase.child(idRemetente).child("pets").push().setValue(pet); //O método push() cria uma chave exclusiva para cada pet cadastrado
+            VerificadorDeObjetos.vDadosPet(pet);
+            mFirebase = ConfiguracaoFirebase.getFirebase().child("usuarios");
+            mFirebase.child(idRemetente).child("pets").push().setValue(pet); //O método push() cria uma chave exclusiva para cada mPet cadastrado
             Toast.makeText(CadastroPetActivity.this, R.string.sucesso_cadastro_Pet, Toast.LENGTH_SHORT).show();
             abrirTelaPrincipal();
 
-        }catch (CampoObrAusenteException e) {
-                mToast = mToast.makeText(CadastroPetActivity.this, R.string.erro_cadastro_campos_obrigatorios_Pet, Toast.LENGTH_SHORT);
-                mToast.show();
-        }catch ( Exception e){
+        } catch (CampoObrAusenteException e) {
+            mToast = mToast.makeText(CadastroPetActivity.this, R.string.erro_cadastro_campos_obrigatorios_Pet, Toast.LENGTH_SHORT);
+            mToast.show();
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
         return true;
     }
 
-    private void abrirTelaPrincipal(){
+    private void abrirTelaPrincipal() {
         Intent intent = new Intent(CadastroPetActivity.this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity( intent );
+        startActivity(intent);
     }
 
-    //Método que recupera o id do usuário logado, para salvar o pet no nó do usuário que o está cadastrando
+    //Método que recupera o id do usuário logado, para salvar o mPet no nó do usuário que o está cadastrando
     public static String getPreferences(String key, Context context) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         return preferences.getString(key, null);

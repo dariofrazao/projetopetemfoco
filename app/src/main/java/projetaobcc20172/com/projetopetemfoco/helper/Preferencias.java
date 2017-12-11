@@ -3,7 +3,6 @@ package projetaobcc20172.com.projetopetemfoco.helper;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import java.util.HashMap;
 
 //Classe para armazenar dados do usuário (preferências) ao iniciar novamente o aplicativo
 public class Preferencias {
@@ -25,7 +24,7 @@ public class Preferencias {
 
     }
 
-    public void salvarDados(String identificadorUsuario){
+    public void salvarDados(String identificadorUsuario) {
 
         editor.putString(CHAVE_IDENTIFICADOR, identificadorUsuario); //Colocar nas preferências a chave identificadora do usuário
         //editor.putString(CHAVE_NOME, nomeUsuario); //Colocar nas preferências a chave com o nome do usuário

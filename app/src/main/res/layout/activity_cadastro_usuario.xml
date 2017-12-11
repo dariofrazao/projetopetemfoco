@@ -152,7 +152,7 @@
                     android:layout_below="@+id/editText_senha2"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/shapebutton"
-                    android:text=  "@string/cadastrar_endereco" />
+                    android:text="@string/cadastrar_endereco" />
 
 
             </LinearLayout>

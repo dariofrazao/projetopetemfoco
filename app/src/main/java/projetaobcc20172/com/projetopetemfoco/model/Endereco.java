@@ -5,58 +5,63 @@ import com.google.firebase.database.Exclude;
 public class Endereco {
 
     //Atributos do endereço
-    private String id;
-    private String logradouro;
-    private String numero;
-    private String complemento;
-    private String bairro;
-    private String localidade;
-    private String uf;
-    private String cep;
+    private String mId;
+    private String mLogradouro;
+    private String mNumero;
+    private String mComplemento;
+    private String mBairro;
+    private String mLocalidade;
+    private String mUf;
+    private String mCep;
 
-    public Endereco(){
-
+    public Endereco(String logradouro,String bairro,String localidade,String uf) {
+        this.mLogradouro = logradouro;
+        this.mBairro = bairro;
+        this.mLocalidade = localidade;
+        this.mUf = uf;
     }
+
+    public Endereco(){}
 
     @Exclude
     public String getId() {
-        return id;
+        return mId;
     }
 
     public void setId(String id) {
-        this.id = id;
+        this.mId = id;
     }
 
     public String getLogradouro() {
-        return logradouro;
+        return mLogradouro;
     }
 
     public void setLogradouro(String logradouro) {
-        this.logradouro = logradouro;
+        this.mLogradouro = logradouro;
     }
 
     public String getNumero() {
-        return numero;
+        return mNumero;
     }
 
     public void setNumero(String numero) {
-        this.numero = numero;
+        this.mNumero = numero;
     }
 
     public String getComplemento() {
-        return complemento;
+        return mComplemento;
     }
 
     public void setComplemento(String complemento) {
-        this.complemento = complemento;
+        this.mComplemento = complemento;
     }
 
     public String getBairro() {
-        return bairro;
+        return mBairro;
     }
 
     public void setBairro(String bairro) {
-        this.bairro = bairro;
+        this.mBairro = bairro;
     }
 
     public String getLocalidade() {
@@ -68,18 +73,18 @@ public class Endereco {
     }
 
     public String getUf() {
-        return uf;
+        return mUf;
     }
 
     public void setUf(String uf) {
-        this.uf = uf;
+        this.mUf = uf;
     }
 
     public String getCep() {
-        return cep;
+        return mCep;
     }
 
     public void setCep(String cep) {
-        this.cep = cep;
+        this.mCep = cep;
     }
 }

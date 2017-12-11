@@ -14,15 +14,15 @@ import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoFirebase;
 public class Fornecedor implements Serializable {
 
     //Atributos do fornecedor
-    private String id;
-    private String nome;
-    private String email;
-    private String telefone;
-    private String cpf_cnpj;
-    private String horarios;
-    private String senha;
-    private String valor = "1";
-    private Endereco endereco;
+    private String mId;
+    private String mNome;
+    private String mEmail;
+    private String mTelefone;
+    private String mCpfCnpj;
+    private String mHorarios;
+    private String mSenha;
+    private String mValor = "1";
+    private Endereco mEndereco;
 
 
     public Fornecedor(){
@@ -35,74 +35,74 @@ public class Fornecedor implements Serializable {
     }
 
     @Exclude
-    public String getId() { return id; }
+    public String getId() { return mId; }
 
     public void setId(String id) {
-        this.id = id;
+        this.mId = id;
     }
 
     public String getNome() {
-        return nome;
+        return mNome;
     }
 
     public void setNome(String nome) {
-        this.nome = nome;
+        this.mNome = nome;
     }
 
     public String getEmail() {
-        return email;
+        return mEmail;
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        this.mEmail = email;
     }
 
     public String getTelefone() {
-        return telefone;
+        return mTelefone;
     }
 
     public void setTelefone(String telefone) {
-        this.telefone = telefone;
+        this.mTelefone = telefone;
     }
 
     public String getCpf_cnpj() {
-        return cpf_cnpj;
+        return mCpfCnpj;
     }
 
     public void setCpf_cnpj(String cpf_cnpj) {
-        this.cpf_cnpj = cpf_cnpj;
+        this.mCpfCnpj = cpf_cnpj;
     }
 
     public String getHorarios() {
-        return horarios;
+        return mHorarios;
     }
 
     public void setHorarios(String horarios) {
-        this.horarios = horarios;
+        this.mHorarios = horarios;
     }
 
     @Exclude
     public String getSenha() {
-        return senha;
+        return mSenha;
     }
 
     public void setSenha(String senha) {
-        this.senha = senha;
+        this.mSenha = senha;
     }
 
     public Endereco getEndereco() {
-        return endereco;
+        return mEndereco;
     }
 
     public void setEndereco(Endereco endereco) {
-        this.endereco = endereco;
+        this.mEndereco = endereco;
     }
 
     public String getValor() {
-        return valor;
+        return mValor;
     }
 
     public void setValor(String valor) {
-        this.valor = valor;
+        this.mValor = valor;
     }
 }

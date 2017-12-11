@@ -34,7 +34,7 @@ public class VerificadorDeObjetos {
                     ||
                     end.getBairro().isEmpty()
                     ||
-                    end.getCidade().isEmpty()
+                    end.getLocalidade().isEmpty()
                     ||
                     end.getUf().isEmpty()
                     ) {

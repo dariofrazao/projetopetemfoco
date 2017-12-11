@@ -25,26 +25,21 @@
         android:paddingTop="@dimen/activity_vertical_margin">
 
         <ScrollView
-            android:id="@+id/endereco_scroll"
+            android:id="@+id/scrollView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="visible"
-            tools:visibility="visible">
+            android:layout_height="match_parent">
 
             <LinearLayout
-                android:id="@+id/end_scroll"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="vertical"
-                android:visibility="visible">
+                android:orientation="vertical">
 
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
                     android:layout_marginBottom="2dp"
                     android:layout_marginTop="2dp" />
-
 
                 <TextView
                     android:id="@+id/TexViewEnderecoCep"
@@ -108,9 +103,9 @@
                     android:layout_margin="4dp"
                     android:layout_marginTop="31dp"
                     android:ems="10"
+                    android:maxLength="5"
                     android:hint="@string/digite_seu_numero"
-                    android:inputType="numberSigned"
-                    android:maxLength="5" />
+                    android:inputType="numberSigned"/>
 
                 <View
                     android:layout_width="fill_parent"
@@ -172,54 +167,11 @@
                     android:layout_marginBottom="2dp"
                     android:layout_marginTop="2dp" />
 
-                <TextView
-                    android:id="@+id/TexViewEnderecoCidade"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="6dp"
-                    android:text="@string/endereco_cidade"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textStyle="bold" />
-
-                <EditText
-                    android:id="@+id/editText_endereco_cidade"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_margin="4dp"
-                    android:layout_marginTop="31dp"
-                    android:ems="10"
-                    android:hint="@string/digite_sua_cidade"
-                    android:inputType="text" />
-
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
                     android:layout_marginBottom="2dp"
                     android:layout_marginTop="2dp" />
-
-                <TextView
-                    android:id="@+id/TexViewEnderecoUf"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="6dp"
-                    android:text="@string/endereco_uf"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textStyle="bold" />
-
-                <Spinner
-                    android:id="@+id/spinner_endereco_uf"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_margin="4dp"
-                    android:layout_marginTop="31dp"
-                    android:ems="10"
-                    android:entries="@array/uf"
-                    android:hint="@string/escolha_sua_uf"
-                    android:spinnerMode="dropdown" />
 
                 <LinearLayout
                     android:orientation="horizontal"
@@ -235,33 +187,6 @@
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:textStyle="bold" />
 
-                <View
-                    android:layout_width="fill_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginBottom="2dp"
-                    android:layout_marginTop="2dp" />
-
-                <TextView
-                    android:id="@+id/TexViewEnderecoCep"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="6dp"
-                    android:text="@string/endereco_cep"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textStyle="bold" />
-
-                <EditText
-                    android:id="@+id/editText_endereco_cep"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_margin="4dp"
-                    android:layout_marginTop="31dp"
-                    android:ems="10"
-                    android:hint="@string/digite_seu_cep"
-                    android:inputType="numberSigned"
-                    android:maxLength="9" />
                     <TextView
                         android:id="@+id/TexViewEnderecoUf"
                         android:layout_width="match_parent"
@@ -292,12 +217,6 @@
                             android:ems="10"
                             android:hint="@string/digite_sua_cidade"
                             android:inputType="text" />
-
-                <View
-                    android:layout_width="fill_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginBottom="2dp"
-                    android:layout_marginTop="2dp" />
 
                     </LinearLayout>
 
@@ -332,5 +251,3 @@
     </LinearLayout>
 
 </RelativeLayout>
-
-

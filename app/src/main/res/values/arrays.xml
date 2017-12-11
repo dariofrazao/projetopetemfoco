@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="ufEndereco">
+    <string-array name="uf">
         <item>AC</item>
         <item>AL</item>
         <item>AP</item>

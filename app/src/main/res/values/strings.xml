@@ -52,7 +52,7 @@
     <string name="digite_seu_email">Digite seu email</string>
     <string name="digite_seu_telefone">Digite seu telefone</string>
     <string name="digite_seu_cpj_cnpj">Digite seu CPF/CNPJ</string>
-    <string name="digite_sua_senha">Digite sua senha</string>
+    <string name="digite_sua_senha">Digite sua senha (min. 6 caracteres)</string>
     <string name="repita_sua_senha">Repita sua senha</string>
     <string name="nome">Nome</string>
     <string name="confirmar_sua_senha">Confirme sua senha</string>

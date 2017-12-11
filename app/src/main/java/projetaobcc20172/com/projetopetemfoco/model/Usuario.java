@@ -67,6 +67,7 @@ public class Usuario implements Serializable {
         this.mSenha = senha;
     }
 
+    @Exclude
     public String getSenha2() {
         return mSenha2;
     }
@@ -92,10 +93,10 @@ public class Usuario implements Serializable {
     }
 
     public String getValor() {
-        return valor;
+        return mValor;
     }
 
     public void setValor(String valor) {
-        this.valor = valor;
+        this.mValor = valor;
     }
 }

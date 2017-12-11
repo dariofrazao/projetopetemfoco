@@ -5,63 +5,66 @@ import com.google.firebase.database.Exclude;
 public class Endereco {
 
     //Atributos do endereço
-    private String mId;
-    private String mLogradouro;
-    private String mNumero;
-    private String mComplemento;
-    private String mBairro;
-    private String mLocalidade;
-    private String mUf;
-    private String mCep;
+    //Estas variáveis não podem ter seus nomes alterados (devido a pesquisa no viacep)
+    private String id;
+    private String logradouro;
+    private String numero;
+    private String complemento;
+    private String bairro;
+    private String localidade;
+    private String uf;
+    private String cep;
 
     public Endereco(String logradouro,String bairro,String localidade,String uf) {
-        this.mLogradouro = logradouro;
-        this.mBairro = bairro;
-        this.mLocalidade = localidade;
-        this.mUf = uf;
+        this.logradouro = logradouro;
+        this.bairro = bairro;
+        this.localidade = localidade;
+        this.uf = uf;
     }
 
-    public Endereco(){}
+    public Endereco(){
+
+    }
 
     @Exclude
     public String getId() {
-        return mId;
+        return id;
     }
 
     public void setId(String id) {
-        this.mId = id;
+        this.id = id;
     }
 
     public String getLogradouro() {
-        return mLogradouro;
+        return logradouro;
     }
 
     public void setLogradouro(String logradouro) {
-        this.mLogradouro = logradouro;
+        this.logradouro = logradouro;
     }
 
     public String getNumero() {
-        return mNumero;
+        return numero;
     }
 
     public void setNumero(String numero) {
-        this.mNumero = numero;
+        this.numero = numero;
     }
 
     public String getComplemento() {
-        return mComplemento;
+        return complemento;
     }
 
     public void setComplemento(String complemento) {
-        this.mComplemento = complemento;
+        this.complemento = complemento;
     }
 
     public String getBairro() {
-        return mBairro;
+        return bairro;
     }
 
     public void setBairro(String bairro) {
-        this.mBairro = bairro;
+        this.bairro = bairro;
     }
 
     public String getLocalidade() {
@@ -73,18 +76,18 @@ public class Endereco {
     }
 
     public String getUf() {
-        return mUf;
+        return uf;
     }
 
     public void setUf(String uf) {
-        this.mUf = uf;
+        this.uf = uf;
     }
 
     public String getCep() {
-        return mCep;
+        return cep;
     }
 
     public void setCep(String cep) {
-        this.mCep = cep;
+        this.cep = cep;
     }
 }

@@ -57,7 +57,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        cadastrar_fornecedor.setOnClickListener(new View.OnClickListener() {
+        mCadastrarFornecedor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(LoginActivity.this, CadastroFornecedorActivity.class);

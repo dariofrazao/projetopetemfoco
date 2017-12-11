@@ -1,4 +1,4 @@
-package projetaobcc20172.com.projetopetemfoco.helper;
+package projetaobcc20172.com.projetopetemfoco.utils;
 
 /**
  * Created by Alexsandro on 06/12/2017.

@@ -35,6 +35,7 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
     private Fornecedor mFornecedor;
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)//permite que essa variavel seja vista pela classe de teste
     public Toast mToast;
+    FirebaseAuth mAutenticacao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +53,7 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 mUsuario = new Usuario();
+                mFornecedor = new Fornecedor();
                 mUsuario.setNome( mNome.getText().toString() );
                 mUsuario.setEmail(mEmail.getText().toString());
                 mUsuario.setSenha(mSenha.getText().toString());
@@ -76,7 +78,6 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
     //Método para cadastrar o usuário no FirebaseAuthentication
     private void cadastrarUsuario() {
         try {
-            FirebaseAuth mAutenticacao;
             VerificadorDeObjetos.vDadosUsuario(mUsuario);
             mAutenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
             mAutenticacao.createUserWithEmailAndPassword(
@@ -128,7 +129,7 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
 
     //Método que chama a activity para cadastrar o endereço, passando os dados básicos aqui cadastrados
     public void abrirCadastroEndereco(Usuario usuario, Fornecedor fornecedor){
-        autenticacao.signOut();
+        mAutenticacao.signOut();
         Intent intent = new Intent(CadastroUsuarioActivity.this, CadastroEnderecoActivity.class);
         intent.putExtra("Usuario", usuario);
         intent.putExtra("Fornecedor", fornecedor);

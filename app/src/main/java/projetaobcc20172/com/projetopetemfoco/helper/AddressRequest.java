@@ -46,7 +46,7 @@ public class AddressRequest extends AsyncTask<Void, Void, Endereco> {
             activity.get().lockFields( false );
         }
 
-            if( address != null ){
+            if(address != null){
                 activity.get().setDataViews(address);
             }
         }

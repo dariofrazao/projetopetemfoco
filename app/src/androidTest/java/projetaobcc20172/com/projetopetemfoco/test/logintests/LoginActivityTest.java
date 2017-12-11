@@ -77,6 +77,6 @@ public class LoginActivityTest {
 
     @After
     public void tearDown() throws Exception {
-        Thread.sleep(2000);
+        Thread.sleep(4000);
     }
 }

@@ -5,86 +5,86 @@ import com.google.firebase.database.Exclude;
 public class Endereco {
 
     //Atributos do endereço
-    private String id;
-    private String logradouro;
-    private String numero;
-    private String complemento;
-    private String bairro;
-    private String cidade;
-    private String uf;
-    private String cep;
+    private String mId;
+    private String mLogradouro;
+    private String mNumero;
+    private String mComplemento;
+    private String mBairro;
+    private String mCidade;
+    private String mUf;
+    private String mCep;
 
     public Endereco(String logradouro,String bairro,String cidade,String uf) {
-        this.logradouro = logradouro;
-        this.bairro = bairro;
-        this.cidade = cidade;
-        this.uf = uf;
+        this.mLogradouro = logradouro;
+        this.mBairro = bairro;
+        this.mCidade = cidade;
+        this.mUf = uf;
     }
 
     public Endereco(){}
 
     @Exclude
     public String getId() {
-        return id;
+        return mId;
     }
 
     public void setId(String id) {
-        this.id = id;
+        this.mId = id;
     }
 
     public String getLogradouro() {
-        return logradouro;
+        return mLogradouro;
     }
 
     public void setLogradouro(String logradouro) {
-        this.logradouro = logradouro;
+        this.mLogradouro = logradouro;
     }
 
     public String getNumero() {
-        return numero;
+        return mNumero;
     }
 
     public void setNumero(String numero) {
-        this.numero = numero;
+        this.mNumero = numero;
     }
 
     public String getComplemento() {
-        return complemento;
+        return mComplemento;
     }
 
     public void setComplemento(String complemento) {
-        this.complemento = complemento;
+        this.mComplemento = complemento;
     }
 
     public String getBairro() {
-        return bairro;
+        return mBairro;
     }
 
     public void setBairro(String bairro) {
-        this.bairro = bairro;
+        this.mBairro = bairro;
     }
 
     public String getCidade() {
-        return cidade;
+        return mCidade;
     }
 
     public void setCidade(String cidade) {
-        this.cidade = cidade;
+        this.mCidade = cidade;
     }
 
     public String getUf() {
-        return uf;
+        return mUf;
     }
 
     public void setUf(String uf) {
-        this.uf = uf;
+        this.mUf = uf;
     }
 
     public String getCep() {
-        return cep;
+        return mCep;
     }
 
     public void setCep(String cep) {
-        this.cep = cep;
+        this.mCep = cep;
     }
 }

@@ -80,7 +80,7 @@ public class CadastrarServicoActivityTest {
 
     @After
     public void tearDown() throws Exception {
-        Thread.sleep(3000);
+        Thread.sleep(4000);
     }
 
 }

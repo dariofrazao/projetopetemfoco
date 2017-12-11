@@ -29,9 +29,9 @@ import projetaobcc20172.com.projetopetemfoco.utils.VerificadorDeObjetos;
 
 public class CadastroEnderecoActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-    private EditText logradouro, numero, complemento, bairro, cidade, cep;
-    private Spinner uf;
-    private Button botaoCadastrarEndereco;
+    private EditText mLogradouro, mNumero, mComplemento, mBairro, mCidade, mCep;
+    private Spinner mUf;
+    private Button mBtnCadastrarEndereco;
     private Endereco mEndereco;
 
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
@@ -46,37 +46,37 @@ public class CadastroEnderecoActivity extends AppCompatActivity implements Adapt
         Toolbar toolbar;
         toolbar = findViewById(R.id.tb_endereco);
 
-        logradouro = findViewById(R.id.editText_endereco_logradouro);
-        numero = findViewById(R.id.editText_endereco_numero);
-        complemento = findViewById(R.id.editText_endereco_complemento);
-        bairro = findViewById(R.id.editText_endereco_bairro);
-        cidade = findViewById(R.id.editText_endereco_cidade);
-        cep = findViewById(R.id.editText_endereco_cep);
-        cep.addTextChangedListener(MaskUtil.insert(cep, MaskUtil.MaskType.CEP));
-        uf = findViewById(R.id.spinner_endereco_uf);
+        mLogradouro = findViewById(R.id.editText_endereco_logradouro);
+        mNumero = findViewById(R.id.editText_endereco_numero);
+        mComplemento = findViewById(R.id.editText_endereco_complemento);
+        mBairro = findViewById(R.id.editText_endereco_bairro);
+        mCidade = findViewById(R.id.editText_endereco_cidade);
+        mCep = findViewById(R.id.editText_endereco_cep);
+        mCep.addTextChangedListener(MaskUtil.insert(mCep, MaskUtil.MaskType.CEP));
+        mUf = findViewById(R.id.spinner_endereco_uf);
         final String[] array_spinner = {"AC", "AL", "AP", "AM", "BA", "CE", "DF",
                 "ES", "GO", "MA", "MG", "MS", "MG", "PA", "PB", "PA", "PE", "PI",
                 "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO"};
 
         ArrayAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, array_spinner);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
-        uf.setAdapter(adapter);
-        uf.setOnItemSelectedListener(this);
+        mUf.setAdapter(adapter);
+        mUf.setOnItemSelectedListener(this);
 
-        botaoCadastrarEndereco = findViewById(R.id.botao_finalizar_cadastro_endereco);
-        botaoCadastrarEndereco.setOnClickListener(new View.OnClickListener() {
+        mBtnCadastrarEndereco = findViewById(R.id.botao_finalizar_cadastro_endereco);
+        mBtnCadastrarEndereco.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 //Recuperar os campos do endereço informados pelo usuário
                 mEndereco = new Endereco();
-                mEndereco.setLogradouro(logradouro.getText().toString());
-                mEndereco.setNumero(numero.getText().toString());
-                mEndereco.setComplemento(complemento.getText().toString());
-                mEndereco.setBairro(bairro.getText().toString());
-                mEndereco.setCidade(cidade.getText().toString());
-                mEndereco.setCep(cep.getText().toString());
-                mEndereco.setUf(array_spinner[(int) uf.getSelectedItemId()]);
+                mEndereco.setLogradouro(mLogradouro.getText().toString());
+                mEndereco.setNumero(mNumero.getText().toString());
+                mEndereco.setComplemento(mComplemento.getText().toString());
+                mEndereco.setBairro(mBairro.getText().toString());
+                mEndereco.setCidade(mCidade.getText().toString());
+                mEndereco.setCep(mCep.getText().toString());
+                mEndereco.setUf(array_spinner[(int) mUf.getSelectedItemId()]);
                 //Chama o método para cadastrar o usuário
                 cadastrarEndereco();
             }
@@ -128,7 +128,7 @@ public class CadastroEnderecoActivity extends AppCompatActivity implements Adapt
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        uf.getItemAtPosition(position);
+        mUf.getItemAtPosition(position);
     }
 
     @Override

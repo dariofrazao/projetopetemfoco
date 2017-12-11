@@ -32,7 +32,7 @@ public class EnderecoActivityTest {
 
     @Before
     public void setUp() throws Exception {
-        Thread.sleep(2000);
+        Thread.sleep(4000);
     }
 
     private void clicarEVerificarCorreto(){

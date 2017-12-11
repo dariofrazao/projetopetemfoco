@@ -1,7 +1,7 @@
 package projetaobcc20172.com.projetopetemfoco.model;
 
 public class Pet {
-    private String idUsuario;
+    private String mIdUsuario;
     private String mNome;
     private String mTipo;
     private String mIdade;
@@ -66,10 +66,10 @@ public class Pet {
     }
 
     public String getIdUsuario() {
-        return idUsuario;
+        return mIdUsuario;
     }
 
     public void setIdUsuario(String idUsuario) {
-        this.idUsuario = idUsuario;
+        this.mIdUsuario = idUsuario;
     }
 }

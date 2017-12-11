@@ -24,6 +24,7 @@ import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoFirebase;
 import projetaobcc20172.com.projetopetemfoco.excecoes.CampoObrAusenteException;
 import projetaobcc20172.com.projetopetemfoco.model.Pet;
+import projetaobcc20172.com.projetopetemfoco.utils.VerificadorDeObjetos;
 
 public class CadastroPetActivity extends AppCompatActivity {
 
@@ -114,17 +115,11 @@ public class CadastroPetActivity extends AppCompatActivity {
         return true;
     }
 
-    //Método que verifica campos obrigatórios ausentes
-    private void verificarCamposObrigatorios() throws CampoObrAusenteException {
-        if (nome.getText().toString().isEmpty()) {
-            throw new CampoObrAusenteException();
-        }
-    }
 
     //Método que salva o pet no banco
     private boolean salvarPet(String idRemetente, Pet pet) {
         try {
-            this.verificarCamposObrigatorios();
+            VerificadorDeObjetos.vDadosPet(pet);
             firebase = ConfiguracaoFirebase.getFirebase().child("usuarios");
             firebase.child(idRemetente).child("pets").push().setValue(pet); //O método push() cria uma chave exclusiva para cada pet cadastrado
             Toast.makeText(CadastroPetActivity.this, R.string.sucesso_cadastro_Pet, Toast.LENGTH_SHORT).show();

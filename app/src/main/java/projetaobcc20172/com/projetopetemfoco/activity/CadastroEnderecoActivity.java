@@ -25,13 +25,14 @@ import projetaobcc20172.com.projetopetemfoco.helper.Base64Custom;
 import projetaobcc20172.com.projetopetemfoco.model.Endereco;
 import projetaobcc20172.com.projetopetemfoco.model.Usuario;
 import projetaobcc20172.com.projetopetemfoco.utils.MaskUtil;
+import projetaobcc20172.com.projetopetemfoco.utils.VerificadorDeObjetos;
 
 public class CadastroEnderecoActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private EditText logradouro, numero, complemento, bairro, cidade, cep;
     private Spinner uf;
     private Button botaoCadastrarEndereco;
-    private Endereco endereco;
+    private Endereco mEndereco;
 
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     //permite que essa variavel seja vista pela classe de teste
@@ -68,14 +69,14 @@ public class CadastroEnderecoActivity extends AppCompatActivity implements Adapt
             public void onClick(View view) {
 
                 //Recuperar os campos do endereço informados pelo usuário
-                endereco = new Endereco();
-                endereco.setLogradouro(logradouro.getText().toString());
-                endereco.setNumero(numero.getText().toString());
-                endereco.setComplemento(complemento.getText().toString());
-                endereco.setBairro(bairro.getText().toString());
-                endereco.setCidade(cidade.getText().toString());
-                endereco.setCep(cep.getText().toString());
-                endereco.setUf(array_spinner[(int) uf.getSelectedItemId()]);
+                mEndereco = new Endereco();
+                mEndereco.setLogradouro(logradouro.getText().toString());
+                mEndereco.setNumero(numero.getText().toString());
+                mEndereco.setComplemento(complemento.getText().toString());
+                mEndereco.setBairro(bairro.getText().toString());
+                mEndereco.setCidade(cidade.getText().toString());
+                mEndereco.setCep(cep.getText().toString());
+                mEndereco.setUf(array_spinner[(int) uf.getSelectedItemId()]);
                 //Chama o método para cadastrar o usuário
                 cadastrarEndereco();
             }
@@ -94,28 +95,14 @@ public class CadastroEnderecoActivity extends AppCompatActivity implements Adapt
         return true;
     }
 
-    //Método para verificar se os campos do endereço estão em branco
-    private void verificarCamposObrigatorios() throws CampoEnderecoObrAusenteException {
-        if (logradouro.getText().toString().isEmpty()
-            ||
-            bairro.getText().toString().isEmpty()
-            ||
-            cidade.getText().toString().isEmpty()
-            ||
-            cep.getText().toString().isEmpty()
-            ) {
-            throw new CampoEnderecoObrAusenteException();
-        }
-    }
 
     //Método que recupera os dados básicos do usuário, adicionando o endereço para salvar no banco
     private void cadastrarEndereco() {
         try {
-
-            this.verificarCamposObrigatorios();
+            VerificadorDeObjetos.vDadosObrEndereco(mEndereco);
             Intent i = getIntent();
             Usuario usuario = (Usuario) i.getSerializableExtra("Usuario");
-            usuario.setEndereco(endereco);
+            usuario.setEndereco(mEndereco);
             usuario.salvar();
             mToast = mToast.makeText(CadastroEnderecoActivity.this, R.string.sucesso_cadastro_Toast, Toast.LENGTH_LONG);
             mToast.show();

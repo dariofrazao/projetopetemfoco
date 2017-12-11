@@ -80,7 +80,7 @@ public class CadastroUsuarioActivityTest {
     @Test
     public void testeCadastroCampoAusenteSenha2(){
         TestToolsCadUser.preencherEclicar(this.mNome,this.mEmail,this.mSenha,"");
-        TestTools.checarToast(R.string.erro_cadastro_campos_obrigatorios_Toast);
+        TestTools.checarToast(R.string.erro_cadastro_senhas_diferentes_Toast);
     }
 
     //Teste que simula um cadastro com e-mail Inválido
@@ -133,6 +133,6 @@ public class CadastroUsuarioActivityTest {
 
     @After
     public void tearDown() throws Exception {
-        Thread.sleep(2000);
+        Thread.sleep(3000);
     }
 }

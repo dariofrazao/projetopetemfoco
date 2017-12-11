@@ -21,6 +21,9 @@ import projetaobcc20172.com.projetopetemfoco.utils.VerificadorDeObjetos;
 @RunWith(Parameterized.class)
 public class UnitTestCadastroEndereco {
 
+    @Parameterized.Parameter
+    public Endereco endTest;
+
     @Parameterized.Parameters
     public static Iterable<? extends Object> data() {
         String mLog = "teste";
@@ -35,10 +38,7 @@ public class UnitTestCadastroEndereco {
                 new Endereco("",mBairro,mCidade,mUf),
                 new Endereco("","",mCidade,mUf),
                 new Endereco("","","",mUf));
-    };
-
-    @Parameterized.Parameter
-    public Endereco endTest;
+    }
 
     @Test (expected=CampoObrAusenteException.class)
     public void testCampoObg() throws CampoObrAusenteException {

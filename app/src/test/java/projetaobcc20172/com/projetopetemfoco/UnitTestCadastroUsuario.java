@@ -17,6 +17,8 @@ import projetaobcc20172.com.projetopetemfoco.utils.VerificadorDeObjetos;
 @RunWith(Parameterized.class)
 public class UnitTestCadastroUsuario {
 
+    @Parameterized.Parameter
+    public Usuario userTest;
 
     /*Paramentros que serão utlizados pelo teste de campo obrigatorio
     basicamente é um produto cartesiano com as combinações possiveis de
@@ -31,9 +33,6 @@ public class UnitTestCadastroUsuario {
                 new Usuario("teste","","senha1"),
                 new Usuario("","email","senha1"));
         };
-
-    @Parameterized.Parameter
-    public Usuario userTest;
 
     @Test (expected=CampoObrAusenteException.class)
     public void testCampoObgUsuario() throws CampoObrAusenteException, SenhasDiferentesException {

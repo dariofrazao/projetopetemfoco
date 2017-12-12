@@ -18,10 +18,9 @@ public class Servico {
 
     public Servico() {}
 
-    public Servico(String nome, String valor, String descricao){
+    public Servico(String nome, String valor){
         this.mNome = nome;
         this.mValor = valor;
-        this.mDescricao = descricao;
     }
 
     @Exclude

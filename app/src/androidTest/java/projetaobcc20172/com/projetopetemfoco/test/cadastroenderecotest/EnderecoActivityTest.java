@@ -25,7 +25,7 @@ public class EnderecoActivityTest {
     private static String sBairro = "gunga";
     private static String sCidade = "Naboo";
     private static String sUf = "PE";
-    private static String sCep = "55299-510";
+    private static String sCep = "55299-525";
     private static int sBotaoCadEnd = R.id.botao_finalizar_cadastro_endereco;
 
     @Rule
@@ -33,10 +33,15 @@ public class EnderecoActivityTest {
 
     @Before
     public void setUp() throws Exception {
-        Thread.sleep(4000);
+        Thread.sleep(3000);
     }
 
     private void clicarEVerificarCorreto(){
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         TestTools.clicarBotaoComScroll(sBotaoCadEnd);
         TestTools.checarToast(R.string.sucesso_cadastro_Toast);
         TestTools.verificarMudancaActivity(LoginActivity.class.getName());
@@ -64,13 +69,20 @@ public class EnderecoActivityTest {
         this.clicarEVerificarCorreto();
     }
 
-    @Test
+    public void testeEnderecoCorretoSemComplENumero(){
+        Intents.init();
+        TestToolsCadEndereco.preencher(sLogradouro, "","", sBairro,
+                sCidade, sUf, sCep);
+        this.clicarEVerificarCorreto();
+    }
+
+   // @Test
     public void testeEnderecoCamposEmBranco(){
         TestTools.clicarBotaoComScroll(sBotaoCadEnd);
         TestTools.checarToast(R.string.erro_cadastro_endereco_campos_obrigatorios_Toast);
     }
 
-    @Test
+    //@Test
     public void testeEnderecoCampoObgLogradouro(){
         TestToolsCadEndereco.preencher("", sNumero, sComplemento, sBairro,
                 sCidade, sUf, sCep);
@@ -78,7 +90,7 @@ public class EnderecoActivityTest {
         TestTools.checarToast(R.string.erro_cadastro_endereco_campos_obrigatorios_Toast);
     }
 
-    @Test
+    //@Test
     public void testeEnderecoCampoObgBairro(){
         TestToolsCadEndereco.preencher(sLogradouro, sNumero, sComplemento,"",
                 sCidade, sUf, sCep);
@@ -86,7 +98,7 @@ public class EnderecoActivityTest {
         TestTools.checarToast(R.string.erro_cadastro_endereco_campos_obrigatorios_Toast);
     }
 
-    @Test
+    //@Test
     public void testeEnderecoCampoObgCidade(){
         TestToolsCadEndereco.preencher(sLogradouro, sNumero, sComplemento, sBairro,
                 "", sUf, sCep);
@@ -95,7 +107,7 @@ public class EnderecoActivityTest {
     }
 
 
-    @Test
+    //@Test
     public void testeEnderecoCampoObgCep(){
         TestToolsCadEndereco.preencher(sLogradouro, sNumero, sComplemento, sBairro,
                 sCidade, sUf,"");

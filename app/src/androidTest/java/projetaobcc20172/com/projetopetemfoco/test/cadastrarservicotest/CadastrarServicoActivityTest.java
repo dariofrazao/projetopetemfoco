@@ -40,14 +40,15 @@ public class CadastrarServicoActivityTest {
         }
 
         LoginActivityTest log = new LoginActivityTest();
-        log.testeUsuarioCadastrado();
+        log.testefornecedorCadastrado();
+        Thread.sleep(5000);
 
     }
     @Test
     public void testeCadServico(){
         TestTools.clicarBotao(R.id.botao_cadastrar_serviço);
         TestToolsCadServico.preencherEClicar(this.mNomeServico,this.mValor,this.mDescricao);
-        TestTools.checarToast(R.string.sucesso_cadastro);
+        TestTools.checarToast(R.string.sucesso_cadastro_servico);
     }
 
     @Test
@@ -71,13 +72,14 @@ public class CadastrarServicoActivityTest {
         TestTools.checarToast(R.string.preencha_campo_valor);
     }
 
+/*
     @Test
     public void testeCamposObgAusenteDescricao(){
         TestTools.clicarBotao(R.id.botao_cadastrar_serviço);
         TestToolsCadServico.preencherEClicar(this.mNomeServico,this.mValor,"");
         TestTools.checarToast(R.string.preencha_campo_descricao);
     }
-
+*/
     @After
     public void tearDown() throws Exception {
         Thread.sleep(4000);

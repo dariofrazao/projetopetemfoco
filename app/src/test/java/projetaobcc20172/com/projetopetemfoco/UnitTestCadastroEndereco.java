@@ -32,14 +32,15 @@ public class UnitTestCadastroEndereco {
         String mBairro = "bairro";
         String mCidade = "cidade";
         String mUf = "PE";
+        //String mCep = "55299-520";
         return Arrays.asList(
                 new Endereco("","","",""),
                 new Endereco(mLog,"","",""),
                 new Endereco(mLog,mBairro,"",""),
                 new Endereco(mLog,mBairro,mCidade,""),
-                new Endereco("",mBairro,mCidade,mUf),
                 new Endereco("","",mCidade,mUf),
-                new Endereco("","","",mUf));
+                new Endereco("","","",mUf),
+                new Endereco("","","",""));
     }
 
     @Test (expected=CampoObrAusenteException.class)

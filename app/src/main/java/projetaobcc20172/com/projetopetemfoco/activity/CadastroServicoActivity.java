@@ -75,7 +75,7 @@ public class CadastroServicoActivity extends AppCompatActivity {
             //Recuperar id do fornecedor logado
             mIdUsuarioLogado = getPreferences("idFornecedor", CadastroServicoActivity.this);
 
-            mServico = new Servico(mEtNome.getText().toString(), mEtValor.getText().toString(), mEtDescricao.getText().toString());
+            mServico = new Servico(mEtNome.getText().toString(), mEtValor.getText().toString());
             VerificadorDeObjetos.vDadosServico(mServico,this);
             //Chamada do DAO para salvar no banco
             ServicoDaoImpl servicoDao =  new ServicoDaoImpl(this);

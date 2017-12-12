@@ -33,7 +33,8 @@
             android:id="@+id/botao_cadastrar_pet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/botao_cadastrar_pet" />
+            android:text="@string/botao_cadastrar_pet"
+            android:visibility="visible" />
 
         <Button
             android:id="@+id/botao_sair"

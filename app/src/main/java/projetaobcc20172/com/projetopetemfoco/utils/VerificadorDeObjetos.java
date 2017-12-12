@@ -1,11 +1,16 @@
 package projetaobcc20172.com.projetopetemfoco.utils;
 
 import projetaobcc20172.com.projetopetemfoco.R;
+import projetaobcc20172.com.projetopetemfoco.activity.CadastroEnderecoActivity;
+import projetaobcc20172.com.projetopetemfoco.activity.CadastroFornecedorActivity;
+import projetaobcc20172.com.projetopetemfoco.activity.CadastroPetActivity;
 import projetaobcc20172.com.projetopetemfoco.activity.CadastroServicoActivity;
+import projetaobcc20172.com.projetopetemfoco.activity.CadastroUsuarioActivity;
 import projetaobcc20172.com.projetopetemfoco.excecoes.CampoObrAusenteException;
 import projetaobcc20172.com.projetopetemfoco.excecoes.SenhasDiferentesException;
 import projetaobcc20172.com.projetopetemfoco.excecoes.ValidacaoException;
 import projetaobcc20172.com.projetopetemfoco.model.Endereco;
+import projetaobcc20172.com.projetopetemfoco.model.Fornecedor;
 import projetaobcc20172.com.projetopetemfoco.model.Pet;
 import projetaobcc20172.com.projetopetemfoco.model.Servico;
 import projetaobcc20172.com.projetopetemfoco.model.Usuario;
@@ -17,13 +22,26 @@ import projetaobcc20172.com.projetopetemfoco.model.Usuario;
 public class VerificadorDeObjetos {
 
     //Verifica se as informações do usuário estão corretas
-    public static void vDadosUsuario(Usuario user) throws CampoObrAusenteException, SenhasDiferentesException {
+    public static void vDadosUsuario(Usuario user, CadastroUsuarioActivity cad) throws ValidacaoException {
         if(user.getNome().isEmpty()|| user.getSenha().isEmpty()
                 || user.getEmail().isEmpty()){
-            throw  new CampoObrAusenteException();
+            throw new ValidacaoException(cad.getResources().getString(R.string.erro_cadastro_campos_obrigatorios_Toast));
         }
         else if(!user.getSenha().equals(user.getSenha2())){
-            throw new SenhasDiferentesException();
+            throw new ValidacaoException(cad.getResources().getString(R.string.erro_cadastro_senhas_diferentes_Toast));
+        }
+
+    }
+
+    //Verifica se as informações do fornecedor estão corretas
+    public static void vDadosFornecedor(Fornecedor fornecedor, CadastroFornecedorActivity cad) throws ValidacaoException {
+        if(fornecedor.getNome().isEmpty()|| fornecedor.getSenha().isEmpty()
+                || fornecedor.getEmail().isEmpty() || fornecedor.getTelefone().isEmpty() || fornecedor.getCpf_cnpj().isEmpty()
+                || fornecedor.getHorarios().isEmpty()){
+            throw new ValidacaoException(cad.getResources().getString(R.string.erro_cadastro_fornecedor_campos_obrigatorios_Toast));
+        }
+        else if(!fornecedor.getSenha().equals(fornecedor.getSenha2())){
+            throw new ValidacaoException(cad.getResources().getString(R.string.erro_cadastro_fornecedor_senhas_diferentes_Toast));
         }
 
     }
@@ -42,9 +60,9 @@ public class VerificadorDeObjetos {
             }
     }
 
-    public static void vDadosPet(Pet pet) throws CampoObrAusenteException {
+    public static void vDadosPet(Pet pet) throws CampoObrAusenteException  {
         if (pet.getNome().isEmpty()) {
-                throw new CampoObrAusenteException();
+            throw new CampoObrAusenteException ();
             }
         }
 
@@ -52,12 +70,12 @@ public class VerificadorDeObjetos {
         if(serv.getNome().isEmpty()){
             throw new ValidacaoException(cad.getResources().getString(R.string.preencha_campo_nome));
         }
-        else if(serv.getValor()==0 ){
+        else if(serv.getValor()==""){
             throw new ValidacaoException(cad.getResources().getString(R.string.preencha_campo_valor));
         }
-        else if(serv.getDescricao().isEmpty()){
-            throw new ValidacaoException(cad.getResources().getString(R.string.preencha_campo_descricao));
-        }
+        //else if(serv.getDescricao().isEmpty()){
+         //   throw new ValidacaoException(cad.getResources().getString(R.string.preencha_campo_descricao));
+        //}
     }
 
 

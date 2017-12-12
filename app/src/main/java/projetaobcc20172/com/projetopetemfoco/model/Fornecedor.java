@@ -21,17 +21,13 @@ public class Fornecedor implements Serializable {
     private String mCpfCnpj;
     private String mHorarios;
     private String mSenha;
+    private String mSenha2;
     private String mValor = "1";
     private Endereco mEndereco;
 
 
     public Fornecedor(){
 
-    }
-
-    public void salvar(){ //Método para salvar fornecedor no banco de dados do Firebase
-        DatabaseReference referenciaFirebase = ConfiguracaoFirebase.getFirebase(); //Chama a referência do Firebase
-        referenciaFirebase.child("fornecedor").child( getId() ).setValue( this ); //Cria os nós dos usuário no banco de dados
     }
 
     @Exclude
@@ -88,6 +84,15 @@ public class Fornecedor implements Serializable {
 
     public void setSenha(String senha) {
         this.mSenha = senha;
+    }
+
+    @Exclude
+    public String getSenha2() {
+        return mSenha2;
+    }
+
+    public void setSenha2(String senha2) {
+        this.mSenha2 = senha2;
     }
 
     public Endereco getEndereco() {

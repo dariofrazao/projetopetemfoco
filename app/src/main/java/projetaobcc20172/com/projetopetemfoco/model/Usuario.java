@@ -22,15 +22,11 @@ public class Usuario implements Serializable {
     public Usuario(){
     }
 
-    public Usuario(String nome,String email,String senha){
+    public Usuario(String nome,String email,String senha, String senha2){
         this.mNome = nome;
         this.mEmail = email;
         this.mSenha = senha;
-    }
-
-    public void salvar(){ //Método para salvar usuário no banco de dados do Firebase
-        DatabaseReference referenciaFirebase = ConfiguracaoFirebase.getFirebase(); //Chama a referência do Firebase
-        referenciaFirebase.child("usuarios").child( getId() ).setValue( this ); //Cria os nós dos usuário no banco de dados
+        this.mSenha2 = senha2;
     }
 
     @Exclude

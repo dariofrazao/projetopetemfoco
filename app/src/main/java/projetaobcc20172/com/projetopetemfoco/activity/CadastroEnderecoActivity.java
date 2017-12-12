@@ -3,6 +3,7 @@ package projetaobcc20172.com.projetopetemfoco.activity;
  * Created by Alexsandro on 03/12/17.
  */
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -19,6 +20,8 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import projetaobcc20172.com.projetopetemfoco.R;
+import projetaobcc20172.com.projetopetemfoco.database.services.FornecedorDaoImpl;
+import projetaobcc20172.com.projetopetemfoco.database.services.UsuarioDaoImpl;
 import projetaobcc20172.com.projetopetemfoco.excecoes.CampoObrAusenteException;
 import projetaobcc20172.com.projetopetemfoco.helper.Util;
 import projetaobcc20172.com.projetopetemfoco.helper.ZipCodeListener;
@@ -28,6 +31,9 @@ import projetaobcc20172.com.projetopetemfoco.model.Usuario;
 import projetaobcc20172.com.projetopetemfoco.utils.MaskUtil;
 import projetaobcc20172.com.projetopetemfoco.utils.VerificadorDeObjetos;
 
+/**
+ * Activity de cadastro de endereço
+ */
 public class CadastroEnderecoActivity extends AppCompatActivity{
 
     private EditText mLogradouro, mNumero, mComplemento, mBairro, mLocalidade, mCep;
@@ -36,6 +42,7 @@ public class CadastroEnderecoActivity extends AppCompatActivity{
     private Fornecedor fornecedor;
     private Util util;
     private Endereco mEndereco;
+    private String mIdUsuarioLogado;
 
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     //permite que essa variavel seja vista pela classe de teste
@@ -49,32 +56,32 @@ public class CadastroEnderecoActivity extends AppCompatActivity{
         Toolbar toolbar;
         toolbar = findViewById(R.id.tb_endereco);
 
-        mCep = findViewById(R.id.editText_endereco_cep);
-        mLocalidade = findViewById(R.id.editText_endereco_localidade);
-        mLogradouro = findViewById(R.id.editText_endereco_logradouro);
-        mNumero = findViewById(R.id.editText_endereco_numero);
-        mComplemento = findViewById(R.id.editText_endereco_complemento);
-        mBairro = findViewById(R.id.editText_endereco_bairro);
+        mCep = findViewById(R.id.etCadastroCepEndereco);
+        mLocalidade = findViewById(R.id.etCadastroLocalidadeEndereco);
+        mLogradouro = findViewById(R.id.etCadastroLogradouroEndereco);
+        mNumero = findViewById(R.id.etCadastroNumeroEndereco);
+        mComplemento = findViewById(R.id.etCadastroComplementoEndereco);
+        mBairro = findViewById(R.id.etCadastroBairroEndereco);
 
         mCep.addTextChangedListener(new ZipCodeListener(this));
-        //mCep.addTextChangedListener(MaskUtil.insert(mCep, MaskUtil.MaskType.CEP));
+        mCep.addTextChangedListener(MaskUtil.insert(mCep, MaskUtil.MaskType.CEP));
 
         //Preparar o adaptar do Spinner para exibir as UF's do Endereço
         mSpinnerUf = findViewById(R.id.ufSpinner);
-        ArrayAdapter<String> adapter_state = new ArrayAdapter<String>(this,
+        ArrayAdapter<String> adapter_state = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_dropdown_item, getResources().getStringArray(R.array.uf));
         mSpinnerUf.setAdapter(adapter_state);
 
         util = new Util(this,
-                R.id.editText_endereco_cep,
-                R.id.editText_endereco_logradouro,
-                R.id.editText_endereco_localidade,
-                R.id.editText_endereco_numero,
-                R.id.editText_endereco_complemento,
-                R.id.editText_endereco_bairro,
+                R.id.etCadastroCepEndereco,
+                R.id.etCadastroLogradouroEndereco,
+                R.id.etCadastroLocalidadeEndereco,
+                R.id.etCadastroNumeroEndereco,
+                R.id.etCadastroComplementoEndereco,
+                R.id.etCadastroBairroEndereco,
                 R.id.ufSpinner);
 
-        //Receber os dados do usuário e/ou fornecedor da outra activity
+        //Receber os dados do usuário e fornecedor da outra activity
         Intent i = getIntent();
         usuario = (Usuario) i.getSerializableExtra("Usuario");
         fornecedor = (Fornecedor) i.getSerializableExtra("Fornecedor");
@@ -107,7 +114,7 @@ public class CadastroEnderecoActivity extends AppCompatActivity{
         });
 
         // Configura toolbar
-        toolbar.setTitle("Cadastro de Endereço");
+        toolbar.setTitle(R.string.tb_cadastro_endereco);
         toolbar.setTitleTextColor(Color.WHITE);
         toolbar.setNavigationIcon(R.drawable.ic_action_arrow_left_white);
         setSupportActionBar(toolbar);
@@ -119,44 +126,56 @@ public class CadastroEnderecoActivity extends AppCompatActivity{
         return true;
     }
 
-    //Método que recupera os dados básicos do usuário, adicionando o endereço para salvar no banco
+    //Método que recupera os dados básicos do usuário, adicionando o endereço e chamando o DAO para salvar no banco
     private void cadastrarEnderecoUsuario() {
         try {
 
+            //Recuperar id do usuário logado
+            mIdUsuarioLogado = getPreferences("id", CadastroEnderecoActivity.this);
+
             VerificadorDeObjetos.vDadosObrEndereco(mEndereco);
             usuario.setEndereco(mEndereco);
-            usuario.salvar();
-            mToast = mToast.makeText(CadastroEnderecoActivity.this, R.string.sucesso_cadastro_Toast, Toast.LENGTH_LONG);
-            mToast.show();
+            UsuarioDaoImpl usuarioDao =  new UsuarioDaoImpl(this);
+
+            //Chamada do DAO para salvar no banco
+            usuarioDao.inserir(usuario, mIdUsuarioLogado);
             salvarPreferencias("id", usuario.getId());
+            Toast mToast = Toast.makeText(CadastroEnderecoActivity.this, R.string.sucesso_cadastro_Toast, Toast.LENGTH_SHORT);
+            mToast.show();
             abrirLoginUsuario();
 
-            } catch (CampoObrAusenteException  e) {
-            mToast = mToast.makeText(CadastroEnderecoActivity.this, R.string.erro_cadastro_endereco_campos_obrigatorios_Toast, Toast.LENGTH_SHORT);
-            mToast.show();
+            } catch (CampoObrAusenteException e) {
+                Toast mToast = Toast.makeText(CadastroEnderecoActivity.this, R.string.erro_cadastro_endereco_campos_obrigatorios_Toast, Toast.LENGTH_SHORT);
+                mToast.show();
             } catch (Exception e) {
-            mToast = mToast.makeText(CadastroEnderecoActivity.this, R.string.erro_cadastro_endereco_campos_obrigatorios_Toast, Toast.LENGTH_SHORT);
-            mToast.show();
+                Toast mToast = Toast.makeText(CadastroEnderecoActivity.this, R.string.erro_cadastro_endereco_campos_obrigatorios_Toast, Toast.LENGTH_SHORT);
+                mToast.show();
             }
     }
 
-    //Método que salva os dados do fornecedor no banco
+    //Método que recupera os dados básicos do fornecedor, adicionando o endereço e chamando o DAO para salvar no banco
     private void cadastrarEnderecoFornecedor(){
             try {
 
+                //Recuperar id do fornecedor logado
+                mIdUsuarioLogado = getPreferences("idFornecedor", CadastroEnderecoActivity.this);
+
                 VerificadorDeObjetos.vDadosObrEndereco(mEndereco);
                 fornecedor.setEndereco(mEndereco);
-                fornecedor.salvar();
-                mToast = mToast.makeText(CadastroEnderecoActivity.this, R.string.sucesso_cadastro_Fornecedor, Toast.LENGTH_LONG);
+                FornecedorDaoImpl fornecedorDao =  new FornecedorDaoImpl(this);
+
+                //Chamada do DAO para salvar no banco
+                fornecedorDao.inserir(fornecedor, mIdUsuarioLogado);
+                salvarPreferencias("idFornecedor", fornecedor.getId());
+                Toast mToast = Toast.makeText(CadastroEnderecoActivity.this, R.string.sucesso_cadastro_Toast, Toast.LENGTH_SHORT);
                 mToast.show();
-                salvarPreferencias("id", fornecedor.getId());
                 abrirLoginUsuario();
 
-            } catch (CampoObrAusenteException  e) {
-                mToast = mToast.makeText(CadastroEnderecoActivity.this, R.string.erro_cadastro_endereco_campos_obrigatorios_Toast, Toast.LENGTH_SHORT);
+            } catch (CampoObrAusenteException e) {
+                Toast mToast = Toast.makeText(CadastroEnderecoActivity.this, R.string.erro_cadastro_endereco_campos_obrigatorios_Toast, Toast.LENGTH_SHORT);
                 mToast.show();
             } catch (Exception e) {
-                mToast = mToast.makeText(CadastroEnderecoActivity.this, R.string.erro_cadastro_endereco_campos_obrigatorios_Toast, Toast.LENGTH_SHORT);
+                Toast mToast = Toast.makeText(CadastroEnderecoActivity.this, R.string.erro_cadastro_endereco_campos_obrigatorios_Toast, Toast.LENGTH_SHORT);
                 mToast.show();
             }
         }
@@ -168,7 +187,7 @@ public class CadastroEnderecoActivity extends AppCompatActivity{
         finish();
     }
 
-    //Método que salva o id do usuário nas preferências para login automático ao abrir aplicativo
+    //Método que salva o id do usuário/fornecedor nas preferências para login automático ao abrir aplicativo
     private void salvarPreferencias(String key, String value){
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -188,10 +207,10 @@ public class CadastroEnderecoActivity extends AppCompatActivity{
 
     //Método que insere nos campos de endereço as informações obtidas pela busca (pelo cep)
     public void setDataViews (Endereco mEndereco){
-        setFields(R.id.editText_endereco_localidade, mEndereco.getLocalidade());
-        setFields(R.id.editText_endereco_bairro, mEndereco.getBairro());
-        setFields(R.id.editText_endereco_logradouro, mEndereco.getLogradouro());
-        setFields(R.id.editText_endereco_complemento, mEndereco.getComplemento());
+        setFields(R.id.etCadastroLocalidadeEndereco, mEndereco.getLocalidade());
+        setFields(R.id.etCadastroBairroEndereco, mEndereco.getBairro());
+        setFields(R.id.etCadastroLogradouroEndereco, mEndereco.getLogradouro());
+        setFields(R.id.etCadastroComplementoEndereco, mEndereco.getComplemento());
         setSpinner(R.id.ufSpinner, R.array.uf, mEndereco.getUf());
     }
 
@@ -211,5 +230,11 @@ public class CadastroEnderecoActivity extends AppCompatActivity{
         }
         ((Spinner)findViewById(id)).setSelection(0);
 
+    }
+
+    //Método que recupera o id do usuário logado, para salvar o endereço no nó do usuário/fornecedor que o está cadastrando
+    public static String getPreferences(String key, Context context) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        return preferences.getString(key, null);
     }
 }

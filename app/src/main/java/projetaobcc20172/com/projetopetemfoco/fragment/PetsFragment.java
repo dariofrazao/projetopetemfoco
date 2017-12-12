@@ -10,7 +10,6 @@ import android.widget.ListView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -26,8 +25,6 @@ public class PetsFragment extends Fragment {
     private ListView listView;
     private ArrayAdapter<Pet> adapter;
     private ArrayList<Pet> pets;
-    private DatabaseReference firebase;
-    private ValueEventListener valueEventListenerPets;
 
     public PetsFragment() {
     }
@@ -36,7 +33,7 @@ public class PetsFragment extends Fragment {
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.activity_pets_fragment, container, false);
+        View view = inflater.inflate(R.layout.activity_fragment, container, false);
 
         // Monta listview e adapter
         pets = new ArrayList<>();
@@ -45,7 +42,7 @@ public class PetsFragment extends Fragment {
         listView.setAdapter(adapter);
 
         //Listener que "ouve" o banco de dados
-        valueEventListenerPets = new ValueEventListener() {
+        ValueEventListener valueEventListenerPets = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -65,17 +62,4 @@ public class PetsFragment extends Fragment {
         return view;
     }
 
-    //Ao iniciar a tela, recupera os pets do banco pelo listener
-    @Override
-    public void onStart() {
-        super.onStart();
-        firebase.addValueEventListener(valueEventListenerPets);
-    }
-
-    //Ao finalizar a tela, remover o listener que "ouve" o banco
-    @Override
-    public void onStop() {
-        super.onStop();
-        firebase.removeEventListener(valueEventListenerPets);
-    }
 }

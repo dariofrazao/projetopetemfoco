@@ -11,8 +11,8 @@ public class TestToolsCadPet {
 
     protected static void preencherEClicar(String nomePet,String raca){
         //preenche o campo de nome com o texto do "nomePet"
-        TestTools.digitarCampo(R.id.editText_nome_pet,nomePet);
-        TestTools.digitarCampo(R.id.editText_raca_pet,raca);
+        TestTools.digitarCampo(R.id.etCadastroNomePet,nomePet);
+        TestTools.digitarCampo(R.id.etCadastroRaçaPet,raca);
         TestTools.clicarBotao(R.id.botao_cadastrar_pet);
     }
 

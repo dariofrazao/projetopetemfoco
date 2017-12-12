@@ -1,7 +1,11 @@
 package projetaobcc20172.com.projetopetemfoco.activity;
 
-
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Color;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -12,7 +16,7 @@ import android.widget.EditText;
 import java.util.Locale;
 
 import projetaobcc20172.com.projetopetemfoco.R;
-import projetaobcc20172.com.projetopetemfoco.database.ServicoDaoImpl;
+import projetaobcc20172.com.projetopetemfoco.database.services.ServicoDaoImpl;
 import projetaobcc20172.com.projetopetemfoco.excecoes.ValidacaoException;
 import projetaobcc20172.com.projetopetemfoco.model.Servico;
 import projetaobcc20172.com.projetopetemfoco.utils.MascaraDinheiro;
@@ -25,33 +29,26 @@ import projetaobcc20172.com.projetopetemfoco.utils.VerificadorDeObjetos;
 public class CadastroServicoActivity extends AppCompatActivity {
 
     private EditText mEtNome, mEtValor, mEtDescricao;
-
+    private String mIdUsuarioLogado;
     private Servico mServico;
-
-    /*
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
-    public String mMsgErro;//Essa vairavel eh private. Ela só é tratada com publica pelas classes de teste
-*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_servico);
-        inicializarComponentes();
-    }
 
-    /**
-     * Inicializa todos os componentes da View.
-     */
-    private void inicializarComponentes() {
+        Toolbar toolbar;
+        toolbar = findViewById(R.id.tb_cadastro_serviço);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        // Configura toolbar
+        toolbar.setTitle(R.string.tb_cadastro_serviço);
+        toolbar.setTitleTextColor(Color.WHITE);
         toolbar.setNavigationIcon(R.drawable.ic_action_arrow_left_white);
         setSupportActionBar(toolbar);
 
-        mEtNome =  findViewById(R.id.etCadastroNomeServico);
-        mEtValor =  findViewById(R.id.etCadastroValorServico);
-        mEtDescricao =  findViewById(R.id.etCadastroDescricaoServico);
+        mEtNome = findViewById(R.id.etCadastroNomeServico);
+        mEtValor = findViewById(R.id.etCadastroValorServico);
+        mEtDescricao = findViewById(R.id.etCadastroDescricaoServico);
 
         Locale mLocal = new Locale("pt", "BR");
 
@@ -61,74 +58,29 @@ public class CadastroServicoActivity extends AppCompatActivity {
         btnCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                cadastrarAtualizar();
+                salvarServico();
             }
         });
     }
-/*
-    private void validarCampos() throws ValidacaoException {
-        String acao;
-        if(verificarNovoCadastro()) acao = "cadastrar";
-        else acao = "atualizar";
-        if(mEtNome.getText().toString().isEmpty()){
-            this.mMsgErro = Utils.formatarMensagemErro(acao, getString(R.string.preencha_campo_nome));
-            throw new ValidacaoException(this.mMsgErro);
-        }
-        if(mEtValor.getText().toString().isEmpty()){
-            this.mMsgErro = Utils.formatarMensagemErro(acao, getString(R.string.preencha_campo_valor));
-            throw new ValidacaoException(this.mMsgErro);
-        }
-        if(mEtDescricao.getText().toString().isEmpty()){
-            this.mMsgErro = Utils.formatarMensagemErro(acao, getString(R.string.preencha_campo_descricao));
-            throw new ValidacaoException(this.mMsgErro);
-        }
-    }
-*/
 
-    /**
-     * Verifica se é um novo cadastro ou uma atualização de cadastro.
-     * @return {true} se for um novo cadastro.
-     */
-    private boolean verificarNovoCadastro(){
-        return (mServico == null);
-    }
-
-    /**
-     * Verifica se algum campo da view foi preenchido.
-     * @return {true} se algum campo foi preenchido.
-     */
     private boolean verificarCamposPreenchidos(){
         return (!mEtNome.getText().toString().isEmpty() ||
                 !mEtValor.getText().toString().isEmpty()||
                 !mEtDescricao.getText().toString().isEmpty());
     }
 
-    /**
-     * Cadastra ou atualiza os dados.
-     */
-    private void cadastrarAtualizar(){
+    private void salvarServico(){
         try {
 
-            Double valor = Double.parseDouble(MascaraDinheiro.removerMascara(mEtValor));
+            //Recuperar id do fornecedor logado
+            mIdUsuarioLogado = getPreferences("idFornecedor", CadastroServicoActivity.this);
 
-            // Verifica se é um novo Cadastro
-            if(verificarNovoCadastro()){
-                mServico = new Servico(mEtNome.getText().toString(),
-                        valor,
-                        mEtDescricao.getText().toString());
-                VerificadorDeObjetos.vDadosServico(mServico,this);
-                ServicoDaoImpl servicoDao =  new ServicoDaoImpl(this);
-                servicoDao.inserir(mServico, "ZEBob3RtYWlsLmNvbQ==");
-                // limpa os campos da view
-                limparCampos();
-                mServico = null;
-
-                // volta para a tela anterior
-                CadastroServicoActivity.super.onBackPressed();
-            }
-            // é atualização de dados
-            // TODO: Implemantar o caso de atualização de dados.
-
+            mServico = new Servico(mEtNome.getText().toString(), mEtValor.getText().toString(), mEtDescricao.getText().toString());
+            VerificadorDeObjetos.vDadosServico(mServico,this);
+            //Chamada do DAO para salvar no banco
+            ServicoDaoImpl servicoDao =  new ServicoDaoImpl(this);
+            servicoDao.inserir(mServico, mIdUsuarioLogado);
+            abrirTelaPrincipal();
 
         } catch (ValidacaoException e) {
             e.printStackTrace();
@@ -142,15 +94,15 @@ public class CadastroServicoActivity extends AppCompatActivity {
         return true;
     }
 
+    //Método do botão voltar
     @Override
     public void onBackPressed(){
         if (verificarCamposPreenchidos()) confirmarSaida();
         else CadastroServicoActivity.super.onBackPressed();
     }
 
-    /**
-     * Pede confirmação do usuário, informa que os dados não salvos serão perdidos.
-     */
+    //Método que exibe pergunta de confirmação ao fornecedor caso ele clique no botão de voltar com as
+    //informações do serviço inseridas nos campos
     public void confirmarSaida(){
         DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
             @Override
@@ -175,12 +127,15 @@ public class CadastroServicoActivity extends AppCompatActivity {
                     dialogClickListener);
     }
 
-    /**
-     * Limpa todos os campos.
-     */
-    public void limparCampos(){
-        mEtDescricao.setText("");
-        mEtValor.setText("0");
-        mEtDescricao.setText("");
+    //Método que recupera o id do usuário logado, para salvar o mPet no nó do usuário que o está cadastrando
+    public static String getPreferences(String key, Context context) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        return preferences.getString(key, null);
+    }
+
+    private void abrirTelaPrincipal() {
+        Intent intent = new Intent(CadastroServicoActivity.this, MainActivityFornecedor.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 }

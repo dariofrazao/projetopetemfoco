@@ -16,10 +16,10 @@ public class TestToolsCadUser {
 
     //Metodo que preenche os campos e clica no botao de cadastrar
     protected static void preencherEclicar(String nome, String email, String senha1, String senha2){
-        TestTools.digitarCampo(R.id.editText_nome,nome);
-        TestTools.digitarCampo(R.id.editText_email,email);
-        TestTools.digitarCampo(R.id.editText_senha,senha1);
-        TestTools.digitarCampo(R.id.editText_senha2,senha2);
+        TestTools.digitarCampo(R.id.etCadastroNomeUsuario,nome);
+        TestTools.digitarCampo(R.id.etCadastroEmailUsuario,email);
+        TestTools.digitarCampo(R.id.etCadastroSenhaUsuario,senha1);
+        TestTools.digitarCampo(R.id.etCadastroSenha2Usuario,senha2);
         TestTools.clicarBotao(R.id.botao_cadastrar_endereco);
     }
 

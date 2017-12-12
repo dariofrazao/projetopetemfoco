@@ -23,11 +23,16 @@ import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoFirebase;
 import projetaobcc20172.com.projetopetemfoco.excecoes.CampoObrAusenteException;
 import projetaobcc20172.com.projetopetemfoco.excecoes.SenhasDiferentesException;
+import projetaobcc20172.com.projetopetemfoco.excecoes.ValidacaoException;
 import projetaobcc20172.com.projetopetemfoco.helper.Base64Custom;
 import projetaobcc20172.com.projetopetemfoco.model.Fornecedor;
 import projetaobcc20172.com.projetopetemfoco.model.Usuario;
+import projetaobcc20172.com.projetopetemfoco.utils.Utils;
 import projetaobcc20172.com.projetopetemfoco.utils.VerificadorDeObjetos;
 
+/**
+ * Activity de cadastro de usuário(consumidor)
+ */
 public class CadastroUsuarioActivity extends AppCompatActivity {
 
     private EditText mNome, mEmail, mSenha, mSenha2;
@@ -43,11 +48,11 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_usuario);
         Toolbar toolbar;
-        toolbar = (Toolbar) findViewById(R.id.tb_cadastro);
-        mNome = findViewById(R.id.editText_nome);
-        mEmail = findViewById(R.id.editText_email);
-        mSenha = findViewById(R.id.editText_senha);
-        mSenha2 = findViewById(R.id.editText_senha2);
+        toolbar = findViewById(R.id.tb_cadastro);
+        mNome = findViewById(R.id.etCadastroNomeUsuario);
+        mEmail = findViewById(R.id.etCadastroEmailUsuario);
+        mSenha = findViewById(R.id.etCadastroSenhaUsuario);
+        mSenha2 = findViewById(R.id.etCadastroSenha2Usuario);
         Button mBtnCadastrar = findViewById(R.id.botao_cadastrar_endereco);
         mBtnCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,8 +82,10 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
 
     //Método para cadastrar o usuário no FirebaseAuthentication
     private void cadastrarUsuario() {
+
         try {
-            VerificadorDeObjetos.vDadosUsuario(mUsuario);
+
+            VerificadorDeObjetos.vDadosUsuario(mUsuario, this);
             mAutenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
             mAutenticacao.createUserWithEmailAndPassword(
                     mUsuario.getEmail(),
@@ -89,7 +96,7 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         String identificadorUsuario = Base64Custom.codificarBase64(mUsuario.getEmail());
                         mUsuario.setId(identificadorUsuario);
-                        mToast = mToast.makeText(CadastroUsuarioActivity.this, R.string.sucesso_cadastro_proxima_etapa_Toast, Toast.LENGTH_LONG);
+                        Toast mToast = Toast.makeText(CadastroUsuarioActivity.this, R.string.sucesso_cadastro_proxima_etapa_Toast, Toast.LENGTH_LONG);
                         mToast.show();
                         mFornecedor.setValor("0");
 
@@ -110,20 +117,14 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
-                        mToast = mToast.makeText(CadastroUsuarioActivity.this, erro, Toast.LENGTH_SHORT);
+                        Toast mToast = Toast.makeText(CadastroUsuarioActivity.this, erro, Toast.LENGTH_SHORT);
                         mToast.show();
                     }
                 }
             });
-        } catch (SenhasDiferentesException e) {
-            mToast = mToast.makeText(CadastroUsuarioActivity.this, R.string.erro_cadastro_senhas_diferentes_Toast, Toast.LENGTH_SHORT);
-            mToast.show();
-        } catch (CampoObrAusenteException e) {
-            mToast = mToast.makeText(CadastroUsuarioActivity.this, R.string.erro_cadastro_campos_obrigatorios_Toast, Toast.LENGTH_SHORT);
-            mToast.show();
-        } catch (Exception e) {
-            mToast = mToast.makeText(CadastroUsuarioActivity.this, R.string.erro_cadastro_campos_obrigatorios_Toast, Toast.LENGTH_SHORT);
-            mToast.show();
+        }catch (ValidacaoException e){
+            e.printStackTrace();
+            Utils.mostrarMensagemCurta(this, e.getMessage());
         }
     }
 

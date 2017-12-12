@@ -6,7 +6,9 @@ import org.junit.runners.Parameterized;
 
 import java.util.Arrays;
 
+import projetaobcc20172.com.projetopetemfoco.activity.CadastroEnderecoActivity;
 import projetaobcc20172.com.projetopetemfoco.excecoes.CampoObrAusenteException;
+import projetaobcc20172.com.projetopetemfoco.excecoes.ValidacaoException;
 import projetaobcc20172.com.projetopetemfoco.model.Endereco;
 import projetaobcc20172.com.projetopetemfoco.utils.VerificadorDeObjetos;
 
@@ -19,13 +21,13 @@ import projetaobcc20172.com.projetopetemfoco.utils.VerificadorDeObjetos;
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 @RunWith(Parameterized.class)
-public class UnitTestCadastroEndereco {
+public class UnitTestCadastroEndereco extends CadastroEnderecoActivity {
 
     @Parameterized.Parameter
     public Endereco endTest;
 
     @Parameterized.Parameters
-    public static Iterable<? extends Object> data() {
+    public static Iterable<?> data() {
         String mLog = "teste";
         String mBairro = "bairro";
         String mCidade = "cidade";
@@ -45,4 +47,8 @@ public class UnitTestCadastroEndereco {
         VerificadorDeObjetos.vDadosObrEndereco(endTest);
     }
 
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+
+    }
 }

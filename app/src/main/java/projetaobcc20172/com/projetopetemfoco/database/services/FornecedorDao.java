@@ -1,0 +1,19 @@
+package projetaobcc20172.com.projetopetemfoco.database.services;
+
+import java.util.List;
+
+import projetaobcc20172.com.projetopetemfoco.model.Fornecedor;
+import projetaobcc20172.com.projetopetemfoco.model.Usuario;
+
+/**
+ * Created by dario on 11/12/2017.
+ */
+
+public interface FornecedorDao {
+    void inserir(Fornecedor fornecedor, String idFornecedor);
+    //void remover(Fornecedor fornecedor,  String idFornecedor);
+    //void atualizar(Fornecedor fornecedor,  String idFornecedor);
+    List<Fornecedor> buscarPorNome(String nome);
+    List<Fornecedor> buscarTodosFornecedor(String idFornecedor);
+
+}

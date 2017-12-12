@@ -38,9 +38,9 @@ public class CadastroEnderecoActivity extends AppCompatActivity{
 
     private EditText mLogradouro, mNumero, mComplemento, mBairro, mLocalidade, mCep;
     private Spinner mSpinnerUf;
-    private Usuario usuario;
-    private Fornecedor fornecedor;
-    private Util util;
+    private Usuario mUsuario;
+    private Fornecedor mFornecedor;
+    private Util mUtil;
     private Endereco mEndereco;
     private String mIdUsuarioLogado;
 
@@ -72,7 +72,7 @@ public class CadastroEnderecoActivity extends AppCompatActivity{
                 android.R.layout.simple_spinner_dropdown_item, getResources().getStringArray(R.array.uf));
         mSpinnerUf.setAdapter(adapter_state);
 
-        util = new Util(this,
+        mUtil = new Util(this,
                 R.id.etCadastroCepEndereco,
                 R.id.etCadastroLogradouroEndereco,
                 R.id.etCadastroLocalidadeEndereco,
@@ -83,8 +83,8 @@ public class CadastroEnderecoActivity extends AppCompatActivity{
 
         //Receber os dados do usuário e fornecedor da outra activity
         Intent i = getIntent();
-        usuario = (Usuario) i.getSerializableExtra("Usuario");
-        fornecedor = (Fornecedor) i.getSerializableExtra("Fornecedor");
+        mUsuario = (Usuario) i.getSerializableExtra("Usuario");
+        mFornecedor = (Fornecedor) i.getSerializableExtra("Fornecedor");
 
         Button mBtnCadastrarEndereco = findViewById(R.id.botao_finalizar_cadastro_endereco);
         mBtnCadastrarEndereco.setOnClickListener(new View.OnClickListener() {
@@ -102,7 +102,7 @@ public class CadastroEnderecoActivity extends AppCompatActivity{
                 mEndereco.setUf(mSpinnerUf.getSelectedItem().toString());
 
                 //Chama o método para cadastrar o usuário no banco(se o valor for "0", é um usuário consumidor
-                if (usuario.getValor().equals("0")) {
+                if (mUsuario.getEnderecoUsuario().equals("0")) {
                     cadastrarEnderecoUsuario();
                 }
                 //Chama o método para cadastrar o fornecedor no banco(se não for "0", é um fornecedor
@@ -134,12 +134,12 @@ public class CadastroEnderecoActivity extends AppCompatActivity{
             mIdUsuarioLogado = getPreferences("id", CadastroEnderecoActivity.this);
 
             VerificadorDeObjetos.vDadosObrEndereco(mEndereco);
-            usuario.setEndereco(mEndereco);
+            mUsuario.setEndereco(mEndereco);
             UsuarioDaoImpl usuarioDao =  new UsuarioDaoImpl(this);
 
             //Chamada do DAO para salvar no banco
-            usuarioDao.inserir(usuario, mIdUsuarioLogado);
-            salvarPreferencias("id", usuario.getId());
+            usuarioDao.inserir(mUsuario, mIdUsuarioLogado);
+            salvarPreferencias("id", mUsuario.getId());
             mToast = Toast.makeText(CadastroEnderecoActivity.this, R.string.sucesso_cadastro_Toast, Toast.LENGTH_SHORT);
             mToast.show();
             abrirLoginUsuario();
@@ -161,12 +161,12 @@ public class CadastroEnderecoActivity extends AppCompatActivity{
                 mIdUsuarioLogado = getPreferences("idFornecedor", CadastroEnderecoActivity.this);
 
                 VerificadorDeObjetos.vDadosObrEndereco(mEndereco);
-                fornecedor.setEndereco(mEndereco);
+                mFornecedor.setEndereco(mEndereco);
                 FornecedorDaoImpl fornecedorDao =  new FornecedorDaoImpl(this);
 
                 //Chamada do DAO para salvar no banco
-                fornecedorDao.inserir(fornecedor, mIdUsuarioLogado);
-                salvarPreferencias("idFornecedor", fornecedor.getId());
+                fornecedorDao.inserir(mFornecedor, mIdUsuarioLogado);
+                salvarPreferencias("idFornecedor", mFornecedor.getId());
                 mToast = Toast.makeText(CadastroEnderecoActivity.this, R.string.sucesso_cadastro_Toast, Toast.LENGTH_SHORT);
                 mToast.show();
                 abrirLoginUsuario();
@@ -197,7 +197,7 @@ public class CadastroEnderecoActivity extends AppCompatActivity{
 
     //Método que trava os campos de endereço enquanto a busca pelo cep é realizada
     public void lockFields (boolean isToLock){
-        util.lockFields(isToLock);
+        mUtil.lockFields(isToLock);
     }
 
     //Método que retorna o endereço completo a partir do cep informado

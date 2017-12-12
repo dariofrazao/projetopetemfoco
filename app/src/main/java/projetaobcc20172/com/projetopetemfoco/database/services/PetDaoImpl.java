@@ -21,20 +21,20 @@ import projetaobcc20172.com.projetopetemfoco.utils.Utils;
 public class PetDaoImpl implements PetDao{
 
 
-    private DatabaseReference mFirebase;
-    private  final Context contexto;
+    private DatabaseReference mReferenciaFirebase;
+    private  final Context mContexto;
 
     public PetDaoImpl(Context contexto){
-        this.mFirebase = ConfiguracaoFirebase.getFirebase();
-        this.contexto = contexto;
+        this.mReferenciaFirebase = ConfiguracaoFirebase.getFirebase();
+        this.mContexto = contexto;
     }
 
     @Override
     public void inserir(Pet pet, String idUsuarioLogado) {
-        mFirebase = mFirebase.child("usuarios").child(idUsuarioLogado);
+        mReferenciaFirebase = mReferenciaFirebase.child("usuarios").child(idUsuarioLogado);
 
         //O método push() cria uma chave exclusiva para cada mPet cadastrado
-        mFirebase.child("pets").push().setValue(pet).addOnCompleteListener(new OnCompleteListener<Void>() {
+        mReferenciaFirebase.child("pets").push().setValue(pet).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful()){
@@ -110,7 +110,7 @@ public class PetDaoImpl implements PetDao{
 
 
     private Context getContexto(){
-        return this.contexto;
+        return this.mContexto;
     }
 
 }

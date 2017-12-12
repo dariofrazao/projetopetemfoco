@@ -96,7 +96,7 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
                         mUsuario.setId(identificadorUsuario);
                         mToast = Toast.makeText(CadastroUsuarioActivity.this, R.string.sucesso_cadastro_proxima_etapa_Toast, Toast.LENGTH_LONG);
                         mToast.show();
-                        mFornecedor.setValor("0");
+                        mFornecedor.setEnderecoFornecedor("0");
 
                         //Aqui será chamado a continuação do cadastro do usuário, levando-o ao cadastro do endereço
                         abrirCadastroEndereco(mUsuario, mFornecedor);

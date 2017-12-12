@@ -20,7 +20,10 @@ public class Fornecedor implements Serializable {
     private String mHorarios;
     private String mSenha;
     private String mSenha2;
-    private String mValor = "1";
+    /*Variável que é setada para o valor "0" quando um consumidor está se cadastrando, para que ao cadastrar o seu endereço,
+    a verificação na classe de Endereço saiba que ali o endereço deve ser cadastrado no nó do Consumidor,
+    pois ambos, fornecedor e consumidor compartilham a mesma classe de Endereço.*/
+    private String mEnderecoFornecedor = "1";
     private Endereco mEndereco;
 
     @Exclude
@@ -96,11 +99,11 @@ public class Fornecedor implements Serializable {
         this.mEndereco = endereco;
     }
 
-    public String getValor() {
-        return mValor;
+    public String getEnderecoFornecedor() {
+        return mEnderecoFornecedor;
     }
 
-    public void setValor(String valor) {
-        this.mValor = valor;
+    public void setEnderecoFornecedor(String valor) {
+        this.mEnderecoFornecedor = valor;
     }
 }

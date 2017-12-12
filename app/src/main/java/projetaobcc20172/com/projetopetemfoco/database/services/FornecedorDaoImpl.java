@@ -17,12 +17,12 @@ import projetaobcc20172.com.projetopetemfoco.utils.Utils;
 
 public class FornecedorDaoImpl implements FornecedorDao{
 
-    private DatabaseReference referenciaFirebase;
-    private  final Context contexto;
+    private DatabaseReference mReferenciaFirebase;
+    private  final Context mContexto;
 
     public FornecedorDaoImpl(Context contexto){
-        this.referenciaFirebase = ConfiguracaoFirebase.getFirebase();
-        this.contexto = contexto;
+        this.mReferenciaFirebase = ConfiguracaoFirebase.getFirebase();
+        this.mContexto = contexto;
     }
 
     @Override
@@ -33,7 +33,7 @@ public class FornecedorDaoImpl implements FornecedorDao{
 
         //Chama a referência do Firebase
         //Cria os nós dos fornecedores no banco de dados
-        referenciaFirebase.child("fornecedor").child(fornecedor.getId()).setValue(fornecedor).addOnCompleteListener(new OnCompleteListener<Void>() {
+        mReferenciaFirebase.child("fornecedor").child(fornecedor.getId()).setValue(fornecedor).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful()){
@@ -108,6 +108,6 @@ public class FornecedorDaoImpl implements FornecedorDao{
 
 
     private Context getContexto(){
-        return this.contexto;
+        return this.mContexto;
     }
 }

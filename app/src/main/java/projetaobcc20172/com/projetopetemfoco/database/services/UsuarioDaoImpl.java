@@ -18,12 +18,12 @@ import projetaobcc20172.com.projetopetemfoco.utils.Utils;
 
 public class UsuarioDaoImpl implements UsuarioDao{
 
-    private DatabaseReference referenciaFirebase;
-    private  final Context contexto;
+    private DatabaseReference mReferenciaFirebase;
+    private final Context mContexto;
 
     public UsuarioDaoImpl(Context contexto){
-        this.referenciaFirebase = ConfiguracaoFirebase.getFirebase();
-        this.contexto = contexto;
+        this.mReferenciaFirebase = ConfiguracaoFirebase.getFirebase();
+        this.mContexto = contexto;
     }
 
     //Método para salvar usuário no banco de dados do Firebase
@@ -31,7 +31,7 @@ public class UsuarioDaoImpl implements UsuarioDao{
     public void inserir(Usuario usuario, String idUsuario) {
 
         //Chama a referência do Firebase e Cria os nós dos usuário no banco de dados
-        referenciaFirebase.child("usuarios").child(usuario.getId()).setValue(usuario).addOnCompleteListener(new OnCompleteListener<Void>() {
+        mReferenciaFirebase.child("usuarios").child(usuario.getId()).setValue(usuario).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful()){
@@ -105,7 +105,7 @@ public class UsuarioDaoImpl implements UsuarioDao{
     }
 
     private Context getContexto(){
-        return this.contexto;
+        return this.mContexto;
     }
 
 }

@@ -23,19 +23,18 @@ import projetaobcc20172.com.projetopetemfoco.utils.Utils;
 public class ServicoDaoImpl implements ServicoDao{
 
 
-    private DatabaseReference referenciaFirebase;
-    private DatabaseReference referenciaFornecedor;
-    private  final Context contexto;
+    private DatabaseReference mReferenciaFirebase;
+    private final Context mContexto;
 
     public ServicoDaoImpl(Context contexto){
-        this.referenciaFirebase = ConfiguracaoFirebase.getFirebase();
-        this.contexto = contexto;
+        this.mReferenciaFirebase = ConfiguracaoFirebase.getFirebase();
+        this.mContexto = contexto;
     }
 
     @Override
     public void inserir(Servico servico, String idFornecedor) {
-        referenciaFornecedor = referenciaFirebase.child("fornecedor").child(idFornecedor);
-        referenciaFornecedor.child("servicos").push().setValue(servico).addOnCompleteListener(new OnCompleteListener<Void>() {
+        mReferenciaFirebase = mReferenciaFirebase.child("fornecedor").child(idFornecedor);
+        mReferenciaFirebase.child("servicos").push().setValue(servico).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful()){
@@ -55,8 +54,8 @@ public class ServicoDaoImpl implements ServicoDao{
 
     @Override
     public void remover(Servico servico, String idFornecedor) {
-        referenciaFornecedor = referenciaFirebase.child("fornecedor").child(idFornecedor);
-        referenciaFornecedor.child(String.format("%s/%s", "servicos", servico.getId()))
+        mReferenciaFirebase = mReferenciaFirebase.child("fornecedor").child(idFornecedor);
+        mReferenciaFirebase.child(String.format("%s/%s", "servicos", servico.getId()))
                 .setValue(null).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
@@ -77,8 +76,8 @@ public class ServicoDaoImpl implements ServicoDao{
 
     @Override
     public void atualizar(Servico servico, String idFornecedor) {
-        referenciaFornecedor = referenciaFirebase.child("fornecedor").child(idFornecedor);
-        referenciaFornecedor.child(String.format("%s/%s", "servicos", servico.getId()))
+        mReferenciaFirebase = mReferenciaFirebase.child("fornecedor").child(idFornecedor);
+        mReferenciaFirebase.child(String.format("%s/%s", "servicos", servico.getId()))
                 .setValue(null).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
@@ -109,7 +108,7 @@ public class ServicoDaoImpl implements ServicoDao{
 
 
     private Context getContexto(){
-        return this.contexto;
+        return this.mContexto;
     }
 
 }

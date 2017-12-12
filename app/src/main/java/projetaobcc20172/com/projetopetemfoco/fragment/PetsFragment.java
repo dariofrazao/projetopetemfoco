@@ -24,9 +24,9 @@ import projetaobcc20172.com.projetopetemfoco.model.Pet;
 //Sua utilização é útil para dividir uma mesma tela em mais partes.
 public class PetsFragment extends Fragment {
 
-    private ListView listView;
-    private ArrayAdapter<Pet> adapter;
-    private ArrayList<Pet> pets;
+    private ListView mListView;
+    private ArrayAdapter<Pet> mAdapter;
+    private ArrayList<Pet> mPets;
     private DatabaseReference mFirebase;
 
     public PetsFragment() {
@@ -39,22 +39,22 @@ public class PetsFragment extends Fragment {
         View view = inflater.inflate(R.layout.activity_fragment, container, false);
 
         // Monta listview e adapter
-        pets = new ArrayList<>();
-        listView = view.findViewById(R.id.lv_pets);
-        adapter = new PetAdapter(getActivity(), pets);
-        listView.setAdapter(adapter);
+        mPets = new ArrayList<>();
+        mListView = view.findViewById(R.id.lv_pets);
+        mAdapter = new PetAdapter(getActivity(), mPets);
+        mListView.setAdapter(mAdapter);
 
         //Listener que "ouve" o banco de dados
         ValueEventListener valueEventListenerPets = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                pets.clear();
+                mPets.clear();
                 for (DataSnapshot dados : dataSnapshot.getChildren()) {
                     Pet pet = dados.getValue(Pet.class);
-                    pets.add(pet);
+                    mPets.add(pet);
                 }
-                adapter.notifyDataSetChanged();
+                mAdapter.notifyDataSetChanged();
             }
 
             @Override

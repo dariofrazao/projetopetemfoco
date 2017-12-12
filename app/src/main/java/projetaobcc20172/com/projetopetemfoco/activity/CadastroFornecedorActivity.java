@@ -42,10 +42,10 @@ import projetaobcc20172.com.projetopetemfoco.utils.VerificadorDeObjetos;
  */
 public class CadastroFornecedorActivity extends AppCompatActivity {
 
-    private EditText nome, email, senha, senha2, telefone, cpf_cnpj;
+    private EditText mNome, mEmail, mSenha, mSenha2, mTelefone, mCpfCnpj;
     private Spinner mSpinnerHorarios;
-    private Fornecedor fornecedor;
-    private Usuario usuario;
+    private Fornecedor mFornecedor;
+    private Usuario mUsuario;
     private FirebaseAuth mAutenticacao;
 
     //permite que essa variavel seja vista pela classe de teste
@@ -60,13 +60,13 @@ public class CadastroFornecedorActivity extends AppCompatActivity {
 
         Toolbar toolbar;
         toolbar = findViewById(R.id.tb_cadastro_fornecedor);
-        nome = findViewById(R.id.etCadastroNomeFornecedor);
-        email = findViewById(R.id.etCadastroEmailFornecedor);
-        telefone = findViewById(R.id.etCadastroTelefoneFornecedor);
-        cpf_cnpj = findViewById(R.id.etCadastroCpfCnpjFornecedor);
-        cpf_cnpj.addTextChangedListener(MaskUtil.insert(cpf_cnpj, MaskUtil.MaskType.CEP));
-        senha = findViewById(R.id.etCadastroSenhaFornecedor);
-        senha2 = findViewById(R.id.etCadastroSenha2Fornecedor);
+        mNome = findViewById(R.id.etCadastroNomeFornecedor);
+        mEmail = findViewById(R.id.etCadastroEmailFornecedor);
+        mTelefone = findViewById(R.id.etCadastroTelefoneFornecedor);
+        mCpfCnpj = findViewById(R.id.etCadastroCpfCnpjFornecedor);
+        mCpfCnpj.addTextChangedListener(MaskUtil.insert(mCpfCnpj, MaskUtil.MaskType.CNPJ));
+        mSenha = findViewById(R.id.etCadastroSenhaFornecedor);
+        mSenha2 = findViewById(R.id.etCadastroSenha2Fornecedor);
         Button botaoCadastrar;
         botaoCadastrar = findViewById(R.id.botao_cadastrar_fornecedor);
 
@@ -79,21 +79,21 @@ public class CadastroFornecedorActivity extends AppCompatActivity {
         botaoCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                fornecedor = new Fornecedor();
-                usuario = new Usuario();
-                fornecedor.setNome( nome.getText().toString() );
-                fornecedor.setEmail(email.getText().toString());
-                fornecedor.setTelefone(telefone.getText().toString());
-                fornecedor.setCpfCnpj(cpf_cnpj.getText().toString());
-                fornecedor.setHorarios(mSpinnerHorarios.getSelectedItem().toString());
-                fornecedor.setSenha(senha.getText().toString());
-                fornecedor.setSenha2(senha2.getText().toString());
+                mFornecedor = new Fornecedor();
+                mUsuario = new Usuario();
+                mFornecedor.setNome(mNome.getText().toString() );
+                mFornecedor.setEmail(mEmail.getText().toString());
+                mFornecedor.setTelefone(mTelefone.getText().toString());
+                mFornecedor.setCpfCnpj(mCpfCnpj.getText().toString());
+                mFornecedor.setHorarios(mSpinnerHorarios.getSelectedItem().toString());
+                mFornecedor.setSenha(mSenha.getText().toString());
+                mFornecedor.setSenha2(mSenha2.getText().toString());
                 cadastrarFornecedor();
             }
         });
 
         // Configura toolbar
-        toolbar.setTitle("Cadastro de Fornecedor");
+        toolbar.setTitle(R.string.tb_cadastro_fornecedor);
         toolbar.setTitleTextColor(Color.WHITE);
         toolbar.setNavigationIcon(R.drawable.ic_action_arrow_left_white);
         setSupportActionBar(toolbar);
@@ -108,23 +108,23 @@ public class CadastroFornecedorActivity extends AppCompatActivity {
     //Método para cadastrar o fornecedor no FirebaseAuthentication
     private void cadastrarFornecedor() {
         try {
-            VerificadorDeObjetos.vDadosFornecedor(fornecedor, this);
+            VerificadorDeObjetos.vDadosFornecedor(mFornecedor, this);
             mAutenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
             mAutenticacao.createUserWithEmailAndPassword(
-                    fornecedor.getEmail(),
-                    fornecedor.getSenha()
+                    mFornecedor.getEmail(),
+                    mFornecedor.getSenha()
             ).addOnCompleteListener(CadastroFornecedorActivity.this, new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
 
                     if (task.isSuccessful()) {
-                        String identificadorFornecedor = Base64Custom.codificarBase64(fornecedor.getEmail());
-                        fornecedor.setId(identificadorFornecedor);
-                        mToast = Toast.makeText(CadastroFornecedorActivity.this, R.string.sucesso_cadastro_proxima_etapa_Toast, Toast.LENGTH_LONG);
+                        String identificadorFornecedor = Base64Custom.codificarBase64(mFornecedor.getEmail());
+                        mFornecedor.setId(identificadorFornecedor);
+                        mToast = Toast.makeText(CadastroFornecedorActivity.this, R.string.sucesso_cadastro_proxima_etapa_Toast, Toast.LENGTH_SHORT);
                         mToast.show();
-                        usuario.setValor("1");
+                        mUsuario.setEnderecoUsuario("1");
                         //Aqui será chamado a continuação do cadastro do fornecedor, levando-o ao cadastro do endereço
-                        abrirCadastroEndereco(usuario, fornecedor);
+                        abrirCadastroEndereco(mUsuario, mFornecedor);
                     } else {
 
                         String erro = "";

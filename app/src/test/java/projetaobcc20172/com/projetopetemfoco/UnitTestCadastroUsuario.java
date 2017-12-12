@@ -1,11 +1,11 @@
 package projetaobcc20172.com.projetopetemfoco;
 
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
 import java.util.Arrays;
+
 import projetaobcc20172.com.projetopetemfoco.excecoes.CampoObrAusenteException;
 import projetaobcc20172.com.projetopetemfoco.excecoes.SenhasDiferentesException;
 import projetaobcc20172.com.projetopetemfoco.model.Usuario;
@@ -25,14 +25,14 @@ public class UnitTestCadastroUsuario {
     campos ausêntes
     */
     @Parameterized.Parameters
-    public static Iterable<? extends Object> data() {
+    public static Iterable<?> data() {
         return Arrays.asList(
-                new Usuario("","",""),
-                new Usuario("teste","",""),
-                new Usuario("teste","email",""),
-                new Usuario("teste","","senha1"),
-                new Usuario("","email","senha1"));
-        };
+                new Usuario("","","", ""),
+                new Usuario("teste","","",""),
+                new Usuario("teste","email","",""),
+                new Usuario("teste","","senha1","senha2"),
+                new Usuario("","email","senha1",""));
+        }
 
     @Test (expected=CampoObrAusenteException.class)
     public void testCampoObgUsuario() throws CampoObrAusenteException, SenhasDiferentesException {
@@ -41,8 +41,7 @@ public class UnitTestCadastroUsuario {
 
     @Test(expected = SenhasDiferentesException.class)
     public void testSenhasDiferentes() throws CampoObrAusenteException, SenhasDiferentesException {
-        Usuario testSenha = new Usuario("teste","email","senha1");
-        testSenha.setSenha2("senhaDiferente");
+        Usuario testSenha = new Usuario("teste","email","senha1", "senhaDiferente");
         VerificadorDeObjetos.vDadosUsuario(testSenha);
     }
 

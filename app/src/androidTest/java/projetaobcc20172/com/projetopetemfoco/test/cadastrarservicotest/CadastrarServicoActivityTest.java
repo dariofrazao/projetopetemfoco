@@ -45,35 +45,35 @@ public class CadastrarServicoActivityTest {
     }
     @Test
     public void testeCadServico(){
-        TestTools.clicarBotao(R.id.btnCadastroServico);
+        TestTools.clicarBotao(R.id.botao_cadastrar_serviço);
         TestToolsCadServico.preencherEClicar(this.mNomeServico,this.mValor,this.mDescricao);
         TestTools.checarToast(R.string.sucesso_cadastro);
     }
 
     @Test
     public void testeCamposEmBranco(){
-        TestTools.clicarBotao(R.id.btnCadastroServico);
+        TestTools.clicarBotao(R.id.botao_cadastrar_serviço);
         Espresso.closeSoftKeyboard();//Fecha o teclado.Por alguma razão nesta tela ele sempre começa aberto
         TestTools.clicarBotao(R.id.btnSalvarServico);
         TestTools.checarToast(R.string.preencha_campo_nome);
     }
     @Test
     public void testeCampoObgAusenteNome(){
-        TestTools.clicarBotao(R.id.btnCadastroServico);
+        TestTools.clicarBotao(R.id.botao_cadastrar_serviço);
         TestToolsCadServico.preencherEClicar("",this.mValor,this.mDescricao);
         TestTools.checarToast(R.string.preencha_campo_nome);
     }
 
     @Test
     public void testeCamposObgAusenteValor(){
-        TestTools.clicarBotao(R.id.btnCadastroServico);
+        TestTools.clicarBotao(R.id.botao_cadastrar_serviço);
         TestToolsCadServico.preencherEClicar(this.mNomeServico,"",this.mDescricao);
         TestTools.checarToast(R.string.preencha_campo_valor);
     }
 
     @Test
     public void testeCamposObgAusenteDescricao(){
-        TestTools.clicarBotao(R.id.btnCadastroServico);
+        TestTools.clicarBotao(R.id.botao_cadastrar_serviço);
         TestToolsCadServico.preencherEClicar(this.mNomeServico,this.mValor,"");
         TestTools.checarToast(R.string.preencha_campo_descricao);
     }

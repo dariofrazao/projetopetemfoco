@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.activity.CadastroEnderecoActivity;
+import projetaobcc20172.com.projetopetemfoco.activity.LoginActivity;
 import projetaobcc20172.com.projetopetemfoco.activity.MainActivity;
 import projetaobcc20172.com.projetopetemfoco.test.TestTools;
 
@@ -43,8 +44,8 @@ public class EnderecoActivityTest {
         }
         TestTools.clicarBotaoComScroll(sBotaoCadEnd);
         TestTools.checarToast(R.string.sucesso_cadastro_Toast);
-        TestTools.verificarMudancaActivity(MainActivity.class.getName());
-        TestTools.clicarBotao(R.id.botao_sair);
+        TestTools.verificarMudancaActivity(LoginActivity.class.getName());
+        //TestTools.clicarBotao(R.id.botao_sair);
     }
 
     public void testeEnderecoCorreto(){

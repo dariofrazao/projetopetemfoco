@@ -1,5 +1,9 @@
 package projetaobcc20172.com.projetopetemfoco.adapter;
 
+/**
+ * Created by dario on 11/12/2017.
+ */
+
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
@@ -11,18 +15,18 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import projetaobcc20172.com.projetopetemfoco.R;
-import projetaobcc20172.com.projetopetemfoco.model.Pet;
+import projetaobcc20172.com.projetopetemfoco.model.Servico;
 
-//Classe que monta uma View para exibir os pets cadastrados do usuário
-public class PetAdapter extends ArrayAdapter<Pet> {
+//Classe que monta uma View para exibir os serviços cadastrados do fornecedor
+public class ServicoAdapter extends ArrayAdapter<Servico> {
 
-    private ArrayList<Pet> mPets;
+    private ArrayList<Servico> mServicos;
     private Context mContext;
 
-    public PetAdapter(Context c, ArrayList<Pet> objects) {
+    public ServicoAdapter(Context c, ArrayList<Servico> objects) {
         super(c, 0, objects);
         this.mContext = c;
-        this.mPets = objects;
+        this.mServicos = objects;
     }
 
     @NonNull
@@ -32,7 +36,7 @@ public class PetAdapter extends ArrayAdapter<Pet> {
         View view = null;
 
         // Verifica se a lista está preenchida
-        if (mPets != null) {
+        if (mServicos != null) {
 
             // inicializar objeto para montagem da view
             LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -45,12 +49,14 @@ public class PetAdapter extends ArrayAdapter<Pet> {
             TextView nome = view.findViewById(R.id.tv_titulo);
             TextView tipo = view.findViewById(R.id.tv_subtitulo);
 
-            Pet pet = mPets.get(position);
-            nome.setText(pet.getNome());
-            tipo.setText(pet.getTipo());
+            Servico servico = mServicos.get(position);
+            nome.setText(servico.getNome());
+            String valorConvertido = servico.getValor();
+            tipo.setText(valorConvertido);
 
         }
 
         return view;
     }
 }
+

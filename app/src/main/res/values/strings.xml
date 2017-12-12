@@ -1,93 +1,25 @@
 <resources>
     <string name="app_name">Pet Em Foco</string>
-    <string name="title_cadastro_usuario">Cadastro de Usuário</string>
-    <string name="entrar">Entrar</string>
-    <string name="cadastrar">Cadastrar</string>
     <string name="salvar">Salvar</string>
-    <string name="cadastrar_novo_usuario">Cadastrar</string>
-    <string name="cadastrar_endereco">Continuar o Cadastro</string>
-    <!-- Strings related to login -->
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Senha</string>
-    <string name="prompt_idade_pet">Idade</string>
-    <string name="prompt_tipo_pet">Tipo</string>
-    <string name="prompt_genero_pet">Gênero</string>
-    <string name="prompt_raca_pet">Raça</string>
-    <string name="prompt_porte_pet">Porte</string>
-    <string name="action_sign_in">Sign in or register</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="error_invalid_email">This email address is invalid</string>
-    <string name="error_invalid_password">This password is too short</string>
-    <string name="error_incorrect_password">This password is incorrect</string>
-    <string name="error_field_required">This field is required</string>
 
-    <string name="erro_cadastro_endereco_campos_obrigatorios_Toast">Erro ao cadastrar endereço: Preencha todos os campos</string>
+    <!--Strings relacionadas a cadastro de consumidor-->
+    <string name="sucesso_cadastro_Toast">Sucesso ao cadastrar usuário</string>
+    <string name="digite_seu_nome">Digite seu nome</string>
+    <string name="digite_sua_senha">Digite sua senha (min. 6 caracteres)</string>
+    <string name="repita_sua_senha">Repita sua senha</string>
+    <string name="nome">Nome</string>
+    <string name="confirmar_sua_senha">Confirme sua senha</string>
     <string name="sucesso_cadastro_proxima_etapa_Toast">Sucesso! Pronto para a próxima etapa</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email completions."</string>
-    <string name="erro_login_invalido_Toast">Erro ao fazer login!</string>
     <string name="erro_cadastro_email_invalido_Toast">Erro ao cadastrar usuário: Email indicado não é válido.</string>
     <string name="erro_cadastro_senha_invalida_Toast">Erro ao cadastrar usuário: Escolha uma senha que contenha pelo menos 6 caracteres.</string>
     <string name="erro_cadastro_email_usado_Toast">Erro ao cadastrar usuário: Já existe uma conta com esse e-mail.</string>
     <string name="erro_cadastro_campos_obrigatorios_Toast">Erro ao cadastrar usuário: Preencha todos os campos</string>
-    <string name="erro_cadastro_campos_obrigatorios_Pet">Erro ao cadastrar pet: Preencha o campo nome</string>
     <string name="erro_cadastro_senhas_diferentes_Toast">Erro ao cadastrar usuário: Os campos de senha devem ser iguais.</string>
     <string name="erro_cadastro_sem_conexao">Erro ao cadastrar usuário: Verifique a sua conexão</string>
     <string name="erro_cadastro_nome_usuario_Toast">Erro ao cadastrar usuário: O nome de usuário inválido.</string>
-    <string name="sucesso_login_Toast">Sucesso ao fazer login!</string>
-    <string name="sucesso_cadastro_Toast">Sucesso ao cadastrar usuário</string>
-    <string name="sucesso_cadastro_Pet">Pet cadastrado com sucesso!</string>
-    <string name="pergunta_nao_possui_cadastro">Não possui cadastro?</string>
-    <string name="digite_seu_nome">Digite seu nome</string>
-    <string name="digite_seu_email">Digite seu email</string>
-    <string name="digite_sua_senha">Digite sua senha</string>
-    <string name="repita_sua_senha">Repita sua senha</string>
-    <string name="nome">Nome</string>
-    <string name="confirmar_sua_senha">Confirme sua senha</string>
-    <!-- Strings related to Cadastro de Endereço -->
-    <string name="endereco_logradouro">Logradouro</string>
-    <string name="digite_seu_logradouro">Digite seu logradouro</string>
-    <string name="endereco_numero">Número</string>
-    <string name="digite_seu_numero">Digite seu número</string>
-    <string name="endereco_complemento">Complemento</string>
-    <string name="digite_seu_complemento">Digite o complemento</string>
-    <string name="endereco_bairro">Bairro</string>
-    <string name="digite_seu_bairro">Digite seu bairro</string>
-    <string name="endereco_cidade">Cidade</string>
-    <string name="digite_sua_cidade">Digite sua cidade</string>
-    <string name="endereco_cep">CEP</string>
-    <string name="digite_seu_cep">Digite seu CEP</string>
-    <string name="endereco_uf">Estado</string>
-    <string name="escolha_sua_uf">Escolha seu estado</string>
-    <string name="finalizar_cadastro">Finalizar Cadastro</string>
-
-    <string name="digite_nome_pet">Digite o nome do seu pet</string>
-    <string name="digite_idade_pet">Digite a idade do seu pet</string>
-    <string name="macho">Macho</string>
-    <string name="femea">Fêmea</string>
-    <string name="digite_raca_pet">Digite a raça do seu pet</string>
-
-    <string name="tb_cadastro_pet">Cadastro de Pet</string>
-
-    <!--Strings relacionadas a serviço-->
-    <string name="title_activity_cadastro_servico">Cadastrar Novo Serviço</string>
-    <string name="editar_servico">Editar Serviço</string>
-    <string name="nome_servico">Nome do Serviço</string>
-    <string name="valor">Valor</string>
-    <string name="descricao">Descrição</string>
-    <string name="digite_nome_servico">Digite o nome do serviço</string>
-    <string name="digite_valor_servico">R$0,00</string>
-    <string name="digite_descricao_servico">Digite a descrição do serviço</string>
-    <string name="servico">Serviço</string>
-
-    <!--Strings de erro-->
+    <string name="sucesso_cadastro">Cadastro Efetuado com Sucesso!</string>
     <string name="erro_ao_cadastrar">Erro ao cadastrar</string>
     <string name="erro_ao_atualizar">Erro ao atualizar</string>
-    <string name="preencha_campo_nome">Preencha o campo nome.</string>
-    <string name="preencha_campo_descricao">Preencha o campo descrição.</string>
-    <string name="preencha_campo_valor">Preencha o campo valor</string>
-
-    <!--Strings de mensagens ao usuário-->
-    <string name="sucesso_cadastro">Cadastro Efetuado com Sucesso!</string>
     <string name="sucesso_remocao">Remoção Efetuada com Sucesso!</string>
     <string name="sucesso_atualizacao">Atualização Efetuada com Sucesso!</string>
     <string name="falha_cadastro">Cadastro Falhou!</string>
@@ -95,8 +27,87 @@
     <string name="falha_atualizacao">Atualização Falhou!</string>
     <string name="pergunta_do_sistema">Pergunta do Sistema</string>
     <string name="atencao">Atenção!</string>
-    <string name="sair">Sair</string>
     <string name="pergunta_confirma_dados_serao_perdidos">Os dados não salvos serão perdidos. Confirma?</string>
 
+    <!--Strings relacionadas a cadastro de fornecedor-->
+    <string name="tb_cadastro_fornecedor">Cadastro de Fornecedor</string>
+    <string name="botao_cadastrar_fornecedor">Cadastrar Fornecedor</string>
+    <string name="sucesso_cadastro_Fornecedor">Sucesso ao cadastrar fornecedor</string>
+    <string name="digite_seu_telefone">Digite seu telefone</string>
+    <string name="digite_seu_cpj_cnpj">Digite seu CPF/CNPJ</string>
+    <string name="prompt_telefone">Telefone</string>
+    <string name="prompt_cpf_cnpj">CPF/CNPJ</string>
+    <string name="prompt_horario">Horário de Funcionamento</string>
+    <string name="erro_cadastro_fornecedor_email_invalido_Toast">Erro ao cadastrar fornecedor: Email indicado não é válido.</string>
+    <string name="erro_cadastro_fornecedor_senha_invalida_Toast">Erro ao cadastrar fornecedor: Escolha uma senha que contenha pelo menos 6 caracteres.</string>
+    <string name="erro_cadastro_fornecedor_email_usado_Toast">Erro ao cadastrar fornecedor: Já existe uma conta com esse e-mail.</string>
+    <string name="erro_cadastro_fornecedor_campos_obrigatorios_Toast">Erro ao cadastrar fornecedor: Preencha todos os campos</string>
+    <string name="erro_cadastro_fornecedor_senhas_diferentes_Toast">Erro ao cadastrar fornecedor: Os campos de senha devem ser iguais.</string>
+    <string name="erro_cadastro_fornecedor_sem_conexao">Erro ao cadastrar fornecedor: Verifique a sua conexão</string>
+    <string name="erro_cadastro_fornecedor_nome_fornecedor_Toast">Erro ao cadastrar fornecedor: O nome de fornecedor inválido.</string>
+
+    <!--Strings relacionadas a login-->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_senha">Senha</string>
+    <string name="digite_seu_email">Digite seu e-mail</string>
+    <string name="digite_sua_senha_login">Digite sua senha</string>
+    <string name="entrar">Entrar</string>
+    <string name="sair">Sair</string>
+    <string name="cadastrar">Cadastrar</string>
+    <string name="sucesso_login_Toast">Sucesso ao fazer login!</string>
+    <string name="erro_login_invalido_Toast">Erro ao fazer login!</string>
+
+    <!--Strings relacionadas a endereço-->
+    <string name="cadastrar_endereco">Continuar o Cadastro</string>
+    <string name="tb_cadastro_endereco">Cadastro de Endereço</string>
+    <string name="digite_seu_logradouro">Digite seu logradouro</string>
+    <string name="endereco_numero">Número</string>
+    <string name="digite_seu_numero">Digite seu número</string>
+    <string name="endereco_complemento">Complemento</string>
+    <string name="endereco_logradouro">Logradouro</string>
+    <string name="digite_seu_complemento">Digite o complemento</string>
+    <string name="endereco_bairro">Bairro</string>
+    <string name="digite_seu_bairro">Digite seu bairro</string>
+    <string name="endereco_localidade">Cidade</string>
+    <string name="digite_sua_cidade">Digite sua cidade</string>
+    <string name="endereco_cep">CEP</string>
+    <string name="digite_seu_cep">Digite seu CEP</string>
+    <string name="endereco_uf">Estado</string>
+    <string name="escolha_sua_uf">Escolha seu estado</string>
+    <string name="finalizar_cadastro">Finalizar Cadastro</string>
+    <string name="erro_cadastro_endereco_campos_obrigatorios_Toast">Erro ao cadastrar endereço: Preencha pelo menos o logradouro, bairro e cidade</string>
+
+    <!--Strings relacionadas a pet-->
+    <string name="tb_cadastro_pet">Cadastro de Pet</string>
+    <string name="botao_cadastrar_pet">Cadastrar Pet</string>
+    <string name="prompt_idade_pet">Idade</string>
+    <string name="prompt_tipo_pet">Tipo</string>
+    <string name="prompt_genero_pet">Gênero</string>
+    <string name="prompt_raca_pet">Raça</string>
+    <string name="prompt_porte_pet">Porte</string>
+    <string name="digite_nome_pet">Digite o nome do seu pet</string>
+    <string name="digite_idade_pet">Digite a idade do seu pet</string>
+    <string name="macho">Macho</string>
+    <string name="femea">Fêmea</string>
+    <string name="digite_raca_pet">Digite a raça do seu pet</string>
+    <string name="erro_cadastro_campos_obrigatorios_Pet">Erro ao cadastrar pet: Preencha o campo nome</string>
+    <string name="sucesso_cadastro_Pet">Pet cadastrado com sucesso!</string>
+
+    <!--Strings relacionadas a serviço-->
+    <string name="tb_cadastro_serviço">Cadastro de Serviço</string>
+    <string name="botao_cadastrar_serviço">Cadastrar Serviço</string>
+    <string name="editar_servico">Editar Serviço</string>
+    <string name="prompt_nome">Nome do Serviço</string>
+    <string name="prompt_valor">Valor</string>
+    <string name="prompt_descricao">Descrição</string>
+    <string name="digite_nome_servico">Digite o nome do serviço</string>
+    <string name="digite_valor_servico">R$0,00</string>
+    <string name="digite_descricao_servico">Digite a descrição do serviço</string>
+    <string name="servico">Serviço</string>
+    <string name="preencha_campo_nome">Preencha o campo nome</string>
+    <string name="preencha_campo_descricao">Preencha o campo descrição</string>
+    <string name="preencha_campo_valor">Preencha o campo valor</string>
+    <string name="sucesso_cadastro_servico">Serviço cadastrado com sucesso!</string>
+    <string name="erro_cadastro_servico">Erro ao cadastrar serviço!</string>
 
 </resources>

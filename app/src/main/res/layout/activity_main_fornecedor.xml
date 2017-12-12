@@ -12,7 +12,7 @@
     </include>
 
     <ListView
-        android:id="@+id/lv_pets"
+        android:id="@+id/lv_serviços"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="8dp"
@@ -30,10 +30,10 @@
         android:layout_alignParentBottom="true">
 
         <Button
-            android:id="@+id/botao_cadastrar_pet"
+            android:id="@+id/botao_cadastrar_serviço"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/botao_cadastrar_pet" />
+            android:text="@string/botao_cadastrar_serviço" />
 
         <Button
             android:id="@+id/botao_sair"

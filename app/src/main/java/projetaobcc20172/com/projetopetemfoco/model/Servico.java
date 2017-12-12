@@ -14,11 +14,11 @@ public class Servico {
     private String mId;
     private String mNome;
     private String mDescricao;
-    private double mValor;
+    private String mValor;
 
     public Servico() {}
 
-    public Servico(String nome, double valor, String descricao){
+    public Servico(String nome, String valor, String descricao){
         this.mNome = nome;
         this.mValor = valor;
         this.mDescricao = descricao;
@@ -45,11 +45,11 @@ public class Servico {
         this.mDescricao = descricao;
     }
 
-    public double getValor() {
+    public String getValor() {
         return mValor;
     }
 
-    public void setValor(double Valor) {
+    public void setValor(String Valor) {
         this.mValor = Valor;
     }
 

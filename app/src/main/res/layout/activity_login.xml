@@ -13,126 +13,119 @@
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/scrollView"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true">
+            android:id="@+id/scrollView">
+
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1">
+                >
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="2dp"
                     android:layout_marginBottom="2dp" />
+
                 <ImageView
                     android:id="@+id/imageView"
                     android:layout_width="@dimen/largura_logo"
                     android:layout_height="@dimen/altura_logo"
                     android:layout_gravity="center"
                     android:background="@drawable/logo" />
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
                     android:layout_marginTop="2dp"
                     android:layout_marginBottom="2dp" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="@string/prompt_email"
-                    android:id="@+id/TexViewEmail"
+                    android:id="@+id/tvLoginEmail"
                     android:layout_margin="6dp"
                     android:textStyle="bold" />
+
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textEmailAddress"
                     android:ems="10"
-                    android:id="@+id/editText_email"
-                    android:layout_below="@+id/linearLayout4"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
+                    android:id="@+id/etLoginEmail"
                     android:layout_margin="4dp"
-                    android:hint="Digite seu e-mail" />
+                    android:hint="@string/digite_seu_email"/>
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="2dp"
-                    android:layout_marginBottom="2dp" />
+                    android:layout_marginBottom="2dp"/>
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="@string/prompt_password"
-                    android:id="@+id/TexViewPassword"
+                    android:text="@string/prompt_senha"
+                    android:id="@+id/tvLoginSenha"
                     android:layout_margin="6dp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"/>
+
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
                     android:ems="10"
-                    android:id="@+id/editText_senha"
-                    android:hint="Digite sua senha"
-                    android:layout_below="@+id/linearLayout4"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_margin="4dp" />
+                    android:id="@+id/etLoginSenha"
+                    android:hint="@string/digite_sua_senha_login"
+                    android:layout_margin="4dp"/>
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="2dp"
-                    android:layout_marginBottom="2dp" />
+                    android:layout_marginBottom="2dp"/>
+
                 <Button
                     android:id="@+id/botao_login"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_below="@+id/linearLayout4"
                     android:layout_margin="4dp"
-                    android:layout_centerHorizontal="true"
                     android:background="@drawable/shapebutton"
-
                     android:text="@string/entrar" />
-
-                    <!--android:layout_marginTop="24dp"-->
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="2dp"
                     android:layout_marginBottom="2dp" />
-                <!--<TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="4dp"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="@string/pergunta_nao_possui_cadastro"
-                    android:id="@+id/TextViewPerguntaCadastro"
-                    android:textStyle="bold" />-->
+
                 <Button
                     android:id="@+id/botao_cadastrar_novo_usuario"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
                     android:layout_margin="4dp"
-                    android:layout_below="@+id/linearLayout4"
-                    android:layout_centerHorizontal="true"
                     android:background="@drawable/shapebuttonborder"
-                    android:text="@string/cadastrar_novo_usuario" />
-                    <!--android:layout_marginTop="24dp" -->
+                    android:text="@string/cadastrar" />
 
+                <Button
+                    android:id="@+id/botao_cadastrar_fornecedor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:background="@drawable/shapebuttonborder"
+                    android:text="@string/botao_cadastrar_fornecedor" />
 
             </LinearLayout>
+
         </ScrollView>
+
     </LinearLayout>
 
 </RelativeLayout>

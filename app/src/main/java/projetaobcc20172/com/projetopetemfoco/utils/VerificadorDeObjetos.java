@@ -1,5 +1,7 @@
 package projetaobcc20172.com.projetopetemfoco.utils;
 
+import android.content.Context;
+
 import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.activity.CadastroServicoActivity;
 import projetaobcc20172.com.projetopetemfoco.excecoes.CampoObrAusenteException;
@@ -49,15 +51,15 @@ public class VerificadorDeObjetos {
             }
         }
 
-    public static void vDadosServico(Servico serv, CadastroServicoActivity cad) throws ValidacaoException {
+    public static void vDadosServico(Servico serv, Context cad) throws ValidacaoException {
         if(serv.getNome().isEmpty()){
-            throw new ValidacaoException(cad.getResources().getString(R.string.preencha_campo_nome));
+            throw new ValidacaoException(cad.getString(R.string.preencha_campo_nome));
         }
         else if(serv.getValor()==0 ){
-            throw new ValidacaoException(cad.getResources().getString(R.string.preencha_campo_valor));
+            throw new ValidacaoException(cad.getString(R.string.preencha_campo_valor));
         }
         else if(serv.getDescricao().isEmpty()){
-            throw new ValidacaoException(cad.getResources().getString(R.string.preencha_campo_descricao));
+            throw new ValidacaoException(cad.getString(R.string.preencha_campo_descricao));
         }
     }
 

@@ -24,7 +24,6 @@ import projetaobcc20172.com.projetopetemfoco.model.Pet;
 //Sua utilização é útil para dividir uma mesma tela em mais partes.
 public class PetsFragment extends Fragment {
 
-    private ListView mListView;
     private ArrayAdapter<Pet> mAdapter;
     private ArrayList<Pet> mPets;
     private DatabaseReference mFirebase;
@@ -40,6 +39,7 @@ public class PetsFragment extends Fragment {
 
         // Monta listview e adapter
         mPets = new ArrayList<>();
+        ListView mListView;
         mListView = view.findViewById(R.id.lv_pets);
         mAdapter = new PetAdapter(getActivity(), mPets);
         mListView.setAdapter(mAdapter);

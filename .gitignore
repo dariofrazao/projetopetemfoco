@@ -1,7 +1,7 @@
 # built application files
- *.apk
- *.ap_
- 
+*.apk
+*.ap_
+projetopetemfoco.iml
  # files for the dex VM
  *.dex
  
@@ -14,35 +14,35 @@
  
  # Eclipse project files
 	
- .metadata
- .classpath
- .project
- .externalToolBuilders/
- .settings/
- lint.xml
- project.properties
+.metadata
+.classpath
+.project
+.externalToolBuilders/
+.settings/
+lint.xml
+project.properties
  
- .gradle
- .idea/
- .idea/workspace.xml
- /build
- **/build
- **/production
+.gradle
+.idea/
+.idea/workspace.xml
+/build
+**/build
+**/production
  
  # Local Configuration file (sdk path, etc.)
  local.properties
  
  # Android Studio
  import-summary.txt
- *.iml
- *.iws
- *.ipr
- *.swp
+*.iml
+*.iws
+*.ipr
+*.swp
  
  # others
- *.o
- *.so
- *.log
+*.o
+*.so
+*.log
  .DS_Store
  Thumbs.db
 .gitignore

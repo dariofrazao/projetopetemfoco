@@ -34,12 +34,9 @@ public class UnitTestCadastroServico {
     @Parameterized.Parameters
     public static Iterable<? extends Object> data() {
         return Arrays.asList(
-                new Servico("",0,""),
-                new Servico("teste",0,""),
-                new Servico("teste",30,""),
-                new Servico("teste",0,"descricao bacana"),
-                new Servico("",20,"descricao bacana"),
-                new Servico("",0,"descricao bacana"));
+                new Servico("",""),
+                new Servico("teste",""),
+                new Servico("","12"));
     }
 
     @Test(expected=ValidacaoException.class)

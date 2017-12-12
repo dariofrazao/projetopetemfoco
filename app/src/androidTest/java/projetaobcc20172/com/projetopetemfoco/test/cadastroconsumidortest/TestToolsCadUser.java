@@ -23,16 +23,4 @@ public class TestToolsCadUser {
         TestTools.clicarBotao(R.id.botao_cadastrar_endereco);
     }
 
-   //Gera um email aleatorio para realizar cadastro
-   protected static String gerarEmailTeste(int num){
-       int x;
-       Random ran = new Random();
-       String emailInicio = "teste";
-       String emailFim = "@gmail.com";
-       for(int i=0;i<=num;i=i+1){
-           x = ran.nextInt(50);
-           emailInicio = emailInicio + x;
-       }
-       return emailInicio+emailFim;
-   }
 }

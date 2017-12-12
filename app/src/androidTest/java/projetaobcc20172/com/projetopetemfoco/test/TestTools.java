@@ -11,6 +11,8 @@ import android.view.View;
 
 import org.hamcrest.Matcher;
 
+import java.util.Random;
+
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.intent.Intents.intended;
 import static android.support.test.espresso.intent.matcher.IntentMatchers.hasComponent;
@@ -52,6 +54,10 @@ public class TestTools {
         Espresso.closeSoftKeyboard();
     }
 
+    public static void digitarCampoComScroll(int idCampo,String textoAserDigitado){
+        Espresso.onView(ViewMatchers.withId(idCampo)).perform(ViewActions.scrollTo(),ViewActions.typeText(textoAserDigitado));
+        Espresso.closeSoftKeyboard();
+    }
     public static void clicarBotao(int idBotao){
         Espresso.onView(ViewMatchers.withId(idBotao)).perform(ViewActions.click());
     }
@@ -93,4 +99,18 @@ public class TestTools {
         });
         return currentActivity[0];
     }
+
+    //Gera um email aleatorio para realizar cadastro
+    public static String gerarEmailTeste(int num){
+        int x;
+        Random ran = new Random();
+        String emailInicio = "teste";
+        String emailFim = "@gmail.com";
+        for(int i=0;i<=num;i=i+1){
+            x = ran.nextInt(50);
+            emailInicio = emailInicio + x;
+        }
+        return emailInicio+emailFim;
+    }
+
 }

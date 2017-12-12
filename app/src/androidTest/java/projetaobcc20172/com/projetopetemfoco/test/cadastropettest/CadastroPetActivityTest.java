@@ -44,6 +44,7 @@ public class CadastroPetActivityTest{
 
         LoginActivityTest log = new LoginActivityTest();
         log.testeUsuarioCadastrado();
+        Thread.sleep(3000);
         TestTools.clicarBotao(R.id.botao_cadastrar_pet);
         Espresso.closeSoftKeyboard();
         Thread.sleep(3000);
@@ -53,7 +54,7 @@ public class CadastroPetActivityTest{
     @Test
     public void testeNomeEmBranco(){
         TestToolsCadPet.preencherEClicar("",sraca);
-        TestTools.clicarBotao(R.id.botao_cadastrar_pet);
+        TestTools.clicarBotaoComScroll(R.id.botao_cadastrar_pet);
         TestTools.checarToast(R.string.erro_cadastro_campos_obrigatorios_Pet);
     }
 

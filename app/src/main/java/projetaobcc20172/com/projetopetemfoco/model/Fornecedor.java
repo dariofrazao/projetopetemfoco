@@ -26,6 +26,18 @@ public class Fornecedor implements Serializable {
     private String mEnderecoFornecedor = "1";
     private Endereco mEndereco;
 
+    public Fornecedor(String nome,String email,String cpfCnpj,String telefone,String senha,String senha2,String horarios){
+        this.mNome = nome;
+        this.mEmail = email;
+        this.mSenha = senha;
+        this.mSenha2 = senha2;
+        this.mHorarios = horarios;
+        this.mCpfCnpj = cpfCnpj;
+        this.mTelefone = telefone;
+    }
+
+    public Fornecedor(){}
+
     @Exclude
     public String getId() { return mId; }
 

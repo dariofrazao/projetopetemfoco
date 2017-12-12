@@ -113,7 +113,7 @@ public class LoginActivity extends AppCompatActivity {
                         mFirebase.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
-                                    if (dataSnapshot.child(mIdentificadorUserLogado).child("cpf_cnpj").exists()) {
+                                    if (dataSnapshot.child(mIdentificadorUserLogado).child("cpfCnpj").exists()) {
                                         salvarPreferenciasFornecedor("idFornecedor", mIdentificadorUserLogado);
                                         abrirTelaPrincipalFornecedor();
                                     } else {

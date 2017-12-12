@@ -48,7 +48,7 @@ public class CadastroUsuarioActivityTest {
     }
 
     private void preencherComInfoCorretas(){
-        String email = TestToolsCadUser.gerarEmailTeste(10);
+        String email = TestTools.gerarEmailTeste(10);
         TestToolsCadUser.preencherEclicar(this.mNome,email,this.mSenha,this.mSenha);
         TestTools.checarToast(R.string.sucesso_cadastro_proxima_etapa_Toast);
         TestTools.verificarMudancaActivity(CadastroEnderecoActivity.class.getName());

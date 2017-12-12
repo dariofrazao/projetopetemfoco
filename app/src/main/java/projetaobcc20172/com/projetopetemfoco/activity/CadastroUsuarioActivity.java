@@ -23,11 +23,9 @@ import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoFirebase;
 import projetaobcc20172.com.projetopetemfoco.excecoes.CampoObrAusenteException;
 import projetaobcc20172.com.projetopetemfoco.excecoes.SenhasDiferentesException;
-import projetaobcc20172.com.projetopetemfoco.excecoes.ValidacaoException;
 import projetaobcc20172.com.projetopetemfoco.helper.Base64Custom;
 import projetaobcc20172.com.projetopetemfoco.model.Fornecedor;
 import projetaobcc20172.com.projetopetemfoco.model.Usuario;
-import projetaobcc20172.com.projetopetemfoco.utils.Utils;
 import projetaobcc20172.com.projetopetemfoco.utils.VerificadorDeObjetos;
 
 /**

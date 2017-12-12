@@ -1,7 +1,7 @@
 # built application files
  *.apk
  *.ap_
- 
+projetopetemfoco.iml
  # files for the dex VM
  *.dex
  
@@ -22,29 +22,29 @@
  lint.xml
  project.properties
  
- .gradle
- .idea/
- .idea/workspace.xml
- /build
- **/build
- **/production
+.gradle
+.idea/
+.idea/workspace.xml
+/build
+**/build
+**/production
  
  # Local Configuration file (sdk path, etc.)
  local.properties
  
  # Android Studio
  import-summary.txt
- *.iml
- *.iws
- *.ipr
- *.swp
- 
- # others
- *.o
- *.so
- *.log
- .DS_Store
- Thumbs.db
+*.iml
+*.iws
+*.ipr
+*.swp
+.idea/
+# others
+*.o
+*.so
+*.log
+.DS_Store
+Thumbs.db
 .gitignore
 .iml
 build.gradle

@@ -1,16 +1,13 @@
 package projetaobcc20172.com.projetopetemfoco;
 
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
 import java.util.Arrays;
 
-import projetaobcc20172.com.projetopetemfoco.activity.CadastroUsuarioActivity;
 import projetaobcc20172.com.projetopetemfoco.excecoes.CampoObrAusenteException;
 import projetaobcc20172.com.projetopetemfoco.excecoes.SenhasDiferentesException;
-import projetaobcc20172.com.projetopetemfoco.excecoes.ValidacaoException;
 import projetaobcc20172.com.projetopetemfoco.model.Usuario;
 import projetaobcc20172.com.projetopetemfoco.utils.VerificadorDeObjetos;
 

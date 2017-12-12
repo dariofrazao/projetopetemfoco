@@ -85,7 +85,7 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
 
         try {
 
-            VerificadorDeObjetos.vDadosUsuario(mUsuario, this);
+            VerificadorDeObjetos.vDadosUsuario(mUsuario);
             mAutenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
             mAutenticacao.createUserWithEmailAndPassword(
                     mUsuario.getEmail(),
@@ -96,7 +96,7 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         String identificadorUsuario = Base64Custom.codificarBase64(mUsuario.getEmail());
                         mUsuario.setId(identificadorUsuario);
-                        Toast mToast = Toast.makeText(CadastroUsuarioActivity.this, R.string.sucesso_cadastro_proxima_etapa_Toast, Toast.LENGTH_LONG);
+                        mToast = Toast.makeText(CadastroUsuarioActivity.this, R.string.sucesso_cadastro_proxima_etapa_Toast, Toast.LENGTH_LONG);
                         mToast.show();
                         mFornecedor.setValor("0");
 
@@ -117,14 +117,19 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
-                        Toast mToast = Toast.makeText(CadastroUsuarioActivity.this, erro, Toast.LENGTH_SHORT);
+                        mToast = Toast.makeText(CadastroUsuarioActivity.this, erro, Toast.LENGTH_SHORT);
                         mToast.show();
                     }
                 }
             });
-        }catch (ValidacaoException e){
+        }catch (SenhasDiferentesException e){
+            mToast = mToast.makeText(CadastroUsuarioActivity.this, R.string.erro_cadastro_senhas_diferentes_Toast, Toast.LENGTH_SHORT);
+            mToast.show();
+        } catch (CampoObrAusenteException e) {
+            mToast = mToast.makeText(CadastroUsuarioActivity.this, R.string.erro_cadastro_campos_obrigatorios_Toast, Toast.LENGTH_SHORT);
+            mToast.show();
+        } catch (Exception e) {
             e.printStackTrace();
-            Utils.mostrarMensagemCurta(this, e.getMessage());
         }
     }
 

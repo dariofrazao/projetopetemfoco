@@ -125,11 +125,12 @@ public class CadastroPetActivity extends AppCompatActivity {
             PetDaoImpl petDao =  new PetDaoImpl(this);
             //Chamada do DAO para salvar no banco
             petDao.inserir(mPet, mIdUsuarioLogado);
-            Toast.makeText(CadastroPetActivity.this, R.string.sucesso_cadastro_Pet, Toast.LENGTH_SHORT).show();
+            mToast = Toast.makeText(CadastroPetActivity.this, R.string.sucesso_cadastro_Pet, Toast.LENGTH_SHORT);
+            mToast.show();
             abrirTelaPrincipal();
 
         } catch (CampoObrAusenteException e) {
-            Toast mToast = Toast.makeText(CadastroPetActivity.this, R.string.erro_cadastro_campos_obrigatorios_Pet, Toast.LENGTH_SHORT);
+            mToast = Toast.makeText(CadastroPetActivity.this, R.string.erro_cadastro_campos_obrigatorios_Pet, Toast.LENGTH_SHORT);
             mToast.show();
         } catch (Exception e) {
             e.printStackTrace();

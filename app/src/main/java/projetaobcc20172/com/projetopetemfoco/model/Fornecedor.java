@@ -23,11 +23,6 @@ public class Fornecedor implements Serializable {
     private String mValor = "1";
     private Endereco mEndereco;
 
-
-    public Fornecedor(){
-
-    }
-
     @Exclude
     public String getId() { return mId; }
 
@@ -59,11 +54,11 @@ public class Fornecedor implements Serializable {
         this.mTelefone = telefone;
     }
 
-    public String getCpf_cnpj() {
+    public String getCpfCnpj() {
         return mCpfCnpj;
     }
 
-    public void setCpf_cnpj(String cpf_cnpj) {
+    public void setCpfCnpj(String cpf_cnpj) {
         this.mCpfCnpj = cpf_cnpj;
     }
 

@@ -51,7 +51,9 @@ public class LoginActivity extends AppCompatActivity {
 
         mEmail = findViewById(R.id.etLoginEmail);
         mSenha = findViewById(R.id.etLoginSenha);
-        Button mLogin, mCadastrar, mCadastrarFornecedor;
+        Button mLogin;
+        Button mCadastrar;
+        Button mCadastrarFornecedor;
         mLogin = findViewById(R.id.botao_login);
         mCadastrar = findViewById(R.id.botao_cadastrar_novo_usuario);
         mCadastrarFornecedor = findViewById(R.id.botao_cadastrar_fornecedor);
@@ -127,11 +129,11 @@ public class LoginActivity extends AppCompatActivity {
                             }
                         });
 
-                        Toast mToast = Toast.makeText(LoginActivity.this,R.string.sucesso_login_Toast, Toast.LENGTH_SHORT);
+                        mToast = Toast.makeText(LoginActivity.this,R.string.sucesso_login_Toast, Toast.LENGTH_SHORT);
                         mToast.show();
                         mProgressDialog.dismiss();
                     } else {
-                        Toast mToast = Toast.makeText(LoginActivity.this, R.string.erro_login_invalido_Toast, Toast.LENGTH_SHORT);
+                        mToast = Toast.makeText(LoginActivity.this, R.string.erro_login_invalido_Toast, Toast.LENGTH_SHORT);
                         mToast.show();
                         mProgressDialog.dismiss();
                     }
@@ -139,7 +141,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
             });
         }catch (Exception e){
-            Toast mToast = Toast.makeText(LoginActivity.this, R.string.erro_login_invalido_Toast, Toast.LENGTH_SHORT);
+            mToast = Toast.makeText(LoginActivity.this, R.string.erro_login_invalido_Toast, Toast.LENGTH_SHORT);
             mToast.show();
             mProgressDialog.dismiss();
         }

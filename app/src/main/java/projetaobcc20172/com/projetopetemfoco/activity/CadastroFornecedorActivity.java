@@ -46,8 +46,11 @@ public class CadastroFornecedorActivity extends AppCompatActivity {
     private Spinner mSpinnerHorarios;
     private Fornecedor fornecedor;
     private Usuario usuario;
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)//permite que essa variavel seja vista pela classe de teste
     private FirebaseAuth mAutenticacao;
+
+    //permite que essa variavel seja vista pela classe de teste
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    private Toast mToast;
 
 
     @Override
@@ -81,7 +84,7 @@ public class CadastroFornecedorActivity extends AppCompatActivity {
                 fornecedor.setNome( nome.getText().toString() );
                 fornecedor.setEmail(email.getText().toString());
                 fornecedor.setTelefone(telefone.getText().toString());
-                fornecedor.setCpf_cnpj(cpf_cnpj.getText().toString());
+                fornecedor.setCpfCnpj(cpf_cnpj.getText().toString());
                 fornecedor.setHorarios(mSpinnerHorarios.getSelectedItem().toString());
                 fornecedor.setSenha(senha.getText().toString());
                 fornecedor.setSenha2(senha2.getText().toString());
@@ -117,7 +120,7 @@ public class CadastroFornecedorActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         String identificadorFornecedor = Base64Custom.codificarBase64(fornecedor.getEmail());
                         fornecedor.setId(identificadorFornecedor);
-                        Toast mToast = Toast.makeText(CadastroFornecedorActivity.this, R.string.sucesso_cadastro_proxima_etapa_Toast, Toast.LENGTH_LONG);
+                        mToast = Toast.makeText(CadastroFornecedorActivity.this, R.string.sucesso_cadastro_proxima_etapa_Toast, Toast.LENGTH_LONG);
                         mToast.show();
                         usuario.setValor("1");
                         //Aqui será chamado a continuação do cadastro do fornecedor, levando-o ao cadastro do endereço
@@ -139,7 +142,7 @@ public class CadastroFornecedorActivity extends AppCompatActivity {
                             e.printStackTrace();
                         }
 
-                        Toast mToast = Toast.makeText(CadastroFornecedorActivity.this, erro, Toast.LENGTH_SHORT);
+                        mToast = Toast.makeText(CadastroFornecedorActivity.this, erro, Toast.LENGTH_SHORT);
                         mToast.show();
                     }
 

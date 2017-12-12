@@ -140,15 +140,15 @@ public class CadastroEnderecoActivity extends AppCompatActivity{
             //Chamada do DAO para salvar no banco
             usuarioDao.inserir(usuario, mIdUsuarioLogado);
             salvarPreferencias("id", usuario.getId());
-            Toast mToast = Toast.makeText(CadastroEnderecoActivity.this, R.string.sucesso_cadastro_Toast, Toast.LENGTH_SHORT);
+            mToast = Toast.makeText(CadastroEnderecoActivity.this, R.string.sucesso_cadastro_Toast, Toast.LENGTH_SHORT);
             mToast.show();
             abrirLoginUsuario();
 
             } catch (CampoObrAusenteException e) {
-                Toast mToast = Toast.makeText(CadastroEnderecoActivity.this, R.string.erro_cadastro_endereco_campos_obrigatorios_Toast, Toast.LENGTH_SHORT);
+                mToast = Toast.makeText(CadastroEnderecoActivity.this, R.string.erro_cadastro_endereco_campos_obrigatorios_Toast, Toast.LENGTH_SHORT);
                 mToast.show();
             } catch (Exception e) {
-                Toast mToast = Toast.makeText(CadastroEnderecoActivity.this, R.string.erro_cadastro_endereco_campos_obrigatorios_Toast, Toast.LENGTH_SHORT);
+                mToast = Toast.makeText(CadastroEnderecoActivity.this, R.string.erro_cadastro_endereco_campos_obrigatorios_Toast, Toast.LENGTH_SHORT);
                 mToast.show();
             }
     }
@@ -167,15 +167,15 @@ public class CadastroEnderecoActivity extends AppCompatActivity{
                 //Chamada do DAO para salvar no banco
                 fornecedorDao.inserir(fornecedor, mIdUsuarioLogado);
                 salvarPreferencias("idFornecedor", fornecedor.getId());
-                Toast mToast = Toast.makeText(CadastroEnderecoActivity.this, R.string.sucesso_cadastro_Toast, Toast.LENGTH_SHORT);
+                mToast = Toast.makeText(CadastroEnderecoActivity.this, R.string.sucesso_cadastro_Toast, Toast.LENGTH_SHORT);
                 mToast.show();
                 abrirLoginUsuario();
 
             } catch (CampoObrAusenteException e) {
-                Toast mToast = Toast.makeText(CadastroEnderecoActivity.this, R.string.erro_cadastro_endereco_campos_obrigatorios_Toast, Toast.LENGTH_SHORT);
+                mToast = Toast.makeText(CadastroEnderecoActivity.this, R.string.erro_cadastro_endereco_campos_obrigatorios_Toast, Toast.LENGTH_SHORT);
                 mToast.show();
             } catch (Exception e) {
-                Toast mToast = Toast.makeText(CadastroEnderecoActivity.this, R.string.erro_cadastro_endereco_campos_obrigatorios_Toast, Toast.LENGTH_SHORT);
+                mToast = Toast.makeText(CadastroEnderecoActivity.this, R.string.erro_cadastro_endereco_campos_obrigatorios_Toast, Toast.LENGTH_SHORT);
                 mToast.show();
             }
         }

@@ -1,6 +1,6 @@
 # built application files
-*.apk
-*.ap_
+ *.apk
+ *.ap_
 projetopetemfoco.iml
  # files for the dex VM
  *.dex
@@ -14,13 +14,13 @@ projetopetemfoco.iml
  
  # Eclipse project files
 	
-.metadata
-.classpath
-.project
-.externalToolBuilders/
-.settings/
-lint.xml
-project.properties
+ .metadata
+ .classpath
+ .project
+ .externalToolBuilders/
+ .settings/
+ lint.xml
+ project.properties
  
 .gradle
 .idea/
@@ -38,13 +38,13 @@ project.properties
 *.iws
 *.ipr
 *.swp
- 
- # others
+.idea/
+# others
 *.o
 *.so
 *.log
- .DS_Store
- Thumbs.db
+.DS_Store
+Thumbs.db
 .gitignore
 .iml
 build.gradle

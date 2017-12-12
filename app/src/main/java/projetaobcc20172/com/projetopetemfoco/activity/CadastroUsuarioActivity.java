@@ -40,7 +40,7 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
     private Fornecedor mFornecedor;
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)//permite que essa variavel seja vista pela classe de teste
     public Toast mToast;
-    FirebaseAuth mAutenticacao;
+    private FirebaseAuth mAutenticacao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

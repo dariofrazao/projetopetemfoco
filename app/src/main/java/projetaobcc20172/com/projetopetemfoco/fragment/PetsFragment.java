@@ -10,12 +10,14 @@ import android.widget.ListView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
 import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.adapter.PetAdapter;
+import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoFirebase;
 import projetaobcc20172.com.projetopetemfoco.model.Pet;
 
 //Classe que monta um Fragmente (pedaço de tela para exibir os pets)
@@ -25,6 +27,7 @@ public class PetsFragment extends Fragment {
     private ListView listView;
     private ArrayAdapter<Pet> adapter;
     private ArrayList<Pet> pets;
+    private DatabaseReference mFirebase;
 
     public PetsFragment() {
     }
@@ -59,6 +62,7 @@ public class PetsFragment extends Fragment {
                 // vazio
             }
         };
+        mFirebase.addValueEventListener(valueEventListenerPets);
         return view;
     }
 

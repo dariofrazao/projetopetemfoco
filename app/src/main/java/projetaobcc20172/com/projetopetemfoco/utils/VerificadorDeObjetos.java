@@ -1,9 +1,7 @@
 package projetaobcc20172.com.projetopetemfoco.utils;
 
 import projetaobcc20172.com.projetopetemfoco.R;
-import projetaobcc20172.com.projetopetemfoco.activity.CadastroEnderecoActivity;
 import projetaobcc20172.com.projetopetemfoco.activity.CadastroFornecedorActivity;
-import projetaobcc20172.com.projetopetemfoco.activity.CadastroPetActivity;
 import projetaobcc20172.com.projetopetemfoco.activity.CadastroServicoActivity;
 import projetaobcc20172.com.projetopetemfoco.activity.CadastroUsuarioActivity;
 import projetaobcc20172.com.projetopetemfoco.excecoes.CampoObrAusenteException;
@@ -22,13 +20,13 @@ import projetaobcc20172.com.projetopetemfoco.model.Usuario;
 public class VerificadorDeObjetos {
 
     //Verifica se as informações do usuário estão corretas
-    public static void vDadosUsuario(Usuario user, CadastroUsuarioActivity cad) throws ValidacaoException {
+    public static void vDadosUsuario(Usuario user) throws  CampoObrAusenteException, SenhasDiferentesException {
         if(user.getNome().isEmpty()|| user.getSenha().isEmpty()
                 || user.getEmail().isEmpty()){
-            throw new ValidacaoException(cad.getResources().getString(R.string.erro_cadastro_campos_obrigatorios_Toast));
+            throw new CampoObrAusenteException();
         }
         else if(!user.getSenha().equals(user.getSenha2())){
-            throw new ValidacaoException(cad.getResources().getString(R.string.erro_cadastro_senhas_diferentes_Toast));
+            throw new SenhasDiferentesException();
         }
 
     }
@@ -70,7 +68,7 @@ public class VerificadorDeObjetos {
         if(serv.getNome().isEmpty()){
             throw new ValidacaoException(cad.getResources().getString(R.string.preencha_campo_nome));
         }
-        else if(serv.getValor()==""){
+        else if(serv.getValor().equals("")){
             throw new ValidacaoException(cad.getResources().getString(R.string.preencha_campo_valor));
         }
         //else if(serv.getDescricao().isEmpty()){

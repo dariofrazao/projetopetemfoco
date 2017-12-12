@@ -25,8 +25,6 @@ import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 
 import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoFirebase;
-import projetaobcc20172.com.projetopetemfoco.excecoes.CampoObrAusenteException;
-import projetaobcc20172.com.projetopetemfoco.excecoes.SenhasDiferentesException;
 import projetaobcc20172.com.projetopetemfoco.excecoes.ValidacaoException;
 import projetaobcc20172.com.projetopetemfoco.helper.Base64Custom;
 import projetaobcc20172.com.projetopetemfoco.utils.MaskUtil;
@@ -46,11 +44,9 @@ public class CadastroFornecedorActivity extends AppCompatActivity {
 
     private EditText nome, email, senha, senha2, telefone, cpf_cnpj;
     private Spinner mSpinnerHorarios;
-    private Button botaoCadastrar;
     private Fornecedor fornecedor;
     private Usuario usuario;
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)//permite que essa variavel seja vista pela classe de teste
-    private Toast mToast;
     private FirebaseAuth mAutenticacao;
 
 
@@ -68,6 +64,7 @@ public class CadastroFornecedorActivity extends AppCompatActivity {
         cpf_cnpj.addTextChangedListener(MaskUtil.insert(cpf_cnpj, MaskUtil.MaskType.CEP));
         senha = findViewById(R.id.etCadastroSenhaFornecedor);
         senha2 = findViewById(R.id.etCadastroSenha2Fornecedor);
+        Button botaoCadastrar;
         botaoCadastrar = findViewById(R.id.botao_cadastrar_fornecedor);
 
         //Preparar o adaptar do Spinner para exibir os horários de atendimento do fornecedor

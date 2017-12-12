@@ -30,10 +30,8 @@ import projetaobcc20172.com.projetopetemfoco.helper.Base64Custom;
 public class LoginActivity extends AppCompatActivity {
 
     private EditText mEmail, mSenha;
-    private Button mLogin, mCadastrar, mCadastrarFornecedor;
     private FirebaseAuth mAutenticacao;
     private Usuario mUsuario;
-    private Fornecedor mFornecedor;
     private String mIdentificadorUserLogado;
     private Toast mToast;
     //private static Boolean loginAutomatico = false;
@@ -53,6 +51,7 @@ public class LoginActivity extends AppCompatActivity {
 
         mEmail = findViewById(R.id.etLoginEmail);
         mSenha = findViewById(R.id.etLoginSenha);
+        Button mLogin, mCadastrar, mCadastrarFornecedor;
         mLogin = findViewById(R.id.botao_login);
         mCadastrar = findViewById(R.id.botao_cadastrar_novo_usuario);
         mCadastrarFornecedor = findViewById(R.id.botao_cadastrar_fornecedor);
@@ -78,6 +77,7 @@ public class LoginActivity extends AppCompatActivity {
         mLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Fornecedor mFornecedor;
                 mUsuario = new Usuario();
                 mFornecedor = new Fornecedor();
                 mUsuario.setEmail( mEmail.getText().toString() );
@@ -123,7 +123,7 @@ public class LoginActivity extends AppCompatActivity {
 
                             @Override
                             public void onCancelled(DatabaseError databaseError) {
-
+                                //vazio
                             }
                         });
 

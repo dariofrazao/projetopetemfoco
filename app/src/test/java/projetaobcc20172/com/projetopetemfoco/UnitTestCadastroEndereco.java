@@ -21,7 +21,7 @@ import projetaobcc20172.com.projetopetemfoco.utils.VerificadorDeObjetos;
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 @RunWith(Parameterized.class)
-public class UnitTestCadastroEndereco extends CadastroEnderecoActivity {
+public class UnitTestCadastroEndereco {
 
     @Parameterized.Parameter
     public Endereco endTest;
@@ -47,8 +47,4 @@ public class UnitTestCadastroEndereco extends CadastroEnderecoActivity {
         VerificadorDeObjetos.vDadosObrEndereco(endTest);
     }
 
-    @Override
-    public void onPointerCaptureChanged(boolean hasCapture) {
-
-    }
 }

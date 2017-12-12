@@ -2,7 +2,6 @@ package projetaobcc20172.com.projetopetemfoco.database.services;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -11,7 +10,6 @@ import com.google.firebase.database.DatabaseReference;
 import java.util.List;
 
 import projetaobcc20172.com.projetopetemfoco.R;
-import projetaobcc20172.com.projetopetemfoco.activity.CadastroPetActivity;
 import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoFirebase;
 import projetaobcc20172.com.projetopetemfoco.model.Pet;
 import projetaobcc20172.com.projetopetemfoco.utils.Utils;

@@ -18,7 +18,7 @@ import projetaobcc20172.com.projetopetemfoco.utils.VerificadorDeObjetos;
 * Essa classe realiza os testes unitários para o cadastro de usuarios.
 * */
 @RunWith(Parameterized.class)
-public class UnitTestCadastroUsuario extends CadastroUsuarioActivity {
+public class UnitTestCadastroUsuario {
 
     @Parameterized.Parameter
     public Usuario userTest;
@@ -37,19 +37,15 @@ public class UnitTestCadastroUsuario extends CadastroUsuarioActivity {
                 new Usuario("","email","senha1",""));
         }
 
-    @Test (expected=ValidacaoException.class)
-    public void testCampoObgUsuario() throws ValidacaoException {
-        VerificadorDeObjetos.vDadosUsuario(userTest, UnitTestCadastroUsuario.this);
+    @Test (expected=CampoObrAusenteException.class)
+    public void testCampoObgUsuario() throws CampoObrAusenteException, SenhasDiferentesException {
+        VerificadorDeObjetos.vDadosUsuario(userTest);
     }
 
     @Test(expected = SenhasDiferentesException.class)
-    public void testSenhasDiferentes() throws CampoObrAusenteException, SenhasDiferentesException, ValidacaoException {
+    public void testSenhasDiferentes() throws CampoObrAusenteException, SenhasDiferentesException {
         Usuario testSenha = new Usuario("teste","email","senha1", "senhaDiferente");
-        VerificadorDeObjetos.vDadosUsuario(testSenha, UnitTestCadastroUsuario.this);
+        VerificadorDeObjetos.vDadosUsuario(testSenha);
     }
 
-    @Override
-    public void onPointerCaptureChanged(boolean hasCapture) {
-
-    }
 }

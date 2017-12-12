@@ -1,11 +1,9 @@
 package projetaobcc20172.com.projetopetemfoco.model;
 
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Exclude;
 
 import java.io.Serializable;
 
-import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoFirebase;
 
 /**
  * Created by renat on 06/12/2017.

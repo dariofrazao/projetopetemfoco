@@ -1,6 +1,6 @@
 package projetaobcc20172.com.projetopetemfoco.test.logintests;
 
-import android.support.test.espresso.intent.Intents;
+
 import android.support.test.rule.ActivityTestRule;
 
 import org.junit.After;
@@ -10,8 +10,6 @@ import org.junit.Test;
 
 import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.activity.LoginActivity;
-import projetaobcc20172.com.projetopetemfoco.activity.MainActivity;
-import projetaobcc20172.com.projetopetemfoco.activity.MainActivityFornecedor;
 import projetaobcc20172.com.projetopetemfoco.test.TestTools;
 
 /**

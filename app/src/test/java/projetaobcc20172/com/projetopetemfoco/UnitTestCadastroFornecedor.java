@@ -12,11 +12,9 @@ import org.mockito.junit.MockitoRule;
 
 import java.util.Arrays;
 
-import projetaobcc20172.com.projetopetemfoco.excecoes.CampoObrAusenteException;
-import projetaobcc20172.com.projetopetemfoco.excecoes.SenhasDiferentesException;
+
 import projetaobcc20172.com.projetopetemfoco.excecoes.ValidacaoException;
 import projetaobcc20172.com.projetopetemfoco.model.Fornecedor;
-import projetaobcc20172.com.projetopetemfoco.model.Servico;
 import projetaobcc20172.com.projetopetemfoco.utils.VerificadorDeObjetos;
 
 /**
@@ -29,14 +27,20 @@ public class UnitTestCadastroFornecedor {
     public MockitoRule rule = MockitoJUnit.rule();
 
     @Mock
-    Context mMockContext;
+    private Context mMockContext;
 
     @Parameterized.Parameter
     public Fornecedor fornecedorTest;
 
     @Parameterized.Parameters
     public static Iterable<? extends Object> data() {
-        String nome = "Teste",email="teste@gmail.com",cpfCnpj = "123456",telefone="996085321",senha="123456",horarios = "17:30";
+        String nome = "Teste";
+        String email="teste@gmail.com";
+        String cpfCnpj = "123456";
+        String telefone="996085321";
+        String senha="123456";
+        String horarios = "17:30";
+
         return Arrays.asList(
                 new Fornecedor(nome,email,cpfCnpj,telefone,senha,senha,""),
                 new Fornecedor(nome,email,cpfCnpj,telefone,senha,"",""),

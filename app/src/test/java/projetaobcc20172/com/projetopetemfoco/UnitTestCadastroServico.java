@@ -29,7 +29,7 @@ public class UnitTestCadastroServico {
     public Servico servicoTest;
 
     @Mock
-    Context mMockContext;
+    private Context mMockContext;
 
     @Parameterized.Parameters
     public static Iterable<? extends Object> data() {

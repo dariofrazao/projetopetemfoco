@@ -2,7 +2,7 @@ Feature: cadastrar
     Como consumidor, eu preciso me cadastrar para que eu possa ter acesso ao aplicativo.
   Scenario: Entre com as informações requisitadas e realize seu cadastro ou recebe uma mensagem de erro.
     Given Eu tenho que preencher os campos com as informaçoes:<nome>,<email>,<senha>,<senha2>
-    When Eu clicar no botão "Continuar Cadastro"
+    When Eu realizar a confirmação do meu cadastro
     Then Eu devo receber uma mensagem informando o estado do procedimento:<result>
 
     Examples:
@@ -19,7 +19,7 @@ Feature: cadastrar
   Scenario: Agora devo infomar os dados referentes a meu endereço
     Given Eu tenho que preencher os campos obrigatorios com as informaçoes:<logradouro>,<bairro>,<cidade>,<cep>,<uf>
     And Se eu desejar posso preencher os campos opcionais: <numero>,<complemento>
-    When  Eu clicar no botão "FINALIZAR CADASTRO"
+    When  Eu realizar a confirmação do meu cadastro
     Then  Eu devo receber uma mensagem informando o estado do procedimento:<result>
 
     Examples:

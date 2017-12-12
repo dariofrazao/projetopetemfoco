@@ -5,7 +5,7 @@ Feature: Logar na aplicação
     Como consumidor, eu preciso informar meu e-mail e senha para que eu possa utilizar o aplicativo.
 Scenario: Informar as informações requisitadas e logar na aplicação ou receber uma mensagem de erro
     Given eu informo meu <email> e <senha>
-    When Eu clicar em "logar"
+    When Eu finalizar a operação de login
     Then Eu recebo a mensagem: <mensagem>
 
     Examples:

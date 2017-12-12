@@ -12,7 +12,8 @@
 
     <include
         android:id="@+id/tb_cadastro_pet"
-        layout="@layout/toolbar"></include>
+        layout="@layout/toolbar">
+    </include>
 
     <LinearLayout
 
@@ -32,7 +33,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:orientation="vertical">
 
                 <View
@@ -42,7 +42,7 @@
                     android:layout_marginTop="2dp" />
 
                 <TextView
-                    android:id="@+id/TexViewCadastroNomePet"
+                    android:id="@+id/tvCadastroNomePet"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="6dp"
@@ -51,11 +51,9 @@
                     android:textStyle="bold" />
 
                 <EditText
-                    android:id="@+id/editText_nome_pet"
+                    android:id="@+id/etCadastroNomePet"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
                     android:layout_margin="4dp"
                     android:layout_marginTop="31dp"
                     android:ems="10"
@@ -74,24 +72,24 @@
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent">
 
-                    <TextView
-                        android:id="@+id/TexViewCadastroIdadePet"
-                        android:layout_width="120dp"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="6dp"
-                        android:text="@string/prompt_idade_pet"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/tvCadastroIdadePet"
+                            android:layout_width="140dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="6dp"
+                            android:text="@string/prompt_idade_pet"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/TexViewCadastroTipoPet"
-                        android:paddingLeft="20dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="6dp"
-                        android:text="@string/prompt_tipo_pet"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/tvCadastroTipoPet"
+                            android:paddingLeft="20dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="6dp"
+                            android:text="@string/prompt_tipo_pet"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textStyle="bold" />
 
                 </LinearLayout>
 
@@ -100,22 +98,37 @@
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent">
 
-                    <Spinner
-                        android:id="@+id/idadeSpinner"
-                        android:layout_margin="4dp"
-                        android:layout_width="120dp"
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:background="@drawable/gradiente_spinner"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/TexViewCadastroIdadePet" />
+                        android:layout_width="170dp">
 
-                    <Spinner
-                        android:id="@+id/tipoSpinner"
-                        android:layout_margin="4dp"
-                        android:layout_below="@+id/TexViewCadastroTipoPet"
-                        android:paddingLeft="20dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        <Spinner
+                            android:id="@+id/idadeSpinner"
+                            android:layout_margin="4dp"
+                            android:layout_width="170dp"
+                            android:layout_height="wrap_content"
+                            style="@style/Widget.AppCompat.DropDownItem.Spinner"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:background="@drawable/gradiente_spinner"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent">
+
+                        <Spinner
+                            android:id="@+id/tipoSpinner"
+                            android:layout_margin="4dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            style="@style/Widget.AppCompat.DropDownItem.Spinner"/>
+
+                    </LinearLayout>
+
                 </LinearLayout>
-
 
                 <View
                     android:layout_width="fill_parent"
@@ -124,7 +137,7 @@
                     android:layout_marginTop="2dp" />
 
                 <TextView
-                    android:id="@+id/TexViewCadastroGeneroPet"
+                    android:id="@+id/tvCadastroGeneroPet"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="6dp"
@@ -139,24 +152,23 @@
                     android:layout_marginTop="2dp" />
 
                 <RadioGroup
-                    android:id="@+id/genero_radio_group"
+                    android:id="@+id/rgGenero"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_toRightOf="@+id/gender_textview"
                     android:orientation="horizontal">
-
                     <RadioButton
-                        android:id="@+id/macho_radio_botao"
+                        android:id="@+id/rbMacho"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/macho"
-                        android:checked="true" />
-
+                        android:checked="true"
+                    />
                     <RadioButton
-                        android:id="@+id/femea_radio_botao"
+                        android:id="@+id/rbFemea"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/femea" />
+                        android:text = "@string/femea"
+                    />
                 </RadioGroup>
 
                 <View
@@ -166,7 +178,7 @@
                     android:layout_marginTop="2dp" />
 
                 <TextView
-                    android:id="@+id/TexViewCadastroRacaPet"
+                    android:id="@+id/tvCadastroRaçaPet"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="6dp"
@@ -175,12 +187,9 @@
                     android:textStyle="bold" />
 
                 <EditText
-                    android:id="@+id/editText_raca_pet"
+                    android:id="@+id/etCadastroRaçaPet"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_below="@+id/editText_genero_pet"
                     android:layout_margin="4dp"
                     android:ems="10"
                     android:hint="@string/digite_raca_pet"
@@ -193,7 +202,7 @@
                     android:layout_marginTop="2dp" />
 
                 <TextView
-                    android:id="@+id/TexViewCadastroPortePet"
+                    android:id="@+id/tvCadastroPortePet"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="6dp"
@@ -201,28 +210,39 @@
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textStyle="bold" />
 
-                <Spinner
-                    android:id="@+id/porteSpinner"
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:background="@drawable/gradiente_spinner"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp" />
+                    android:layout_width="match_parent">
+
+                    <Spinner
+                        android:id="@+id/porteSpinner"
+                        android:layout_margin="4dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/Widget.AppCompat.DropDownItem.Spinner"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="8dp" />
 
                 <Button
                     android:id="@+id/botao_cadastrar_pet"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_below="@+id/editText_senha2"
-                    android:layout_marginTop="24dp"
                     android:background="@drawable/shapebutton"
-                    android:text="Cadastrar" />
+                    android:text="@string/cadastrar" />
 
             </LinearLayout>
 
         </ScrollView>
 
     </LinearLayout>
+
 
 
 </RelativeLayout>

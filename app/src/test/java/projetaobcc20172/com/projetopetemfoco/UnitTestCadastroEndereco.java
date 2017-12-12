@@ -6,7 +6,9 @@ import org.junit.runners.Parameterized;
 
 import java.util.Arrays;
 
+import projetaobcc20172.com.projetopetemfoco.activity.CadastroEnderecoActivity;
 import projetaobcc20172.com.projetopetemfoco.excecoes.CampoObrAusenteException;
+import projetaobcc20172.com.projetopetemfoco.excecoes.ValidacaoException;
 import projetaobcc20172.com.projetopetemfoco.model.Endereco;
 import projetaobcc20172.com.projetopetemfoco.utils.VerificadorDeObjetos;
 
@@ -25,7 +27,7 @@ public class UnitTestCadastroEndereco {
     public Endereco endTest;
 
     @Parameterized.Parameters
-    public static Iterable<? extends Object> data() {
+    public static Iterable<?> data() {
         String mLog = "teste";
         String mBairro = "bairro";
         String mCidade = "cidade";

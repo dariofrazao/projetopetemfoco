@@ -4,7 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 
-public class Preferencias { //Classe para armazenar dados do usuário (preferências) ao iniciar novamente o aplicativo
+//Classe para armazenar dados do usuário (preferências) ao iniciar novamente o aplicativo
+public class Preferencias {
 
     private Context contexto;
     private SharedPreferences preferences;

@@ -10,8 +10,8 @@ import projetaobcc20172.com.projetopetemfoco.test.TestTools;
 public class TestToolsLogin {
 
     protected static void preencherEclicar(String login, String senha){
-        TestTools.digitarCampo(R.id.editText_email,login);
-        TestTools.digitarCampo(R.id.editText_senha,senha);
+        TestTools.digitarCampo(R.id.etLoginEmail,login);
+        TestTools.digitarCampo(R.id.etLoginSenha,senha);
         TestTools.clicarBotao(R.id.botao_login);
     }
 

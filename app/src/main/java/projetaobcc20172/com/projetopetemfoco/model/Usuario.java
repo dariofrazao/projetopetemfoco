@@ -1,11 +1,7 @@
 package projetaobcc20172.com.projetopetemfoco.model;
 
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Exclude;
-
 import java.io.Serializable;
-
-import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoFirebase;
 
 public class Usuario implements Serializable {
 
@@ -16,20 +12,20 @@ public class Usuario implements Serializable {
     private String mSenha;
     private String mSenha2;
     private Endereco mEndereco;
+    /*Variável que é setada para o valor "1" quando um fornecedor está se cadastrando, para que ao cadastrar o seu endereço,
+    a verificação na classe de Endereço saiba que ali o endereço deve ser cadastrado no nó do Fornecedor,
+    pois ambos, fornecedor e consumidor compartilham a mesma classe de Endereço.*/
+    private String mEnderecoUsuario = "0";
     private Pet mPet;
 
     public Usuario(){
     }
 
-    public Usuario(String nome,String email,String senha){
+    public Usuario(String nome,String email,String senha, String senha2){
         this.mNome = nome;
         this.mEmail = email;
         this.mSenha = senha;
-    }
-
-    public void salvar(){ //Método para salvar usuário no banco de dados do Firebase
-        DatabaseReference referenciaFirebase = ConfiguracaoFirebase.getFirebase(); //Chama a referência do Firebase
-        referenciaFirebase.child("usuarios").child( getId() ).setValue( this ); //Cria os nós dos usuário no banco de dados
+        this.mSenha2 = senha2;
     }
 
     @Exclude
@@ -66,6 +62,7 @@ public class Usuario implements Serializable {
         this.mSenha = senha;
     }
 
+    @Exclude
     public String getSenha2() {
         return mSenha2;
     }
@@ -88,5 +85,13 @@ public class Usuario implements Serializable {
 
     public void setPet(Pet pet) {
         this.mPet = pet;
+    }
+
+    public String getEnderecoUsuario() {
+        return mEnderecoUsuario;
+    }
+
+    public void setEnderecoUsuario(String enderecoUsuario) {
+        this.mEnderecoUsuario = enderecoUsuario;
     }
 }

@@ -17,17 +17,16 @@ import java.util.ArrayList;
 
 import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.adapter.PetAdapter;
+import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoFirebase;
 import projetaobcc20172.com.projetopetemfoco.model.Pet;
 
 //Classe que monta um Fragmente (pedaço de tela para exibir os pets)
 //Sua utilização é útil para dividir uma mesma tela em mais partes.
 public class PetsFragment extends Fragment {
 
-    private ListView listView;
-    private ArrayAdapter<Pet> adapter;
-    private ArrayList<Pet> pets;
-    private DatabaseReference firebase;
-    private ValueEventListener valueEventListenerPets;
+    private ArrayAdapter<Pet> mAdapter;
+    private ArrayList<Pet> mPets;
+    private DatabaseReference mFirebase;
 
     public PetsFragment() {
     }
@@ -36,25 +35,26 @@ public class PetsFragment extends Fragment {
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.activity_pets_fragment, container, false);
+        View view = inflater.inflate(R.layout.activity_fragment, container, false);
 
         // Monta listview e adapter
-        pets = new ArrayList<>();
-        listView = view.findViewById(R.id.lv_pets);
-        adapter = new PetAdapter(getActivity(), pets);
-        listView.setAdapter(adapter);
+        mPets = new ArrayList<>();
+        ListView mListView;
+        mListView = view.findViewById(R.id.lv_pets);
+        mAdapter = new PetAdapter(getActivity(), mPets);
+        mListView.setAdapter(mAdapter);
 
         //Listener que "ouve" o banco de dados
-        valueEventListenerPets = new ValueEventListener() {
+        ValueEventListener valueEventListenerPets = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                pets.clear();
+                mPets.clear();
                 for (DataSnapshot dados : dataSnapshot.getChildren()) {
                     Pet pet = dados.getValue(Pet.class);
-                    pets.add(pet);
+                    mPets.add(pet);
                 }
-                adapter.notifyDataSetChanged();
+                mAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -62,20 +62,8 @@ public class PetsFragment extends Fragment {
                 // vazio
             }
         };
+        mFirebase.addValueEventListener(valueEventListenerPets);
         return view;
     }
 
-    //Ao iniciar a tela, recupera os pets do banco pelo listener
-    @Override
-    public void onStart() {
-        super.onStart();
-        firebase.addValueEventListener(valueEventListenerPets);
-    }
-
-    //Ao finalizar a tela, remover o listener que "ouve" o banco
-    @Override
-    public void onStop() {
-        super.onStop();
-        firebase.removeEventListener(valueEventListenerPets);
-    }
 }

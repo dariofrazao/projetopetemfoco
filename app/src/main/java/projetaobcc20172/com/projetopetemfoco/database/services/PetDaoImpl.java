@@ -1,4 +1,4 @@
-package projetaobcc20172.com.projetopetemfoco.database;
+package projetaobcc20172.com.projetopetemfoco.database.services;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -11,38 +11,37 @@ import java.util.List;
 
 import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoFirebase;
-import projetaobcc20172.com.projetopetemfoco.database.services.ServicoDao;
-import projetaobcc20172.com.projetopetemfoco.model.Servico;
+import projetaobcc20172.com.projetopetemfoco.model.Pet;
 import projetaobcc20172.com.projetopetemfoco.utils.Utils;
 
 /**
- * Created by Felipe Oliveira on 07/12/17.
- * <flpdias14@gmail.com>
+ * Created by dario on 11/12/2017.
  */
 
-public class ServicoDaoImpl implements ServicoDao{
+public class PetDaoImpl implements PetDao{
 
 
-    private DatabaseReference referenciaFirebase;
-    private DatabaseReference referenciaFornecedor;
-    private  final Context contexto;
+    private DatabaseReference mReferenciaFirebase;
+    private  final Context mContexto;
 
-    public ServicoDaoImpl(Context contexto){
-        this.referenciaFirebase = ConfiguracaoFirebase.getFirebase();
-        this.contexto = contexto;
+    public PetDaoImpl(Context contexto){
+        this.mReferenciaFirebase = ConfiguracaoFirebase.getFirebase();
+        this.mContexto = contexto;
     }
 
     @Override
-    public void inserir(Servico servico, String idFornecedor) {
-        referenciaFornecedor = referenciaFirebase.child("fornecedor").child(idFornecedor);
-        referenciaFornecedor.child("servicos").push().setValue(servico).addOnCompleteListener(new OnCompleteListener<Void>() {
+    public void inserir(Pet pet, String idUsuarioLogado) {
+        mReferenciaFirebase = mReferenciaFirebase.child("usuarios").child(idUsuarioLogado);
+
+        //O método push() cria uma chave exclusiva para cada mPet cadastrado
+        mReferenciaFirebase.child("pets").push().setValue(pet).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful()){
-                    Utils.mostrarMensagemLonga(getContexto(), getContexto().getString(R.string.sucesso_cadastro));
+                    Utils.mostrarMensagemCurta(getContexto(), getContexto().getString(R.string.sucesso_cadastro_Pet));
                 }
                 else{
-                    Utils.mostrarMensagemLonga(getContexto(), getContexto().getString(R.string.sucesso_cadastro));
+                    Utils.mostrarMensagemLonga(getContexto(), getContexto().getString(R.string.erro_ao_cadastrar));
                     try {
                         throw  task.getException();
                     } catch (Exception e) {
@@ -53,10 +52,11 @@ public class ServicoDaoImpl implements ServicoDao{
         });
     }
 
+    /*
     @Override
-    public void remover(Servico servico, String idFornecedor) {
-        referenciaFornecedor = referenciaFirebase.child("fornecedor").child(idFornecedor);
-        referenciaFornecedor.child(String.format("%s/%s", "servicos", servico.getId()))
+    public void remover(Pet pet, String idFornecedor) {
+        referenciaFornecedor = referenciaFirebase.child("usuarios").child(idFornecedor);
+        referenciaFornecedor.child(String.format("%s/%s", "pets", pet.getId()))
                 .setValue(null).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
@@ -73,12 +73,13 @@ public class ServicoDaoImpl implements ServicoDao{
                 }
             }
         });
-    }
+    }*/
 
+    /*
     @Override
-    public void atualizar(Servico servico, String idFornecedor) {
-        referenciaFornecedor = referenciaFirebase.child("fornecedor").child(idFornecedor);
-        referenciaFornecedor.child(String.format("%s/%s", "servicos", servico.getId()))
+    public void atualizar(Pet pet, String idFornecedor) {
+        referenciaFornecedor = referenciaFirebase.child("usuarios").child(idFornecedor);
+        referenciaFornecedor.child(String.format("%s/%s", "servicos", pet.getId()))
                 .setValue(null).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
@@ -95,21 +96,21 @@ public class ServicoDaoImpl implements ServicoDao{
                 }
             }
         });
-    }
+    }*/
 
     @Override
-    public List<Servico> buscarPorNome(String nome) {
+    public List<Pet> buscarPorNome(String nome) {
         return null;
     }
 
     @Override
-    public List<Servico> buscarTodosFornecedor(String idFornecedor) {
+    public List<Pet> buscarTodosFornecedor(String idFornecedor) {
         return null;
     }
 
 
     private Context getContexto(){
-        return this.contexto;
+        return this.mContexto;
     }
 
 }

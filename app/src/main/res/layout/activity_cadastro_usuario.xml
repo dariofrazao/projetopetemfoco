@@ -12,7 +12,8 @@
 
     <include
         android:id="@+id/tb_cadastro"
-        layout="@layout/toolbar"></include>
+        layout="@layout/toolbar">
+    </include>
 
     <LinearLayout
 
@@ -32,7 +33,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:orientation="vertical">
 
                 <View
@@ -42,7 +42,7 @@
                     android:layout_marginTop="2dp" />
 
                 <TextView
-                    android:id="@+id/TexViewCadastroNomeUsuario"
+                    android:id="@+id/tvCadastroNomeUsuario"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="6dp"
@@ -51,11 +51,9 @@
                     android:textStyle="bold" />
 
                 <EditText
-                    android:id="@+id/editText_nome"
+                    android:id="@+id/etCadastroNomeUsuario"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
                     android:layout_margin="4dp"
                     android:layout_marginTop="31dp"
                     android:ems="10"
@@ -69,7 +67,7 @@
                     android:layout_marginTop="2dp" />
 
                 <TextView
-                    android:id="@+id/TexViewCadastroEmailUsuario"
+                    android:id="@+id/tvCadastroEmailUsuario"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="6dp"
@@ -78,12 +76,9 @@
                     android:textStyle="bold" />
 
                 <EditText
-                    android:id="@+id/editText_email"
+                    android:id="@+id/etCadastroEmailUsuario"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_below="@+id/editText_nome"
                     android:layout_margin="4dp"
                     android:ems="10"
                     android:hint="@string/digite_seu_email"
@@ -96,21 +91,18 @@
                     android:layout_marginTop="2dp" />
 
                 <TextView
-                    android:id="@+id/TexViewCadastroSenhaUsuario"
+                    android:id="@+id/tvCadastroSenhaUsuario"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="6dp"
-                    android:text="@string/prompt_password"
+                    android:text="@string/prompt_senha"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textStyle="bold" />
 
                 <EditText
-                    android:id="@+id/editText_senha"
+                    android:id="@+id/etCadastroSenhaUsuario"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_below="@+id/editText_email"
                     android:layout_margin="4dp"
                     android:ems="10"
                     android:hint="@string/digite_sua_senha"
@@ -123,7 +115,7 @@
                     android:layout_marginTop="2dp" />
 
                 <TextView
-                    android:id="@+id/TexViewCadastroRepetirSenhaUsuario"
+                    android:id="@+id/tvCadastroSenha2Usuario"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="6dp"
@@ -132,31 +124,19 @@
                     android:textStyle="bold" />
 
                 <EditText
-                    android:id="@+id/editText_senha2"
+                    android:id="@+id/etCadastroSenha2Usuario"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_below="@+id/editText_senha"
                     android:layout_margin="4dp"
                     android:ems="10"
                     android:hint="@string/repita_sua_senha"
                     android:inputType="textPassword" />
 
-                <View
-                    android:layout_width="fill_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginBottom="2dp"
-                    android:layout_marginTop="2dp" />
-
                 <Button
                     android:id="@+id/botao_cadastrar_endereco"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_below="@+id/editText_senha2"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginTop="10dp"
                     android:background="@drawable/shapebutton"
                     android:text="@string/cadastrar_endereco" />
 

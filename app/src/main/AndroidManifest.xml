@@ -3,6 +3,7 @@
     package="projetaobcc20172.com.projetopetemfoco">
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
@@ -24,20 +25,30 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".activity.MainActivity" />
 
         <activity
             android:name=".activity.CadastroPetActivity"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".activity.CadastroEnderecoActivity" />
+
         <activity
             android:name=".activity.CadastroUsuarioActivity"
-            android:label="@string/title_cadastro_usuario"
             android:windowSoftInputMode="stateHidden" />
+
         <activity
             android:name=".activity.CadastroServicoActivity"
-            android:label="@string/title_activity_cadastro_servico"
-            android:theme="@style/AppTheme" />
+            android:windowSoftInputMode="stateHidden"/>
+
+        <activity
+            android:name=".activity.CadastroFornecedorActivity"
+            android:windowSoftInputMode="stateHidden" />
+
+        <activity android:name=".activity.CadastroEnderecoActivity" />
+
+        <activity android:name=".activity.MainActivityFornecedor">
+
+        </activity>
     </application>
 
 </manifest>

@@ -6,9 +6,7 @@ import org.junit.runners.Parameterized;
 
 import java.util.Arrays;
 
-import projetaobcc20172.com.projetopetemfoco.activity.CadastroEnderecoActivity;
 import projetaobcc20172.com.projetopetemfoco.excecoes.CampoObrAusenteException;
-import projetaobcc20172.com.projetopetemfoco.excecoes.ValidacaoException;
 import projetaobcc20172.com.projetopetemfoco.model.Endereco;
 import projetaobcc20172.com.projetopetemfoco.utils.VerificadorDeObjetos;
 

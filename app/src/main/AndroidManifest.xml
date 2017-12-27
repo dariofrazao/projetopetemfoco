@@ -36,19 +36,8 @@
             android:name=".activity.CadastroUsuarioActivity"
             android:windowSoftInputMode="stateHidden" />
 
-        <activity
-            android:name=".activity.CadastroServicoActivity"
-            android:windowSoftInputMode="stateHidden"/>
-
-        <activity
-            android:name=".activity.CadastroFornecedorActivity"
-            android:windowSoftInputMode="stateHidden" />
-
         <activity android:name=".activity.CadastroEnderecoActivity" />
 
-        <activity android:name=".activity.MainActivityFornecedor">
-
-        </activity>
     </application>
 
 </manifest>

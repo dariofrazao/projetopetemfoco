@@ -29,23 +29,6 @@
     <string name="atencao">Atenção!</string>
     <string name="pergunta_confirma_dados_serao_perdidos">Os dados não salvos serão perdidos. Confirma?</string>
 
-    <!--Strings relacionadas a cadastro de fornecedor-->
-    <string name="tb_cadastro_fornecedor">Cadastro de Fornecedor</string>
-    <string name="botao_cadastrar_fornecedor">Cadastrar Fornecedor</string>
-    <string name="sucesso_cadastro_Fornecedor">Sucesso ao cadastrar fornecedor</string>
-    <string name="digite_seu_telefone">Digite seu telefone</string>
-    <string name="digite_seu_cpj_cnpj">Digite seu CPF/CNPJ</string>
-    <string name="prompt_telefone">Telefone</string>
-    <string name="prompt_cpf_cnpj">CPF/CNPJ</string>
-    <string name="prompt_horario">Horário de Funcionamento</string>
-    <string name="erro_cadastro_fornecedor_email_invalido_Toast">Erro ao cadastrar fornecedor: Email indicado não é válido.</string>
-    <string name="erro_cadastro_fornecedor_senha_invalida_Toast">Erro ao cadastrar fornecedor: Escolha uma senha que contenha pelo menos 6 caracteres.</string>
-    <string name="erro_cadastro_fornecedor_email_usado_Toast">Erro ao cadastrar fornecedor: Já existe uma conta com esse e-mail.</string>
-    <string name="erro_cadastro_fornecedor_campos_obrigatorios_Toast">Erro ao cadastrar fornecedor: Preencha todos os campos</string>
-    <string name="erro_cadastro_fornecedor_senhas_diferentes_Toast">Erro ao cadastrar fornecedor: Os campos de senha devem ser iguais.</string>
-    <string name="erro_cadastro_fornecedor_sem_conexao">Erro ao cadastrar fornecedor: Verifique a sua conexão</string>
-    <string name="erro_cadastro_fornecedor_nome_fornecedor_Toast">Erro ao cadastrar fornecedor: O nome de fornecedor inválido.</string>
-
     <!--Strings relacionadas a login-->
     <string name="prompt_email">Email</string>
     <string name="prompt_senha">Senha</string>
@@ -92,22 +75,5 @@
     <string name="digite_raca_pet">Digite a raça do seu pet</string>
     <string name="erro_cadastro_campos_obrigatorios_Pet">Erro ao cadastrar pet: Preencha o campo nome</string>
     <string name="sucesso_cadastro_Pet">Pet cadastrado com sucesso!</string>
-
-    <!--Strings relacionadas a serviço-->
-    <string name="tb_cadastro_serviço">Cadastro de Serviço</string>
-    <string name="botao_cadastrar_serviço">Cadastrar Serviço</string>
-    <string name="editar_servico">Editar Serviço</string>
-    <string name="prompt_nome">Nome do Serviço</string>
-    <string name="prompt_valor">Valor</string>
-    <string name="prompt_descricao">Descrição</string>
-    <string name="digite_nome_servico">Digite o nome do serviço</string>
-    <string name="digite_valor_servico">R$0,00</string>
-    <string name="digite_descricao_servico">Digite a descrição do serviço</string>
-    <string name="servico">Serviço</string>
-    <string name="preencha_campo_nome">Preencha o campo nome</string>
-    <string name="preencha_campo_descricao">Preencha o campo descrição</string>
-    <string name="preencha_campo_valor">Preencha o campo valor</string>
-    <string name="sucesso_cadastro_servico">Serviço cadastrado com sucesso!</string>
-    <string name="erro_cadastro_servico">Erro ao cadastrar serviço!</string>
 
 </resources>

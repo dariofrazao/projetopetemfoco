@@ -23,7 +23,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoFirebase;
-import projetaobcc20172.com.projetopetemfoco.model.Fornecedor;
 import projetaobcc20172.com.projetopetemfoco.model.Usuario;
 import projetaobcc20172.com.projetopetemfoco.helper.Base64Custom;
 
@@ -48,15 +47,12 @@ public class LoginActivity extends AppCompatActivity {
         verificarUsuarioLogado();
         //}
 
-
         mEmail = findViewById(R.id.etLoginEmail);
         mSenha = findViewById(R.id.etLoginSenha);
         Button mLogin;
         Button mCadastrar;
-        Button mCadastrarFornecedor;
         mLogin = findViewById(R.id.botao_login);
         mCadastrar = findViewById(R.id.botao_cadastrar_novo_usuario);
-        mCadastrarFornecedor = findViewById(R.id.botao_cadastrar_fornecedor);
 
         mCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,25 +63,13 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        mCadastrarFornecedor.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this, CadastroFornecedorActivity.class);
-                startActivity(intent);
-                //finish();
-            }
-        });
 
         mLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Fornecedor mFornecedor;
                 mUsuario = new Usuario();
-                mFornecedor = new Fornecedor();
                 mUsuario.setEmail( mEmail.getText().toString() );
                 mUsuario.setSenha( mSenha.getText().toString() );
-                mFornecedor.setEmail( mEmail.getText().toString() );
-                mFornecedor.setSenha( mSenha.getText().toString() );
                 exibirProgresso();
                 validarLogin();
 
@@ -97,6 +81,7 @@ public class LoginActivity extends AppCompatActivity {
     private void validarLogin(){
         try {
             mAutenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
+            mFirebase = ConfiguracaoFirebase.getFirebase().child("fornecedor");
             mAutenticacao.signInWithEmailAndPassword(
                     mUsuario.getEmail(),
                     mUsuario.getSenha()
@@ -108,19 +93,24 @@ public class LoginActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         mIdentificadorUserLogado = Base64Custom.codificarBase64(mUsuario.getEmail());
 
-                        //Salva o id do usuário logado nas preferências
-                        mFirebase = ConfiguracaoFirebase.getFirebase().child("fornecedor");
                         mFirebase.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
-                                    if (dataSnapshot.child(mIdentificadorUserLogado).child("cpfCnpj").exists()) {
-                                        salvarPreferenciasFornecedor("idFornecedor", mIdentificadorUserLogado);
-                                        abrirTelaPrincipalFornecedor();
-                                    } else {
-                                        salvarPreferenciasConsumidor("id", mIdentificadorUserLogado);
-                                        abrirTelaPrincipalConsumidor();
-                                    }
-
+                                //Se o usuário que fez login for um fornecedor, exibirá mensagem de erro
+                                if (dataSnapshot.child(mIdentificadorUserLogado).child("cpfCnpj").exists()) {
+                                    mToast = Toast.makeText(LoginActivity.this, R.string.erro_login_invalido_Toast, Toast.LENGTH_SHORT);
+                                    mToast.show();
+                                    mProgressDialog.dismiss();
+                                }
+                                //Se o usuário não for um fornecedor, então será um consumidor e abrirá a tela principal
+                                else {
+                                    mToast = Toast.makeText(LoginActivity.this,R.string.sucesso_login_Toast, Toast.LENGTH_SHORT);
+                                    mToast.show();
+                                    mProgressDialog.dismiss();
+                                    //Salva o id do usuário logado nas preferências
+                                    salvarPreferenciasConsumidor("id", mIdentificadorUserLogado);
+                                    abrirTelaPrincipalConsumidor();
+                                }
                             }
 
                             @Override
@@ -129,9 +119,6 @@ public class LoginActivity extends AppCompatActivity {
                             }
                         });
 
-                        mToast = Toast.makeText(LoginActivity.this,R.string.sucesso_login_Toast, Toast.LENGTH_SHORT);
-                        mToast.show();
-                        mProgressDialog.dismiss();
                     } else {
                         mToast = Toast.makeText(LoginActivity.this, R.string.erro_login_invalido_Toast, Toast.LENGTH_SHORT);
                         mToast.show();
@@ -153,20 +140,12 @@ public class LoginActivity extends AppCompatActivity {
         finish();
     }
 
-    private void abrirTelaPrincipalFornecedor(){
-        Intent intent = new Intent(LoginActivity.this, MainActivityFornecedor.class);
-        startActivity( intent );
-        finish();
-    }
 
     //Método que verifica se o usuário já está logado no app
     private void verificarUsuarioLogado(){
         mAutenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
         if( mAutenticacao.getCurrentUser() != null && getPreferencesKeyConsumidor(this)){
             abrirTelaPrincipalConsumidor();
-        }
-        else if (mAutenticacao.getCurrentUser() != null){
-            abrirTelaPrincipalFornecedor();
         }
     }
 
@@ -187,14 +166,6 @@ public class LoginActivity extends AppCompatActivity {
 
     //Método que salva o id do usuário nas preferências para login automático ao abrir aplicativo
     private void salvarPreferenciasConsumidor(String key, String value){
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(key, value);
-        editor.commit();
-    }
-
-    //Método que salva o id do usuário nas preferências para login automático ao abrir aplicativo
-    private void salvarPreferenciasFornecedor(String key, String value){
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(key, value);

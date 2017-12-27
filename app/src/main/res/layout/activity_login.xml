@@ -114,14 +114,6 @@
                     android:background="@drawable/shapebuttonborder"
                     android:text="@string/cadastrar" />
 
-                <Button
-                    android:id="@+id/botao_cadastrar_fornecedor"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="4dp"
-                    android:background="@drawable/shapebuttonborder"
-                    android:text="@string/botao_cadastrar_fornecedor" />
-
             </LinearLayout>
 
         </ScrollView>

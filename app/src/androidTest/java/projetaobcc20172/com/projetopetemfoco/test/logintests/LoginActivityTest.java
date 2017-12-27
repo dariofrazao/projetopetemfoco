@@ -24,8 +24,6 @@ public class LoginActivityTest {
     private static String sSenhaInvalida = "senhaInvalida";
     private static String sLoginValido = "raulpedrouag@gmail.com";
     private static String sSenhaValida = "123456";
-    private static String sLoginFornecedor = "for@for.com";
-    private static String sSenhaFornecedor = "12345678";
 
     @Rule
     public ActivityTestRule <LoginActivity> loginActivityRule = new ActivityTestRule<>(LoginActivity.class);
@@ -75,15 +73,6 @@ public class LoginActivityTest {
         TestTools.checarToast(R.string.sucesso_login_Toast);
        // Thread.sleep(3000);
       //  TestTools.verificarMudancaActivity(MainActivity.class.getName());
-    }
-
-    @Test
-    public void testefornecedorCadastrado() throws InterruptedException {
-     //   Intents.init();//Para realizar teste de mudança dela deve-se sempre add esse método no começo do método
-        TestToolsLogin.preencherEclicar(sLoginFornecedor, sSenhaFornecedor);
-        TestTools.checarToast(R.string.sucesso_login_Toast);
-       // Thread.sleep(3000);
-       // TestTools.verificarMudancaActivity(MainActivityFornecedor.class.getName());
     }
 
     @After

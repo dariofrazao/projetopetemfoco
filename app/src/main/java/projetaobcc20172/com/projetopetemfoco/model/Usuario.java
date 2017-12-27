@@ -12,9 +12,6 @@ public class Usuario implements Serializable {
     private String mSenha;
     private String mSenha2;
     private Endereco mEndereco;
-    /*Variável que é setada para o valor "1" quando um fornecedor está se cadastrando, para que ao cadastrar o seu endereço,
-    a verificação na classe de Endereço saiba que ali o endereço deve ser cadastrado no nó do Fornecedor,
-    pois ambos, fornecedor e consumidor compartilham a mesma classe de Endereço.*/
     private String mEnderecoUsuario = "0";
     private Pet mPet;
 

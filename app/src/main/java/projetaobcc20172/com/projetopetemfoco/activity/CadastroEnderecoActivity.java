@@ -20,13 +20,11 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import projetaobcc20172.com.projetopetemfoco.R;
-import projetaobcc20172.com.projetopetemfoco.database.services.FornecedorDaoImpl;
 import projetaobcc20172.com.projetopetemfoco.database.services.UsuarioDaoImpl;
 import projetaobcc20172.com.projetopetemfoco.excecoes.CampoObrAusenteException;
 import projetaobcc20172.com.projetopetemfoco.helper.Util;
 import projetaobcc20172.com.projetopetemfoco.helper.ZipCodeListener;
 import projetaobcc20172.com.projetopetemfoco.model.Endereco;
-import projetaobcc20172.com.projetopetemfoco.model.Fornecedor;
 import projetaobcc20172.com.projetopetemfoco.model.Usuario;
 import projetaobcc20172.com.projetopetemfoco.utils.MaskUtil;
 import projetaobcc20172.com.projetopetemfoco.utils.VerificadorDeObjetos;
@@ -39,7 +37,6 @@ public class CadastroEnderecoActivity extends AppCompatActivity{
     private EditText mLogradouro, mNumero, mComplemento, mBairro, mLocalidade, mCep;
     private Spinner mSpinnerUf;
     private Usuario mUsuario;
-    private Fornecedor mFornecedor;
     private Util mUtil;
     private Endereco mEndereco;
     private String mIdUsuarioLogado;
@@ -81,10 +78,9 @@ public class CadastroEnderecoActivity extends AppCompatActivity{
                 R.id.etCadastroBairroEndereco,
                 R.id.ufSpinner);
 
-        //Receber os dados do usuário e fornecedor da outra activity
+        //Receber os dados do usuário da outra activity
         Intent i = getIntent();
         mUsuario = (Usuario) i.getSerializableExtra("Usuario");
-        mFornecedor = (Fornecedor) i.getSerializableExtra("Fornecedor");
 
         Button mBtnCadastrarEndereco = findViewById(R.id.botao_finalizar_cadastro_endereco);
         mBtnCadastrarEndereco.setOnClickListener(new View.OnClickListener() {
@@ -101,14 +97,8 @@ public class CadastroEnderecoActivity extends AppCompatActivity{
                 mEndereco.setCep(mCep.getText().toString());
                 mEndereco.setUf(mSpinnerUf.getSelectedItem().toString());
 
-                //Chama o método para cadastrar o usuário no banco(se o valor for "0", é um usuário consumidor
-                if (mUsuario.getEnderecoUsuario().equals("0")) {
-                    cadastrarEnderecoUsuario();
-                }
-                //Chama o método para cadastrar o fornecedor no banco(se não for "0", é um fornecedor
-                else{
-                    cadastrarEnderecoFornecedor();
-                }
+                cadastrarEnderecoUsuario();
+
 
             }
         });
@@ -139,9 +129,7 @@ public class CadastroEnderecoActivity extends AppCompatActivity{
 
             //Chamada do DAO para salvar no banco
             usuarioDao.inserir(mUsuario, mIdUsuarioLogado);
-            salvarPreferencias("id", mUsuario.getId());
-            mToast = Toast.makeText(CadastroEnderecoActivity.this, R.string.sucesso_cadastro_Toast, Toast.LENGTH_SHORT);
-            mToast.show();
+            //salvarPreferencias("id", mUsuario.getId());
             abrirLoginUsuario();
 
             } catch (CampoObrAusenteException e) {
@@ -153,41 +141,13 @@ public class CadastroEnderecoActivity extends AppCompatActivity{
             }
     }
 
-    //Método que recupera os dados básicos do fornecedor, adicionando o endereço e chamando o DAO para salvar no banco
-    private void cadastrarEnderecoFornecedor(){
-            try {
-
-                //Recuperar id do fornecedor logado
-                mIdUsuarioLogado = getPreferences("idFornecedor", CadastroEnderecoActivity.this);
-
-                VerificadorDeObjetos.vDadosObrEndereco(mEndereco);
-                mFornecedor.setEndereco(mEndereco);
-                FornecedorDaoImpl fornecedorDao =  new FornecedorDaoImpl(this);
-
-                //Chamada do DAO para salvar no banco
-                fornecedorDao.inserir(mFornecedor, mIdUsuarioLogado);
-                salvarPreferencias("idFornecedor", mFornecedor.getId());
-                mToast = Toast.makeText(CadastroEnderecoActivity.this, R.string.sucesso_cadastro_Toast, Toast.LENGTH_SHORT);
-                mToast.show();
-                abrirLoginUsuario();
-
-            } catch (CampoObrAusenteException e) {
-                mToast = Toast.makeText(CadastroEnderecoActivity.this, R.string.erro_cadastro_endereco_campos_obrigatorios_Toast, Toast.LENGTH_SHORT);
-                mToast.show();
-            } catch (Exception e) {
-                mToast = Toast.makeText(CadastroEnderecoActivity.this, R.string.erro_cadastro_endereco_campos_obrigatorios_Toast, Toast.LENGTH_SHORT);
-                mToast.show();
-            }
-        }
-
-
     public void abrirLoginUsuario() {
         Intent intent = new Intent(CadastroEnderecoActivity.this, LoginActivity.class);
         startActivity(intent);
         finish();
     }
 
-    //Método que salva o id do usuário/fornecedor nas preferências para login automático ao abrir aplicativo
+    //Método que salva o id do usuário nas preferências para login automático ao abrir aplicativo
     private void salvarPreferencias(String key, String value){
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -232,7 +192,7 @@ public class CadastroEnderecoActivity extends AppCompatActivity{
 
     }
 
-    //Método que recupera o id do usuário logado, para salvar o endereço no nó do usuário/fornecedor que o está cadastrando
+    //Método que recupera o id do usuário logado, para salvar o endereço no nó do usuário que o está cadastrando
     public static String getPreferences(String key, Context context) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         return preferences.getString(key, null);

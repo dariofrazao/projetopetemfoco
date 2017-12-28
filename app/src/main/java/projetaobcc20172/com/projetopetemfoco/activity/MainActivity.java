@@ -9,31 +9,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
 import projetaobcc20172.com.projetopetemfoco.R;
-import projetaobcc20172.com.projetopetemfoco.adapter.PetAdapter;
 import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoFirebase;
-import projetaobcc20172.com.projetopetemfoco.model.Pet;
 
 public class MainActivity extends AppCompatActivity {
 
     private TextView mTvTitulo, mTvSubtitulo;
     private FirebaseAuth mAutenticacao;
-    private DatabaseReference mFirebase;
-    private static FirebaseDatabase mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +34,8 @@ public class MainActivity extends AppCompatActivity {
         mAutenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
         Button sair;
         Button meusPets;
-        Button buscarServicos;
-        Button meusFavoritos;
+        //Button buscarServicos;
+        //Button meusFavoritos;
 
         Toolbar toolbar;
         toolbar = findViewById(R.id.tb_main);
@@ -56,8 +47,8 @@ public class MainActivity extends AppCompatActivity {
 
         sair = findViewById(R.id.botao_sair);
         meusPets =  findViewById(R.id.botao_meus_pets);
-        buscarServicos =  findViewById(R.id.botao_buscar_servicos);
-        meusFavoritos =  findViewById(R.id.botao_meus_favoritos);
+        //buscarServicos =  findViewById(R.id.botao_buscar_servicos);
+        //meusFavoritos =  findViewById(R.id.botao_meus_favoritos);
 
         mTvTitulo = findViewById(R.id.tvTituloConsumidor);
         mTvSubtitulo = findViewById(R.id.tvSubtituloConsumidor);
@@ -67,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
         idUsuarioLogado = getPreferences("id", this);
 
         // Recuperar serviços do Firebase
+        DatabaseReference mFirebase;
         mFirebase = ConfiguracaoFirebase.getFirebase().child("usuarios").child(idUsuarioLogado);
 
         mFirebase.addValueEventListener(new ValueEventListener() {
@@ -80,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
+                //vazio
             }
         });
 
@@ -107,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
     private void deslogarFornecedor(){
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = preferences.edit();
-        editor.remove("idFornecedor");
+        editor.remove("id");
         editor.apply();
         mAutenticacao.signOut();
         Intent intent = new Intent(MainActivity.this, LoginActivity.class);

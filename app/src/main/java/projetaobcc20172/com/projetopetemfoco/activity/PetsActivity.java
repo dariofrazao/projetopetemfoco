@@ -9,12 +9,10 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,18 +27,13 @@ import projetaobcc20172.com.projetopetemfoco.model.Pet;
 
 public class PetsActivity extends AppCompatActivity {
 
-    private FirebaseAuth mAutenticacao;
-    private DatabaseReference mFirebase;
     private ArrayList<Pet> mPets;
     private ArrayAdapter<Pet> mAdapter;
-    private ValueEventListener mValueEventListenerPet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pets);
-
-        mAutenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
 
         //Recuperar id do usuário logado
         String idUsuarioLogado;
@@ -68,8 +61,10 @@ public class PetsActivity extends AppCompatActivity {
         listView.setAdapter(mAdapter);
 
         // Recuperar pets do Firebase
+        DatabaseReference mFirebase;
         mFirebase = ConfiguracaoFirebase.getFirebase().child("usuarios").child(idUsuarioLogado).child("pets");
 
+        ValueEventListener mValueEventListenerPet;
         mValueEventListenerPet = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

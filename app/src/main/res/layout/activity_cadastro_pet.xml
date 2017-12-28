@@ -8,6 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/fundo_degrade"
     tools:context="projetaobcc20172.com.projetopetemfoco.activity.CadastroPetActivity">
 
     <include
@@ -109,6 +110,7 @@
                             android:layout_margin="4dp"
                             android:layout_width="170dp"
                             android:layout_height="wrap_content"
+                            android:popupBackground="@drawable/fundo_degrade"
                             style="@style/Widget.AppCompat.DropDownItem.Spinner"/>
 
                     </LinearLayout>
@@ -124,6 +126,7 @@
                             android:layout_margin="4dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:popupBackground="@drawable/fundo_degrade"
                             style="@style/Widget.AppCompat.DropDownItem.Spinner"/>
 
                     </LinearLayout>
@@ -156,6 +159,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
+
                     <RadioButton
                         android:id="@+id/rbMacho"
                         android:layout_width="wrap_content"
@@ -221,6 +225,7 @@
                         android:layout_margin="4dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:popupBackground="@drawable/fundo_degrade"
                         style="@style/Widget.AppCompat.DropDownItem.Spinner"/>
 
                 </LinearLayout>

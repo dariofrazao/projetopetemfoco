@@ -61,6 +61,9 @@
     <string name="erro_cadastro_endereco_campos_obrigatorios_Toast">Erro ao cadastrar endereço: Preencha pelo menos o logradouro, bairro e cidade</string>
 
     <!--Strings relacionadas a pet-->
+    <string name="botao_meus_pets">Meus Pets</string>
+    <string name="botao_buscar_servicos">Buscar Serviços</string>
+    <string name="botao_meus_favoritos">Meus Favoritos</string>
     <string name="tb_cadastro_pet">Cadastro de Pet</string>
     <string name="botao_cadastrar_pet">Cadastrar Pet</string>
     <string name="prompt_idade_pet">Idade</string>

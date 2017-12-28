@@ -92,6 +92,36 @@ public class CadastroPetActivity extends AppCompatActivity {
                 !mRaca.getText().toString().isEmpty());
     }
 
+    //Método que salva o pet no banco
+    private boolean salvarPet(){
+        try {
+
+            //Recuperar id do usuário logado
+            mIdUsuarioLogado = getPreferences("id", CadastroPetActivity.this);
+            //Recuperar dados do pet informados pelo usuário
+            mRadioGroup = findViewById(R.id.rgGenero);
+            //Recupera o texto do item selecionado no gênero do pet
+            String itemSelecionado = ((RadioButton) findViewById(mRadioGroup.getCheckedRadioButtonId())).getText().toString();
+            mPet = new Pet(mNome.getText().toString(), mSpinnerTipo.getSelectedItem().toString(),
+                    mSpinnerIdade.getSelectedItem().toString(),mSpinnerPorte.getSelectedItem().toString(),
+                    mRaca.getText().toString(), itemSelecionado);
+
+            VerificadorDeObjetos.vDadosPet(mPet);
+            //Chamada do DAO para salvar no banco
+            PetDaoImpl petDao =  new PetDaoImpl(this);
+            petDao.inserir(mPet, mIdUsuarioLogado);
+            abrirTelaPrincipal();
+
+        } catch (CampoObrAusenteException e) {
+            mToast = Toast.makeText(CadastroPetActivity.this, R.string.erro_cadastro_campos_obrigatorios_Pet, Toast.LENGTH_SHORT);
+            mToast.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
     //Método do ícone para voltar
     @Override
     public boolean onSupportNavigateUp() {
@@ -104,48 +134,6 @@ public class CadastroPetActivity extends AppCompatActivity {
     public void onBackPressed() {
         if (verificarCamposPreenchidos()) confirmarSaida();
         else CadastroPetActivity.super.onBackPressed();
-    }
-
-    //Método que salva o pet no banco
-    private boolean salvarPet(){
-
-        //Recuperar id do usuário logado
-        mIdUsuarioLogado = getPreferences("id", CadastroPetActivity.this);
-
-        //Recuperar dados do pet informados pelo usuário
-        mRadioGroup = findViewById(R.id.rgGenero);
-        //Recupera o texto do item selecionado no gênero do pet
-        String itemSelecionado = ((RadioButton) findViewById(mRadioGroup.getCheckedRadioButtonId())).getText().toString();
-        mPet = new Pet(mNome.getText().toString(), mSpinnerTipo.getSelectedItem().toString(),
-                mSpinnerIdade.getSelectedItem().toString(),mSpinnerPorte.getSelectedItem().toString(),
-                mRaca.getText().toString(), itemSelecionado);
-
-        try {
-            VerificadorDeObjetos.vDadosPet(mPet);
-            PetDaoImpl petDao =  new PetDaoImpl(this);
-            //Chamada do DAO para salvar no banco
-            petDao.inserir(mPet, mIdUsuarioLogado);
-            mToast = Toast.makeText(CadastroPetActivity.this, R.string.sucesso_cadastro_Pet, Toast.LENGTH_SHORT);
-            mToast.show();
-            abrirTelaPrincipal();
-
-        } catch (CampoObrAusenteException e) {
-            mToast = Toast.makeText(CadastroPetActivity.this, R.string.erro_cadastro_campos_obrigatorios_Pet, Toast.LENGTH_SHORT);
-            mToast.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-        return true;
-
-
-
-    }
-
-    private void abrirTelaPrincipal() {
-        Intent intent = new Intent(CadastroPetActivity.this, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
     }
 
     //Método que exibe pergunta de confirmação ao usuário caso ele clique no botão de voltar com as
@@ -178,6 +166,13 @@ public class CadastroPetActivity extends AppCompatActivity {
     public static String getPreferences(String key, Context context) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         return preferences.getString(key, null);
+    }
+
+    private void abrirTelaPrincipal() {
+        //Intent intent = new Intent(CadastroPetActivity.this, MainActivity.class);
+        //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        //startActivity(intent);
+        finish();
     }
 
 }

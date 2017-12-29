@@ -1,7 +1,7 @@
 package projetaobcc20172.com.projetopetemfoco.model;
 
 public class Pet {
-    private String mIdUsuario;
+    private String mIdPet;
     private String mNome;
     private String mTipo;
     private String mIdade;
@@ -12,7 +12,8 @@ public class Pet {
     public Pet(){
     }
 
-    public Pet(String nome, String tipo, String idade, String porte, String raça, String genero){
+    public Pet(String idPet, String nome, String tipo, String idade, String porte, String raça, String genero){
+        this.mIdPet = idPet;
         this.mNome = nome;
         this.mTipo = tipo;
         this.mIdade = idade;
@@ -74,11 +75,12 @@ public class Pet {
         this.mRaca = raça;
     }
 
-    public String getIdUsuario() {
-        return mIdUsuario;
+    public String getIdPet() {
+        return mIdPet;
     }
 
-    public void setIdUsuario(String idUsuario) {
-        this.mIdUsuario = idUsuario;
+    public void setIdPet(String idPet) {
+        this.mIdPet = idPet;
     }
+
 }

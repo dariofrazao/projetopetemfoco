@@ -1,7 +1,5 @@
 package projetaobcc20172.com.projetopetemfoco.database.services;
 
-import java.util.List;
-
 import projetaobcc20172.com.projetopetemfoco.model.Pet;
 
 /**
@@ -10,10 +8,10 @@ import projetaobcc20172.com.projetopetemfoco.model.Pet;
 
 public interface PetDao {
 
-    void inserir(Pet pet, String idFornecedor);
-    //void remover(Pet pet,  String idFornecedor);
-    //void atualizar(Pet pet,  String idFornecedor);
-    List<Pet> buscarPorNome(String nome);
-    List<Pet> buscarTodosFornecedor(String idFornecedor);
+    void inserir(Pet pet, String idUsuario);
+    void remover(Pet pet,  String idUsuario);
+    void atualizar(Pet pet,  String idUsuario);
+    //List<Pet> buscarPorNome(String nome);
+    //List<Pet> buscarTodosFornecedor(String idUsuario);
 
 }

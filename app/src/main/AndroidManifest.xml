@@ -33,7 +33,9 @@
             android:name=".activity.CadastroUsuarioActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity android:name=".activity.CadastroEnderecoActivity" />
-        <activity android:name=".activity.PetsActivity"></activity>
+        <activity android:name=".activity.PetsActivity" />
+        <activity android:name=".activity.EditarPetActivity"
+            android:windowSoftInputMode="stateHidden"></activity>
     </application>
 
 </manifest>

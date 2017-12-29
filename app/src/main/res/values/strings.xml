@@ -20,6 +20,7 @@
     <string name="sucesso_cadastro">Cadastro Efetuado com Sucesso!</string>
     <string name="erro_ao_cadastrar">Erro ao cadastrar</string>
     <string name="erro_ao_atualizar">Erro ao atualizar</string>
+    <string name="erro_ao_remover">Erro ao remover</string>
     <string name="sucesso_remocao">Remoção Efetuada com Sucesso!</string>
     <string name="sucesso_atualizacao">Atualização Efetuada com Sucesso!</string>
     <string name="falha_cadastro">Cadastro Falhou!</string>
@@ -37,6 +38,7 @@
     <string name="entrar">Entrar</string>
     <string name="sair">Sair</string>
     <string name="cadastrar">Cadastrar</string>
+    <string name="editar">Editar</string>
     <string name="sucesso_login_Toast">Sucesso ao fazer login!</string>
     <string name="erro_login_invalido_Toast">Erro ao fazer login!</string>
 
@@ -65,6 +67,7 @@
     <string name="botao_buscar_servicos">Buscar Serviços</string>
     <string name="botao_meus_favoritos">Meus Favoritos</string>
     <string name="tb_cadastro_pet">Cadastro de Pet</string>
+    <string name="tb_editar_pet">Edição de Pet</string>
     <string name="botao_cadastrar_pet">Cadastrar Pet</string>
     <string name="prompt_idade_pet">Idade</string>
     <string name="prompt_tipo_pet">Tipo</string>
@@ -77,6 +80,10 @@
     <string name="femea">Fêmea</string>
     <string name="digite_raca_pet">Digite a raça do seu pet</string>
     <string name="erro_cadastro_campos_obrigatorios_Pet">Erro ao cadastrar pet: Preencha o campo nome</string>
+    <string name="erro_atualizacao_campos_obrigatorios_Pet">Erro ao atualizar pet: Preencha o campo nome</string>
     <string name="sucesso_cadastro_Pet">Pet cadastrado com sucesso!</string>
+    <string name="sucesso_atualizacao_Pet">Pet atualizado com sucesso!</string>
+    <string name="sucesso_remocao_Pet">Pet removido com sucesso!</string>
+    <string name="pergunta_confirma_remocao_pet">O pet será removido. Confirma?</string>
 
 </resources>

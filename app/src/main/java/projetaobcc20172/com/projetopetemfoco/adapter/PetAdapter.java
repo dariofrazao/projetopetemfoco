@@ -50,10 +50,10 @@ public class PetAdapter extends ArrayAdapter<Pet> {
             view = inflater.inflate(R.layout.lista_itens, parent, false);
 
             // recupera elemento para exibição
-            TextView nome = view.findViewById(R.id.tv_titulo);
-            TextView tipo = view.findViewById(R.id.tv_subtitulo);
-            ImageButton removerPet = view.findViewById(R.id.icone_remover_pet);
-            ImageButton editarPet = view.findViewById(R.id.icone_editar_pet);
+            TextView nome = view.findViewById(R.id.tvTitulo);
+            TextView tipo = view.findViewById(R.id.tvSubtitulo);
+            ImageButton removerPet = view.findViewById(R.id.ibtnRemoverPet);
+            ImageButton editarPet = view.findViewById(R.id.ibtnEditarPet);
 
             final Pet pet = mPets.get(position);
             nome.setText(pet.getNome());

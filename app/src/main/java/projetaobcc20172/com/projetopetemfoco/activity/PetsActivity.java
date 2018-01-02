@@ -51,7 +51,7 @@ public class PetsActivity extends AppCompatActivity {
         toolbar.setNavigationIcon(R.drawable.ic_action_arrow_left_white);
         setSupportActionBar(toolbar);
 
-        cadastrarPet = findViewById(R.id.botao_cadastrar_pet);
+        cadastrarPet = findViewById(R.id.btnCadastrarPet);
         ListView listView;
         listView = findViewById(R.id.lv_pets);
 

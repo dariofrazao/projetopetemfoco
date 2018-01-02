@@ -45,8 +45,8 @@ public class MainActivity extends AppCompatActivity {
         toolbar.setTitleTextColor(Color.WHITE);
         setSupportActionBar(toolbar);
 
-        sair = findViewById(R.id.botao_sair);
-        meusPets =  findViewById(R.id.botao_meus_pets);
+        sair = findViewById(R.id.btnSair);
+        meusPets =  findViewById(R.id.btnMeusPets);
         //buscarServicos =  findViewById(R.id.botao_buscar_servicos);
         //meusFavoritos =  findViewById(R.id.botao_meus_favoritos);
 

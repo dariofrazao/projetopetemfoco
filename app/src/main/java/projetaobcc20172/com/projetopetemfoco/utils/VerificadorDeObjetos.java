@@ -1,11 +1,7 @@
 package projetaobcc20172.com.projetopetemfoco.utils;
 
-import android.content.Context;
-
-import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.excecoes.CampoObrAusenteException;
 import projetaobcc20172.com.projetopetemfoco.excecoes.SenhasDiferentesException;
-import projetaobcc20172.com.projetopetemfoco.excecoes.ValidacaoException;
 import projetaobcc20172.com.projetopetemfoco.model.Endereco;
 import projetaobcc20172.com.projetopetemfoco.model.Pet;
 import projetaobcc20172.com.projetopetemfoco.model.Usuario;

@@ -76,6 +76,7 @@ public class Utils {
         //Coloca o título e a mensagem.
         builder.setTitle(titulo);
         builder.setMessage(mensagem);
+        builder.setCancelable(false);
 
         builder.setPositiveButton("Sim", onClickListenerPositive);
         builder.setNegativeButton("Não", onClickListenerNegative);

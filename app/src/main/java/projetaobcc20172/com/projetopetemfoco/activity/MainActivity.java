@@ -1,5 +1,6 @@
 package projetaobcc20172.com.projetopetemfoco.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -8,10 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListView;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -19,19 +18,13 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
 import projetaobcc20172.com.projetopetemfoco.R;
-import projetaobcc20172.com.projetopetemfoco.adapter.PetAdapter;
 import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoFirebase;
-import projetaobcc20172.com.projetopetemfoco.model.Pet;
 
 public class MainActivity extends AppCompatActivity {
 
+    private TextView mTvTitulo, mTvSubtitulo;
     private FirebaseAuth mAutenticacao;
-    private DatabaseReference mFirebase;
-    private ArrayList<Pet> mPets;
-    private ArrayAdapter<Pet> mAdapter;
-    private ValueEventListener mValueEventListenerPet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,14 +32,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mAutenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
-
-        //Recuperar id do usuário logado
-        String idUsuarioLogado;
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        idUsuarioLogado = preferences.getString("id", "");
-
-        Button cadastrarPet; //Botão de cadastrar o pet
-        Button sair; //Botão de Logout do usuário
+        Button sair;
+        Button meusPets;
+        //Button buscarServicos;
+        //Button meusFavoritos;
 
         Toolbar toolbar;
         toolbar = findViewById(R.id.tb_main);
@@ -56,70 +45,72 @@ public class MainActivity extends AppCompatActivity {
         toolbar.setTitleTextColor(Color.WHITE);
         setSupportActionBar(toolbar);
 
-        sair = findViewById(R.id.botao_sair);
-        cadastrarPet = findViewById(R.id.botao_cadastrar_pet);
-        ListView listView;
-        listView = findViewById(R.id.lv_pets);
+        sair = findViewById(R.id.btnSair);
+        meusPets =  findViewById(R.id.btnMeusPets);
+        //buscarServicos =  findViewById(R.id.botao_buscar_servicos);
+        //meusFavoritos =  findViewById(R.id.botao_meus_favoritos);
 
-        // Monta listview e mAdapter
-        mPets = new ArrayList<>();
-        mAdapter = new PetAdapter(MainActivity.this, mPets);
-        listView.setAdapter(mAdapter);
+        mTvTitulo = findViewById(R.id.tvTituloConsumidor);
+        mTvSubtitulo = findViewById(R.id.tvSubtituloConsumidor);
 
-        // Recuperar pets do Firebase
-        mFirebase = ConfiguracaoFirebase.getFirebase().child("usuarios").child(idUsuarioLogado).child("pets");
+        //Recuperar id do fornecedor logado
+        final String idUsuarioLogado;
+        idUsuarioLogado = getPreferences("id", this);
 
-        mValueEventListenerPet = new ValueEventListener() {
+        // Recuperar serviços do Firebase
+        DatabaseReference mFirebase;
+        mFirebase = ConfiguracaoFirebase.getFirebase().child("usuarios").child(idUsuarioLogado);
+
+        mFirebase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                mPets.clear();
-
-                // Recupera mPets
-                for (DataSnapshot dados : dataSnapshot.getChildren()) {
-                    Pet pet = dados.getValue(Pet.class);
-                    mPets.add(pet);
-                }
-                //Notificar o adaptar que exibe a lista de mPets se houver alteração no banco
-                mAdapter.notifyDataSetChanged();
+                String nome = (String)dataSnapshot.child("nome").getValue();
+                String email = (String)dataSnapshot.child("email").getValue();
+                mTvTitulo.setText(nome);
+                mTvSubtitulo.setText("E-mail: " + email);
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(MainActivity.this, "Erro na leitura do banco de dados", Toast.LENGTH_SHORT).show();
-            }
-        };
-        mFirebase.addValueEventListener(mValueEventListenerPet);
-
-        //Ação do botão de deslogar o usuário
-        sair.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                deslogarUsuario();
+                //vazio
             }
         });
 
-        //Ação do botão de cadastrar o pet, que abre a tela para o seu cadastro
-        cadastrarPet.setOnClickListener(new View.OnClickListener() {
+        meusPets.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, CadastroPetActivity.class);
+                Intent intent = new Intent();
+                intent.setClass(MainActivity.this, PetsActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        //Ação do botão de deslogar o fornecedor
+        sair.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                deslogarFornecedor();
             }
         });
 
     }
 
-    //Método para deslogar usuário da aplicação e retornar a tela de Login
-    private void deslogarUsuario(){
+    //Método para deslogar fornecedor da aplicação e retornar a tela de Login
+    private void deslogarFornecedor(){
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = preferences.edit();
         editor.remove("id");
         editor.apply();
-        mFirebase.removeEventListener(mValueEventListenerPet);
         mAutenticacao.signOut();
         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+    }
+
+    //Método que recupera o id do fornecedor logado, para salvar o endereço no nó do fornecedor que o está cadastrando
+    public static String getPreferences(String key, Context context) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        return preferences.getString(key, null);
     }
 
 }

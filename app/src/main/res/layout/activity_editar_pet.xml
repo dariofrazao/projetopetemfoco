@@ -5,10 +5,10 @@
     android:layout_height="match_parent"
     android:padding="0dp"
     android:background="@drawable/fundo_degrade"
-    tools:context="projetaobcc20172.com.projetopetemfoco.activity.CadastroPetActivity">
+    tools:context="projetaobcc20172.com.projetopetemfoco.activity.EditarPetActivity">
 
     <include
-        android:id="@+id/tb_cadastro_pet"
+        android:id="@+id/tb_editar_pet"
         layout="@layout/toolbar">
     </include>
 
@@ -16,14 +16,14 @@
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tb_cadastro_pet"
+        android:layout_below="@+id/tb_editar_pet"
         android:paddingBottom="@dimen/activity_vertical_margin"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin">
 
         <ScrollView
-            android:id="@+id/scrollView"
+            android:id="@+id/scrollViewEditarPet"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -39,7 +39,7 @@
                     android:layout_marginTop="2dp" />
 
                 <TextView
-                    android:id="@+id/tvCadastroNomePet"
+                    android:id="@+id/tvEditarNomePet"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="6dp"
@@ -48,7 +48,7 @@
                     android:textStyle="bold" />
 
                 <EditText
-                    android:id="@+id/etCadastroNomePet"
+                    android:id="@+id/etEditarNomePet"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="4dp"
@@ -69,24 +69,24 @@
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent">
 
-                        <TextView
-                            android:id="@+id/tvCadastroIdadePet"
-                            android:layout_width="140dp"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="6dp"
-                            android:text="@string/prompt_idade_pet"
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/tvEditarIdadePet"
+                        android:layout_width="140dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="6dp"
+                        android:text="@string/prompt_idade_pet"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textStyle="bold" />
 
-                        <TextView
-                            android:id="@+id/tvCadastroTipoPet"
-                            android:paddingLeft="20dp"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="6dp"
-                            android:text="@string/prompt_tipo_pet"
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/tvEditarTipoPet"
+                        android:paddingLeft="20dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="6dp"
+                        android:text="@string/prompt_tipo_pet"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textStyle="bold" />
 
                 </LinearLayout>
 
@@ -102,7 +102,7 @@
                         android:layout_width="170dp">
 
                         <Spinner
-                            android:id="@+id/idadeSpinner"
+                            android:id="@+id/idadeEditarSpinner"
                             android:layout_margin="4dp"
                             android:layout_width="170dp"
                             android:layout_height="wrap_content"
@@ -118,7 +118,7 @@
                         android:layout_width="match_parent">
 
                         <Spinner
-                            android:id="@+id/tipoSpinner"
+                            android:id="@+id/tipoEditarSpinner"
                             android:layout_margin="4dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -136,7 +136,7 @@
                     android:layout_marginTop="2dp" />
 
                 <TextView
-                    android:id="@+id/tvCadastroGeneroPet"
+                    android:id="@+id/tvEditarGeneroPet"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="6dp"
@@ -151,24 +151,24 @@
                     android:layout_marginTop="2dp" />
 
                 <RadioGroup
-                    android:id="@+id/rgGenero"
+                    android:id="@+id/rgEditarGenero"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
                     <RadioButton
-                        android:id="@+id/rbMacho"
+                        android:id="@+id/rbEditarMacho"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/macho"
                         android:checked="true"
-                    />
+                        />
                     <RadioButton
-                        android:id="@+id/rbFemea"
+                        android:id="@+id/rbEditarFemea"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text = "@string/femea"
-                    />
+                        />
                 </RadioGroup>
 
                 <View
@@ -178,7 +178,7 @@
                     android:layout_marginTop="2dp" />
 
                 <TextView
-                    android:id="@+id/tvCadastroRaçaPet"
+                    android:id="@+id/tvEditarRaçaPet"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="6dp"
@@ -187,7 +187,7 @@
                     android:textStyle="bold" />
 
                 <EditText
-                    android:id="@+id/etCadastroRaçaPet"
+                    android:id="@+id/etEditarRaçaPet"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="4dp"
@@ -202,7 +202,7 @@
                     android:layout_marginTop="2dp" />
 
                 <TextView
-                    android:id="@+id/tvCadastroPortePet"
+                    android:id="@+id/tvEditarPortePet"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="6dp"
@@ -217,7 +217,7 @@
                     android:layout_width="match_parent">
 
                     <Spinner
-                        android:id="@+id/porteSpinner"
+                        android:id="@+id/porteEditarSpinner"
                         android:layout_margin="4dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -232,11 +232,11 @@
                     android:layout_marginTop="8dp" />
 
                 <Button
-                    android:id="@+id/botao_cadastrar_pet"
+                    android:id="@+id/botao_editar_pet"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/shapebutton"
-                    android:text="@string/cadastrar" />
+                    android:text="@string/editar" />
 
             </LinearLayout>
 

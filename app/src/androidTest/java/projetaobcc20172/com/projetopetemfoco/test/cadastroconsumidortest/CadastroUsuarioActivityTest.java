@@ -11,6 +11,7 @@ import org.junit.Test;
 import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.activity.CadastroEnderecoActivity;
 import projetaobcc20172.com.projetopetemfoco.activity.CadastroUsuarioActivity;
+import projetaobcc20172.com.projetopetemfoco.activity.LoginActivity;
 import projetaobcc20172.com.projetopetemfoco.test.TestTools;
 import projetaobcc20172.com.projetopetemfoco.test.cadastroenderecotest.EnderecoActivityTest;
 
@@ -40,7 +41,7 @@ public class CadastroUsuarioActivityTest {
         //Desloga caso já esteja logado.
         //Evita erros nos testes
         try{
-            TestTools.clicarBotao(R.id.botao_sair);
+            TestTools.clicarBotao(R.id.btnSair);
         }catch (Exception e){
             e.getMessage();
         }
@@ -115,7 +116,7 @@ public class CadastroUsuarioActivityTest {
 
     @Test
     public void testeCadastrar(){
-        Intents.init();
+        //Intents.init();
         this.preencherComInfoCorretas();
         new EnderecoActivityTest().testeEnderecoCorreto();
     }
@@ -124,7 +125,7 @@ public class CadastroUsuarioActivityTest {
     //Teste que avalia o cadastro de um consumidor sem
     //a informção de num no endereço
     public void testeCadastrarEndNum(){
-        Intents.init();
+        //Intents.init();
         this.preencherComInfoCorretas();
         new EnderecoActivityTest().testeEnderecoCorretoSemNumero();
     }
@@ -133,7 +134,7 @@ public class CadastroUsuarioActivityTest {
     //Teste que avalia o cadastro de um consumidor sem
     //a informção de complemento no endereço
     public void testeCadastrarComplemento(){
-        Intents.init();
+        //Intents.init();
         this.preencherComInfoCorretas();
         new EnderecoActivityTest().testeEnderecoCorretoSemCompl();
     }
@@ -142,7 +143,7 @@ public class CadastroUsuarioActivityTest {
     //Teste que avalia o cadastro de um consumidor sem
     //a informação de complemento e de número no endereço
     public void testeCadastrarComplementoENumero(){
-        Intents.init();
+        //Intents.init();
         this.preencherComInfoCorretas();
         new EnderecoActivityTest().testeEnderecoCorretoSemComplENumero();
     }

@@ -9,9 +9,6 @@ import projetaobcc20172.com.projetopetemfoco.model.Fornecedor;
  */
 
 public interface FornecedorDao {
-    void inserir(Fornecedor fornecedor, String idFornecedor);
-    //void remover(Fornecedor fornecedor,  String idFornecedor);
-    //void atualizar(Fornecedor fornecedor,  String idFornecedor);
     List<Fornecedor> buscarPorNome(String nome);
     List<Fornecedor> buscarTodosFornecedor(String idFornecedor);
 

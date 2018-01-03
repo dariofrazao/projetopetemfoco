@@ -15,10 +15,12 @@ import java.util.Random;
 
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.intent.Intents.intended;
+import static android.support.test.espresso.intent.matcher.ComponentNameMatchers.hasClassName;
 import static android.support.test.espresso.intent.matcher.IntentMatchers.hasComponent;
 import static android.support.test.espresso.matcher.RootMatchers.withDecorView;
 import static android.support.test.espresso.matcher.ViewMatchers.isAssignableFrom;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static junit.framework.Assert.assertEquals;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.core.AllOf.allOf;
@@ -37,15 +39,22 @@ public class TestTools {
         Espresso.onView(ViewMatchers.withText(act.getResources().getString(rMsg))).inRoot(withDecorView(not(is(act.getWindow().getDecorView())))).check(matches(isDisplayed()));
     }
 
+    public static void checarToast(int rMsg,Activity act){
+        Espresso.onView(ViewMatchers.withText(act.getResources().getString(rMsg))).inRoot(withDecorView(not(is(act.getWindow().getDecorView())))).check(matches(isDisplayed()));
+    }
     public static  void checarToast(String msg){
         Activity act = TestTools.activityAtual();
         Espresso.onView(ViewMatchers.withText(msg)).inRoot(withDecorView(not(is(act.getWindow().getDecorView())))).check(matches(isDisplayed()));
     }
-
+    /*
     //Verifica se a mudança de activity(tela) ocorreu como esperada
     public static void verificarMudancaActivity(String nomeActivity){
-        intended(hasComponent(nomeActivity));
-        Intents.release();
+        intended(hasComponent(hasClassName(nomeActivity)));
+        assertEquals(activityEsperada,TestTools.activityAtual().getClass().getName());
+    }
+*/
+    public static void verificarMudancaActivity(String activityEsperada){
+        assertEquals(activityEsperada,TestTools.activityAtual().getClass().getName());
     }
 
     //Recebe a R.id.campoTexto e o texto a ser inserido no teste

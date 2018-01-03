@@ -13,6 +13,7 @@ import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.activity.CadastroPetActivity;
 import projetaobcc20172.com.projetopetemfoco.activity.LoginActivity;
 import projetaobcc20172.com.projetopetemfoco.activity.MainActivity;
+import projetaobcc20172.com.projetopetemfoco.activity.PetsActivity;
 import projetaobcc20172.com.projetopetemfoco.test.TestTools;
 import projetaobcc20172.com.projetopetemfoco.test.logintests.LoginActivityTest;
 
@@ -37,7 +38,7 @@ public class CadastroPetActivityTest{
     @Before
     public void setUp() throws Exception {
         try{
-            TestTools.clicarBotao(R.id.botao_sair);
+            TestTools.clicarBotao(R.id.btnSair);
         }catch (Exception e){
             e.getMessage();
         }
@@ -45,7 +46,8 @@ public class CadastroPetActivityTest{
         LoginActivityTest log = new LoginActivityTest();
         log.testeUsuarioCadastrado();
         Thread.sleep(3000);
-        TestTools.clicarBotao(R.id.botao_cadastrar_pet);
+        TestTools.clicarBotao(R.id.btnMeusPets);
+        TestTools.clicarBotao(R.id.btnCadastrarPet);
         Espresso.closeSoftKeyboard();
         Thread.sleep(3000);
     }
@@ -68,10 +70,10 @@ public class CadastroPetActivityTest{
     //Teste que simula um cadastro do pet com todos os campos preenchidos
     @Test
     public void testeCadastrarPet(){
-        Intents.init();
+        //Intents.init();
         TestToolsCadPet.preencherEClicar(sNomePet, sraca);
         TestTools.checarToast(R.string.sucesso_cadastro_Pet);
-        TestTools.verificarMudancaActivity(MainActivity.class.getName());
+        TestTools.verificarMudancaActivity(PetsActivity.class.getName());
     }
 
     @After

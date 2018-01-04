@@ -9,7 +9,16 @@
 
         <SearchView
             android:id="@+id/svBusca"
+            android:hint="@string/buscaEstabelecimento"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content" >
+
+        </SearchView>
+
+        <ListView
+            android:id="@+id/lvBuscaEsta"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
     </LinearLayout>
 </RelativeLayout>

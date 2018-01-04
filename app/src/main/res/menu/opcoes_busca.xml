@@ -13,6 +13,10 @@
             android:icon="@drawable/servicos"
             android:title="Servicos" />
         <item
+            android:id="@+id/nav_autonomos"
+            android:icon="@drawable/autonomo"
+            android:title="Autômatos" />
+        <item
             android:id="@+id/nav_mapa"
             android:icon="@drawable/map"
             android:title="Mapa" />

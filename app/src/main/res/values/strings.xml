@@ -86,4 +86,12 @@
     <string name="sucesso_remocao_Pet">Pet removido com sucesso!</string>
     <string name="pergunta_confirma_remocao_pet">O pet será removido. Confirma?</string>
 
+    <!--Strings relacionadas a tela de busca-->
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <string name="buscas">Buscas</string>
+
 </resources>

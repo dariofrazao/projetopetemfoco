@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_estabelecimentos"
+            android:icon="@drawable/estabelecimentos"
+            android:title="Estabelecimentos" />
+        <item
+            android:id="@+id/nav_servicos"
+            android:icon="@drawable/servicos"
+            android:title="Servicos" />
+        <item
+            android:id="@+id/nav_mapa"
+            android:icon="@drawable/map"
+            android:title="Mapa" />
+
+    </group>
+
+
+</menu>

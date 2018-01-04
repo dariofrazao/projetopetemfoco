@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.adapter.EstabelecimentoAdapter;
 import projetaobcc20172.com.projetopetemfoco.model.Fornecedor;
-import projetaobcc20172.com.projetopetemfoco.model.Pet;
 
 /**
  * Created by raul1 on 03/01/2018.

@@ -1,5 +1,6 @@
 package projetaobcc20172.com.projetopetemfoco.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -16,15 +17,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import projetaobcc20172.com.projetopetemfoco.R;
-
+/*
+* Essa classe implementa o navigator Drawer existente na tela de busca*/
 public class NavigatorMenu extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_busca);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setContentView(R.layout.activity_busca);//Activity em que se encontra o navigator
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);//toolbar do navigator
         setSupportActionBar(toolbar);
 
       /*  FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -44,18 +46,18 @@ public class NavigatorMenu extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        displaySelectedScreen(R.id.nav_estabelecimentos);//Determina qual tela será aberta primeiro ao entrar
     }
 
+    //Método do botão voltar
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
+        Intent intent = new Intent(NavigatorMenu.this, MainActivity.class);
+        startActivity( intent );
+        finish();
     }
 
+    //Determina o que será chamado no menu (botão superior direito - os três pontinhos)
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -113,4 +115,5 @@ public class NavigatorMenu extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
     }
+
 }

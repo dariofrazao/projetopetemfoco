@@ -30,4 +30,6 @@ public class BuscaEstabelecimentoActivity extends Fragment {
         //you can set the title for your toolbar here for different fragments different titles
         getActivity().setTitle("Busca por nome estabelecimento");
     }
+
+
 }

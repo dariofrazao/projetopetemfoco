@@ -68,4 +68,17 @@
         <item>Gigante</item>
     </string-array>
 
+    <string-array name="servicos">
+        <item>Banho</item>
+        <item>Tosa</item>
+        <item>Hospedagem</item>
+        <item>Passeio</item>
+        <item>Vacinação</item>
+    </string-array>
+
+    <string-array name="tiposAnimais">
+        <item>Cachorro</item>
+        <item>Gato</item>
+    </string-array>
+
 </resources>

@@ -29,7 +29,6 @@ import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoFirebase;
 public class MainActivity extends AppCompatActivity {
 
     private TextView mTvTitulo, mTvSubtitulo;
-    private DatabaseReference mFirebase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
         idUsuarioLogado = getPreferences("id", this);
 
         // Recuperar usuários do Firebase
+        DatabaseReference mFirebase;
         mFirebase = ConfiguracaoFirebase.getFirebase().child("usuarios").child(idUsuarioLogado);
 
         mFirebase.addValueEventListener(new ValueEventListener() {

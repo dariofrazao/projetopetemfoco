@@ -206,7 +206,7 @@ public class LoginActivity extends AppCompatActivity {
                 abrirTelaPrincipalConsumidor();
 
                 //Se o login pelo Google foi realizado com sucesso pela primeira vez na sessão
-            } else if (result.isSuccess() && getPreferencesKeyConsumidorGoogle(this) == false) {
+            } else if (result.isSuccess() && !getPreferencesKeyConsumidorGoogle(this)) {
 
                 GoogleSignInAccount account = result.getSignInAccount();
                 firebaseAuthWithGoogle(account);

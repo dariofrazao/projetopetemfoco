@@ -28,8 +28,6 @@ public class EditarEnderecoActivity extends AppCompatActivity {
 
     private EditText mLogradouro, mNumero, mComplemento, mBairro, mLocalidade, mCep;
     private Spinner mSpinnerUf;
-    private Endereco mEndereco;
-    private String mIdUsuarioLogado;
     private String mIdEndereco;
 
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
@@ -145,9 +143,11 @@ public class EditarEnderecoActivity extends AppCompatActivity {
         try {
 
             //Recuperar id do usuário logado
+            String mIdUsuarioLogado;
             mIdUsuarioLogado = getPreferences("id", EditarEnderecoActivity.this);
 
             //Recuperar os campos do endereço informados pelo usuário
+            Endereco mEndereco;
             mEndereco = new Endereco();
             mEndereco.setId(mIdEndereco);
             mEndereco.setLogradouro(mLogradouro.getText().toString());

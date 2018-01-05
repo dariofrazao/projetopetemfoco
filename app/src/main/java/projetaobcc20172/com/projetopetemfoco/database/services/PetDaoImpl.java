@@ -67,7 +67,7 @@ public class PetDaoImpl implements PetDao{
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                //O método getKey() retorna o id do pet
+
                 mReferenciaFirebase.child("usuarios").child(idUsuarioLogado).child("pets").
                         child(pet.getIdPet()).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override

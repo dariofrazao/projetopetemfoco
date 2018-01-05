@@ -17,7 +17,6 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.database.services.PetDaoImpl;
@@ -38,7 +37,6 @@ public class EditarPetActivity extends AppCompatActivity {
 
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     //permite que essa variavel seja vista pela classe de teste
-    private Toast mToast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +84,7 @@ public class EditarPetActivity extends AppCompatActivity {
         mNome = findViewById(R.id.etEditarNomePet);
         mRaca = findViewById(R.id.etEditarRaçaPet);
 
+        //Obter os dados do pet para edição
         midPet = intent.getStringExtra("idPet");
         mNome.setText(intent.getStringExtra("nomePet"));
         mRaca.setText(intent.getStringExtra("raçaPet"));
@@ -135,8 +134,7 @@ public class EditarPetActivity extends AppCompatActivity {
             abrirTelaPets();
 
         } catch (CampoObrAusenteException e) {
-            mToast = Toast.makeText(EditarPetActivity.this, R.string.erro_atualizacao_campos_obrigatorios_Pet, Toast.LENGTH_SHORT);
-            mToast.show();
+            Utils.mostrarMensagemCurta(getApplicationContext(), getApplicationContext().getString(R.string.erro_atualizacao_campos_obrigatorios_Pet));
         } catch (Exception e) {
             e.printStackTrace();
             return false;
@@ -191,9 +189,6 @@ public class EditarPetActivity extends AppCompatActivity {
     }
 
     private void abrirTelaPets() {
-        //Intent intent = new Intent(CadastroPetActivity.this, MainActivity.class);
-        //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-        //startActivity(intent);
         finish();
     }
 

@@ -100,9 +100,13 @@ public class NavigatorMenu extends AppCompatActivity
             case R.id.nav_servicos:
                 fragment = new BuscaServicoActivity();
                 break;
+            case R.id.nav_voltar:
+                this.onBackPressed();
+                break;
             case R.id.nav_mapa:
                 //fragment = new MapaActivity();
                 break;
+
         }
 
         //replacing the fragment

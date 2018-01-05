@@ -1,5 +1,8 @@
 package projetaobcc20172.com.projetopetemfoco.database.services;
 
+import android.widget.ArrayAdapter;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import projetaobcc20172.com.projetopetemfoco.model.Fornecedor;
@@ -9,7 +12,7 @@ import projetaobcc20172.com.projetopetemfoco.model.Fornecedor;
  */
 
 public interface FornecedorDao {
-    List<Fornecedor> buscarPorNome(String nome);
-    List<Fornecedor> buscarTodosFornecedor(String idFornecedor);
+    ArrayList<Fornecedor> buscarPorNome(String nome, ArrayAdapter<Fornecedor> adp);
+    List<Fornecedor> buscarTodosFornecedor();
 
 }

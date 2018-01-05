@@ -21,6 +21,11 @@
             android:icon="@drawable/map"
             android:title="Mapa" />
 
+        <item
+            android:id="@+id/nav_voltar"
+            android:icon="@drawable/setavoltar"
+            android:title="Voltar" />
+
     </group>
 
 

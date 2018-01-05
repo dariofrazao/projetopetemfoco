@@ -28,9 +28,10 @@ public class Fornecedor implements Serializable {
     private float mLongitude = 0;
     private float mNota = 0;
 
-    public Fornecedor(){}
+    public Fornecedor() {
+    }
 
-    public Fornecedor(String nome,String email,String cpfCnpj,String telefone,String senha,String senha2,String horarios){
+    public Fornecedor(String nome, String email, String cpfCnpj, String telefone, String senha, String senha2, String horarios) {
         this.mNome = nome;
         this.mEmail = email;
         this.mSenha = senha;
@@ -40,8 +41,20 @@ public class Fornecedor implements Serializable {
         this.mTelefone = telefone;
     }
 
+    public Fornecedor(String nome,String email,String  cpfCnpj,String horarios,float nota,String telefone,Endereco endereco){
+        this.mNome = nome;
+        this.mEmail = email;
+        this.mHorarios = horarios;
+        this.mCpfCnpj = cpfCnpj;
+        this.mTelefone = telefone;
+        this.mEndereco = endereco;
+        this.mNota = nota;
+    }
+
     @Exclude
-    public String getId() { return mId; }
+    public String getId() {
+        return mId;
+    }
 
     public void setId(String id) {
         this.mId = id;
@@ -121,7 +134,7 @@ public class Fornecedor implements Serializable {
         this.mEnderecoFornecedor = valor;
     }
 
-    public void addServico(Servico serv){
+    public void addServico(Servico serv) {
         this.mServicos.add(serv);
     }
 
@@ -141,3 +154,4 @@ public class Fornecedor implements Serializable {
         this.mNota = mNota;
     }
 }
+

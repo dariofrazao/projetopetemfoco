@@ -24,7 +24,7 @@
         android:layout_alignBottom="@+id/tvNota"
         android:layout_toLeftOf="@+id/tvNota"
         android:layout_toStartOf="@+id/tvNota"
-        android:text="mNota:"
+        android:text="Nota: "
         android:textColor="@color/colorSecondaryText"
         android:textSize="16sp" />
 

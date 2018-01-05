@@ -122,4 +122,9 @@ public class TestTools {
         return emailInicio+emailFim;
     }
 
+    //Lança um erro de teste se dois valores não forem iguais
+    public static void verQtElementos(int qtEncontrada,int qtEsperada){
+        assertEquals(qtEncontrada,qtEsperada);
+    }
+
 }

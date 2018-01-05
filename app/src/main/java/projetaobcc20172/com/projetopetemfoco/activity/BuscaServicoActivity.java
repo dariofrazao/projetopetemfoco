@@ -2,18 +2,25 @@ package projetaobcc20172.com.projetopetemfoco.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import projetaobcc20172.com.projetopetemfoco.R;
+import projetaobcc20172.com.projetopetemfoco.utils.SectionsPageAdapter;
 
 /**
  * Created by raul1 on 03/01/2018.
  */
 
 public class BuscaServicoActivity extends Fragment{
+
+    private SectionsPageAdapter mSectionsPageAdapter;
+    private ViewPager mViewPager;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -28,5 +35,20 @@ public class BuscaServicoActivity extends Fragment{
         super.onViewCreated(view, savedInstanceState);
         //you can set the title for your toolbar here for different fragments different titles
         getActivity().setTitle("Busca por serviço");
+        mSectionsPageAdapter = new SectionsPageAdapter(getActivity().getSupportFragmentManager());
+
+        // Set up the ViewPager with the sections adapter.
+        mViewPager = getActivity().findViewById(R.id.container);
+        setupViewPager(mViewPager);
+
+        TabLayout tabLayout = getActivity().findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(mViewPager);
+    }
+
+    private void setupViewPager(ViewPager viewPager) {
+        SectionsPageAdapter adapter = new SectionsPageAdapter(getActivity().getSupportFragmentManager());
+        adapter.addFragment(new TabServicosFragment(), "Serviços");
+        adapter.addFragment(new TabPetOpcoesFragment(), "Opções de Pet");
+        viewPager.setAdapter(adapter);
     }
 }

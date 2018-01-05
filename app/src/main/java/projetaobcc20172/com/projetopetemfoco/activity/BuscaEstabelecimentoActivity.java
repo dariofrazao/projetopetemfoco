@@ -63,31 +63,38 @@ public class BuscaEstabelecimentoActivity extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String s) {
+                if(s.equals("")){//apaga os resultado quando se apaga o texto
+                    mForncedores.clear();
+                    mAdapter.notifyDataSetChanged();
+                }
                 return false;
             }
         });
     }
 
     private void buscarEstabelecimentos(String nome){
-        Query query1 =  ConfiguracaoFirebase.getFirebase().child("fornecedor").orderByChild("nome").startAt(nome);
+        Query query1 = ConfiguracaoFirebase.getFirebase().child("fornecedor").orderByChild("nome").startAt(nome);
         query1.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                System.out.println("nome aki");
                 mForncedores.clear();
-                for(DataSnapshot dados : dataSnapshot.getChildren()){
+                for (DataSnapshot dados : dataSnapshot.getChildren()) {
                     Fornecedor forn;
                     try {
                         forn = dados.getValue(Fornecedor.class);
                         mForncedores.add(forn);
                         System.out.println(mForncedores.get(0).getNome());
                         mAdapter.notifyDataSetChanged();
-                    }catch (Exception e){
+                    } catch (Exception e) {
                         ArrayList<Servico> servicos = new ArrayList<>();
-                        forn = new Fornecedor(dados.child("nome").getValue(String.class),dados.child("email").getValue(String.class),dados.child("cpfCnpj").getValue(String.class)
-                                ,dados.child("horario").getValue(String.class),dados.child("nota").getValue(float.class),dados.child("telefone").getValue(String.class),
+                        float nota = 0;
+                        if (dados.child("nota").getValue(float.class) != null) {
+                            nota = dados.child("nota").getValue(float.class);
+                        }
+                        forn = new Fornecedor(dados.child("nome").getValue(String.class), dados.child("email").getValue(String.class), dados.child("cpfCnpj").getValue(String.class)
+                                , dados.child("horario").getValue(String.class), nota, dados.child("telefone").getValue(String.class),
                                 dados.child("endereco").getValue(Endereco.class));
-                        for(DataSnapshot ds:dados.child("servicos").getChildren()){
+                        for (DataSnapshot ds : dados.child("servicos").getChildren()) {
                             Servico serv = ds.getValue(Servico.class);
                             servicos.add(serv);
                         }
@@ -98,11 +105,15 @@ public class BuscaEstabelecimentoActivity extends Fragment {
                 }
                 mAdapter.notifyDataSetChanged();
             }
+
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 //Se ocorrer um erro
             }
         });
+
     }
+
+
 
 }

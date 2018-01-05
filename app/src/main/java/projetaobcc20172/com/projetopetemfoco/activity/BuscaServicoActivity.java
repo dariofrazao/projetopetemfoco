@@ -9,8 +9,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+
 import projetaobcc20172.com.projetopetemfoco.R;
-import projetaobcc20172.com.projetopetemfoco.utils.SectionsPageAdapter;
+import projetaobcc20172.com.projetopetemfoco.adapter.SectionsPageAdapter;
+
 
 /**
  * Created by raul1 on 03/01/2018.
@@ -18,7 +20,6 @@ import projetaobcc20172.com.projetopetemfoco.utils.SectionsPageAdapter;
 
 public class BuscaServicoActivity extends Fragment{
 
-    private SectionsPageAdapter mSectionsPageAdapter;
     private ViewPager mViewPager;
 
     @Nullable
@@ -35,18 +36,18 @@ public class BuscaServicoActivity extends Fragment{
         super.onViewCreated(view, savedInstanceState);
         //you can set the title for your toolbar here for different fragments different titles
         getActivity().setTitle("Busca por serviço");
-        mSectionsPageAdapter = new SectionsPageAdapter(getActivity().getSupportFragmentManager());
+        SectionsPageAdapter mSectionsPageAdapter = new SectionsPageAdapter(getActivity().getSupportFragmentManager());
 
         // Set up the ViewPager with the sections adapter.
         mViewPager = getActivity().findViewById(R.id.container);
         setupViewPager(mViewPager);
-
         TabLayout tabLayout = getActivity().findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
     }
 
+    //Permite que as abas apareçam na tela
     private void setupViewPager(ViewPager viewPager) {
-        SectionsPageAdapter adapter = new SectionsPageAdapter(getActivity().getSupportFragmentManager());
+        SectionsPageAdapter adapter = new SectionsPageAdapter(getChildFragmentManager());
         adapter.addFragment(new TabServicosFragment(), "Serviços");
         adapter.addFragment(new TabPetOpcoesFragment(), "Opções de Pet");
         viewPager.setAdapter(adapter);

@@ -1,5 +1,6 @@
 package projetaobcc20172.com.projetopetemfoco.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -15,6 +16,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.inputmethod.InputMethodManager;
 
 import projetaobcc20172.com.projetopetemfoco.R;
 /*
@@ -106,10 +108,9 @@ public class NavigatorMenu extends AppCompatActivity
             case R.id.nav_mapa:
                 //fragment = new MapaActivity();
                 break;
-
         }
-
-        //replacing the fragment
+        this.fecharTeclado();
+        //Instancia o fragmento
         if (fragment != null) {
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.content_main, fragment);
@@ -119,5 +120,14 @@ public class NavigatorMenu extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
     }
+
+    private void fecharTeclado(){
+        View view = this.getCurrentFocus();
+        if(view !=null){
+            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+    }
+
 
 }

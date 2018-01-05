@@ -46,11 +46,6 @@ public class EstabelecimentoAdapter extends ArrayAdapter<Fornecedor> {
             TextView nota = view.findViewById(R.id.tvNota);
             TextView distancia = view.findViewById(R.id.tvDistancia);
 
-            //Recuperar id do usuário logado
-            final String idUsuarioLogado;
-            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
-            idUsuarioLogado = preferences.getString("id", "");
-
             final Fornecedor fornecedor = mForncedores.get(position);
             nome.setText(fornecedor.getNome());
             nota.setText(fornecedor.getNota()+"");

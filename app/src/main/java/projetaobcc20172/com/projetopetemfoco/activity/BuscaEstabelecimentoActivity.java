@@ -47,7 +47,7 @@ public class BuscaEstabelecimentoActivity extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         //you can set the title for your toolbar here for different fragments different titles
         getActivity().setTitle("Busca por nome");
-        ListView listView = (ListView) getView().findViewById(R.id.lvBuscaEsta);
+        ListView listView = getView().findViewById(R.id.lvBuscaEsta);
         SearchView buscaEst = getView().findViewById(R.id.svBusca);
         // Monta listview e mAdapter
         mForncedores = new ArrayList<>();

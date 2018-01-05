@@ -7,6 +7,11 @@ import android.content.DialogInterface;
 import android.net.ConnectivityManager;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import projetaobcc20172.com.projetopetemfoco.R;
+
 
 /**
  * Classe de Rotinas úteis.
@@ -82,5 +87,10 @@ public class Utils {
         builder.setNegativeButton("Não", onClickListenerNegative);
 
         builder.show();
+    }
+
+    public static ArrayList<String> recuperaArrayR(Activity  act,int nomeArray){
+        ArrayList <String> tiposServicos = new ArrayList<>(Arrays.asList(act.getResources().getStringArray(nomeArray)));
+        return tiposServicos;
     }
 }

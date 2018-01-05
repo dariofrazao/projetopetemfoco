@@ -5,29 +5,26 @@ import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-
 import java.util.ArrayList;
 
-
 import projetaobcc20172.com.projetopetemfoco.R;
-
 
 /**
  * Created by raul1 on 05/01/2018.
  */
 
-public class ServicoAdapterGrid extends BaseAdapter {
-    private ArrayList<String> mTiposServicos;
+public class OpPetGridAdapter extends BaseAdapter {
+    private ArrayList<String> mTiposPet;
     private Context mContext;
     private static LayoutInflater inflater=null;
-    public ServicoAdapterGrid(@NonNull Context context,ArrayList<String> tiposServicos) {
+
+    public OpPetGridAdapter(@NonNull Context context, ArrayList<String> tiposPet) {
         this.mContext = context;
-        this.mTiposServicos = tiposServicos;
+        this.mTiposPet = tiposPet;
         inflater = ( LayoutInflater )context.
                 getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
@@ -35,7 +32,7 @@ public class ServicoAdapterGrid extends BaseAdapter {
     @Override
     public int getCount() {
         // TODO Auto-generated method stub
-        return this.mTiposServicos.size();
+        return this.mTiposPet.size();
     }
 
     @Override
@@ -58,16 +55,26 @@ public class ServicoAdapterGrid extends BaseAdapter {
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         // TODO Auto-generated method stub
-        Holder holder=new Holder();
+        OpPetGridAdapter.Holder holder=new OpPetGridAdapter.Holder();
         View rowView;
-        System.out.print("aki");
-        rowView = inflater.inflate(R.layout.grid_servicos, null);
-        holder.tv=(TextView) rowView.findViewById(R.id.gridTextServico);
-        holder.img=(ImageView) rowView.findViewById(R.id.gridImgServico);
+        rowView = inflater.inflate(R.layout.grid_op_pets, null);
+        holder.tv = rowView.findViewById(R.id.gridTextPet);
+        holder.img = rowView.findViewById(R.id.gridImgPet);
 
-        holder.tv.setText(this.mTiposServicos.get(position));
-       // holder.img.setImageResource(imageId[position]);
+        holder.tv.setText(this.mTiposPet.get(position));
+        holder.img.setImageResource(escolherImg(this.mTiposPet.get(position)));
 
         return rowView;
+    }
+
+
+    private int escolherImg(String tipoPet){
+        if(tipoPet.equals("Gato")){
+            return R.drawable.tipo_pet_gato;
+        }
+        if(tipoPet.equals("Cachorro")){
+            return R.drawable.tipo_pet_cachorro;
+        }
+        return R.drawable.tipo_pet_todos;
     }
 }

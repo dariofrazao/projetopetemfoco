@@ -72,37 +72,34 @@ public class BuscaEstabelecimentoActivity extends Fragment {
         });
     }
 
-    private void buscarEstabelecimentos(String nome){
+    private void buscarEstabelecimentos(String nomeBuscado){
+        final String nome = nomeBuscado;
         Query query1 = ConfiguracaoFirebase.getFirebase().child("fornecedor").orderByChild("nome").startAt(nome);
         query1.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 mForncedores.clear();
                 for (DataSnapshot dados : dataSnapshot.getChildren()) {
-                    Fornecedor forn;
-                    try {
-                        forn = dados.getValue(Fornecedor.class);
-                        mForncedores.add(forn);
-                        System.out.println(mForncedores.get(0).getNome());
-                        mAdapter.notifyDataSetChanged();
-                    } catch (Exception e) {
-                        ArrayList<Servico> servicos = new ArrayList<>();
-                        float nota = 0;
-                        if (dados.child("nota").getValue(float.class) != null) {
-                            nota = dados.child("nota").getValue(float.class);
-                        }
-                        forn = new Fornecedor(dados.child("nome").getValue(String.class), dados.child("email").getValue(String.class), dados.child("cpfCnpj").getValue(String.class)
-                                , dados.child("horario").getValue(String.class), nota, dados.child("telefone").getValue(String.class),
-                                dados.child("endereco").getValue(Endereco.class));
-                        for (DataSnapshot ds : dados.child("servicos").getChildren()) {
-                            Servico serv = ds.getValue(Servico.class);
-                            servicos.add(serv);
-                        }
-                        forn.setServicos(servicos);
-                        mForncedores.add(forn);
-
+                    String nomeT = dados.child("nome").getValue(String.class);
+                    if(!nomeT.contains(nome)){
+                        continue;
                     }
-                }
+                    Fornecedor forn;
+                    ArrayList<Servico> servicos = new ArrayList<>();
+                    float nota = 0;
+                    if (dados.child("nota").getValue(float.class) != null) {
+                        nota = dados.child("nota").getValue(float.class);
+                    }
+                    forn = new Fornecedor(nome, dados.child("email").getValue(String.class), dados.child("cpfCnpj").getValue(String.class)
+                            , dados.child("horario").getValue(String.class), nota, dados.child("telefone").getValue(String.class),
+                            dados.child("endereco").getValue(Endereco.class));
+                    for (DataSnapshot ds : dados.child("servicos").getChildren()) {
+                        Servico serv = ds.getValue(Servico.class);
+                        servicos.add(serv);
+                    }
+                    forn.setServicos(servicos);
+                mForncedores.add(forn);
+            }
                 mAdapter.notifyDataSetChanged();
             }
 

@@ -42,7 +42,7 @@ public class ListaEstabServicoActivity extends AppCompatActivity {
         mResultado = new ArrayList<>();
         mAdapter = new ServicoAdapterListView(ListaEstabServicoActivity.this,mResultado);
         listView.setAdapter(mAdapter);
-        buscarServico(intent.getStringExtra("servico") ,intent.getStringExtra("pet"));
+        buscarServico(intent.getStringExtra("servico") , intent.getStringArrayListExtra("pets"));
         mAdapter.notifyDataSetChanged();
     }
 
@@ -53,42 +53,41 @@ public class ListaEstabServicoActivity extends AppCompatActivity {
         return true;
     }
 
-    private void buscarServico(String servico,String pet){
-        Query query;
-        if(servico.equals("Todos") && pet.equals("Todos")){
-            query = ConfiguracaoFirebase.getFirebase().child("servico_fornecedor").orderByChild("nome_tipoPet");
-            System.out.println("valors 1"+servico+" "+pet);
-        }
-        else if(servico.equals("Todos")){
-            query = ConfiguracaoFirebase.getFirebase().child("servico_fornecedor").orderByChild("pet").equalTo(pet);
-            System.out.println("valors 2"+servico+" "+pet);
-        }
-        else if(pet.equals("Todos")){
-            query = ConfiguracaoFirebase.getFirebase().child("servico_fornecedor").orderByChild("servico").equalTo(servico);
-            System.out.println("valors 3"+servico+" "+pet);
-        }
-        else{
-            query = ConfiguracaoFirebase.getFirebase().child("servico_fornecedor").orderByChild("nome_tipoPet").equalTo(servico+"_"+pet);
-            System.out.println("valors 4"+servico+" "+pet);
-        }
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                mResultado.clear();
-                for(DataSnapshot dado: dataSnapshot.getChildren()){
-                   String tipoServico = dado.child("nome_tipoPet").getValue(String.class).split("_")[0];
-                   System.out.println(tipoServico);
-                   String [] resultado = {tipoServico,dado.child("nomeFornecedor").getValue(String.class),dado.child("valor").getValue(String.class),dado.child("pet").getValue(String.class)};
-                   mResultado.add(resultado);
+    private void buscarServico(String servico,ArrayList<String> pets) {
+        mResultado.clear();
+        for (String pet : pets) {
+            Query query;
+            if (servico.equals("Todos") && pet.equals("Todos")) {
+                query = ConfiguracaoFirebase.getFirebase().child("servico_fornecedor").orderByChild("nome_tipoPet");
+                System.out.println("valors 1" + servico + " " + pet);
+            } else if (servico.equals("Todos")) {
+                query = ConfiguracaoFirebase.getFirebase().child("servico_fornecedor").orderByChild("pet").equalTo(pet);
+                System.out.println("valors 2" + servico + " " + pet);
+            } else if (pet.equals("Todos")) {
+                query = ConfiguracaoFirebase.getFirebase().child("servico_fornecedor").orderByChild("servico").equalTo(servico);
+                System.out.println("valors 3" + servico + " " + pet);
+            } else {
+                query = ConfiguracaoFirebase.getFirebase().child("servico_fornecedor").orderByChild("nome_tipoPet").equalTo(servico + "_" + pet);
+                System.out.println("valors 4" + servico + " " + pet);
+            }
+            query.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    for (DataSnapshot dado : dataSnapshot.getChildren()) {
+                        String tipoServico = dado.child("nome_tipoPet").getValue(String.class).split("_")[0];
+                        System.out.println(tipoServico);
+                        String[] resultado = {tipoServico, dado.child("nomeFornecedor").getValue(String.class), dado.child("valor").getValue(String.class), dado.child("pet").getValue(String.class)};
+                        mResultado.add(resultado);
+
+                    }
+                    mAdapter.notifyDataSetChanged();
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
 
                 }
-                mAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
+            });
+        }
     }
 }

@@ -63,7 +63,9 @@ public class OpPetGridAdapter extends BaseAdapter {
         holder.img = rowView.findViewById(R.id.gridImgPet);
         holder.tv.setText(this.mTiposPet.get(position));
         holder.img.setImageResource(Utils.escolherIconPet(this.mTiposPet.get(position),rowView));
-
+        if(this.mTiposPet.get(position).equals("Todos")){
+            holder.img.setImageResource(R.drawable.tipo_pet_todos_check);
+        }
         return rowView;
     }
 

@@ -48,10 +48,6 @@ public class TabPetOpcoesFragment extends Fragment {
                 TextView opcaoSelecionada = view.findViewById(R.id.tvGridTextPet);
                 ImageView im = view.findViewById(R.id.gridImgPet);
                 addOpcoes(opcaoSelecionada.getText().toString(),im,gridView);
-                for(String s: sOpcaosSelecionada){
-                    System.out.println("opcoes "+s);
-                }
-                System.out.println("_______________");
             }
         });
         mPetAdapter.notifyDataSetChanged();
@@ -68,24 +64,22 @@ public class TabPetOpcoesFragment extends Fragment {
             this.desmarcarTodos(grid);
             sOpcaosSelecionada.add(this.opcaoTodos);
             this.marcarImg(this.opcaoTodos,im);
-            System.out.println("aki1");
         }
         else if(sOpcaosSelecionada.contains(this.opcaoTodos)){
             sOpcaosSelecionada.remove(this.opcaoTodos);
             sOpcaosSelecionada.add(selecionado);
             this.desmarcarTodos(grid);
             this.marcarImg(selecionado,im);
-            System.out.println("aki2");
         }
-        else if(sOpcaosSelecionada.contains(selecionado)){
+        //Desmarca um item marcado somente se a lista tiver mais de um item marcado
+        //garante que sempre existirá pelo menos um item marcado para busca.
+        else if(sOpcaosSelecionada.contains(selecionado) && sOpcaosSelecionada.size()>1){
             sOpcaosSelecionada.remove(selecionado);
             this.desmarcarImg(selecionado,im);
-            System.out.println("aki3");
-        }
-        else{
+        }//Se não está na lista add
+        else if(!sOpcaosSelecionada.contains(selecionado)){
             sOpcaosSelecionada.add(selecionado);
             this.marcarImg(selecionado,im);
-            System.out.println("aki4");
         }
 
     }
@@ -103,7 +97,7 @@ public class TabPetOpcoesFragment extends Fragment {
     }
 
     private void desmarcarImg(String selecionado, ImageView im){
-        if(selecionado.equals(tiposPets.get(0))){
+        if(selecionado.equals(tiposPets.get(0)) ){
             im.setImageResource(R.drawable.tipo_pet_todos);
         }
         else if(selecionado.equals(tiposPets.get(1))){

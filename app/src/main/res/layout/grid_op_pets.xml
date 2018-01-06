@@ -13,7 +13,7 @@
         app:srcCompat="@drawable/common_google_signin_btn_icon_dark_normal" />
 
     <TextView
-        android:id="@+id/gridTextPet"
+        android:id="@+id/tvGridTextPet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="17dp"

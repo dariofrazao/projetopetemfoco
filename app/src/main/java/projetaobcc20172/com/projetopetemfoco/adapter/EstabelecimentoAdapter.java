@@ -1,8 +1,6 @@
 package projetaobcc20172.com.projetopetemfoco.adapter;
 
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,7 +37,7 @@ public class EstabelecimentoAdapter extends ArrayAdapter<Fornecedor> {
 
             // Monta view a partir do xml
             assert inflater != null;
-            view = inflater.inflate(R.layout.linha_list_estabelecimentos, parent, false);
+            view = inflater.inflate(R.layout.lista_estabelecimentos_busca, parent, false);
 
             // recupera elemento para exibição
             TextView nome = view.findViewById(R.id.tvNomeForn);

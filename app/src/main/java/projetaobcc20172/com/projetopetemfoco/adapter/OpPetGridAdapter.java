@@ -12,6 +12,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import projetaobcc20172.com.projetopetemfoco.R;
+import projetaobcc20172.com.projetopetemfoco.utils.Utils;
 
 /**
  * Created by raul1 on 05/01/2018.
@@ -58,23 +59,13 @@ public class OpPetGridAdapter extends BaseAdapter {
         OpPetGridAdapter.Holder holder=new OpPetGridAdapter.Holder();
         View rowView;
         rowView = inflater.inflate(R.layout.grid_op_pets, null);
-        holder.tv = rowView.findViewById(R.id.gridTextPet);
+        holder.tv = rowView.findViewById(R.id.tvGridTextPet);
         holder.img = rowView.findViewById(R.id.gridImgPet);
-
         holder.tv.setText(this.mTiposPet.get(position));
-        holder.img.setImageResource(escolherImg(this.mTiposPet.get(position)));
+        holder.img.setImageResource(Utils.escolherIconPet(this.mTiposPet.get(position),rowView));
 
         return rowView;
     }
 
 
-    private int escolherImg(String tipoPet){
-        if(tipoPet.equals("Gato")){
-            return R.drawable.tipo_pet_gato;
-        }
-        if(tipoPet.equals("Cachorro")){
-            return R.drawable.tipo_pet_cachorro;
-        }
-        return R.drawable.tipo_pet_todos;
-    }
 }

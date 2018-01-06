@@ -1,6 +1,7 @@
 package projetaobcc20172.com.projetopetemfoco.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,17 +16,20 @@ import java.util.ArrayList;
 
 
 import projetaobcc20172.com.projetopetemfoco.R;
+import projetaobcc20172.com.projetopetemfoco.activity.CadastroUsuarioActivity;
+import projetaobcc20172.com.projetopetemfoco.activity.ListaEstabServicoActivity;
+import projetaobcc20172.com.projetopetemfoco.activity.LoginActivity;
 
 
 /**
  * Created by raul1 on 05/01/2018.
  */
 
-public class ServicoAdapterGrid extends BaseAdapter {
+public class TiposServicoAdapterGrid extends BaseAdapter {
     private ArrayList<String> mTiposServicos;
     private Context mContext;
     private static LayoutInflater inflater=null;
-    public ServicoAdapterGrid(@NonNull Context context,ArrayList<String> tiposServicos) {
+    public TiposServicoAdapterGrid(@NonNull Context context, ArrayList<String> tiposServicos) {
         this.mContext = context;
         this.mTiposServicos = tiposServicos;
         inflater = ( LayoutInflater )context.
@@ -60,14 +64,14 @@ public class ServicoAdapterGrid extends BaseAdapter {
         // TODO Auto-generated method stub
         Holder holder=new Holder();
         View rowView;
-        System.out.print("aki");
         rowView = inflater.inflate(R.layout.grid_servicos, null);
-        holder.tv=(TextView) rowView.findViewById(R.id.gridTextServico);
-        holder.img=(ImageView) rowView.findViewById(R.id.gridImgServico);
-
+        holder.tv = rowView.findViewById(R.id.gridTextServico);
+        holder.img= rowView.findViewById(R.id.gridImgServico);
         holder.tv.setText(this.mTiposServicos.get(position));
        // holder.img.setImageResource(imageId[position]);
 
         return rowView;
     }
+
+
 }

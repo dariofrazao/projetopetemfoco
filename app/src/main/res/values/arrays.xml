@@ -69,6 +69,7 @@
     </string-array>
 
     <string-array name="servicos">
+        <item>Todos</item>
         <item>Banho</item>
         <item>Tosa</item>
         <item>Hospedagem</item>

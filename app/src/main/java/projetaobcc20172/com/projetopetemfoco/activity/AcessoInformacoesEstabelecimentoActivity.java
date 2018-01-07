@@ -10,16 +10,13 @@ import android.os.Bundle;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-
 import projetaobcc20172.com.projetopetemfoco.R;
+import projetaobcc20172.com.projetopetemfoco.model.Estabelecimento;
 
 public class AcessoInformacoesEstabelecimentoActivity extends AppCompatActivity {
-
+    Estabelecimento mEstabelecimento;
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     //permite que essa variavel seja vista pela classe de teste
 
@@ -28,10 +25,8 @@ public class AcessoInformacoesEstabelecimentoActivity extends AppCompatActivity 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_acesso_informacoes_estabelecimento);
 
-        Intent intent = getIntent();
-
         Toolbar toolbar;
-        toolbar = findViewById(R.id.tb_acesso_estabelecimento);
+        toolbar = findViewById(R.id.tb_acesso_infomacoes_estabelecimento);
 
         // Configura toolbar
         toolbar.setTitle(R.string.tb_acesso_estabelecimento);
@@ -45,5 +40,14 @@ public class AcessoInformacoesEstabelecimentoActivity extends AppCompatActivity 
         TextView mExibeCpfCnpjEstabelecimento = findViewById(R.id.tvExibeCpfCnpjEstabelecimento);
         TextView mExibeHorarioEstabelecimento = findViewById(R.id.tvExibeHorarioEstabelecimento);
 
+        //Receber os dados do estabelecimento da outra activity
+        Intent i = getIntent();
+        mEstabelecimento = (Estabelecimento) i.getSerializableExtra("Estabelecimento");
+
+        mExibeNomeEstabelecimento.setText(mEstabelecimento.getNome());
+        mExibeEmailEstabelecimentor.setText(mEstabelecimento.getEmail());
+        mExibeTelefoneEstabelecimento.setText(mEstabelecimento.getTelefone());
+        mExibeCpfCnpjEstabelecimento.setText(mEstabelecimento.getCpfCnpj());
+        mExibeHorarioEstabelecimento.setText(mEstabelecimento.getHorarios());
     }
 }

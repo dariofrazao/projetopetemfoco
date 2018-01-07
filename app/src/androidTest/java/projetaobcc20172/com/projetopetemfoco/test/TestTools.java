@@ -6,7 +6,8 @@ import android.support.test.espresso.Espresso;
 import android.support.test.espresso.UiController;
 import android.support.test.espresso.ViewAction;
 import android.support.test.espresso.action.ViewActions;
-import android.support.test.espresso.intent.Intents;
+import android.support.test.espresso.contrib.DrawerActions;
+import android.support.test.espresso.contrib.NavigationViewActions;
 import android.support.test.espresso.matcher.ViewMatchers;
 import android.view.KeyEvent;
 import android.view.View;
@@ -17,18 +18,22 @@ import org.hamcrest.Matcher;
 
 import java.util.Random;
 
-import static android.support.test.espresso.action.ViewActions.pressImeActionButton;
+
+
+import static android.support.test.espresso.Espresso.onData;
+import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.action.ViewActions.swipeLeft;
+import static android.support.test.espresso.action.ViewActions.swipeRight;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
-import static android.support.test.espresso.intent.Intents.intended;
-import static android.support.test.espresso.intent.matcher.ComponentNameMatchers.hasClassName;
-import static android.support.test.espresso.intent.matcher.IntentMatchers.hasComponent;
 import static android.support.test.espresso.matcher.RootMatchers.withDecorView;
 import static android.support.test.espresso.matcher.ViewMatchers.isAssignableFrom;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
+import static org.hamcrest.Matchers.anything;
 import static org.hamcrest.core.AllOf.allOf;
 import static org.hamcrest.core.IsInstanceOf.instanceOf;
 
@@ -65,35 +70,35 @@ public class TestTools {
 
     //Recebe a R.id.campoTexto e o texto a ser inserido no teste
     public static void digitarCampo(int idCampo,String textoAserDigitado){
-        Espresso.onView(ViewMatchers.withId(idCampo)).perform(ViewActions.typeText(textoAserDigitado));
+        Espresso.onView(withId(idCampo)).perform(ViewActions.typeText(textoAserDigitado));
         Espresso.closeSoftKeyboard();
     }
 
     public static void digitarCampoComScroll(int idCampo,String textoAserDigitado){
-        Espresso.onView(ViewMatchers.withId(idCampo)).perform(ViewActions.scrollTo(),ViewActions.typeText(textoAserDigitado));
+        Espresso.onView(withId(idCampo)).perform(ViewActions.scrollTo(),ViewActions.typeText(textoAserDigitado));
         Espresso.closeSoftKeyboard();
     }
     public static void clicarBotao(int idBotao){
-        Espresso.onView(ViewMatchers.withId(idBotao)).perform(ViewActions.click());
+        Espresso.onView(withId(idBotao)).perform(click());
     }
     //Caso a tela contenha scroll e o botão não estaja visivel é necessario
     //rolar a barra até ele para depois clicar
     public static void clicarBotaoComScroll(int idBotao){
-        Espresso.onView(ViewMatchers.withId(idBotao)).perform(ViewActions.scrollTo(),ViewActions.click());
+        Espresso.onView(withId(idBotao)).perform(ViewActions.scrollTo(), click());
     }
     public static void selecionarSpinner(int idSpinner,String textoSpinner){
-        Espresso.onView(ViewMatchers.withId(idSpinner)).perform(ViewActions.click());
-        Espresso.onData(allOf(is(instanceOf(String.class)),is(textoSpinner))).perform(ViewActions.click());
+        Espresso.onView(withId(idSpinner)).perform(click());
+        Espresso.onData(allOf(is(instanceOf(String.class)),is(textoSpinner))).perform(click());
     }
 
     public static void selecionarItemSpinnerComScroll(int idSpinner,String textoSpinner){
-        Espresso.onView(ViewMatchers.withId(idSpinner)).perform(ViewActions.scrollTo(),ViewActions.click());
-        Espresso.onData(allOf(is(instanceOf(String.class)),is(textoSpinner))).perform(ViewActions.click());
+        Espresso.onView(withId(idSpinner)).perform(ViewActions.scrollTo(), click());
+        Espresso.onData(allOf(is(instanceOf(String.class)),is(textoSpinner))).perform(click());
     }
     //Retorna activity que está atualmente instanciada
     public static  Activity activityAtual() {
         final Activity[] currentActivity = new Activity[1];
-        Espresso.onView(allOf(ViewMatchers.withId(android.R.id.content), isDisplayed())).perform(new ViewAction() {
+        Espresso.onView(allOf(withId(android.R.id.content), isDisplayed())).perform(new ViewAction() {
             @Override
             public Matcher<View> getConstraints() {
                 return isAssignableFrom(View.class);
@@ -159,5 +164,24 @@ public class TestTools {
         assertEquals(list.getCount(),qtEsperada);
     }
 
+    public static void clicarItemNavigationMenu(int idDrawerLayout,int idNavigator,int idMenu){
+        Espresso.onView(withId(idDrawerLayout)).perform(DrawerActions.open());
+        Espresso.onView(withId(idNavigator)).perform(NavigationViewActions.navigateTo(idMenu));
+    }
+
+    public static void moverAbaDireita(int idViewPager) throws InterruptedException {
+        Espresso.onView(withId(idViewPager)).perform(swipeRight());
+        Espresso.onView(withId(idViewPager)).perform(swipeLeft());
+        Thread.sleep(2000);
+    }
+    public static void moverAbaEsquerda(int idViewPager) throws InterruptedException {
+        Espresso.onView(withId(idViewPager)).perform(swipeLeft());
+        Espresso.onView(withId(idViewPager)).perform(swipeRight());
+        Thread.sleep(2000);
+    }
+
+    public static void clicarEmITemListView(int idView,int indice){
+        onData(anything()).inAdapterView(withId(idView)).atPosition(indice).perform(click());
+    }
 
 }

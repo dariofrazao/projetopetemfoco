@@ -46,7 +46,7 @@ public class NavigatorMenu extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView =  findViewById(R.id.nav_busca);
         navigationView.setNavigationItemSelectedListener(this);
         displaySelectedScreen(R.id.nav_estabelecimentos);//Determina qual tela será aberta primeiro ao entrar
     }

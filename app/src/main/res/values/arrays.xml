@@ -55,7 +55,7 @@
     </string-array>
 
     <string-array name="tipoPet">
-        <item>Cão</item>
+        <item>Cachorro</item>
         <item>Gato</item>
         <item>Pássaro</item>
         <item>Peixe</item>

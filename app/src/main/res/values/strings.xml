@@ -86,4 +86,9 @@
     <string name="sucesso_remocao_Pet">Pet removido com sucesso!</string>
     <string name="pergunta_confirma_remocao_pet">O pet será removido. Confirma?</string>
 
+    <!--Strings relacionadas ao estbelecimento-->
+    <string name="tb_acesso_estabelecimento">Informações do Estabelecimentos</string>
+    <string name="tela_exibir_informacoes_estabelecimento_voltar">Voltar</string>
+    <string name="exibir_servicos_estabelecimento">Exibir Serviços</string>
+
 </resources>

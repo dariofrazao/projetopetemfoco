@@ -93,6 +93,7 @@ public class LoginActivity extends AppCompatActivity {
 
                                 if(getPreferencesKeyConsumidorFacebook(getApplicationContext())){
                                     salvarPreferencias("id", facebookData.getString("idFacebook"));
+                                    Utils.mostrarMensagemCurta(getApplicationContext(), getApplicationContext().getString(R.string.sucesso_login_Toast));
                                     abrirTelaPrincipalConsumidor();
                                 }
                                 else{
@@ -203,6 +204,7 @@ public class LoginActivity extends AppCompatActivity {
                 GoogleSignInAccount account = result.getSignInAccount();
                 firebaseAuthWithGoogle(account);
                 salvarPreferencias("id", account.getId());
+                Utils.mostrarMensagemCurta(getApplicationContext(), getApplicationContext().getString(R.string.sucesso_login_Toast));
                 abrirTelaPrincipalConsumidor();
 
                 //Se o login pelo Google foi realizado com sucesso pela primeira vez na sessão
@@ -236,7 +238,7 @@ public class LoginActivity extends AppCompatActivity {
     private void abrirTelaPrincipalConsumidor() {
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         startActivity(intent);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         finish();
     }
 

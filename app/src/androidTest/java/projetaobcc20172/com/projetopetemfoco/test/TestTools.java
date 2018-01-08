@@ -184,4 +184,17 @@ public class TestTools {
         onData(anything()).inAdapterView(withId(idView)).atPosition(indice).perform(click());
     }
 
+    public static void clicarEmItemDentroListView(int idView,int indice,int idItem){
+        onData(anything())
+                .inAdapterView(withId(idView))
+                .atPosition(indice)
+                .onChildView(withId(idItem))
+                .perform(click());
+    }
+
+    public static int getTamanhoListView(Activity act,int idListView){
+        ListView list =  act.findViewById(idListView);
+        return list.getCount();
+    }
+
 }

@@ -1,7 +1,5 @@
 package projetaobcc20172.com.projetopetemfoco.database.services;
 
-import java.util.List;
-
 import projetaobcc20172.com.projetopetemfoco.model.Endereco;
 import projetaobcc20172.com.projetopetemfoco.model.Usuario;
 

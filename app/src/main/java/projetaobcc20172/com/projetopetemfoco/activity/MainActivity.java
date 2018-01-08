@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         mAutenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
         Button sair;
         Button meusPets;
-        //Button buscarServicos;
+        Button btnBuscarServ;
         //Button meusFavoritos;
 
         Toolbar toolbar;
@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
         sair = findViewById(R.id.btnSair);
         meusPets =  findViewById(R.id.btnMeusPets);
-        //buscarServicos =  findViewById(R.id.botao_buscar_servicos);
+        btnBuscarServ = findViewById(R.id.btnBuscarServicos);
         //meusFavoritos =  findViewById(R.id.botao_meus_favoritos);
 
         mTvTitulo = findViewById(R.id.tvTituloConsumidor);
@@ -85,6 +85,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        btnBuscarServ.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                abrirBuscas();
+            }
+        });
+
         //Ação do botão de deslogar o fornecedor
         sair.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,6 +112,12 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+    }
+
+    private void abrirBuscas(){
+        Intent intent = new Intent(MainActivity.this, NavigatorMenu.class);
+        startActivity( intent );
+        finish();
     }
 
     //Método que recupera o id do fornecedor logado, para salvar o endereço no nó do fornecedor que o está cadastrando

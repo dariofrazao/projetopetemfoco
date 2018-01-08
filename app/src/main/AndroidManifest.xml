@@ -26,6 +26,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.MainActivity" />
+        <activity android:name=".activity.NavigatorMenu" />
         <activity
             android:name=".activity.CadastroPetActivity"
             android:windowSoftInputMode="stateHidden" />
@@ -38,6 +39,10 @@
             android:name=".activity.EditarPetActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity android:name=".activity.AcessoInformacoesEstabelecimentoActivity"></activity>
+        <activity android:name=".activity.EditarPetActivity"
+            android:windowSoftInputMode="stateHidden">
+        </activity>
+        <activity android:name=".activity.ListaEstabServicoActivity"/>
     </application>
 
 </manifest>

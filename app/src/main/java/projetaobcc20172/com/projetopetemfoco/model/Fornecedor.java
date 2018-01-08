@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * Created by renat on 06/12/2017.
  */
 
-public class Estabelecimento implements Serializable {
+public class Fornecedor implements Serializable {
 
     //Atributos do fornecedor
     private String mId;
@@ -28,10 +28,10 @@ public class Estabelecimento implements Serializable {
     private float mLongitude = 0;
     private float mNota = 0;
 
-    public Estabelecimento() {
+    public Fornecedor() {
     }
 
-    public Estabelecimento(String nome, String email, String cpfCnpj, String telefone, String senha, String senha2, String horarios) {
+    public Fornecedor(String nome, String email, String cpfCnpj, String telefone, String senha, String senha2, String horarios) {
         this.mNome = nome;
         this.mEmail = email;
         this.mSenha = senha;
@@ -41,7 +41,7 @@ public class Estabelecimento implements Serializable {
         this.mTelefone = telefone;
     }
 
-    public Estabelecimento(String nome, String email, String  cpfCnpj, String horarios, float nota, String telefone, Endereco endereco){
+    public Fornecedor(String nome,String email,String  cpfCnpj,String horarios,float nota,String telefone,Endereco endereco){
         this.mNome = nome;
         this.mEmail = email;
         this.mHorarios = horarios;
@@ -154,3 +154,4 @@ public class Estabelecimento implements Serializable {
         this.mNota = mNota;
     }
 }
+

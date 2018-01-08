@@ -5,7 +5,13 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.net.ConnectivityManager;
+import android.view.View;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import projetaobcc20172.com.projetopetemfoco.R;
 
 
 /**
@@ -82,5 +88,21 @@ public class Utils {
         builder.setNegativeButton("Não", onClickListenerNegative);
 
         builder.show();
+    }
+
+    public static ArrayList<String> recuperaArrayR(Activity  act,int nomeArray){
+        ArrayList <String> tiposServicos = new ArrayList<>(Arrays.asList(act.getResources().getStringArray(nomeArray)));
+        return tiposServicos;
+    }
+    //retorna o id da imagem que com o tipo de animal
+    public static  int escolherIconPet(String tipoPet, View view){
+        String[] pets =  view.getResources().getStringArray(R.array.tiposPetBusca);
+        if(tipoPet.equals(pets[1])){
+            return R.drawable.tipo_pet_cachorro;
+        }
+        if(tipoPet.equals(pets[2])){
+            return R.drawable.tipo_pet_gato;
+        }
+        return R.drawable.tipo_pet_todos;
     }
 }

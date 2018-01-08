@@ -43,34 +43,33 @@ public class EnderecoActivityTest {
             e.printStackTrace();
         }
         TestTools.clicarBotaoComScroll(sBotaoCadEnd);
-        TestTools.checarToast(R.string.sucesso_cadastro_Toast);
         TestTools.verificarMudancaActivity(LoginActivity.class.getName());
         //TestTools.clicarBotao(R.id.botao_sair);
     }
 
     public void testeEnderecoCorreto(){
-        Intents.init();
+        //Intents.init();
         TestToolsCadEndereco.preencher(sLogradouro, sNumero, sComplemento, sBairro,
                 sCidade, sUf, sCep);
         this.clicarEVerificarCorreto();
     }
 
     public void testeEnderecoCorretoSemNumero(){
-        Intents.init();
+        //Intents.init();
         TestToolsCadEndereco.preencher(sLogradouro,"", sComplemento, sBairro,
                 sCidade, sUf, sCep);
         this.clicarEVerificarCorreto();
     }
 
     public void testeEnderecoCorretoSemCompl(){
-        Intents.init();
+        //Intents.init();
         TestToolsCadEndereco.preencher(sLogradouro, sNumero,"", sBairro,
                 sCidade, sUf, sCep);
         this.clicarEVerificarCorreto();
     }
 
     public void testeEnderecoCorretoSemComplENumero(){
-        Intents.init();
+        //Intents.init();
         TestToolsCadEndereco.preencher(sLogradouro, "","", sBairro,
                 sCidade, sUf, sCep);
         this.clicarEVerificarCorreto();

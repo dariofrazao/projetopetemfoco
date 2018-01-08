@@ -33,6 +33,16 @@ public class TestToolsCadEndereco {
         TestToolsCadEndereco.selecionarEstadoEdicao(uf);
     }
 
+    public static void apagarCampos(){
+
+        TestTools.apagarCampo(R.id.etEditarCepEndereco);
+        TestTools.apagarCampo(R.id.etEditarLogradouroEndereco);
+        TestTools.apagarCampo(R.id.etEditarNumeroEndereco);
+        TestTools.apagarCampo(R.id.etEditarBairroEndereco);
+        TestTools.apagarCampo(R.id.etEditarLocalidadeEndereco);
+        TestTools.apagarCampo(R.id.etEditarComplementoEndereco);
+    }
+
         public static void selecionarEstadoCadastro(String estado){
             TestTools.selecionarItemSpinnerComScroll(R.id.ufSpinner,estado);
         }

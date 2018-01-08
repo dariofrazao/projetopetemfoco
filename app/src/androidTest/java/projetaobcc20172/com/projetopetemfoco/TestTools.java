@@ -94,6 +94,8 @@ public class TestTools {
         Espresso.onData(allOf(is(instanceOf(String.class)),is(textoSpinner))).perform(ViewActions.click());
     }
 
+
+
     //Retorna activity que está atualmente instanciada
     public static  Activity activityAtual() {
         final Activity[] currentActivity = new Activity[1];

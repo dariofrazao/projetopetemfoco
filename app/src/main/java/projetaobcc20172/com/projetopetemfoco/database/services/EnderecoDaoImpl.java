@@ -157,16 +157,6 @@ public class EnderecoDaoImpl implements EnderecoDao {
         });
     }
 
-    @Override
-    public List<Usuario> buscarPorNome(String nome) {
-        return null;
-    }
-
-    @Override
-    public List<Usuario> buscarTodosUsuario(String idFornecedor) {
-        return null;
-    }
-
     private Context getContexto(){
         return this.mContexto;
     }

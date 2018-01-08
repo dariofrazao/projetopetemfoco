@@ -15,7 +15,5 @@ public interface EnderecoDao {
     void inserirEndereco(Endereco endereco, String idUsuario);
     void removerEndereco(Endereco endereco,  String idUsuario);
     void atualizarEndereco(Endereco endereco,  String idUsuario);
-    List<Usuario> buscarPorNome(String nome);
-    List<Usuario> buscarTodosUsuario(String idUsuario);
 
 }

@@ -49,12 +49,7 @@ public class EditarEnderecoActivityTest {
 
     @Test
     public void testeEnderecoCamposEmBranco() throws InterruptedException {
-        TestTools.apagarCampo(R.id.etEditarCepEndereco);
-        TestTools.apagarCampo(R.id.etEditarLogradouroEndereco);
-        TestTools.apagarCampo(R.id.etEditarNumeroEndereco);
-        TestTools.apagarCampo(R.id.etEditarBairroEndereco);
-        TestTools.apagarCampo(R.id.etEditarLocalidadeEndereco);
-        TestTools.apagarCampo(R.id.etEditarComplementoEndereco);
+        TestToolsCadEndereco.apagarCampos();
         Thread.sleep(2000);
         TestTools.clicarBotaoComScroll(sBotaoEdicEnd);
         TestTools.checarToast(R.string.erro_atualizacao_campos_obrigatorios_endereco);

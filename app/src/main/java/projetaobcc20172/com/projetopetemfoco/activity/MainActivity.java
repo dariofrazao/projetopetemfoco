@@ -81,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
         //Ação do botão para abrir a tela dos Pets
         meusPets.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -146,7 +147,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity( intent );
         finish();
     }
-
 
     //Método que recupera o id do usuário logado
     public static String getPreferences(String key, Context context) {

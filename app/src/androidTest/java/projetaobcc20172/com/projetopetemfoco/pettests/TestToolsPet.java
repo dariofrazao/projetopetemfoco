@@ -23,4 +23,15 @@ public class TestToolsPet {
         TestTools.clicarEmItemDentroListView(R.id.lv_pets,0,R.id.ibtnRemover);
     }
 
+
+    public static void clicarIconeEditar(){
+        TestTools.clicarEmItemDentroListView(R.id.lv_pets,0,R.id.ibtnEditar);
+    }
+
+    public static void clicarMeusPets(){
+        TestTools.clicarBotao(R.id.btnMeusPets);
+    }
+    public static void clicarCadastrarPet(){
+        TestTools.clicarBotao(R.id.btnCadastrarPet);
+    }
 }

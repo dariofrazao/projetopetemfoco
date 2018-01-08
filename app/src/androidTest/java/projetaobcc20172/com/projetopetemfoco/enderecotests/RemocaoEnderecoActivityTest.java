@@ -3,9 +3,7 @@ package projetaobcc20172.com.projetopetemfoco.enderecotests;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.uiautomator.UiDevice;
-import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiObjectNotFoundException;
-import android.support.test.uiautomator.UiSelector;
 
 import org.junit.Before;
 import org.junit.FixMethodOrder;
@@ -42,27 +40,26 @@ public class RemocaoEnderecoActivityTest {
         }
 
         LoginActivityTest log = new LoginActivityTest();
-        log.testeLoginComSucesso();
-        Thread.sleep(4000);
-        TestTools.clicarItemMenu("Endereço");
-        Thread.sleep(4000);
         CadastroEnderecoActivityTest cadEnd = new CadastroEnderecoActivityTest();
+        log.testeLoginComSucesso();
+        Thread.sleep(2000);
+        TestToolsEndereco.clicarMenuEndereco();
+        TestToolsEndereco.clicarBtnCadastrarEnd();
         cadEnd.testeCadastrarEndereco();
+        Thread.sleep(2000);
         TestToolsEndereco.clicarIconeExcluir();
     }
 
     //Teste que simula a remoção de um endereço cancelando a ação
     @Test
     public void testeRemoverEnderecoCancelando() throws UiObjectNotFoundException, InterruptedException {
-        UiObject buttonInput2 = mDevice.findObject(new UiSelector().text("NÃO"));
-        buttonInput2.click();
+        TestTools.clicarNaoDialog();
     }
 
     //Teste que simula a remoção de um endereço confirmando a ação
     @Test
     public void testeRemoverEnderecoConfirmando() throws UiObjectNotFoundException, InterruptedException {
-        UiObject buttonInput2 = mDevice.findObject(new UiSelector().text("SIM"));
-        buttonInput2.click();
+        TestTools.clicarSimDialog();
         Thread.sleep(1000);
         TestTools.checarToast(R.string.sucesso_remocao_endereco);
     }

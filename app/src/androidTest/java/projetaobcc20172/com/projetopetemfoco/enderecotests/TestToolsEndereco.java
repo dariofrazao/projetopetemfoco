@@ -58,4 +58,12 @@ public class TestToolsEndereco {
         public static void clicarIconeExcluir(){
             TestTools.clicarEmItemDentroListView(R.id.lv_enderecos,0,R.id.ibtnRemover);
         }
+
+        public static void clicarMenuEndereco(){
+            TestTools.clicarItemMenu("Endereço");
+        }
+
+        public static void clicarBtnCadastrarEnd(){
+            TestTools.clicarBotao(R.id.btnCadastrarEndereco);
+        }
 }

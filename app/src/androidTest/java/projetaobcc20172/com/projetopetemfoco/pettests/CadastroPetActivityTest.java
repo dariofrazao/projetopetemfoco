@@ -38,9 +38,9 @@ public class CadastroPetActivityTest{
         LoginActivityTest log = new LoginActivityTest();
         log.testeLoginComSucesso();
         Thread.sleep(4000);
-        TestTools.clicarBotao(R.id.btnMeusPets);
+        TestToolsPet.clicarMeusPets();
         Thread.sleep(4000);
-        TestTools.clicarBotao(R.id.btnCadastrarPet);
+        TestToolsPet.clicarCadastrarPet();
         Espresso.closeSoftKeyboard();
     }
 

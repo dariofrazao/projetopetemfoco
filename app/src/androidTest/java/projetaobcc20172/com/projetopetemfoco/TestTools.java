@@ -21,6 +21,7 @@ import java.util.Random;
 
 
 import static android.support.test.espresso.Espresso.onData;
+import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.swipeLeft;
 import static android.support.test.espresso.action.ViewActions.swipeRight;
@@ -112,6 +113,14 @@ public class TestTools {
     public static void selecionarItemSpinnerComScroll(int idSpinner,String textoSpinner){
         Espresso.onView(withId(idSpinner)).perform(ViewActions.scrollTo(), click());
         Espresso.onData(allOf(is(instanceOf(String.class)),is(textoSpinner))).perform(click());
+    }
+
+    public static void clicarSimDialog(){
+        onView(withId(android.R.id.button1)).perform(click());
+    }
+
+    public static void clicarNaoDialog(){
+        onView(withId(android.R.id.button2)).perform(click());
     }
 
 

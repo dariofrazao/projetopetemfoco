@@ -40,9 +40,9 @@ public class CadastroEnderecoActivityTest {
         LoginActivityTest log = new LoginActivityTest();
         log.testeLoginComSucesso();
         Thread.sleep(4000);
-        TestTools.clicarItemMenu("Endereço");
+        TestToolsEndereco.clicarMenuEndereco();
         Thread.sleep(4000);
-        TestTools.clicarBotao(R.id.btnCadastrarEndereco);
+        TestToolsEndereco.clicarBtnCadastrarEnd();
     }
 
 

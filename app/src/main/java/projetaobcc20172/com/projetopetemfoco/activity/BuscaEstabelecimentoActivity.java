@@ -72,16 +72,15 @@ public class BuscaEstabelecimentoActivity extends Fragment {
         });
     }
 
-    private void buscarEstabelecimentos(String nomeBuscado){
-        final String nome = nomeBuscado;
-        Query query1 = ConfiguracaoFirebase.getFirebase().child("fornecedor").orderByChild("nome").startAt(nome);
+    private void buscarEstabelecimentos(final String nomeBuscado){
+        Query query1 = ConfiguracaoFirebase.getFirebase().child("fornecedor").orderByChild("nome").startAt(nomeBuscado);
         query1.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 mForncedores.clear();
                 for (DataSnapshot dados : dataSnapshot.getChildren()) {
                     String nomeT = dados.child("nome").getValue(String.class);
-                    if(!nomeT.contains(nome)){
+                    if(!nomeT.contains(nomeBuscado)){
                         continue;
                     }
                     Fornecedor forn;
@@ -90,7 +89,7 @@ public class BuscaEstabelecimentoActivity extends Fragment {
                     if (dados.child("nota").getValue(float.class) != null) {
                         nota = dados.child("nota").getValue(float.class);
                     }
-                    forn = new Fornecedor(nome, dados.child("email").getValue(String.class), dados.child("cpfCnpj").getValue(String.class)
+                    forn = new Fornecedor(dados.child("nome").getValue(String.class), dados.child("email").getValue(String.class), dados.child("cpfCnpj").getValue(String.class)
                             , dados.child("horario").getValue(String.class), nota, dados.child("telefone").getValue(String.class),
                             dados.child("endereco").getValue(Endereco.class));
                     for (DataSnapshot ds : dados.child("servicos").getChildren()) {

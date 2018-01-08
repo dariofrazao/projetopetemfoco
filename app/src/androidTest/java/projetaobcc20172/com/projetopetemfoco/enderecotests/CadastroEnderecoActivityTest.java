@@ -54,7 +54,7 @@ public class CadastroEnderecoActivityTest {
 
     @Test
     public void testeEnderecoCampoObgLogradouro() throws InterruptedException {
-        TestToolsCadEndereco.preencherCadastro("", sNumero, sComplemento, sBairro,
+        TestToolsEndereco.preencherCadastro("", sNumero, sComplemento, sBairro,
                 sCidade, sUf, sCep);
         Thread.sleep(2000);
         TestTools.apagarCampo(R.id.etCadastroLogradouroEndereco);
@@ -65,7 +65,7 @@ public class CadastroEnderecoActivityTest {
 
     @Test
     public void testeEnderecoCampoObgBairro() throws InterruptedException {
-        TestToolsCadEndereco.preencherCadastro(sLogradouro, sNumero, sComplemento,"",
+        TestToolsEndereco.preencherCadastro(sLogradouro, sNumero, sComplemento,"",
                 sCidade, sUf, sCep);
         Thread.sleep(2000);
         TestTools.apagarCampo(R.id.etCadastroBairroEndereco);
@@ -76,7 +76,7 @@ public class CadastroEnderecoActivityTest {
 
     @Test
     public void testeEnderecoCampoObgCidade() throws InterruptedException {
-        TestToolsCadEndereco.preencherCadastro(sLogradouro, sNumero, sComplemento, sBairro,
+        TestToolsEndereco.preencherCadastro(sLogradouro, sNumero, sComplemento, sBairro,
                 "", sUf, sCep);
         Thread.sleep(2000);
         TestTools.apagarCampo(R.id.etCadastroLocalidadeEndereco);
@@ -87,7 +87,7 @@ public class CadastroEnderecoActivityTest {
 
     @Test
     public void testeEnderecoCampoObgCep() throws InterruptedException {
-        TestToolsCadEndereco.preencherCadastro(sLogradouro, sNumero, sComplemento, sBairro,
+        TestToolsEndereco.preencherCadastro(sLogradouro, sNumero, sComplemento, sBairro,
                 sCidade, sUf,"");
         Thread.sleep(2000);
         TestTools.clicarBotao(sBotaoCadEnd);
@@ -96,7 +96,7 @@ public class CadastroEnderecoActivityTest {
 
     @Test
     public void testeCadastrarEndereco() throws InterruptedException {
-        TestToolsCadEndereco.preencherCadastro(sLogradouro, sNumero, sComplemento, sBairro,
+        TestToolsEndereco.preencherCadastro(sLogradouro, sNumero, sComplemento, sBairro,
                 sCidade, sUf,sCep);
         Thread.sleep(2000);
         TestTools.clicarBotao(sBotaoCadEnd);

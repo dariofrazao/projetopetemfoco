@@ -1,12 +1,11 @@
-package projetaobcc20172.com.projetopetemfoco.test.buscaservicotest;
+package projetaobcc20172.com.projetopetemfoco.buscaservicotest;
 
 
 import android.widget.GridView;
 import android.widget.TextView;
 
-import projetaobcc20172.com.projetopetemfoco.test.TestTools;
 import projetaobcc20172.com.projetopetemfoco.R;
-
+import projetaobcc20172.com.projetopetemfoco.TestTools;
 
 
 /**

@@ -19,4 +19,8 @@ public class TestToolsPet {
         TestTools.digitarCampo(R.id.etEditarRaçaPet,raca);
     }
 
+    protected static void clicariconeExcluir(){
+        TestTools.clicarEmItemDentroListView(R.id.lv_pets,0,R.id.ibtnRemover);
+    }
+
 }

@@ -1,25 +1,20 @@
-package projetaobcc20172.com.projetopetemfoco.test.buscaservicotest;
+package projetaobcc20172.com.projetopetemfoco.buscaservicotest;
 
-import android.support.test.espresso.Espresso;
-import android.support.test.espresso.action.ViewActions;
-import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.rule.ActivityTestRule;
 
-import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 
 import projetaobcc20172.com.projetopetemfoco.R;
+import projetaobcc20172.com.projetopetemfoco.TestTools;
 import projetaobcc20172.com.projetopetemfoco.activity.LoginActivity;
-import projetaobcc20172.com.projetopetemfoco.test.TestTools;
-import projetaobcc20172.com.projetopetemfoco.test.logintests.LoginActivityTest;
+import projetaobcc20172.com.projetopetemfoco.logintests.LoginActivityTest;
 
 
 /**
@@ -59,7 +54,7 @@ public class TestBuscaServicoTestActivityParam {
             e.getMessage();
         }
         LoginActivityTest log = new LoginActivityTest();
-        log.testeUsuarioCadastrado();
+        log.testeLoginComSucesso();
         TestTools.clicarBotao(R.id.btnBuscarServicos);
         TestToolsBuscaServico.clicarBuscaServico();
     }

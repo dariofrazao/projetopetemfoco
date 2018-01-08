@@ -1,9 +1,9 @@
-package projetaobcc20172.com.projetopetemfoco.test.buscaestabelecimentotest;
+package projetaobcc20172.com.projetopetemfoco.buscaestabelecimentotest;
 
 import android.app.Activity;
 
 import projetaobcc20172.com.projetopetemfoco.R;
-import projetaobcc20172.com.projetopetemfoco.test.TestTools;
+import projetaobcc20172.com.projetopetemfoco.TestTools;
 
 /**
  * Created by raul1 on 06/01/2018.

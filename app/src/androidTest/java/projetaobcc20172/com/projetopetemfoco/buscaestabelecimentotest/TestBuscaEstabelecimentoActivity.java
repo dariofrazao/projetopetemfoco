@@ -1,4 +1,4 @@
-package projetaobcc20172.com.projetopetemfoco.test.buscaestabelecimentotest;
+package projetaobcc20172.com.projetopetemfoco.buscaestabelecimentotest;
 
 import android.support.test.espresso.Espresso;
 import android.support.test.rule.ActivityTestRule;
@@ -8,9 +8,9 @@ import org.junit.Rule;
 import org.junit.Test;
 
 import projetaobcc20172.com.projetopetemfoco.R;
+import projetaobcc20172.com.projetopetemfoco.TestTools;
 import projetaobcc20172.com.projetopetemfoco.activity.LoginActivity;
-import projetaobcc20172.com.projetopetemfoco.test.TestTools;
-import projetaobcc20172.com.projetopetemfoco.test.logintests.LoginActivityTest;
+import projetaobcc20172.com.projetopetemfoco.logintests.LoginActivityTest;
 
 /**
  * Created by raul1 on 06/01/2018.
@@ -31,7 +31,7 @@ public class TestBuscaEstabelecimentoActivity {
         }
 
         LoginActivityTest log = new LoginActivityTest();
-        log.testeUsuarioCadastrado();
+        log.testeLoginComSucesso();
         TestTools.clicarBotao(R.id.btnBuscarServicos);
         Espresso.closeSoftKeyboard();
     }

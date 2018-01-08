@@ -46,7 +46,9 @@ public class RemocaoEnderecoActivityTest {
         Thread.sleep(4000);
         TestTools.clicarItemMenu("Endereço");
         Thread.sleep(4000);
-        TestTools.clicarBotao(R.id.ibtnRemover);
+        CadastroEnderecoActivityTest cadEnd = new CadastroEnderecoActivityTest();
+        cadEnd.testeCadastrarEndereco();
+        TestToolsEndereco.clicarIconeExcluir();
     }
 
     //Teste que simula a remoção de um endereço cancelando a ação

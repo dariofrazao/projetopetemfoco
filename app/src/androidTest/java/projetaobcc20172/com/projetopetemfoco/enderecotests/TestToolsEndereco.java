@@ -7,7 +7,7 @@ import projetaobcc20172.com.projetopetemfoco.TestTools;
  * Created by raul on 09/12/17.
  */
 
-public class TestToolsCadEndereco {
+public class TestToolsEndereco {
 
         public static void preencherCadastro(String logradouro,String numero,String complemento,
                                             String bairro,String localidade,String uf,String cep){
@@ -18,7 +18,7 @@ public class TestToolsCadEndereco {
             TestTools.digitarCampo(R.id.etCadastroComplementoEndereco,complemento);
             TestTools.digitarCampo(R.id.etCadastroBairroEndereco,bairro);
             TestTools.digitarCampo(R.id.etCadastroLocalidadeEndereco,localidade);
-            TestToolsCadEndereco.selecionarEstadoCadastro(uf);
+            TestToolsEndereco.selecionarEstadoCadastro(uf);
         }
 
     public static void preencherEdicao(String logradouro,String numero,String complemento,
@@ -30,7 +30,7 @@ public class TestToolsCadEndereco {
         TestTools.digitarCampo(R.id.etEditarComplementoEndereco,complemento);
         TestTools.digitarCampo(R.id.etEditarBairroEndereco,bairro);
         TestTools.digitarCampo(R.id.etEditarLocalidadeEndereco,localidade);
-        TestToolsCadEndereco.selecionarEstadoEdicao(uf);
+        TestToolsEndereco.selecionarEstadoEdicao(uf);
     }
 
     public static void apagarCampos(){
@@ -49,5 +49,13 @@ public class TestToolsCadEndereco {
 
         public static void selecionarEstadoEdicao(String estado){
             TestTools.selecionarItemSpinnerComScroll(R.id.ufEditarSpinner,estado);
+        }
+
+        public static void clicarIconeEditar(){
+            TestTools.clicarEmItemDentroListView(R.id.lv_enderecos,0,R.id.ibtnEditar);
+        }
+
+        public static void clicarIconeExcluir(){
+            TestTools.clicarEmItemDentroListView(R.id.lv_enderecos,0,R.id.ibtnRemover);
         }
 }

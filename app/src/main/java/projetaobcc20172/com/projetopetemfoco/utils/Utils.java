@@ -105,4 +105,25 @@ public class Utils {
         }
         return R.drawable.tipo_pet_todos;
     }
+
+    public static int escolherIconServico(String servico,View view){
+        String[] pets =  view.getResources().getStringArray(R.array.servicos);
+        if(servico.equals(pets[1])){
+            return R.drawable.servico_banho;
+        }
+        if(servico.equals(pets[2])){
+            return R.drawable.servico_tosa;
+        }
+        if(servico.equals(pets[3])){
+            return R.drawable.servico_hospedagem;
+        }
+        if(servico.equals(pets[4])){
+            return R.drawable.servico_passeio;
+        }
+        if(servico.equals(pets[5])){
+            return R.drawable.servico_vacinacao;
+        }
+        return R.drawable.servico_todos;
+
+    }
 }

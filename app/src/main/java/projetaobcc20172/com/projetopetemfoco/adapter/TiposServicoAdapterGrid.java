@@ -19,6 +19,7 @@ import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.activity.CadastroUsuarioActivity;
 import projetaobcc20172.com.projetopetemfoco.activity.ListaEstabServicoActivity;
 import projetaobcc20172.com.projetopetemfoco.activity.LoginActivity;
+import projetaobcc20172.com.projetopetemfoco.utils.Utils;
 
 
 /**
@@ -68,7 +69,7 @@ public class TiposServicoAdapterGrid extends BaseAdapter {
         holder.tv = rowView.findViewById(R.id.gridTextServico);
         holder.img= rowView.findViewById(R.id.gridImgServico);
         holder.tv.setText(this.mTiposServicos.get(position));
-       // holder.img.setImageResource(imageId[position]);
+        holder.img.setImageResource(Utils.escolherIconServico(this.mTiposServicos.get(position),rowView));
 
         return rowView;
     }

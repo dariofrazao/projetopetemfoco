@@ -16,9 +16,6 @@ import java.util.ArrayList;
 
 
 import projetaobcc20172.com.projetopetemfoco.R;
-import projetaobcc20172.com.projetopetemfoco.activity.CadastroUsuarioActivity;
-import projetaobcc20172.com.projetopetemfoco.activity.ListaEstabServicoActivity;
-import projetaobcc20172.com.projetopetemfoco.activity.LoginActivity;
 import projetaobcc20172.com.projetopetemfoco.utils.Utils;
 
 

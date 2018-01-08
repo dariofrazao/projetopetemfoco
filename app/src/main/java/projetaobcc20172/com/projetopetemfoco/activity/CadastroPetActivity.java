@@ -16,7 +16,6 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.database.services.PetDaoImpl;
@@ -40,7 +39,6 @@ public class CadastroPetActivity extends AppCompatActivity {
 
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     //permite que essa variavel seja vista pela classe de teste
-    private Toast mToast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,6 +96,7 @@ public class CadastroPetActivity extends AppCompatActivity {
 
             //Recuperar id do usuário logado
             mIdUsuarioLogado = getPreferences("id", CadastroPetActivity.this);
+
             //Recuperar dados do pet informados pelo usuário
             mRadioGroup = findViewById(R.id.rgGenero);
             //Recupera o texto do item selecionado no gênero do pet
@@ -107,14 +106,14 @@ public class CadastroPetActivity extends AppCompatActivity {
                     mRaca.getText().toString(), itemSelecionado);
 
             VerificadorDeObjetos.vDadosPet(mPet);
+
             //Chamada do DAO para salvar no banco
             PetDaoImpl petDao =  new PetDaoImpl(this);
             petDao.inserir(mPet, mIdUsuarioLogado);
             abrirTelaPets();
 
         } catch (CampoObrAusenteException e) {
-            mToast = Toast.makeText(CadastroPetActivity.this, R.string.erro_cadastro_campos_obrigatorios_Pet, Toast.LENGTH_SHORT);
-            mToast.show();
+            Utils.mostrarMensagemCurta(getApplicationContext(), getApplicationContext().getString(R.string.erro_cadastro_campos_obrigatorios_Pet));
         } catch (Exception e) {
             e.printStackTrace();
             return false;
@@ -169,9 +168,6 @@ public class CadastroPetActivity extends AppCompatActivity {
     }
 
     private void abrirTelaPets() {
-        //Intent intent = new Intent(CadastroPetActivity.this, MainActivity.class);
-        //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-        //startActivity(intent);
         finish();
     }
 

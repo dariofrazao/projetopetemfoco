@@ -29,6 +29,7 @@
     <string name="pergunta_do_sistema">Pergunta do Sistema</string>
     <string name="atencao">Atenção!</string>
     <string name="pergunta_confirma_dados_serao_perdidos">Os dados não salvos serão perdidos. Confirma?</string>
+    <string name="pergunta_cadastro_endereco">Deseja cadastrar seu endereço agora?</string>
 
     <!--Strings relacionadas a login-->
     <string name="prompt_email">Email</string>
@@ -41,10 +42,17 @@
     <string name="editar">Editar</string>
     <string name="sucesso_login_Toast">Sucesso ao fazer login!</string>
     <string name="erro_login_invalido_Toast">Erro ao fazer login!</string>
+    <string name="login_cancelado">Login cancelado</string>
+    <string name="botao_login_google">Login com o Google</string>
+    <string name="botao_login_facebook">Login com o Facebook</string>
+    <string name="ou">Ou</string>
 
     <!--Strings relacionadas a endereço-->
+    <string name="enderecos">Endereços</string>
+    <string name="endereco">Endereço</string>
     <string name="cadastrar_endereco">Continuar o Cadastro</string>
     <string name="tb_cadastro_endereco">Cadastro de Endereço</string>
+    <string name="tb_editar_endereco">Edição de Endereço</string>
     <string name="digite_seu_logradouro">Digite seu logradouro</string>
     <string name="endereco_numero">Número</string>
     <string name="digite_seu_numero">Digite seu número</string>
@@ -61,8 +69,14 @@
     <string name="escolha_sua_uf">Escolha seu estado</string>
     <string name="finalizar_cadastro">Finalizar Cadastro</string>
     <string name="erro_cadastro_endereco_campos_obrigatorios_Toast">Erro ao cadastrar endereço: Preencha pelo menos o logradouro, bairro e cidade</string>
+    <string name="erro_atualizacao_campos_obrigatorios_endereco">Erro ao atualizar endereço: Preencha pelo menos o logradouro, bairro e cidade</string>
+    <string name="sucesso_cadastro_endereco">Endereço cadastrado com sucesso!</string>
+    <string name="sucesso_atualizacao_endereco">Endereço atualizado com sucesso!</string>
+    <string name="sucesso_remocao_endereco">Endereço removido com sucesso!</string>
+    <string name="pergunta_confirma_remocao_endereco">O endereço será removido. Confirma?</string>
 
     <!--Strings relacionadas a pet-->
+    <string name="pets">Pets</string>
     <string name="botao_meus_pets">Meus Pets</string>
     <string name="botao_buscar_servicos">Buscar Serviços</string>
     <string name="botao_meus_favoritos">Meus Favoritos</string>
@@ -85,5 +99,10 @@
     <string name="sucesso_atualizacao_Pet">Pet atualizado com sucesso!</string>
     <string name="sucesso_remocao_Pet">Pet removido com sucesso!</string>
     <string name="pergunta_confirma_remocao_pet">O pet será removido. Confirma?</string>
+
+    <string name="facebook_app_id">1383454871782340</string>
+    <string name="fb_login_protocol_scheme">fb1383454871782340</string>
+
+
 
 </resources>

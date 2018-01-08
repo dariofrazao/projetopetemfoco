@@ -1,4 +1,4 @@
-package projetaobcc20172.com.projetopetemfoco;
+package projetaobcc20172.com.projetopetemfoco.enderecotests;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

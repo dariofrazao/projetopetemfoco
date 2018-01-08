@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,21 +17,24 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import projetaobcc20172.com.projetopetemfoco.R;
-import projetaobcc20172.com.projetopetemfoco.activity.EditarPetActivity;
-import projetaobcc20172.com.projetopetemfoco.database.services.PetDaoImpl;
-import projetaobcc20172.com.projetopetemfoco.model.Pet;
+import projetaobcc20172.com.projetopetemfoco.activity.EditarEnderecoActivity;
+import projetaobcc20172.com.projetopetemfoco.database.services.EnderecoDaoImpl;
+import projetaobcc20172.com.projetopetemfoco.model.Endereco;
 import projetaobcc20172.com.projetopetemfoco.utils.Utils;
 
-//Classe que monta uma View para exibir os pets cadastrados do usuário
-public class PetAdapter extends ArrayAdapter<Pet> {
+/**
+ * Created by dario on 03/01/2018.
+ */
 
-    private ArrayList<Pet> mPets;
+public class EnderecoAdapter extends ArrayAdapter<Endereco> {
+
+    private ArrayList<Endereco> mEnderecos;
     private Context mContext;
 
-    public PetAdapter(Context c, ArrayList<Pet> objects) {
+    public EnderecoAdapter(Context c, ArrayList<Endereco> objects) {
         super(c, 0, objects);
         this.mContext = c;
-        this.mPets = objects;
+        this.mEnderecos = objects;
     }
 
     @NonNull
@@ -40,7 +44,7 @@ public class PetAdapter extends ArrayAdapter<Pet> {
         View view = null;
 
         // Verifica se a lista está preenchida
-        if (mPets != null) {
+        if (mEnderecos != null) {
 
             // inicializar objeto para montagem da view
             final LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -52,20 +56,20 @@ public class PetAdapter extends ArrayAdapter<Pet> {
             // recupera elemento para exibição
             TextView mNome = view.findViewById(R.id.tvTitulo);
             TextView mTipo = view.findViewById(R.id.tvSubtitulo);
-            ImageButton mRemoverPet = view.findViewById(R.id.ibtnRemover);
-            ImageButton mEditarPet = view.findViewById(R.id.ibtnEditar);
+            ImageButton mRemoverEndereco = view.findViewById(R.id.ibtnRemover);
+            final ImageButton mEditarEndereco = view.findViewById(R.id.ibtnEditar);
 
-            final Pet pet = mPets.get(position);
-            mNome.setText(pet.getNome());
-            mTipo.setText(pet.getTipo());
+            final Endereco endereco = mEnderecos.get(position);
+            mNome.setText(endereco.getBairro());
+            mTipo.setText(endereco.getLocalidade());
 
             //Recuperar id do usuário logado
             final String idUsuarioLogado;
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
             idUsuarioLogado = preferences.getString("id", "");
 
-            //Ação do ícone para remover um pet
-            mRemoverPet.setOnClickListener(new View.OnClickListener() {
+            //Ação do ícone para remover um endereço
+            mRemoverEndereco.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     final DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
@@ -74,10 +78,10 @@ public class PetAdapter extends ArrayAdapter<Pet> {
                             switch (which){
                                 case DialogInterface.BUTTON_POSITIVE:
                                     // Botão sim foi clicado
-                                    PetDaoImpl petDao = new PetDaoImpl(getContext());
-                                    //Chamada do DAO para remover pet do banco
-                                    petDao.remover(pet, idUsuarioLogado);
-                                    mPets.remove(position);
+                                    EnderecoDaoImpl usuarioDao = new EnderecoDaoImpl(getContext());
+                                    //Chamada do DAO para remover endereço do banco
+                                    usuarioDao.removerEndereco(endereco, idUsuarioLogado);
+                                    mEnderecos.remove(position);
                                     notifyDataSetChanged();
                                     break;
 
@@ -90,26 +94,29 @@ public class PetAdapter extends ArrayAdapter<Pet> {
                         }
                     };
 
-                    //Exibe pergunta se o usuário realmente deseja remover um pet
+                    //Exibe pergunta se o usuário realmente deseja remover um endereço
                     Utils.mostrarPerguntaSimNao(getContext(), mContext.getString(R.string.atencao),
-                            mContext.getString(R.string.pergunta_confirma_remocao_pet), dialogClickListener,
+                            mContext.getString(R.string.pergunta_confirma_remocao_endereco), dialogClickListener,
                             dialogClickListener);
                 }
             });
 
-            //Ação do ícone para editar um pet
-            mEditarPet.setOnClickListener(new View.OnClickListener() {
+            //Ação do ícone para editar um endereço
+            mEditarEndereco.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    //Enviar para a Activity de Edição do pet seus atuais dados salvos para exibição
-                    Intent intent = new Intent(getContext(), EditarPetActivity.class);
-                    intent.putExtra("idPet", pet.getIdPet());
-                    intent.putExtra("nomePet", pet.getNome());
-                    intent.putExtra("raçaPet", pet.getRaça());
-                    intent.putExtra("idadePet", pet.getIdade());
-                    intent.putExtra("tipoPet", pet.getTipo());
-                    intent.putExtra("portePet", pet.getPorte());
-                    intent.putExtra("generoPet", pet.getGenero());
+
+                    //Enviar para a Activity de Edição do endereço seus atuais dados salvos para exibição
+                    Intent intent = new Intent(getContext(), EditarEnderecoActivity.class);
+                    Log.i("VER", endereco.getId());
+                    intent.putExtra("idEndereco", endereco.getId());
+                    intent.putExtra("logradouroEndereco", endereco.getLogradouro());
+                    intent.putExtra("numeroEndereco", endereco.getNumero());
+                    intent.putExtra("complementoEndereco", endereco.getComplemento());
+                    intent.putExtra("bairroEndereco", endereco.getBairro());
+                    intent.putExtra("localidadeEndereco", endereco.getLocalidade());
+                    intent.putExtra("ufEndereco", endereco.getUf());
+                    intent.putExtra("cepEndereco", endereco.getCep());
                     getContext().startActivity(intent);
                 }
             });
@@ -117,5 +124,4 @@ public class PetAdapter extends ArrayAdapter<Pet> {
         }
         return view;
     }
-
 }

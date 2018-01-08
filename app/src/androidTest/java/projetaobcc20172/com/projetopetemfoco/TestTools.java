@@ -1,4 +1,4 @@
-package projetaobcc20172.com.projetopetemfoco.test;
+package projetaobcc20172.com.projetopetemfoco;
 
 import android.app.Activity;
 import android.support.test.espresso.Espresso;
@@ -58,14 +58,32 @@ public class TestTools {
         Espresso.onView(ViewMatchers.withId(idCampo)).perform(ViewActions.scrollTo(),ViewActions.typeText(textoAserDigitado));
         Espresso.closeSoftKeyboard();
     }
+
+    //Recebe a R.id.campoTexto e o texto a ser inserido no teste
+    public static void apagarCampo(int idCampo){
+        Espresso.onView(ViewMatchers.withId(idCampo)).perform(ViewActions.clearText());
+        Espresso.closeSoftKeyboard();
+    }
+
     public static void clicarBotao(int idBotao){
         Espresso.onView(ViewMatchers.withId(idBotao)).perform(ViewActions.click());
     }
+
+    public static void clicarItemMenu(String idBotao){
+        Espresso.openContextualActionModeOverflowMenu();
+        Espresso.onView(ViewMatchers.withText(idBotao)).perform(ViewActions.click());
+    }
+
     //Caso a tela contenha scroll e o botão não estaja visivel é necessario
     //rolar a barra até ele para depois clicar
     public static void clicarBotaoComScroll(int idBotao){
         Espresso.onView(ViewMatchers.withId(idBotao)).perform(ViewActions.scrollTo(),ViewActions.click());
     }
+
+    public static void editarTextoComScroll(int idEditText){
+        Espresso.onView(ViewMatchers.withId(idEditText)).perform(ViewActions.scrollTo());
+    }
+
     public static void selecionarSpinner(int idSpinner,String textoSpinner){
         Espresso.onView(ViewMatchers.withId(idSpinner)).perform(ViewActions.click());
         Espresso.onData(allOf(is(instanceOf(String.class)),is(textoSpinner))).perform(ViewActions.click());
@@ -75,6 +93,9 @@ public class TestTools {
         Espresso.onView(ViewMatchers.withId(idSpinner)).perform(ViewActions.scrollTo(),ViewActions.click());
         Espresso.onData(allOf(is(instanceOf(String.class)),is(textoSpinner))).perform(ViewActions.click());
     }
+
+
+
     //Retorna activity que está atualmente instanciada
     public static  Activity activityAtual() {
         final Activity[] currentActivity = new Activity[1];

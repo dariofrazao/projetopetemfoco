@@ -62,6 +62,7 @@
         <activity
             android:name=".activity.EditarEnderecoActivity"
             android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".activity.ListaEstabServicoActivity" />
 
     </application>
 

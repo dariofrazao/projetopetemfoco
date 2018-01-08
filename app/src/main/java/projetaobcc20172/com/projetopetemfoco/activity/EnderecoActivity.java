@@ -21,79 +21,78 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 import projetaobcc20172.com.projetopetemfoco.R;
-import projetaobcc20172.com.projetopetemfoco.adapter.PetAdapter;
+import projetaobcc20172.com.projetopetemfoco.adapter.EnderecoAdapter;
 import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoFirebase;
-import projetaobcc20172.com.projetopetemfoco.model.Pet;
+import projetaobcc20172.com.projetopetemfoco.model.Endereco;
 
-public class PetsActivity extends AppCompatActivity {
+public class EnderecoActivity extends AppCompatActivity {
 
-    private ArrayList<Pet> mPets;
-    private ArrayAdapter<Pet> mAdapter;
+    private ArrayList<Endereco> mEnderecos;
+    private ArrayAdapter<Endereco> mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pets);
+        setContentView(R.layout.activity_endereco);
 
         //Recuperar id do usuário logado
         String idUsuarioLogado;
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         idUsuarioLogado = preferences.getString("id", "");
 
-        ImageButton mCadastrarPet; //Botão de cadastrar o pet
+        ImageButton mCadastrarEndereco; //Botão de cadastrar o endereço
 
         Toolbar toolbar;
         toolbar = findViewById(R.id.tb_main);
 
         // Configura toolbar
-        toolbar.setTitle(R.string.pets);
+        toolbar.setTitle(R.string.endereco);
         toolbar.setTitleTextColor(Color.WHITE);
         toolbar.setNavigationIcon(R.drawable.ic_action_arrow_left_white);
         setSupportActionBar(toolbar);
 
-        mCadastrarPet = findViewById(R.id.btnCadastrarPet);
+        mCadastrarEndereco = findViewById(R.id.btnCadastrarEndereco);
         ListView mListView;
-        mListView = findViewById(R.id.lv_pets);
+        mListView = findViewById(R.id.lv_enderecos);
 
         // Monta listview e mAdapter
-        mPets = new ArrayList<>();
-        mAdapter = new PetAdapter(PetsActivity.this, mPets);
+        mEnderecos = new ArrayList<>();
+        mAdapter = new EnderecoAdapter(EnderecoActivity.this, mEnderecos);
         mListView.setAdapter(mAdapter);
 
-        // Recuperar pets do Firebase
+        // Recuperar endereços do Firebase
         DatabaseReference mFirebase;
-        mFirebase = ConfiguracaoFirebase.getFirebase().child("usuarios").child(idUsuarioLogado).child("pets");
+        mFirebase = ConfiguracaoFirebase.getFirebase().child("usuarios").child(idUsuarioLogado).child("enderecos");
 
-        ValueEventListener mValueEventListenerPet;
-        mValueEventListenerPet = new ValueEventListener() {
+        ValueEventListener mValueEventListenerEndereco;
+        mValueEventListenerEndereco = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                mPets.clear();
+                mEnderecos.clear();
 
-                // Recupera pets
+                // Recupera endereços
                 for (DataSnapshot dados : dataSnapshot.getChildren()) {
-                    Pet pet = dados.getValue(Pet.class);
-                    mPets.add(pet);
+                    Endereco endereco = dados.getValue(Endereco.class);
+                    mEnderecos.add(endereco);
                 }
-                //Notificar o adaptador que exibe a lista de pets se houver alteração no banco
+                //Notificar o adaptador que exibe a lista de endereços se houver alteração no banco
                 mAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(PetsActivity.this, "Erro na leitura do banco de dados", Toast.LENGTH_SHORT).show();
+                Toast.makeText(EnderecoActivity.this, "Erro na leitura do banco de dados", Toast.LENGTH_SHORT).show();
             }
         };
 
-        //Ação do botão de cadastrar o pet, que abre a tela para o seu cadastro
-        mCadastrarPet.setOnClickListener(new View.OnClickListener() {
+        mCadastrarEndereco.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(PetsActivity.this, CadastroPetActivity.class);
+                Intent intent = new Intent(EnderecoActivity.this, CadastroEnderecoActivity.class);
                 startActivity(intent);
             }
         });
-        mFirebase.addValueEventListener(mValueEventListenerPet);
+        mFirebase.addValueEventListener(mValueEventListenerEndereco);
 
     }
 

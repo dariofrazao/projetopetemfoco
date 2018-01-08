@@ -1,16 +1,14 @@
 package projetaobcc20172.com.projetopetemfoco.activity;
-/**
- * Created by Alexsandro on 03/12/17.
- */
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -21,23 +19,16 @@ import android.widget.Spinner;
 import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.database.services.EnderecoDaoImpl;
 import projetaobcc20172.com.projetopetemfoco.excecoes.CampoObrAusenteException;
-import projetaobcc20172.com.projetopetemfoco.helper.Util;
-import projetaobcc20172.com.projetopetemfoco.helper.ZipCodeListener;
 import projetaobcc20172.com.projetopetemfoco.model.Endereco;
 import projetaobcc20172.com.projetopetemfoco.utils.MaskUtil;
 import projetaobcc20172.com.projetopetemfoco.utils.Utils;
 import projetaobcc20172.com.projetopetemfoco.utils.VerificadorDeObjetos;
 
-/**
- * Activity de cadastro de endereço
- */
-public class CadastroEnderecoActivity extends AppCompatActivity{
+public class EditarEnderecoActivity extends AppCompatActivity {
 
     private EditText mLogradouro, mNumero, mComplemento, mBairro, mLocalidade, mCep;
     private Spinner mSpinnerUf;
-    private Util mUtil;
-    private Endereco mEndereco;
-    private String mIdUsuarioLogado;
+    private String mIdEndereco;
 
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     //permite que essa variavel seja vista pela classe de teste
@@ -45,51 +36,56 @@ public class CadastroEnderecoActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cadastro_endereco);
+        setContentView(R.layout.activity_editar_endereco);
+
+        Intent intent = getIntent();
 
         Toolbar toolbar;
-        toolbar = findViewById(R.id.tb_endereco);
-
-        mCep = findViewById(R.id.etCadastroCepEndereco);
-        mLocalidade = findViewById(R.id.etCadastroLocalidadeEndereco);
-        mLogradouro = findViewById(R.id.etCadastroLogradouroEndereco);
-        mNumero = findViewById(R.id.etCadastroNumeroEndereco);
-        mComplemento = findViewById(R.id.etCadastroComplementoEndereco);
-        mBairro = findViewById(R.id.etCadastroBairroEndereco);
-
-        mCep.addTextChangedListener(new ZipCodeListener(this));
-        mCep.addTextChangedListener(MaskUtil.insert(mCep, MaskUtil.MaskType.CEP));
-
-        //Preparar o adaptar do Spinner para exibir as UF's do Endereço
-        mSpinnerUf = findViewById(R.id.ufSpinner);
-        ArrayAdapter<String> adapter_state = new ArrayAdapter<>(this,
-                android.R.layout.simple_spinner_dropdown_item, getResources().getStringArray(R.array.uf));
-        mSpinnerUf.setAdapter(adapter_state);
-
-        mUtil = new Util(this,
-                R.id.etCadastroCepEndereco,
-                R.id.etCadastroLogradouroEndereco,
-                R.id.etCadastroLocalidadeEndereco,
-                R.id.etCadastroNumeroEndereco,
-                R.id.etCadastroComplementoEndereco,
-                R.id.etCadastroBairroEndereco,
-                R.id.ufSpinner);
-
-        Button mBtnCadastrarEndereco = findViewById(R.id.botao_finalizar_cadastro_endereco);
-        mBtnCadastrarEndereco.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                cadastrarEnderecoUsuario();
-
-            }
-        });
+        toolbar = findViewById(R.id.tb_editar_endereco);
 
         // Configura toolbar
-        toolbar.setTitle(R.string.tb_cadastro_endereco);
+        toolbar.setTitle(R.string.tb_editar_endereco);
         toolbar.setTitleTextColor(Color.WHITE);
         toolbar.setNavigationIcon(R.drawable.ic_action_arrow_left_white);
         setSupportActionBar(toolbar);
+
+        mCep = findViewById(R.id.etEditarCepEndereco);
+        mLocalidade = findViewById(R.id.etEditarLocalidadeEndereco);
+        mLogradouro = findViewById(R.id.etEditarLogradouroEndereco);
+        mNumero = findViewById(R.id.etEditarNumeroEndereco);
+        mComplemento = findViewById(R.id.etEditarComplementoEndereco);
+        mBairro = findViewById(R.id.etEditarBairroEndereco);
+
+        //Obter os dados do endereço para edição
+        mCep.setText(intent.getStringExtra("cepEndereco"));
+        mCep.addTextChangedListener(MaskUtil.insert(mCep, MaskUtil.MaskType.CEP));
+
+        mLocalidade.setText(intent.getStringExtra("localidadeEndereco"));
+        mLogradouro.setText(intent.getStringExtra("logradouroEndereco"));
+        mNumero.setText(intent.getStringExtra("numeroEndereco"));
+        mComplemento.setText(intent.getStringExtra("complementoEndereco"));
+        mBairro.setText(intent.getStringExtra("bairroEndereco"));
+        mIdEndereco = intent.getStringExtra("idEndereco");
+
+        //Preparar o adaptar do Spinner para exibir as UF's do Endereço
+        mSpinnerUf = findViewById(R.id.ufEditarSpinner);
+        ArrayAdapter<String> adapter_state = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_dropdown_item, getResources().getStringArray(R.array.uf));
+        mSpinnerUf.setAdapter(adapter_state);
+        String uf = intent.getStringExtra("ufEndereco");
+        int posicaoUf = adapter_state.getPosition(uf);
+        mSpinnerUf.setSelection(posicaoUf);
+
+
+        Button mBtnEditarEndereco = findViewById(R.id.botao_editar_endereco);
+        mBtnEditarEndereco.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                editarEnderecoUsuario();
+
+            }
+        });
 
     }
 
@@ -113,7 +109,7 @@ public class CadastroEnderecoActivity extends AppCompatActivity{
     @Override
     public void onBackPressed() {
         if (verificarCamposPreenchidos()) confirmarSaida();
-        else CadastroEnderecoActivity.super.onBackPressed();
+        else EditarEnderecoActivity.super.onBackPressed();
     }
 
     //Método que exibe pergunta de confirmação ao usuário caso ele clique no botão de voltar com as
@@ -125,7 +121,7 @@ public class CadastroEnderecoActivity extends AppCompatActivity{
                 switch (which){
                     case DialogInterface.BUTTON_POSITIVE:
                         // Botão sim foi clicado
-                        CadastroEnderecoActivity.super.onBackPressed();
+                        EditarEnderecoActivity.super.onBackPressed();
                         break;
 
                     case DialogInterface.BUTTON_NEGATIVE:
@@ -142,15 +138,18 @@ public class CadastroEnderecoActivity extends AppCompatActivity{
                 dialogClickListener);
     }
 
-    //Método que recupera os dados básicos do usuário, adicionando o endereço e chamando o DAO para salvar no banco
-    private void cadastrarEnderecoUsuario() {
+    //Método que recupera os dados do endereço e chama o DAO para editar no banco
+    private void editarEnderecoUsuario() {
         try {
 
             //Recuperar id do usuário logado
-            mIdUsuarioLogado = getPreferences("id", CadastroEnderecoActivity.this);
+            String mIdUsuarioLogado;
+            mIdUsuarioLogado = getPreferences("id", EditarEnderecoActivity.this);
 
             //Recuperar os campos do endereço informados pelo usuário
+            Endereco mEndereco;
             mEndereco = new Endereco();
+            mEndereco.setId(mIdEndereco);
             mEndereco.setLogradouro(mLogradouro.getText().toString());
             mEndereco.setNumero(mNumero.getText().toString());
             mEndereco.setComplemento(mComplemento.getText().toString());
@@ -160,59 +159,21 @@ public class CadastroEnderecoActivity extends AppCompatActivity{
             mEndereco.setUf(mSpinnerUf.getSelectedItem().toString());
 
             VerificadorDeObjetos.vDadosObrEndereco(mEndereco);
+            EnderecoDaoImpl usuarioDao =  new EnderecoDaoImpl(this);
 
-            EnderecoDaoImpl enderecoDao =  new EnderecoDaoImpl(this);
-
-            //Chamada do DAO para salvar no banco
-            enderecoDao.inserirEndereco(mEndereco, mIdUsuarioLogado);
+            //Chamada do DAO para editar no banco
+            usuarioDao.atualizarEndereco(mEndereco, mIdUsuarioLogado);
             abrirTelaEnderecos();
 
-            } catch (CampoObrAusenteException e) {
-            Utils.mostrarMensagemCurta(getApplicationContext(), getApplicationContext().getString(R.string.erro_cadastro_endereco_campos_obrigatorios_Toast));
-            } catch (Exception e) {
-            Utils.mostrarMensagemCurta(getApplicationContext(), getApplicationContext().getString(R.string.erro_cadastro_endereco_campos_obrigatorios_Toast));
-            }
+        } catch (CampoObrAusenteException e) {
+            Utils.mostrarMensagemCurta(getApplicationContext(), getApplicationContext().getString(R.string.erro_atualizacao_campos_obrigatorios_endereco));
+        } catch (Exception e) {
+            Utils.mostrarMensagemCurta(getApplicationContext(), getApplicationContext().getString(R.string.erro_atualizacao_campos_obrigatorios_endereco));
+        }
     }
 
     public void abrirTelaEnderecos() {
         finish();
-    }
-
-    //Método que trava os campos de endereço enquanto a busca pelo cep é realizada
-    public void lockFields (boolean isToLock){
-        mUtil.lockFields(isToLock);
-    }
-
-    //Método que retorna o endereço completo a partir do cep informado
-    public String getUriZipCode(){
-        return "https://viacep.com.br/ws/"+mCep.getText()+"/json/";
-    }
-
-    //Método que insere nos campos de endereço as informações obtidas pela busca (pelo cep)
-    public void setDataViews (Endereco mEndereco){
-        setFields(R.id.etCadastroLocalidadeEndereco, mEndereco.getLocalidade());
-        setFields(R.id.etCadastroBairroEndereco, mEndereco.getBairro());
-        setFields(R.id.etCadastroLogradouroEndereco, mEndereco.getLogradouro());
-        setFields(R.id.etCadastroComplementoEndereco, mEndereco.getComplemento());
-        setSpinner(R.id.ufSpinner, R.array.uf, mEndereco.getUf());
-    }
-
-    private void setFields (int id, String data){
-        ((EditText)findViewById(id)).setText(data);
-    }
-
-    private void setSpinner (int id, int arrayId, String data){
-        String[] itens = getResources().getStringArray(arrayId);
-
-        for(int i = 0; i < itens.length; i++){
-
-            if(itens[i].equals(data)){
-                ((Spinner)findViewById(id)).setSelection(i);
-                return;
-            }
-        }
-        ((Spinner)findViewById(id)).setSelection(0);
-
     }
 
     //Método que recupera o id do usuário logado

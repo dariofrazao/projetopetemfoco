@@ -1,4 +1,4 @@
-package projetaobcc20172.com.projetopetemfoco;
+package projetaobcc20172.com.projetopetemfoco.pettests;
 
 import org.junit.Test;
 

@@ -6,6 +6,12 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorPrimary</item>
+        <item name="android:actionOverflowButtonStyle">@style/AppTheme.OverFlow</item>
+    </style>
+
+    <style name="AppTheme.OverFlow">
+        <item name="android:src">@drawable/ic_action_settings</item>
+
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />

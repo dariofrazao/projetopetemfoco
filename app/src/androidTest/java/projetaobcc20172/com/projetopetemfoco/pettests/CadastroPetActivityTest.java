@@ -1,7 +1,6 @@
-package projetaobcc20172.com.projetopetemfoco.test.cadastropettest;
+package projetaobcc20172.com.projetopetemfoco.pettests;
 
 import android.support.test.espresso.Espresso;
-import android.support.test.espresso.intent.Intents;
 import android.support.test.rule.ActivityTestRule;
 
 import org.junit.After;
@@ -10,12 +9,9 @@ import org.junit.Rule;
 import org.junit.Test;
 
 import projetaobcc20172.com.projetopetemfoco.R;
-import projetaobcc20172.com.projetopetemfoco.activity.CadastroPetActivity;
+import projetaobcc20172.com.projetopetemfoco.TestTools;
 import projetaobcc20172.com.projetopetemfoco.activity.LoginActivity;
-import projetaobcc20172.com.projetopetemfoco.activity.MainActivity;
-import projetaobcc20172.com.projetopetemfoco.activity.PetsActivity;
-import projetaobcc20172.com.projetopetemfoco.test.TestTools;
-import projetaobcc20172.com.projetopetemfoco.test.logintests.LoginActivityTest;
+import projetaobcc20172.com.projetopetemfoco.logintests.LoginActivityTest;
 
 /**
  * Created by dario on 07/12/17.
@@ -28,10 +24,6 @@ public class CadastroPetActivityTest{
     private static String sNomePet = "Billie";
     private static String sraca = "Bulldog";
 
-    /*
-    @Rule
-    public ActivityTestRule<CadastroPetActivity> cadPetActivityRule = new ActivityTestRule<>(CadastroPetActivity.class);
-    */
     @Rule
     public ActivityTestRule <LoginActivity> loginActivityRule = new ActivityTestRule<>(LoginActivity.class);
 
@@ -44,18 +36,18 @@ public class CadastroPetActivityTest{
         }
 
         LoginActivityTest log = new LoginActivityTest();
-        log.testeUsuarioCadastrado();
-        Thread.sleep(3000);
+        log.testeLoginComSucesso();
+        Thread.sleep(4000);
         TestTools.clicarBotao(R.id.btnMeusPets);
+        Thread.sleep(4000);
         TestTools.clicarBotao(R.id.btnCadastrarPet);
         Espresso.closeSoftKeyboard();
-        Thread.sleep(3000);
     }
 
     //Teste que simula um cadastro do pet com o campo nome em branco
     @Test
     public void testeNomeEmBranco(){
-        TestToolsCadPet.preencherEClicar("",sraca);
+        TestToolsPet.preencherCadastro("",sraca);
         TestTools.clicarBotaoComScroll(R.id.botao_cadastrar_pet);
         TestTools.checarToast(R.string.erro_cadastro_campos_obrigatorios_Pet);
     }
@@ -69,11 +61,11 @@ public class CadastroPetActivityTest{
 
     //Teste que simula um cadastro do pet com todos os campos preenchidos
     @Test
-    public void testeCadastrarPet(){
-        //Intents.init();
-        TestToolsCadPet.preencherEClicar(sNomePet, sraca);
+    public void testeCadastrarPet() throws InterruptedException {
+        TestToolsPet.preencherCadastro(sNomePet, sraca);
+        TestTools.clicarBotaoComScroll(R.id.botao_cadastrar_pet);
+        Thread.sleep(1000);
         TestTools.checarToast(R.string.sucesso_cadastro_Pet);
-        TestTools.verificarMudancaActivity(PetsActivity.class.getName());
     }
 
     @After

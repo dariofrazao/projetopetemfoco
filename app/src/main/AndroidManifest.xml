@@ -2,6 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="projetaobcc20172.com.projetopetemfoco">
 
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -43,6 +49,7 @@
 
         <activity android:name=".activity.MainActivity" />
 
+        <activity android:name=".activity.NavigatorMenu" />
         <activity
             android:name=".activity.CadastroPetActivity"
             android:windowSoftInputMode="stateHidden" />
@@ -50,24 +57,27 @@
         <activity android:name=".activity.CadastroEnderecoActivity"
             android:windowSoftInputMode="stateHidden" />
 
-        <activity android:name=".activity.PetsActivity" />
-
+        <activity android:name=".activity.AcessoInformacoesEstabelecimentoActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".activity.AvaliarEstabelecimentoActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".activity.AvalicoesEstabelecimentoActivity"
+            android:windowSoftInputMode="stateHidden" />
+         <activity android:name=".activity.PetsActivity" />
         <activity
             android:name=".activity.EditarPetActivity"
             android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".activity.InfoPetActivity" />
+        <activity android:name=".activity.CalendarioVacinasActivity" />
+        <activity android:name=".activity.CadastroVacinaActivity"></activity>
 
         <activity android:name=".activity.EnderecoActivity" />
 
         <activity
             android:name=".activity.EditarEnderecoActivity"
             android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".activity.ListaEstabServicoActivity" />
 
     </application>
-
-    <!-- To auto-complete the email text field in the login form with the user's emails -->
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
-    <uses-permission android:name="android.permission.READ_PROFILE" />
-    <uses-permission android:name="android.permission.READ_CONTACTS" />
 
 </manifest>

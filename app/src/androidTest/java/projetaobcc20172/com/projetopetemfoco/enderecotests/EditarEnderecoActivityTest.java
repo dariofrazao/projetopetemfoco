@@ -44,12 +44,12 @@ public class EditarEnderecoActivityTest {
         Thread.sleep(4000);
         TestTools.clicarItemMenu("Endereço");
         Thread.sleep(4000);
-        TestTools.clicarBotao(R.id.ibtnEditar);
+        TestToolsEndereco.clicarIconeEditar();
     }
 
     @Test
     public void testeEnderecoCamposEmBranco() throws InterruptedException {
-        TestToolsCadEndereco.apagarCampos();
+        TestToolsEndereco.apagarCampos();
         Thread.sleep(2000);
         TestTools.clicarBotaoComScroll(sBotaoEdicEnd);
         TestTools.checarToast(R.string.erro_atualizacao_campos_obrigatorios_endereco);
@@ -57,7 +57,7 @@ public class EditarEnderecoActivityTest {
 
     @Test
     public void testeEnderecoCampoObgLogradouro() throws InterruptedException {
-        TestToolsCadEndereco.preencherEdicao("", sNumero, sComplemento, sBairro,
+        TestToolsEndereco.preencherEdicao("", sNumero, sComplemento, sBairro,
                 sCidade, sUf, sCep);
         Thread.sleep(2000);
         TestTools.apagarCampo(R.id.etEditarLogradouroEndereco);
@@ -68,7 +68,7 @@ public class EditarEnderecoActivityTest {
 
     @Test
     public void testeEnderecoCampoObgBairro() throws InterruptedException {
-        TestToolsCadEndereco.preencherEdicao(sLogradouro, sNumero, sComplemento,"",
+        TestToolsEndereco.preencherEdicao(sLogradouro, sNumero, sComplemento,"",
                 sCidade, sUf, sCep);
         Thread.sleep(2000);
         TestTools.apagarCampo(R.id.etEditarBairroEndereco);
@@ -79,7 +79,7 @@ public class EditarEnderecoActivityTest {
 
     @Test
     public void testeEnderecoCampoObgCidade() throws InterruptedException {
-        TestToolsCadEndereco.preencherEdicao(sLogradouro, sNumero, sComplemento, sBairro,
+        TestToolsEndereco.preencherEdicao(sLogradouro, sNumero, sComplemento, sBairro,
                 "", sUf, sCep);
         Thread.sleep(2000);
         TestTools.apagarCampo(R.id.etEditarLocalidadeEndereco);
@@ -90,7 +90,7 @@ public class EditarEnderecoActivityTest {
 
     @Test
     public void testeEnderecoCampoObgCep() throws InterruptedException {
-        TestToolsCadEndereco.preencherEdicao(sLogradouro, sNumero, sComplemento, sBairro,
+        TestToolsEndereco.preencherEdicao(sLogradouro, sNumero, sComplemento, sBairro,
                 sCidade, sUf,"");
         Thread.sleep(2000);
         TestTools.editarTextoComScroll(R.id.etEditarCepEndereco);
@@ -103,7 +103,7 @@ public class EditarEnderecoActivityTest {
 
     @Test
     public void testeEditarEndereco() throws InterruptedException {
-        TestToolsCadEndereco.preencherEdicao(sLogradouro, sNumero, sComplemento, sBairro,
+        TestToolsEndereco.preencherEdicao(sLogradouro, sNumero, sComplemento, sBairro,
                 sCidade, sUf,sCep);
         Thread.sleep(2000);
         TestTools.clicarBotao(sBotaoEdicEnd);

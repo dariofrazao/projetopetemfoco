@@ -3,9 +3,7 @@ package projetaobcc20172.com.projetopetemfoco.pettests;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.uiautomator.UiDevice;
-import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiObjectNotFoundException;
-import android.support.test.uiautomator.UiSelector;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -40,17 +38,19 @@ public class RemocaoPetActivityTest {
 
         LoginActivityTest log = new LoginActivityTest();
         log.testeLoginComSucesso();
-        Thread.sleep(4000);
-        TestTools.clicarBotao(R.id.btnMeusPets);
-        Thread.sleep(4000);
-        TestTools.clicarBotao(R.id.ibtnRemover);
+        Thread.sleep(2000);
+        TestToolsPet.clicarMeusPets();
+        Thread.sleep(1000);
+        TestToolsPet.clicarCadastrarPet();
+        new CadastroPetActivityTest().testeCadastrarPet();
+        Thread.sleep(1500);
+        TestToolsPet.clicariconeExcluir();
     }
 
     //Teste que simula a remoção de um pet confirmando a ação
     @Test
     public void testeRemoverPetConfirmando() throws UiObjectNotFoundException, InterruptedException {
-        UiObject buttonInput2 = mDevice.findObject(new UiSelector().text("SIM"));
-        buttonInput2.click();
+        TestTools.clicarSimDialog();
         Thread.sleep(1000);
         TestTools.checarToast(R.string.sucesso_remocao_Pet);
     }
@@ -58,7 +58,6 @@ public class RemocaoPetActivityTest {
     //Teste que simula a remoção de um pet cancelando a ação
     @Test
     public void testeRemoverPetCancelando() throws UiObjectNotFoundException, InterruptedException {
-        UiObject buttonInput2 = mDevice.findObject(new UiSelector().text("NÃO"));
-        buttonInput2.click();
+        TestTools.clicarNaoDialog();
     }
 }

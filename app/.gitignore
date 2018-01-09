@@ -4,3 +4,5 @@
 # the project can be imported from settings.gradle
 .idea
 *.iml
+# Local Configuration file (sdk path, etc.)
+local.properties

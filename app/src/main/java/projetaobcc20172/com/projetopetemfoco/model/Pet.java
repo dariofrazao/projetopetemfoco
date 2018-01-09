@@ -1,6 +1,8 @@
 package projetaobcc20172.com.projetopetemfoco.model;
 
-public class Pet {
+import java.io.Serializable;
+
+public class Pet implements Serializable{
     private String mIdPet;
     private String mNome;
     private String mTipo;

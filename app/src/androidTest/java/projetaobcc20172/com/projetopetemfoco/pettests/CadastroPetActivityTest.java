@@ -1,5 +1,6 @@
 package projetaobcc20172.com.projetopetemfoco.pettests;
 
+import android.support.test.espresso.Espresso;
 import android.support.test.rule.ActivityTestRule;
 
 import org.junit.After;
@@ -37,9 +38,10 @@ public class CadastroPetActivityTest{
         LoginActivityTest log = new LoginActivityTest();
         log.testeLoginComSucesso();
         Thread.sleep(4000);
-        TestTools.clicarBotao(R.id.btnMeusPets);
+        TestToolsPet.clicarMeusPets();
         Thread.sleep(4000);
-        TestTools.clicarBotao(R.id.btnCadastrarPet);
+        TestToolsPet.clicarCadastrarPet();
+        Espresso.closeSoftKeyboard();
     }
 
     //Teste que simula um cadastro do pet com o campo nome em branco

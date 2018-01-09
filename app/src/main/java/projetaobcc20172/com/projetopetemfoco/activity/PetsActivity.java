@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -29,6 +30,7 @@ public class PetsActivity extends AppCompatActivity {
 
     private ArrayList<Pet> mPets;
     private ArrayAdapter<Pet> mAdapter;
+    private ListView mListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +54,7 @@ public class PetsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         mCadastrarPet = findViewById(R.id.btnCadastrarPet);
-        ListView mListView;
+
         mListView = findViewById(R.id.lv_pets);
 
         // Monta listview e mAdapter
@@ -85,6 +87,10 @@ public class PetsActivity extends AppCompatActivity {
             }
         };
 
+        mFirebase.addValueEventListener(mValueEventListenerPet);
+
+        this.chamarInfoPetListener();
+
         //Ação do botão de cadastrar o pet, que abre a tela para o seu cadastro
         mCadastrarPet.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,6 +101,19 @@ public class PetsActivity extends AppCompatActivity {
         });
         mFirebase.addValueEventListener(mValueEventListenerPet);
 
+    }
+
+    public void chamarInfoPetListener(){
+        this.mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Intent intent = new Intent(PetsActivity.this,InfoPetActivity.class);
+                Pet pet = mPets.get(position);
+                intent.putExtra("Pet", pet);
+                startActivity( intent );
+            }
+        });
     }
 
     @Override

@@ -55,7 +55,7 @@
     </string-array>
 
     <string-array name="tipoPet">
-        <item>Cão</item>
+        <item>Cachorro</item>
         <item>Gato</item>
         <item>Pássaro</item>
         <item>Peixe</item>
@@ -66,6 +66,21 @@
         <item>Médio</item>
         <item>Grande</item>
         <item>Gigante</item>
+    </string-array>
+
+    <string-array name="servicos">
+        <item>Todos</item>
+        <item>Banho</item>
+        <item>Tosa</item>
+        <item>Hospedagem</item>
+        <item>Passeio</item>
+        <item>Vacinação</item>
+    </string-array>
+
+    <string-array name="tiposPetBusca">
+        <item>Todos</item>
+        <item>Cachorro</item>
+        <item>Gato</item>
     </string-array>
 
 </resources>

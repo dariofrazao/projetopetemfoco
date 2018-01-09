@@ -1,6 +1,7 @@
 package projetaobcc20172.com.projetopetemfoco.model;
+import java.io.Serializable;
 
-public class Endereco {
+public class Endereco  implements Serializable {
 
     //Atributos do endereço
     //Estas variáveis não podem ter seus nomes alterados (devido a pesquisa no viacep)

@@ -35,10 +35,10 @@ public class EditarPetActivityTest {
 
         LoginActivityTest log = new LoginActivityTest();
         log.testeLoginComSucesso();
+        Thread.sleep(2000);
+        TestToolsPet.clicarMeusPets();
         Thread.sleep(4000);
-        TestTools.clicarBotao(R.id.btnMeusPets);
-        Thread.sleep(4000);
-        TestTools.clicarBotao(R.id.ibtnEditar);
+        TestToolsPet.clicarIconeEditar();
     }
 
     //Teste que simula uma edição do pet com o campo nome em branco

@@ -35,10 +35,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button mSair;
-        Button mMeusPets;
-        //Button mBuscarServicos;
-        //Button mMeusFavoritos;
+        Button sair;
+        Button meusPets;
+        Button btnBuscarServ;
+        //Button meusFavoritos;
 
         Toolbar toolbar;
         toolbar = findViewById(R.id.tb_main);
@@ -50,10 +50,10 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         toolbar.inflateMenu(R.menu.main_menu);
 
-        mSair = findViewById(R.id.btnSair);
-        mMeusPets =  findViewById(R.id.btnMeusPets);
-        //mBuscarServicos =  findViewById(R.id.botao_buscar_servicos);
-        //mMeusFavoritos =  findViewById(R.id.botao_meus_favoritos);
+        sair = findViewById(R.id.btnSair);
+        meusPets =  findViewById(R.id.btnMeusPets);
+        btnBuscarServ = findViewById(R.id.btnBuscarServicos);
+        //meusFavoritos =  findViewById(R.id.botao_meus_favoritos);
 
         mTvTitulo = findViewById(R.id.tvTituloConsumidor);
         mTvSubtitulo = findViewById(R.id.tvSubtituloConsumidor);
@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //Ação do botão para abrir a tela dos Pets
-        mMeusPets.setOnClickListener(new View.OnClickListener() {
+        meusPets.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent();
@@ -92,8 +92,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //Ação do botão de deslogar o usuário
-        mSair.setOnClickListener(new View.OnClickListener() {
+        btnBuscarServ.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                abrirBuscas();
+            }
+        });
+
+        //Ação do botão de deslogar o fornecedor
+        sair.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 deslogarUsuario();
@@ -133,6 +140,12 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+    }
+
+    private void abrirBuscas(){
+        Intent intent = new Intent(MainActivity.this, NavigatorMenu.class);
+        startActivity( intent );
+        finish();
     }
 
     //Método que recupera o id do usuário logado

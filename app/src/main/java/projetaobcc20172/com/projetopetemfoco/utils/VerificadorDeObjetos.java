@@ -4,7 +4,8 @@ import projetaobcc20172.com.projetopetemfoco.excecoes.CampoObrAusenteException;
 import projetaobcc20172.com.projetopetemfoco.model.Avaliacao;
 import projetaobcc20172.com.projetopetemfoco.model.Endereco;
 import projetaobcc20172.com.projetopetemfoco.model.Pet;
-import projetaobcc20172.com.projetopetemfoco.model.Usuario;
+import projetaobcc20172.com.projetopetemfoco.model.Vacina;
+
 /**
  * Created by raul on 10/12/17.
  * Essa classe é responsavel por validar os dados que são recebidos pelo controller
@@ -41,5 +42,9 @@ public class VerificadorDeObjetos {
             }
         }
 
-
+     public static void vDadosVacina(Vacina vacina) throws CampoObrAusenteException{
+        if(vacina.getmDescricao().isEmpty()){
+            throw new CampoObrAusenteException();
+        }
+     }
 }

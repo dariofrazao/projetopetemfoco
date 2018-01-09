@@ -97,8 +97,10 @@
     <string name="erro_atualizacao_campos_obrigatorios_Pet">Erro ao atualizar pet: Preencha o campo nome</string>
     <string name="sucesso_cadastro_Pet">Pet cadastrado com sucesso!</string>
     <string name="sucesso_atualizacao_Pet">Pet atualizado com sucesso!</string>
+    <string name="sucesso_atualizacao_vacina">Vacina atualizada com sucesso!</string>
     <string name="sucesso_remocao_Pet">Pet removido com sucesso!</string>
     <string name="pergunta_confirma_remocao_pet">O pet será removido. Confirma?</string>
+    <string name="pergunta_confirma_remocao_vacina">A vacina será removida. Confirma?</string>
 
     <string name="facebook_app_id">1383454871782340</string>
     <string name="fb_login_protocol_scheme">fb1383454871782340</string>

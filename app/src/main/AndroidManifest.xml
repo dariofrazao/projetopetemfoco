@@ -67,6 +67,9 @@
         <activity
             android:name=".activity.EditarPetActivity"
             android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".activity.InfoPetActivity" />
+        <activity android:name=".activity.CalendarioVacinasActivity" />
+        <activity android:name=".activity.CadastroVacinaActivity"></activity>
 
         <activity android:name=".activity.EnderecoActivity" />
 

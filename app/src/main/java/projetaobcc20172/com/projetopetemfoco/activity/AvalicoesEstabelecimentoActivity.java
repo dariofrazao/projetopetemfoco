@@ -19,7 +19,6 @@ import projetaobcc20172.com.projetopetemfoco.model.Avaliacao;
 import projetaobcc20172.com.projetopetemfoco.model.Fornecedor;
 
 public class AvalicoesEstabelecimentoActivity extends AppCompatActivity implements Serializable {
-    private Fornecedor mFornecedor;
     @SuppressLint("WrongConstant")
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     //permite que essa variavel seja vista pela classe de teste
@@ -33,6 +32,8 @@ public class AvalicoesEstabelecimentoActivity extends AppCompatActivity implemen
 
         Toolbar toolbar;
         toolbar = findViewById(R.id.tb_lista_avaliacoes_estabelecimento);
+
+        Fornecedor mFornecedor;
 
         //Receber os dados do estabelecimento da outra activity
         Intent i = getIntent();

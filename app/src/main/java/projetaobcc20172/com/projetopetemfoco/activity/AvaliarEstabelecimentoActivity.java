@@ -13,14 +13,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.Toast;
-import com.google.firebase.auth.FirebaseAuth;
 import projetaobcc20172.com.projetopetemfoco.R;
-import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoFirebase;
 import projetaobcc20172.com.projetopetemfoco.database.services.AvaliacaoDaoImpl;
 import projetaobcc20172.com.projetopetemfoco.excecoes.CampoObrAusenteException;
 import projetaobcc20172.com.projetopetemfoco.model.Avaliacao;
 import projetaobcc20172.com.projetopetemfoco.model.Fornecedor;
-import projetaobcc20172.com.projetopetemfoco.model.Usuario;
 import projetaobcc20172.com.projetopetemfoco.utils.VerificadorDeObjetos;
 
 public class AvaliarEstabelecimentoActivity extends AppCompatActivity {
@@ -29,7 +26,6 @@ public class AvaliarEstabelecimentoActivity extends AppCompatActivity {
     private Fornecedor mFornecedor;
     private EditText mComentario;
     private RatingBar mRatingBar;
-    private Button mBtnAvaliar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +47,7 @@ public class AvaliarEstabelecimentoActivity extends AppCompatActivity {
         Intent i = getIntent();
         mFornecedor = (Fornecedor) i.getSerializableExtra("Fornecedor");
 
+        Button mBtnAvaliar;
         mBtnAvaliar = findViewById(R.id.botao_avaliar);
         mBtnAvaliar.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -22,96 +21,84 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 import projetaobcc20172.com.projetopetemfoco.R;
-import projetaobcc20172.com.projetopetemfoco.adapter.PetAdapter;
+import projetaobcc20172.com.projetopetemfoco.adapter.VacinaAdapter;
 import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoFirebase;
-import projetaobcc20172.com.projetopetemfoco.model.Pet;
+import projetaobcc20172.com.projetopetemfoco.model.Vacina;
 
-public class PetsActivity extends AppCompatActivity {
+public class CalendarioVacinasActivity extends AppCompatActivity {
 
-    private ArrayList<Pet> mPets;
-    private ArrayAdapter<Pet> mAdapter;
+    private ArrayList<Vacina> mVacinas;
+    private ArrayAdapter<Vacina> mAdapter;
     private ListView mListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pets);
+        setContentView(R.layout.activity_calendario_vacinas);
+
+        //recupera a id do pet
+        final String petId = getIntent().getStringExtra("petId");
 
         //Recuperar id do usuário logado
         String idUsuarioLogado;
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         idUsuarioLogado = preferences.getString("id", "");
 
-        ImageButton mCadastrarPet; //Botão de cadastrar o pet
+        ImageButton cadastrar; //Botão de cadastrar o pet
 
         Toolbar toolbar;
         toolbar = findViewById(R.id.tb_main);
 
         // Configura toolbar
-        toolbar.setTitle(R.string.pets);
+        toolbar.setTitle("Calendario");
         toolbar.setTitleTextColor(Color.WHITE);
         toolbar.setNavigationIcon(R.drawable.ic_action_arrow_left_white);
         setSupportActionBar(toolbar);
 
-        mCadastrarPet = findViewById(R.id.btnCadastrarPet);
-
-        mListView = findViewById(R.id.lv_pets);
+        cadastrar = findViewById(R.id.btnCadastrar);
+        //ListView listView;
+        mListView = findViewById(R.id.lv_vacinas);
 
         // Monta listview e mAdapter
-        mPets = new ArrayList<>();
-        mAdapter = new PetAdapter(PetsActivity.this, mPets);
+        mVacinas = new ArrayList<>();
+        mAdapter = new VacinaAdapter(CalendarioVacinasActivity.this, mVacinas,petId);
         mListView.setAdapter(mAdapter);
 
         // Recuperar pets do Firebase
         DatabaseReference mFirebase;
-        mFirebase = ConfiguracaoFirebase.getFirebase().child("usuarios").child(idUsuarioLogado).child("pets");
+        mFirebase = ConfiguracaoFirebase.getFirebase().child("usuarios").child(idUsuarioLogado).child("pets").child(petId).child("calendarioVacinas");
 
         ValueEventListener mValueEventListenerPet;
         mValueEventListenerPet = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                mPets.clear();
+                mVacinas.clear();
 
-                // Recupera pets
+                // Recupera mPets
                 for (DataSnapshot dados : dataSnapshot.getChildren()) {
-                    Pet pet = dados.getValue(Pet.class);
-                    mPets.add(pet);
+                    Vacina vacina = dados.getValue(Vacina.class);
+                    vacina.setId(dados.getKey());
+                    mVacinas.add(vacina);
                 }
-                //Notificar o adaptador que exibe a lista de pets se houver alteração no banco
+                //Notificar o adaptar que exibe a lista de mPets se houver alteração no banco
                 mAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(PetsActivity.this, "Erro na leitura do banco de dados", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CalendarioVacinasActivity.this, "Erro na leitura do banco de dados", Toast.LENGTH_SHORT).show();
             }
         };
 
         mFirebase.addValueEventListener(mValueEventListenerPet);
 
-        this.chamarInfoPetListener();
-
         //Ação do botão de cadastrar o pet, que abre a tela para o seu cadastro
-        mCadastrarPet.setOnClickListener(new View.OnClickListener() {
+        cadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(PetsActivity.this, CadastroPetActivity.class);
+                Intent intent = new Intent(CalendarioVacinasActivity.this, CadastroVacinaActivity.class);
+                intent.putExtra("petId",petId);
                 startActivity(intent);
-            }
-        });
-        mFirebase.addValueEventListener(mValueEventListenerPet);
-
-    }
-
-    public void chamarInfoPetListener(){
-        this.mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                Intent intent = new Intent(PetsActivity.this,InfoPetActivity.class);
-                Pet pet = mPets.get(position);
-                intent.putExtra("Pet", pet);
-                startActivity( intent );
             }
         });
     }

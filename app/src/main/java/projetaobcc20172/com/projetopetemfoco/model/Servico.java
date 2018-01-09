@@ -2,19 +2,22 @@ package projetaobcc20172.com.projetopetemfoco.model;
 
 import com.google.firebase.database.Exclude;
 
+import java.io.Serializable;
+
 /**
  * Created by Felipe Oliveira on 05/12/17.
  *
  */
 
-public class Servico {
+public class Servico implements Serializable {
     private String mId;
     private String mNome;
     private String mDescricao;
     private String mValor;
     private String mTipoPet;
 
-    public Servico() {}
+    public Servico(){
+    }
 
     public Servico(String nome, String valor,String tipoPet){
         this.mNome = nome;
@@ -50,12 +53,6 @@ public class Servico {
     public void setValor(String Valor) {
         this.mValor = Valor;
     }
-/*
-    public void salvar(String idEstabelecimento){
-        DatabaseReference referenciaFirebase = ConfiguracaoFirebase.getFirebase();
-        referenciaFirebase.child("fornecedor").child( idEstabelecimento ).setValue(this);
-    }
-    */
 
     public String getTipoPet() {
         return mTipoPet;

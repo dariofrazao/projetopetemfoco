@@ -16,11 +16,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.inputmethod.InputMethodManager;
 
+import java.io.Serializable;
+
 import projetaobcc20172.com.projetopetemfoco.R;
 /*
 * Essa classe implementa o navigator Drawer existente na tela de busca*/
 public class NavigatorMenu extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener , Serializable{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -128,6 +130,5 @@ public class NavigatorMenu extends AppCompatActivity
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
     }
-
 
 }

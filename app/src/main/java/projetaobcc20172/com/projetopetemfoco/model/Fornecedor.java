@@ -27,6 +27,7 @@ public class Fornecedor implements Serializable {
     private float mLatitude = 0;
     private float mLongitude = 0;
     private float mNota = 0;
+    private ArrayList<Avaliacao> mAvaliacoes = new ArrayList<>();
 
     public Fornecedor() {
     }
@@ -152,6 +153,18 @@ public class Fornecedor implements Serializable {
 
     public void setNota(float mNota) {
         this.mNota = mNota;
+    }
+
+    public void addAvaliacao(Avaliacao avali) {
+        this.mAvaliacoes.add(avali);
+    }
+
+    public ArrayList<Avaliacao> getAvaliacoes() {
+        return mAvaliacoes;
+    }
+
+    public void setAvaliacao(ArrayList<Avaliacao> avaliacoes) {
+        this.mAvaliacoes = avaliacoes;
     }
 
     public float getmLatitude() {

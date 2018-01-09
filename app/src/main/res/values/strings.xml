@@ -107,6 +107,18 @@
 
 
 
+    <!--Strings relacionadas ao estbelecimento-->
+    <string name="tb_acesso_estabelecimento">Informações</string>
+    <string name="servicos">Serviços:</string>
+    <string name="estabelecimento">Estabelecimento:</string>
+    <string name="telefone">Telefone:</string>
+    <string name="cpf_cnpj">CPF/CNPJ:</string>
+    <string name="horario">Horário:</string>
+    <string name="email">Email:</string>
+    <string name="avaliacoes">Avaliações</string>
+    <string name="sucesso_avaliacao_estabelecimento">avaliacao realizada com sucesso</string>
+    <string name="erro_avaliacao_estabelecimento">erro ao realizar avaliação</string>
+
     <!--Strings relacionadas a tela de busca-->
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -114,5 +126,12 @@
     <string name="action_settings">Settings</string>
 
     <string name="buscaEstabelecimento">Nome estabelecimento</string>
+
+    <!--Strings relacionadas a avaliação-->
+    <string name="tb_avaliar_estabelecimento">Avaliação</string>
+    <string name="tb_avaliacoes_estabelecimento">Avaliações</string>
+    <string name="avaliador">Usuário</string>
+    <string name="comentario">Comentário</string>
+    <string name="avaliar">Avaliar</string>
 
 </resources>

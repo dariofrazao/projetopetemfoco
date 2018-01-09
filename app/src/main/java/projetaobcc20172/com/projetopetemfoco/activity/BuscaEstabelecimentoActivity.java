@@ -1,21 +1,26 @@
 package projetaobcc20172.com.projetopetemfoco.activity;
 
 
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
+
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import projetaobcc20172.com.projetopetemfoco.R;
@@ -29,7 +34,7 @@ import projetaobcc20172.com.projetopetemfoco.model.Servico;
  * Created by raul1 on 03/01/2018.
  */
 
-public class BuscaEstabelecimentoActivity extends Fragment {
+public class BuscaEstabelecimentoActivity extends Fragment implements Serializable {
     private ArrayList<Fornecedor> mForncedores;
     private ArrayAdapter<Fornecedor> mAdapter;
 
@@ -45,10 +50,20 @@ public class BuscaEstabelecimentoActivity extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         //you can set the title for your toolbar here for different fragments different titles
         getActivity().setTitle("Busca por nome");
         ListView listView = getView().findViewById(R.id.lvBuscaEsta);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                exibirEstabelecimento(mForncedores.get(position));
+            }
+        });
+
+
         SearchView buscaEst = getView().findViewById(R.id.svBusca);
+
         // Monta listview e mAdapter
         mForncedores = new ArrayList<>();
         mAdapter = new EstabelecimentoAdapter(getActivity(), mForncedores);
@@ -63,7 +78,7 @@ public class BuscaEstabelecimentoActivity extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String s) {
-                if("".equals(s)){//apaga os resultado quando se apaga o texto
+                if(s.equals("")){//apaga os resultado quando se apaga o texto
                     mForncedores.clear();
                     mAdapter.notifyDataSetChanged();
                 }
@@ -72,15 +87,23 @@ public class BuscaEstabelecimentoActivity extends Fragment {
         });
     }
 
-    private void buscarEstabelecimentos(final String nomeBuscado){
-        Query query1 = ConfiguracaoFirebase.getFirebase().child("fornecedor").orderByChild("nome").startAt(nomeBuscado);
+    //Método que chama a activity para exibir informações do estabelecimento
+    public void exibirEstabelecimento(Fornecedor fornecedor){
+        Intent intent = new Intent(getActivity(), AcessoInformacoesEstabelecimentoActivity.class);
+        intent.putExtra("Fornecedor", fornecedor);
+        getActivity().startActivity(intent);
+    }
+
+    private void buscarEstabelecimentos(String nomeBuscado){
+        final String nome = nomeBuscado;
+        Query query1 = ConfiguracaoFirebase.getFirebase().child("fornecedor").orderByChild("nome").startAt(nome);
         query1.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 mForncedores.clear();
                 for (DataSnapshot dados : dataSnapshot.getChildren()) {
                     String nomeT = dados.child("nome").getValue(String.class);
-                    if(!nomeT.contains(nomeBuscado)){
+                    if(!nomeT.contains(nome)){
                         continue;
                     }
                     Fornecedor forn;
@@ -90,15 +113,16 @@ public class BuscaEstabelecimentoActivity extends Fragment {
                         nota = dados.child("nota").getValue(float.class);
                     }
                     forn = new Fornecedor(dados.child("nome").getValue(String.class), dados.child("email").getValue(String.class), dados.child("cpfCnpj").getValue(String.class)
-                            , dados.child("horario").getValue(String.class), nota, dados.child("telefone").getValue(String.class),
+                            , dados.child("horarios").getValue(String.class), nota, dados.child("telefone").getValue(String.class),
                             dados.child("endereco").getValue(Endereco.class));
+                    forn.setId(dados.getKey());
                     for (DataSnapshot ds : dados.child("servicos").getChildren()) {
                         Servico serv = ds.getValue(Servico.class);
                         servicos.add(serv);
                     }
                     forn.setServicos(servicos);
-                mForncedores.add(forn);
-            }
+                    mForncedores.add(forn);
+                }
                 mAdapter.notifyDataSetChanged();
             }
 
@@ -109,7 +133,5 @@ public class BuscaEstabelecimentoActivity extends Fragment {
         });
 
     }
-
-
 
 }

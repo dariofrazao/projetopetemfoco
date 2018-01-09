@@ -19,6 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/tb_acesso_infomacoes_estabelecimento"
+        android:orientation="vertical"
         android:paddingBottom="@dimen/activity_vertical_margin"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
@@ -40,11 +41,35 @@
                     android:layout_marginBottom="2dp"
                     android:layout_marginTop="2dp" />
 
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent">
+
+                <TextView
+                    android:id="@+id/tvEstabelecimento"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="@string/estabelecimento"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textStyle="normal" />
+                <Button
+                android:id="@+id/botao_mostrar_avaliacoes_estabelecimento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/avaliacoes" />
+                <Button
+                    android:id="@+id/botao_avaliar_estabelecimento"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/avaliar" />
+            </LinearLayout>
+
                 <TextView
                     android:id="@+id/tvExibeNomeEstabelecimento"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="6dp"
                     android:text="Nome"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textStyle="bold" />
@@ -56,10 +81,16 @@
                     android:layout_marginTop="2dp" />
 
                 <TextView
+                    android:id="@+id/tvEmail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/email"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textStyle="normal" />
+                <TextView
                     android:id="@+id/tvExibeEmailEstabelecimentor"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="6dp"
                     android:text="Email"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textStyle="bold" />
@@ -70,41 +101,66 @@
                     android:layout_marginBottom="2dp"
                     android:layout_marginTop="2dp" />
 
-                <TextView
-                    android:id="@+id/tvExibeTelefoneEstabelecimento"
-                    android:layout_width="fill_parent"
+                <LinearLayout
+                    android:orientation="horizontal"
                     android:layout_height="wrap_content"
-                    android:layout_margin="6dp"
-                    android:text="Telefone"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textStyle="bold" />
+                    android:layout_width="match_parent">
 
+                    <TextView
+                        android:id="@+id/tvTelefone"
+                        android:layout_width="130dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/telefone"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textStyle="normal" />
+
+                    <TextView
+                        android:id="@+id/tvCpfCnpj"
+                        android:paddingLeft="20dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/cpf_cnpj"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textStyle="normal" />
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent">
+
+                    <TextView
+                        android:id="@+id/tvExibeTelefoneEstabelecimento"
+                        android:layout_width="135dp"
+                        android:layout_height="wrap_content"
+                        android:text="Telefone"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvExibeCpfCnpjEstabelecimento"
+                        android:paddingLeft="20dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="CPF/CNPJ"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textStyle="bold" />
+                </LinearLayout>
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
                     android:layout_marginBottom="2dp"
                     android:layout_marginTop="2dp" />
-
                 <TextView
-                    android:id="@+id/tvExibeCpfCnpjEstabelecimento"
+                    android:id="@+id/tvHorario"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="6dp"
-                    android:text="CPF/CNPJ"
+                    android:text="@string/horario"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textStyle="bold" />
-
-                <View
-                    android:layout_width="fill_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginBottom="2dp"
-                    android:layout_marginTop="2dp" />
-
+                    android:textStyle="normal" />
                 <TextView
                     android:id="@+id/tvExibeHorarioEstabelecimento"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="6dp"
                     android:text="Horario"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textStyle="bold" />
@@ -115,24 +171,31 @@
                     android:layout_marginBottom="2dp"
                     android:layout_marginTop="4dp" />
 
-                <TextView
-                    android:id="@+id/tvServicos"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="6dp"
-                    android:text="@string/servicos"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textStyle="bold" />
-                <View
-                    android:layout_width="fill_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginBottom="2dp"
-                    android:layout_marginTop="4dp" />
-
-                <ListView
-                    android:id="@+id/lvListaServicos"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="220dp" />
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvServicos"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/servicos"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textStyle="bold" />
+
+                    <View
+                        android:layout_width="fill_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginTop="4dp" />
+                    <ListView
+                        android:id="@+id/lvListaServicos"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp" />
+                </LinearLayout>
+
+
 
             </LinearLayout>
 

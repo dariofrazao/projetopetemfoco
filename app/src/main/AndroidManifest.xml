@@ -38,11 +38,13 @@
         <activity
             android:name=".activity.EditarPetActivity"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".activity.AcessoInformacoesEstabelecimentoActivity"></activity>
-        <activity android:name=".activity.EditarPetActivity"
-            android:windowSoftInputMode="stateHidden">
-        </activity>
-        <activity android:name=".activity.ListaEstabServicoActivity"/>
+        <activity android:name=".activity.AcessoInformacoesEstabelecimentoActivity" />
+        <activity
+            android:name=".activity.EditarPetActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".activity.ListaEstabServicoActivity" />
+        <activity android:name=".activity.AvalicoesEstabelecimentoActivity" />
+        <activity android:name=".activity.AvaliarEstabelecimentoActivity"></activity>
     </application>
 
 </manifest>

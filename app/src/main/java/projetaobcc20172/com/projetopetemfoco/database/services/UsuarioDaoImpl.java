@@ -5,7 +5,11 @@ import android.support.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.List;
 import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoFirebase;
@@ -48,6 +52,7 @@ public class UsuarioDaoImpl implements UsuarioDao{
             }
         });
     }
+
     /*
     @Override
     public void remover(Usuario usuario, String idFornecedor) {
@@ -95,17 +100,21 @@ public class UsuarioDaoImpl implements UsuarioDao{
     */
 
     @Override
-    public List<Usuario> buscarPorNome(String nome) {
-        return null;
-    }
+    public List<Usuario> buscarPorNome(String nome) { return  null; }
 
     @Override
     public List<Usuario> buscarTodosUsuario(String idFornecedor) {
         return null;
     }
 
+    @Override
+    public Usuario buscarUsuarioPorId(String id) {
+        return null;
+    }
+
     private Context getContexto(){
         return this.mContexto;
     }
+
 
 }

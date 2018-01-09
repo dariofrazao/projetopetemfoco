@@ -27,17 +27,13 @@ public class AvaliarEstabelecimentoActivity extends AppCompatActivity {
     private Avaliacao mAvaliacao;
     public Toast mToast;
     private Fornecedor mFornecedor;
-    private Usuario mUsuario;
-    EditText mComentario;
-    RatingBar mRatingBar;
-    Button mBtnAvaliar;
-    private FirebaseAuth mAutenticacao;
+    private EditText mComentario;
+    private RatingBar mRatingBar;
+    private Button mBtnAvaliar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_avaliar_estabelecimento);
-
-        mAutenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
 
         Toolbar toolbar;
         toolbar = findViewById(R.id.tb_avaliacao_estabelecimento);

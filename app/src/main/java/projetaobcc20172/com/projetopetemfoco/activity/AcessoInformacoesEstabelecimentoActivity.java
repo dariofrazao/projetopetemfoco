@@ -23,8 +23,7 @@ import projetaobcc20172.com.projetopetemfoco.model.Fornecedor;
 import projetaobcc20172.com.projetopetemfoco.model.Servico;
 
 public class AcessoInformacoesEstabelecimentoActivity extends AppCompatActivity implements Serializable {
-    Fornecedor mFornecedor;
-    private ArrayAdapter<Servico> mAdapter;
+    private Fornecedor mFornecedor;
     @SuppressLint("WrongConstant")
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     //permite que essa variavel seja vista pela classe de teste
@@ -33,6 +32,8 @@ public class AcessoInformacoesEstabelecimentoActivity extends AppCompatActivity 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_acesso_informacoes_estabelecimento);
+
+        ArrayAdapter<Servico> mAdapter;
 
         Toolbar toolbar;
         toolbar = findViewById(R.id.tb_acesso_infomacoes_estabelecimento);

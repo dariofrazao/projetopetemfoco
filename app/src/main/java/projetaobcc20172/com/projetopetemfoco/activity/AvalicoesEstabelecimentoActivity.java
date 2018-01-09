@@ -19,8 +19,7 @@ import projetaobcc20172.com.projetopetemfoco.model.Avaliacao;
 import projetaobcc20172.com.projetopetemfoco.model.Fornecedor;
 
 public class AvalicoesEstabelecimentoActivity extends AppCompatActivity implements Serializable {
-    Fornecedor mFornecedor;
-    private ArrayAdapter<Avaliacao> mAdapter;
+    private Fornecedor mFornecedor;
     @SuppressLint("WrongConstant")
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     //permite que essa variavel seja vista pela classe de teste
@@ -29,6 +28,8 @@ public class AvalicoesEstabelecimentoActivity extends AppCompatActivity implemen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_avalicoes_estabelecimento);
+
+        ArrayAdapter<Avaliacao> mAdapter;
 
         Toolbar toolbar;
         toolbar = findViewById(R.id.tb_lista_avaliacoes_estabelecimento);

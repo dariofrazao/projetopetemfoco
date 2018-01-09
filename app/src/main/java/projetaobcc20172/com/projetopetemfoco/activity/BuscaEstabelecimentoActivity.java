@@ -26,7 +26,6 @@ import java.util.ArrayList;
 import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.adapter.EstabelecimentoAdapter;
 import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoFirebase;
-import projetaobcc20172.com.projetopetemfoco.model.Avaliacao;
 import projetaobcc20172.com.projetopetemfoco.model.Endereco;
 import projetaobcc20172.com.projetopetemfoco.model.Fornecedor;
 import projetaobcc20172.com.projetopetemfoco.model.Servico;

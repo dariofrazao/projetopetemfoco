@@ -1,6 +1,5 @@
 package projetaobcc20172.com.projetopetemfoco.model;
 
-import android.text.Editable;
 
 /**
  * Created by Alexsandro on 08/01/2018.

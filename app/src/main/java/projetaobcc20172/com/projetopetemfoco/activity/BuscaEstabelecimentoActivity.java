@@ -63,7 +63,7 @@ public class BuscaEstabelecimentoActivity extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String s) {
-                if(s.equals("")){//apaga os resultado quando se apaga o texto
+                if("".equals(s)){//apaga os resultado quando se apaga o texto
                     mForncedores.clear();
                     mAdapter.notifyDataSetChanged();
                 }

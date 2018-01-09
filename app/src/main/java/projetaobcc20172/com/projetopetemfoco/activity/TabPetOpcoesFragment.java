@@ -23,6 +23,7 @@ import projetaobcc20172.com.projetopetemfoco.utils.Utils;
  */
 
 public class TabPetOpcoesFragment extends Fragment {
+
     private OpPetGridAdapter mPetAdapter;
     private static ArrayList<String> sOpcaosSelecionada;
     private HashMap<String,Integer> botoesClicados;//Hash que verifica se o botão está marcado ou não. 1 se estiver e 0 se não estiver

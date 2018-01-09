@@ -21,7 +21,6 @@ import java.util.Random;
 
 
 import static android.support.test.espresso.Espresso.onData;
-import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.swipeLeft;
 import static android.support.test.espresso.action.ViewActions.swipeRight;
@@ -116,11 +115,11 @@ public class TestTools {
     }
 
     public static void clicarSimDialog(){
-        onView(withId(android.R.id.button1)).perform(click());
+        Espresso.onView(withId(android.R.id.button1)).perform(click());
     }
 
     public static void clicarNaoDialog(){
-        onView(withId(android.R.id.button2)).perform(click());
+        Espresso.onView(withId(android.R.id.button2)).perform(click());
     }
 
 

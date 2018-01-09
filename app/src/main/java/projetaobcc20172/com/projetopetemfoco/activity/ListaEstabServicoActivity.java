@@ -57,18 +57,14 @@ public class ListaEstabServicoActivity extends AppCompatActivity {
         mResultado.clear();
         for (String pet : pets) {
             Query query;
-            if (servico.equals("Todos") && pet.equals("Todos")) {
+            if ("Todos".equals(servico) && "Todos".equals(pet)) {
                 query = ConfiguracaoFirebase.getFirebase().child("servico_fornecedor").orderByChild("nome_tipoPet");
-                System.out.println("valors 1" + servico + " " + pet);
-            } else if (servico.equals("Todos")) {
+            } else if ("Todos".equals(servico)) {
                 query = ConfiguracaoFirebase.getFirebase().child("servico_fornecedor").orderByChild("pet").equalTo(pet);
-                System.out.println("valors 2" + servico + " " + pet);
-            } else if (pet.equals("Todos")) {
+            } else if ("Todos".equals(pet)) {
                 query = ConfiguracaoFirebase.getFirebase().child("servico_fornecedor").orderByChild("servico").equalTo(servico);
-                System.out.println("valors 3" + servico + " " + pet);
             } else {
                 query = ConfiguracaoFirebase.getFirebase().child("servico_fornecedor").orderByChild("nome_tipoPet").equalTo(servico + "_" + pet);
-                System.out.println("valors 4" + servico + " " + pet);
             }
             query.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
@@ -85,7 +81,7 @@ public class ListaEstabServicoActivity extends AppCompatActivity {
 
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
-
+                    assert true;
                 }
             });
         }

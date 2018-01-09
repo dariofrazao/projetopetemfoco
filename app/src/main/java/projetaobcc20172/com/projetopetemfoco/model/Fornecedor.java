@@ -153,5 +153,21 @@ public class Fornecedor implements Serializable {
     public void setNota(float mNota) {
         this.mNota = mNota;
     }
+
+    public float getmLatitude() {
+        return mLatitude;
+    }
+
+    public float getmLongitude() {
+        return mLongitude;
+    }
+
+    public void setmLatitude(float mLatitude) {
+        this.mLatitude = mLatitude;
+    }
+
+    public void setmLongitude(float mLongitude) {
+        this.mLongitude = mLongitude;
+    }
 }
 

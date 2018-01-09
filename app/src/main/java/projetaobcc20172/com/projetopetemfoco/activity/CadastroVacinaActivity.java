@@ -1,6 +1,7 @@
 package projetaobcc20172.com.projetopetemfoco.activity;
 
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -23,7 +24,10 @@ import java.util.Calendar;
 import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.database.services.VacinaDao;
 import projetaobcc20172.com.projetopetemfoco.database.services.VacinaDaoImpl;
+import projetaobcc20172.com.projetopetemfoco.excecoes.CampoObrAusenteException;
 import projetaobcc20172.com.projetopetemfoco.model.Vacina;
+import projetaobcc20172.com.projetopetemfoco.utils.Utils;
+import projetaobcc20172.com.projetopetemfoco.utils.VerificadorDeObjetos;
 
 public class CadastroVacinaActivity extends AppCompatActivity {
 
@@ -77,17 +81,29 @@ public class CadastroVacinaActivity extends AppCompatActivity {
                 VacinaDao vacinaDao = new VacinaDaoImpl(CadastroVacinaActivity.this);
 
                 if(mEditavel){
-                    Vacina vacina = (Vacina) getIntent().getSerializableExtra("vacina");
-                    vacina.setmDescricao(mDescricao.getText().toString());
-                    vacina.setmData(mData.getText().toString());
-
-                    vacinaDao.atualizar(vacina,idUsuarioLogado,petId);
-
+                    try {
+                        Vacina vacina = (Vacina) getIntent().getSerializableExtra("vacina");
+                        vacina.setmDescricao(mDescricao.getText().toString());
+                        vacina.setmData(mData.getText().toString());
+                        VerificadorDeObjetos.vDadosVacina(vacina);
+                        vacinaDao.atualizar(vacina,idUsuarioLogado,petId);
+                    }catch (CampoObrAusenteException e){
+                        Utils.mostrarMensagemCurta(getApplicationContext(), "erro ao editar campos_obrigatorios_vacina");
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
                 }else{
-                    Vacina vacina = new Vacina();
-                    vacina.setmDescricao(mDescricao.getText().toString());
-                    vacina.setmData(mData.getText().toString());
-                    vacinaDao.inserir(vacina,idUsuarioLogado,petId);
+                    try {
+                        Vacina vacina = new Vacina();
+                        vacina.setmDescricao(mDescricao.getText().toString());
+                        vacina.setmData(mData.getText().toString());
+                        VerificadorDeObjetos.vDadosVacina(vacina);
+                        vacinaDao.inserir(vacina,idUsuarioLogado,petId);
+                    }catch (CampoObrAusenteException e){
+                        Utils.mostrarMensagemCurta(getApplicationContext(), "erro ao cadastrar campos_obrigatorios_vacina");
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
                 }
 
                 mToast = mToast.makeText(CadastroVacinaActivity.this, "Cadastro de vacina realizado com sucesso", Toast.LENGTH_LONG);
@@ -141,6 +157,38 @@ public class CadastroVacinaActivity extends AppCompatActivity {
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
+    }
+
+    //Método do botão voltar
+    @Override
+    public void onBackPressed() {
+        if (verificarCamposPreenchidos()) confirmarSaida();
+        else CadastroVacinaActivity.super.onBackPressed();
+    }
+
+    public void confirmarSaida(){
+        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which){
+                    case DialogInterface.BUTTON_POSITIVE:
+                        // Botão sim foi clicado
+                        CadastroVacinaActivity.super.onBackPressed();
+                        break;
+
+                    case DialogInterface.BUTTON_NEGATIVE:
+                        // Botão não foi clicado
+                        break;
+                    default:
+                        break;
+                }
+            }
+        };
+    }
+
+    private boolean verificarCamposPreenchidos(){
+        return (!mDescricao.getText().toString().isEmpty() ||
+                !mData.getText().toString().isEmpty());
     }
 
     private void abrirCalendario(){

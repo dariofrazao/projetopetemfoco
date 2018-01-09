@@ -57,8 +57,8 @@ public class VacinaAdapter extends ArrayAdapter<Vacina>{
             // recupera elemento para exibição
             TextView titulo = view.findViewById(R.id.tvTitulo);
             TextView subtitulo = view.findViewById(R.id.tvSubtitulo);
-            ImageButton remover = view.findViewById(R.id.ibtnRemoverPet);
-            ImageButton editar = view.findViewById(R.id.ibtnEditarPet);
+            ImageButton remover = view.findViewById(R.id.ibtnRemover);
+            ImageButton editar = view.findViewById(R.id.ibtnEditar);
 
             final Vacina vacina = mVacina.get(position);
             titulo.setText(vacina.getmDescricao());

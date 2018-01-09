@@ -4,11 +4,14 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.os.Build;
 import android.preference.PreferenceManager;
+import android.support.annotation.RequiresApi;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -33,6 +36,7 @@ public class CadastroVacinaActivity extends AppCompatActivity {
     private boolean mEditavel;
 
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +44,10 @@ public class CadastroVacinaActivity extends AppCompatActivity {
 
         mDescricao = (EditText) findViewById(R.id.etDescricao);
         mData = (EditText) findViewById(R.id.etData);
+        mData.setShowSoftInputOnFocus(false);
+        mData.setInputType(InputType.TYPE_NULL);
+        mData.setFocusable(false);
+
         mCadastrarVacina = (Button) findViewById(R.id.btnCadastroVacina);
 
         Toolbar toolbar;
@@ -127,6 +135,12 @@ public class CadastroVacinaActivity extends AppCompatActivity {
                 mDatePickerDialog.show();
             }
         });
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 
     private void abrirCalendario(){

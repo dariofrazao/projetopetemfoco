@@ -54,7 +54,7 @@ public class PetsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         mCadastrarPet = findViewById(R.id.btnCadastrarPet);
-        ListView mListView;
+
         mListView = findViewById(R.id.lv_pets);
 
         // Monta listview e mAdapter

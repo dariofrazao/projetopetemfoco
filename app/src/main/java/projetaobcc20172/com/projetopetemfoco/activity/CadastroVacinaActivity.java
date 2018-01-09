@@ -87,8 +87,10 @@ public class CadastroVacinaActivity extends AppCompatActivity {
                         vacina.setmData(mData.getText().toString());
                         VerificadorDeObjetos.vDadosVacina(vacina);
                         vacinaDao.atualizar(vacina,idUsuarioLogado,petId);
+                        mToast = mToast.makeText(CadastroVacinaActivity.this, "Edição da vacina realizado com sucesso", Toast.LENGTH_LONG);
+                        mToast.show();
                     }catch (CampoObrAusenteException e){
-                        Utils.mostrarMensagemCurta(getApplicationContext(), "erro ao editar campos_obrigatorios_vacina");
+                        Utils.mostrarMensagemCurta(getApplicationContext(), "erro ao editar campos obrigatorios_vacina");
                     }catch (Exception e){
                         e.printStackTrace();
                     }
@@ -99,15 +101,14 @@ public class CadastroVacinaActivity extends AppCompatActivity {
                         vacina.setmData(mData.getText().toString());
                         VerificadorDeObjetos.vDadosVacina(vacina);
                         vacinaDao.inserir(vacina,idUsuarioLogado,petId);
+                        mToast = mToast.makeText(CadastroVacinaActivity.this, "Cadastro de vacina realizado com sucesso", Toast.LENGTH_LONG);
+                        mToast.show();
                     }catch (CampoObrAusenteException e){
                         Utils.mostrarMensagemCurta(getApplicationContext(), "erro ao cadastrar campos_obrigatorios_vacina");
                     }catch (Exception e){
                         e.printStackTrace();
                     }
                 }
-
-                mToast = mToast.makeText(CadastroVacinaActivity.this, "Cadastro de vacina realizado com sucesso", Toast.LENGTH_LONG);
-                mToast.show();
 
                 abrirCalendario();
             }
@@ -159,13 +160,6 @@ public class CadastroVacinaActivity extends AppCompatActivity {
         return true;
     }
 
-    //Método do botão voltar
-    @Override
-    public void onBackPressed() {
-        if (verificarCamposPreenchidos()) confirmarSaida();
-        else CadastroVacinaActivity.super.onBackPressed();
-    }
-
     public void confirmarSaida(){
         DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
             @Override
@@ -184,6 +178,15 @@ public class CadastroVacinaActivity extends AppCompatActivity {
                 }
             }
         };
+        Utils.mostrarPerguntaSimNao(this, getString(R.string.atencao),
+                getString(R.string.pergunta_confirma_dados_serao_perdidos), dialogClickListener,
+                dialogClickListener);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (verificarCamposPreenchidos()) confirmarSaida();
+        else CadastroVacinaActivity.super.onBackPressed();
     }
 
     private boolean verificarCamposPreenchidos(){

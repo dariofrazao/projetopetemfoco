@@ -57,8 +57,13 @@
         <activity android:name=".activity.CadastroEnderecoActivity"
             android:windowSoftInputMode="stateHidden" />
 
-        <activity android:name=".activity.PetsActivity" />
-
+        <activity android:name=".activity.AcessoInformacoesEstabelecimentoActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".activity.AvaliarEstabelecimentoActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".activity.AvalicoesEstabelecimentoActivity"
+            android:windowSoftInputMode="stateHidden" />
+         <activity android:name=".activity.PetsActivity" />
         <activity
             android:name=".activity.EditarPetActivity"
             android:windowSoftInputMode="stateHidden" />

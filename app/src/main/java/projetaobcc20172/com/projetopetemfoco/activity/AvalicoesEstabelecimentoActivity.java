@@ -46,12 +46,12 @@ public class AvalicoesEstabelecimentoActivity extends AppCompatActivity implemen
         TextView mNomeEstabelecimento = findViewById(R.id.tvExibeNomeEstabelecimentoAvaliacao);
         ListView mExibeListaAvaliacao = findViewById(R.id.lvListaAvaliacoes);
 
-        mNomeEstabelecimento.setText(mFornecedor.getNome());
-
         // Monta listview e mAdapter
         mAdapter = new ServicoAdapterListaViewAvaliacoes(this, mFornecedor.getAvaliacoes());
         mExibeListaAvaliacao.setAdapter(mAdapter);
         mAdapter.notifyDataSetChanged();
+
+        mNomeEstabelecimento.setText(mFornecedor.getNome());
 
     }
 

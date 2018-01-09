@@ -1,6 +1,7 @@
 package projetaobcc20172.com.projetopetemfoco.utils;
 
 import projetaobcc20172.com.projetopetemfoco.excecoes.CampoObrAusenteException;
+import projetaobcc20172.com.projetopetemfoco.model.Avaliacao;
 import projetaobcc20172.com.projetopetemfoco.model.Endereco;
 import projetaobcc20172.com.projetopetemfoco.model.Pet;
 import projetaobcc20172.com.projetopetemfoco.model.Usuario;

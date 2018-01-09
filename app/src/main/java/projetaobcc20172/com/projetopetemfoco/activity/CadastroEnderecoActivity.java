@@ -4,7 +4,7 @@ package projetaobcc20172.com.projetopetemfoco.activity;
  */
 
 import android.content.Context;
-import android.content.Intent;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -17,16 +17,15 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import projetaobcc20172.com.projetopetemfoco.R;
-import projetaobcc20172.com.projetopetemfoco.database.services.UsuarioDaoImpl;
+import projetaobcc20172.com.projetopetemfoco.database.services.EnderecoDaoImpl;
 import projetaobcc20172.com.projetopetemfoco.excecoes.CampoObrAusenteException;
 import projetaobcc20172.com.projetopetemfoco.helper.Util;
 import projetaobcc20172.com.projetopetemfoco.helper.ZipCodeListener;
 import projetaobcc20172.com.projetopetemfoco.model.Endereco;
-import projetaobcc20172.com.projetopetemfoco.model.Usuario;
 import projetaobcc20172.com.projetopetemfoco.utils.MaskUtil;
+import projetaobcc20172.com.projetopetemfoco.utils.Utils;
 import projetaobcc20172.com.projetopetemfoco.utils.VerificadorDeObjetos;
 
 /**
@@ -36,14 +35,12 @@ public class CadastroEnderecoActivity extends AppCompatActivity{
 
     private EditText mLogradouro, mNumero, mComplemento, mBairro, mLocalidade, mCep;
     private Spinner mSpinnerUf;
-    private Usuario mUsuario;
     private Util mUtil;
     private Endereco mEndereco;
     private String mIdUsuarioLogado;
 
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     //permite que essa variavel seja vista pela classe de teste
-    private Toast mToast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,27 +75,12 @@ public class CadastroEnderecoActivity extends AppCompatActivity{
                 R.id.etCadastroBairroEndereco,
                 R.id.ufSpinner);
 
-        //Receber os dados do usuário da outra activity
-        Intent i = getIntent();
-        mUsuario = (Usuario) i.getSerializableExtra("Usuario");
-
         Button mBtnCadastrarEndereco = findViewById(R.id.botao_finalizar_cadastro_endereco);
         mBtnCadastrarEndereco.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                //Recuperar os campos do endereço informados pelo usuário
-                mEndereco = new Endereco();
-                mEndereco.setLogradouro(mLogradouro.getText().toString());
-                mEndereco.setNumero(mNumero.getText().toString());
-                mEndereco.setComplemento(mComplemento.getText().toString());
-                mEndereco.setBairro(mBairro.getText().toString());
-                mEndereco.setLocalidade(mLocalidade.getText().toString());
-                mEndereco.setCep(mCep.getText().toString());
-                mEndereco.setUf(mSpinnerUf.getSelectedItem().toString());
-
                 cadastrarEnderecoUsuario();
-
 
             }
         });
@@ -108,12 +90,56 @@ public class CadastroEnderecoActivity extends AppCompatActivity{
         toolbar.setTitleTextColor(Color.WHITE);
         toolbar.setNavigationIcon(R.drawable.ic_action_arrow_left_white);
         setSupportActionBar(toolbar);
+
     }
+
+    private boolean verificarCamposPreenchidos(){
+        return (!mCep.getText().toString().isEmpty() ||
+                !mLogradouro.getText().toString().isEmpty() ||
+                !mNumero.getText().toString().isEmpty() ||
+                !mComplemento.getText().toString().isEmpty() ||
+                !mLocalidade.getText().toString().isEmpty() ||
+                !mBairro.getText().toString().isEmpty());
+    }
+
 
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
+    }
+
+    //Método do botão voltar
+    @Override
+    public void onBackPressed() {
+        if (verificarCamposPreenchidos()) confirmarSaida();
+        else CadastroEnderecoActivity.super.onBackPressed();
+    }
+
+    //Método que exibe pergunta de confirmação ao usuário caso ele clique no botão de voltar com as
+    //informações do endereço inseridas nos campos
+    public void confirmarSaida(){
+        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which){
+                    case DialogInterface.BUTTON_POSITIVE:
+                        // Botão sim foi clicado
+                        CadastroEnderecoActivity.super.onBackPressed();
+                        break;
+
+                    case DialogInterface.BUTTON_NEGATIVE:
+                        // Botão não foi clicado
+                        break;
+                    default:
+                        break;
+                }
+            }
+        };
+
+        Utils.mostrarPerguntaSimNao(this, getString(R.string.atencao),
+                getString(R.string.pergunta_confirma_dados_serao_perdidos), dialogClickListener,
+                dialogClickListener);
     }
 
     //Método que recupera os dados básicos do usuário, adicionando o endereço e chamando o DAO para salvar no banco
@@ -123,36 +149,33 @@ public class CadastroEnderecoActivity extends AppCompatActivity{
             //Recuperar id do usuário logado
             mIdUsuarioLogado = getPreferences("id", CadastroEnderecoActivity.this);
 
+            //Recuperar os campos do endereço informados pelo usuário
+            mEndereco = new Endereco();
+            mEndereco.setLogradouro(mLogradouro.getText().toString());
+            mEndereco.setNumero(mNumero.getText().toString());
+            mEndereco.setComplemento(mComplemento.getText().toString());
+            mEndereco.setBairro(mBairro.getText().toString());
+            mEndereco.setLocalidade(mLocalidade.getText().toString());
+            mEndereco.setCep(mCep.getText().toString());
+            mEndereco.setUf(mSpinnerUf.getSelectedItem().toString());
+
             VerificadorDeObjetos.vDadosObrEndereco(mEndereco);
-            mUsuario.setEndereco(mEndereco);
-            UsuarioDaoImpl usuarioDao =  new UsuarioDaoImpl(this);
+
+            EnderecoDaoImpl enderecoDao =  new EnderecoDaoImpl(this);
 
             //Chamada do DAO para salvar no banco
-            usuarioDao.inserir(mUsuario, mIdUsuarioLogado);
-            //salvarPreferencias("id", mUsuario.getId());
-            abrirLoginUsuario();
+            enderecoDao.inserirEndereco(mEndereco, mIdUsuarioLogado);
+            abrirTelaEnderecos();
 
             } catch (CampoObrAusenteException e) {
-                mToast = Toast.makeText(CadastroEnderecoActivity.this, R.string.erro_cadastro_endereco_campos_obrigatorios_Toast, Toast.LENGTH_SHORT);
-                mToast.show();
+            Utils.mostrarMensagemCurta(getApplicationContext(), getApplicationContext().getString(R.string.erro_cadastro_endereco_campos_obrigatorios_Toast));
             } catch (Exception e) {
-                mToast = Toast.makeText(CadastroEnderecoActivity.this, R.string.erro_cadastro_endereco_campos_obrigatorios_Toast, Toast.LENGTH_SHORT);
-                mToast.show();
+            Utils.mostrarMensagemCurta(getApplicationContext(), getApplicationContext().getString(R.string.erro_cadastro_endereco_campos_obrigatorios_Toast));
             }
     }
 
-    public void abrirLoginUsuario() {
-        Intent intent = new Intent(CadastroEnderecoActivity.this, LoginActivity.class);
-        startActivity(intent);
+    public void abrirTelaEnderecos() {
         finish();
-    }
-
-    //Método que salva o id do usuário nas preferências para login automático ao abrir aplicativo
-    private void salvarPreferencias(String key, String value){
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(key, value);
-        editor.commit();
     }
 
     //Método que trava os campos de endereço enquanto a busca pelo cep é realizada
@@ -192,7 +215,7 @@ public class CadastroEnderecoActivity extends AppCompatActivity{
 
     }
 
-    //Método que recupera o id do usuário logado, para salvar o endereço no nó do usuário que o está cadastrando
+    //Método que recupera o id do usuário logado
     public static String getPreferences(String key, Context context) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         return preferences.getString(key, null);

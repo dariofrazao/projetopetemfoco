@@ -1,12 +1,12 @@
 # built application files
- *.apk
- *.ap_
+*.apk
+*.ap_
 projetopetemfoco.iml
  # files for the dex VM
- *.dex
+*.dex
  
  # java class files
- *.class
+*.class
  
  # generated files
  bin/
@@ -14,13 +14,13 @@ projetopetemfoco.iml
  
  # Eclipse project files
 	
- .metadata
- .classpath
- .project
- .externalToolBuilders/
- .settings/
- lint.xml
- project.properties
+.metadata
+.classpath
+.project
+.externalToolBuilders/
+.settings/
+lint.xml
+project.properties
  
 .gradle
 .idea/
@@ -29,8 +29,8 @@ projetopetemfoco.iml
 **/build
 **/production
  
- # Local Configuration file (sdk path, etc.)
- local.properties
+# Local Configuration file (sdk path, etc.)
+local.properties
  
  # Android Studio
  import-summary.txt

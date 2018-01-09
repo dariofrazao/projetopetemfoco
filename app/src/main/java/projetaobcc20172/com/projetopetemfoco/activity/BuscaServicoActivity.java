@@ -20,8 +20,6 @@ import projetaobcc20172.com.projetopetemfoco.adapter.SectionsPageAdapter;
 
 public class BuscaServicoActivity extends Fragment{
 
-    private ViewPager mViewPager;
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -39,7 +37,7 @@ public class BuscaServicoActivity extends Fragment{
         SectionsPageAdapter mSectionsPageAdapter = new SectionsPageAdapter(getActivity().getSupportFragmentManager());
 
         // Set up the ViewPager with the sections adapter.
-        mViewPager = getActivity().findViewById(R.id.container);
+        ViewPager mViewPager = getActivity().findViewById(R.id.container);
         setupViewPager(mViewPager);
         TabLayout tabLayout = getActivity().findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);

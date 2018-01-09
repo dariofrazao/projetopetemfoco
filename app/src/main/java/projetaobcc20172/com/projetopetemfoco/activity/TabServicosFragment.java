@@ -22,7 +22,9 @@ import projetaobcc20172.com.projetopetemfoco.utils.Utils;
  */
 
 public class TabServicosFragment extends Fragment {
+
     private TiposServicoAdapterGrid mServAdpGrid;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

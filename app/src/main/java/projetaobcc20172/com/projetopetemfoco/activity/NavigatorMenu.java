@@ -3,8 +3,6 @@ package projetaobcc20172.com.projetopetemfoco.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
@@ -109,6 +107,8 @@ public class NavigatorMenu extends AppCompatActivity
                 break;
             case R.id.nav_mapa:
                 //fragment = new MapaActivity();
+                break;
+            default:
                 break;
         }
         this.fecharTeclado();

@@ -28,7 +28,6 @@ public class Endereco  implements Serializable {
 
     }
 
-    @Exclude
     public String getId() {
         return id;
     }

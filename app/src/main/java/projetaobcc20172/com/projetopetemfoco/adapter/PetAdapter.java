@@ -50,21 +50,22 @@ public class PetAdapter extends ArrayAdapter<Pet> {
             view = inflater.inflate(R.layout.lista_itens, parent, false);
 
             // recupera elemento para exibição
-            TextView nome = view.findViewById(R.id.tvTitulo);
-            TextView tipo = view.findViewById(R.id.tvSubtitulo);
-            ImageButton removerPet = view.findViewById(R.id.ibtnRemoverPet);
-            ImageButton editarPet = view.findViewById(R.id.ibtnEditarPet);
+            TextView mNome = view.findViewById(R.id.tvTitulo);
+            TextView mTipo = view.findViewById(R.id.tvSubtitulo);
+            ImageButton mRemoverPet = view.findViewById(R.id.ibtnRemover);
+            ImageButton mEditarPet = view.findViewById(R.id.ibtnEditar);
 
             final Pet pet = mPets.get(position);
-            nome.setText(pet.getNome());
-            tipo.setText(pet.getTipo());
+            mNome.setText(pet.getNome());
+            mTipo.setText(pet.getTipo());
 
             //Recuperar id do usuário logado
             final String idUsuarioLogado;
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
             idUsuarioLogado = preferences.getString("id", "");
 
-            removerPet.setOnClickListener(new View.OnClickListener() {
+            //Ação do ícone para remover um pet
+            mRemoverPet.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     final DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
@@ -74,6 +75,7 @@ public class PetAdapter extends ArrayAdapter<Pet> {
                                 case DialogInterface.BUTTON_POSITIVE:
                                     // Botão sim foi clicado
                                     PetDaoImpl petDao = new PetDaoImpl(getContext());
+                                    //Chamada do DAO para remover pet do banco
                                     petDao.remover(pet, idUsuarioLogado);
                                     mPets.remove(position);
                                     notifyDataSetChanged();
@@ -88,13 +90,15 @@ public class PetAdapter extends ArrayAdapter<Pet> {
                         }
                     };
 
+                    //Exibe pergunta se o usuário realmente deseja remover um pet
                     Utils.mostrarPerguntaSimNao(getContext(), mContext.getString(R.string.atencao),
                             mContext.getString(R.string.pergunta_confirma_remocao_pet), dialogClickListener,
                             dialogClickListener);
                 }
             });
 
-            editarPet.setOnClickListener(new View.OnClickListener() {
+            //Ação do ícone para editar um pet
+            mEditarPet.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     //Enviar para a Activity de Edição do pet seus atuais dados salvos para exibição
@@ -113,11 +117,5 @@ public class PetAdapter extends ArrayAdapter<Pet> {
         }
         return view;
     }
-
-
-
-
-
-
 
 }

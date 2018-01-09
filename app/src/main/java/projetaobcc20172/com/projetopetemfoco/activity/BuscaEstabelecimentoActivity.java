@@ -46,6 +46,7 @@ public class BuscaEstabelecimentoActivity extends Fragment implements Serializab
         return inflater.inflate(R.layout.activity_busca_estabelecimento, container, false);
     }
 
+
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -114,7 +115,6 @@ public class BuscaEstabelecimentoActivity extends Fragment implements Serializab
                     forn = new Fornecedor(dados.child("nome").getValue(String.class), dados.child("email").getValue(String.class), dados.child("cpfCnpj").getValue(String.class)
                             , dados.child("horarios").getValue(String.class), nota, dados.child("telefone").getValue(String.class),
                             dados.child("endereco").getValue(Endereco.class));
-//                    forn.setId(dados.child("id").getValue(String.class));
                     forn.setId(dados.getKey());
                     for (DataSnapshot ds : dados.child("servicos").getChildren()) {
                         Servico serv = ds.getValue(Servico.class);

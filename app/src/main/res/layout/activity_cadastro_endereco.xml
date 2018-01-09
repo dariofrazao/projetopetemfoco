@@ -235,7 +235,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/shapebutton"
-                    android:text="@string/finalizar_cadastro"
+                    android:text="@string/cadastrar"
                     android:visibility="visible" />
 
             </LinearLayout>

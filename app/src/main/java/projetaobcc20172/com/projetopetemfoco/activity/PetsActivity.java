@@ -40,25 +40,25 @@ public class PetsActivity extends AppCompatActivity {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         idUsuarioLogado = preferences.getString("id", "");
 
-        ImageButton cadastrarPet; //Botão de cadastrar o pet
+        ImageButton mCadastrarPet; //Botão de cadastrar o pet
 
         Toolbar toolbar;
         toolbar = findViewById(R.id.tb_main);
 
         // Configura toolbar
-        toolbar.setTitle("Pets");
+        toolbar.setTitle(R.string.pets);
         toolbar.setTitleTextColor(Color.WHITE);
         toolbar.setNavigationIcon(R.drawable.ic_action_arrow_left_white);
         setSupportActionBar(toolbar);
 
-        cadastrarPet = findViewById(R.id.btnCadastrarPet);
-        ListView listView;
-        listView = findViewById(R.id.lv_pets);
+        mCadastrarPet = findViewById(R.id.btnCadastrarPet);
+        ListView mListView;
+        mListView = findViewById(R.id.lv_pets);
 
         // Monta listview e mAdapter
         mPets = new ArrayList<>();
         mAdapter = new PetAdapter(PetsActivity.this, mPets);
-        listView.setAdapter(mAdapter);
+        mListView.setAdapter(mAdapter);
 
         // Recuperar pets do Firebase
         DatabaseReference mFirebase;
@@ -70,12 +70,12 @@ public class PetsActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 mPets.clear();
 
-                // Recupera mPets
+                // Recupera pets
                 for (DataSnapshot dados : dataSnapshot.getChildren()) {
                     Pet pet = dados.getValue(Pet.class);
                     mPets.add(pet);
                 }
-                //Notificar o adaptar que exibe a lista de mPets se houver alteração no banco
+                //Notificar o adaptador que exibe a lista de pets se houver alteração no banco
                 mAdapter.notifyDataSetChanged();
             }
 
@@ -85,24 +85,15 @@ public class PetsActivity extends AppCompatActivity {
             }
         };
 
-        cadastrarPet.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent();
-                intent.setClass(PetsActivity.this, CadastroPetActivity.class);
-                startActivity(intent);
-            }
-        });
-        mFirebase.addValueEventListener(mValueEventListenerPet);
-
         //Ação do botão de cadastrar o pet, que abre a tela para o seu cadastro
-        cadastrarPet.setOnClickListener(new View.OnClickListener() {
+        mCadastrarPet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(PetsActivity.this, CadastroPetActivity.class);
                 startActivity(intent);
             }
         });
+        mFirebase.addValueEventListener(mValueEventListenerPet);
 
     }
 

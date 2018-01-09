@@ -1,18 +1,29 @@
 package projetaobcc20172.com.projetopetemfoco.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
+import android.support.annotation.VisibleForTesting;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.io.Serializable;
+
 import projetaobcc20172.com.projetopetemfoco.R;
-import projetaobcc20172.com.projetopetemfoco.adapter.ServicoAdapterListaViewInformacoes;
+import projetaobcc20172.com.projetopetemfoco.adapter.ServicoAdapterListaViewAvaliacoes;
+import projetaobcc20172.com.projetopetemfoco.model.Avaliacao;
 import projetaobcc20172.com.projetopetemfoco.model.Fornecedor;
 
-public class AvalicoesEstabelecimentoActivity extends AppCompatActivity {
+public class AvalicoesEstabelecimentoActivity extends AppCompatActivity implements Serializable {
+    Fornecedor mFornecedor;
+    private ArrayAdapter<Avaliacao> mAdapter;
+    @SuppressLint("WrongConstant")
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    //permite que essa variavel seja vista pela classe de teste
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,35 +31,27 @@ public class AvalicoesEstabelecimentoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_avalicoes_estabelecimento);
 
         Toolbar toolbar;
-        toolbar = findViewById(R.id.tb_acesso_infomacoes_estabelecimento);
-
-        // Configura toolbar
-        toolbar.setTitle(R.string.tb_acesso_estabelecimento);
-        toolbar.setTitleTextColor(Color.WHITE);
-        toolbar.setNavigationIcon(R.drawable.ic_action_arrow_left_white);
-        setSupportActionBar(toolbar);
-    }
-/*
-        TextView mExibeNomeEstabelecimento = findViewById(R.id.tvExibeNomeEstabelecimento);
-        TextView mExibeEmailEstabelecimentor = findViewById(R.id.tvExibeEmailEstabelecimentor);
-        TextView mExibeTelefoneEstabelecimento = findViewById(R.id.tvExibeTelefoneEstabelecimento);
-        TextView mExibeCpfCnpjEstabelecimento = findViewById(R.id.tvExibeCpfCnpjEstabelecimento);
-        TextView mExibeHorarioEstabelecimento = findViewById(R.id.tvExibeHorarioEstabelecimento);
-        ListView mExibeListaServicos = findViewById(R.id.lvListaServicos);
+        toolbar = findViewById(R.id.tb_lista_avaliacoes_estabelecimento);
 
         //Receber os dados do estabelecimento da outra activity
         Intent i = getIntent();
         mFornecedor = (Fornecedor) i.getSerializableExtra("Fornecedor");
 
-        mExibeNomeEstabelecimento.setText(mFornecedor.getNome());
-        mExibeEmailEstabelecimentor.setText(mFornecedor.getEmail());
-        mExibeTelefoneEstabelecimento.setText(mFornecedor.getTelefone());
-        mExibeCpfCnpjEstabelecimento.setText(mFornecedor.getCpfCnpj());
-        mExibeHorarioEstabelecimento.setText(mFornecedor.getHorarios());
+        // Configura toolbar
+        toolbar.setTitle(R.string.tb_avaliacoes_estabelecimento);
+        toolbar.setTitleTextColor(Color.WHITE);
+        toolbar.setNavigationIcon(R.drawable.ic_action_arrow_left_white);
+        setSupportActionBar(toolbar);
+
+        TextView mNomeEstabelecimento = findViewById(R.id.tvExibeNomeEstabelecimentoAvaliacao);
+        ListView mExibeListaAvaliacao = findViewById(R.id.lvListaAvaliacoes);
+
+        mNomeEstabelecimento.setText(mFornecedor.getNome());
 
         // Monta listview e mAdapter
-        mAdapter = new ServicoAdapterListaViewInformacoes(this, mFornecedor.getServicos());
-        mExibeListaServicos.setAdapter(mAdapter);
+        mAdapter = new ServicoAdapterListaViewAvaliacoes(this, mFornecedor.getAvaliacoes());
+        mExibeListaAvaliacao.setAdapter(mAdapter);
+        mAdapter.notifyDataSetChanged();
 
     }
 
@@ -56,5 +59,5 @@ public class AvalicoesEstabelecimentoActivity extends AppCompatActivity {
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
-    }*/
+    }
 }

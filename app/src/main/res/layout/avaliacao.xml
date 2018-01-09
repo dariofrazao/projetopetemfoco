@@ -15,7 +15,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <TextView
-                android:id="@+id/tvAvaliador"
+                android:id="@+id/tvUsuarioAvaliador"
                 android:layout_width="170dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
@@ -23,7 +23,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textStyle="normal" />
             <TextView
-                android:id="@+id/tvNomeUsuarioAvaliador"
+                android:id="@+id/tvNomeUsuarioAvaliacaoes"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="Nome"
@@ -33,22 +33,36 @@
         </LinearLayout>
 
         <RatingBar
-            android:id="@+id/ratingBar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:id="@+id/rbEstrelaAvaliacoes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:numStars="5"
+            android:layout_gravity="center"
+            android:stepSize="1.0"
+            android:rating="0.0" />
 
         <TextView
-            android:id="@+id/tvComentarioAvaliacao"
+            android:id="@+id/tvComentarioAvaliacoes"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="@string/comentario"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textStyle="bold" />
-        <TextView
-            android:id="@+id/textView2"
+        <ScrollView
+            android:id="@+id/scrollView"
             android:layout_width="match_parent"
-            android:layout_height="196dp"
-            android:background="@color/branco"
-            android:text="TextView" />
+            android:layout_height="254dp">
+            <EditText
+                android:id="@+id/etComentarioAvaliacoes"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:ems="10"
+                android:gravity="left|top"
+                android:inputType="textMultiLine"
+                android:background="@color/branco"
+                android:lines="8"
+                android:maxLines="12"
+                android:minLines="12" />
+        </ScrollView>
     </LinearLayout>
 </RelativeLayout>

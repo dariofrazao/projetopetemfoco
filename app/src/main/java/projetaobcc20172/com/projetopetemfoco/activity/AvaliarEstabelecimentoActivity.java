@@ -49,7 +49,7 @@ public class AvaliarEstabelecimentoActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         mComentario = findViewById(R.id.etComentarioAvaliacao);
-        mRatingBar = findViewById(R.id.rbAvaliacao);
+        mRatingBar = findViewById(R.id.rbEstrelasAvaliacao);
         mAvaliacao = new Avaliacao();
         //Receber os dados do estabelecimento da outra activity
         Intent i = getIntent();

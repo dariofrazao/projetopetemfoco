@@ -64,11 +64,19 @@ public class AcessoInformacoesEstabelecimentoActivity extends AppCompatActivity 
         mAdapter = new ServicoAdapterListaViewInformacoes(this, mFornecedor.getServicos());
         mExibeListaServicos.setAdapter(mAdapter);
 
-        Button mBtnAvaliarEstabelecimento = findViewById(R.id.botao_avaliar_estabelecimento);
-        mBtnAvaliarEstabelecimento.setOnClickListener(new View.OnClickListener() {
+        Button mBotaoAvaliarEstabelecimento = findViewById(R.id.botao_avaliar_estabelecimento);
+        mBotaoAvaliarEstabelecimento.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 avaliar(mFornecedor);
+            }
+        });
+
+        Button mBotaoExibirAvaliacoesEstabelecimento = findViewById(R.id.botao_mostrar_avaliacoes_estabelecimento);
+        mBotaoExibirAvaliacoesEstabelecimento.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                avaliacoes(mFornecedor);
             }
         });
     }
@@ -81,6 +89,14 @@ public class AcessoInformacoesEstabelecimentoActivity extends AppCompatActivity 
     //Método que chama a activity para realizar a avaliação
     public void avaliar(Fornecedor fornecedor) {
         Intent intent = new Intent(AcessoInformacoesEstabelecimentoActivity.this, AvaliarEstabelecimentoActivity.class);
+        intent.putExtra("Fornecedor", fornecedor);
+        startActivity(intent);
+        finish();
+    }
+
+    //Método que chama a activity para exibir as avaliações
+    public void avaliacoes(Fornecedor fornecedor) {
+        Intent intent = new Intent(AcessoInformacoesEstabelecimentoActivity.this, AvalicoesEstabelecimentoActivity.class);
         intent.putExtra("Fornecedor", fornecedor);
         startActivity(intent);
         finish();

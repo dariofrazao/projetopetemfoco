@@ -45,13 +45,13 @@
             </LinearLayout>
 
             <RatingBar
-                android:id="@+id/rbAvaliacao"
+                android:id="@+id/rbEstrelasAvaliacao"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:numStars="5"
                 android:layout_gravity="center"
                 android:stepSize="1.0"
-                android:rating="2.0" />
+                android:rating="0.0" />
 
             <TextView
                 android:id="@+id/tvComentario"

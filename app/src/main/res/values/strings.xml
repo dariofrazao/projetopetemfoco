@@ -108,6 +108,7 @@
 
     <!--Strings relacionadas a avaliação-->
     <string name="tb_avaliar_estabelecimento">Avaliação</string>
+    <string name="tb_avaliacoes_estabelecimento">Avaliações</string>
     <string name="avaliador">Usuário</string>
     <string name="comentario">Comentário</string>
     <string name="avaliar">Avaliar</string>

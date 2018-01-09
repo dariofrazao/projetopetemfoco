@@ -105,7 +105,7 @@ public class VacinaAdapter extends ArrayAdapter<Vacina>{
                     };
 
                     Utils.mostrarPerguntaSimNao(getContext(), mContext.getString(R.string.atencao),
-                            mContext.getString(R.string.pergunta_confirma_remocao_pet), dialogClickListener,
+                            mContext.getString(R.string.pergunta_confirma_remocao_vacina), dialogClickListener,
                             dialogClickListener);
                 }
             });

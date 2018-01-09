@@ -31,7 +31,7 @@ public class VacinaDaoImpl implements VacinaDao{
 
     @Override
     public void inserir(Vacina vacina, String idUsuario,String petId) {
-        //O método push() cria uma chave exclusiva para cada mPet cadastrado
+        //O método push() cria uma chave exclusiva para cada mVacina cadastrado
         mReferenciaFirebase = mReferenciaFirebase.child("usuarios").child(idUsuario).child("pets").child(petId).child("calendarioVacinas").push();
         vacina.setId(mReferenciaFirebase.getKey());
 
@@ -55,8 +55,8 @@ public class VacinaDaoImpl implements VacinaDao{
 
     @Override
     public void remover(final Vacina vacina, final String idUsuario, final String petId) {
-        //Adicionar um listener no nó do pet que será removido
-        //O método orderByChild ordena os pets pelo seu id e o equalTo busca o id do pet que será removido
+        //Adicionar um listener no nó do vacina que será removido
+        //O método orderByChild ordena os vacimns pelo seu id e o equalTo busca o id do pet que será removido
         mReferenciaFirebase.child("usuarios").child(idUsuario).child("pets").child(petId).child("calendarioVacinas").
                 orderByChild("id").
                 equalTo(vacina.getId()).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -107,7 +107,7 @@ public class VacinaDaoImpl implements VacinaDao{
                     public void onComplete(@NonNull Task<Void> task) {
                         //Se a edição foi feita com sucesso
                         if(task.isSuccessful()){
-                            Utils.mostrarMensagemCurta(getContexto(), getContexto().getString(R.string.sucesso_atualizacao_Pet));
+                            Utils.mostrarMensagemCurta(getContexto(), getContexto().getString(R.string.sucesso_atualizacao_vacina));
                         }
                         //Senão
                         else{

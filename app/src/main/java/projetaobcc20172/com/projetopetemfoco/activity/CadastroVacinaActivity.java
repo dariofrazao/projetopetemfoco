@@ -87,10 +87,9 @@ public class CadastroVacinaActivity extends AppCompatActivity {
                         vacina.setmData(mData.getText().toString());
                         VerificadorDeObjetos.vDadosVacina(vacina);
                         vacinaDao.atualizar(vacina,idUsuarioLogado,petId);
-                        mToast = mToast.makeText(CadastroVacinaActivity.this, "Edição da vacina realizado com sucesso", Toast.LENGTH_LONG);
-                        mToast.show();
+
                     }catch (CampoObrAusenteException e){
-                        Utils.mostrarMensagemCurta(getApplicationContext(), "erro ao editar campos obrigatorios_vacina");
+                        Utils.mostrarMensagemCurta(getApplicationContext(), "Erro ao editar vacina: Preencha o campo descrição");
                     }catch (Exception e){
                         e.printStackTrace();
                     }
@@ -101,10 +100,8 @@ public class CadastroVacinaActivity extends AppCompatActivity {
                         vacina.setmData(mData.getText().toString());
                         VerificadorDeObjetos.vDadosVacina(vacina);
                         vacinaDao.inserir(vacina,idUsuarioLogado,petId);
-                        mToast = mToast.makeText(CadastroVacinaActivity.this, "Cadastro de vacina realizado com sucesso", Toast.LENGTH_LONG);
-                        mToast.show();
                     }catch (CampoObrAusenteException e){
-                        Utils.mostrarMensagemCurta(getApplicationContext(), "erro ao cadastrar campos_obrigatorios_vacina");
+                        Utils.mostrarMensagemCurta(getApplicationContext(), "Erro ao cadastrar vacina: Preencha o campo descrição");
                     }catch (Exception e){
                         e.printStackTrace();
                     }

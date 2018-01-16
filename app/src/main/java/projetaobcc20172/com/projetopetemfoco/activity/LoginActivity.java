@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -236,7 +237,7 @@ public class LoginActivity extends AppCompatActivity {
 
     //Abrir tela principal do consumidor
     private void abrirTelaPrincipalConsumidor() {
-        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        Intent intent = new Intent(LoginActivity.this, NavigatorMenu.class);
         startActivity(intent);
         //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         finish();
@@ -251,7 +252,7 @@ public class LoginActivity extends AppCompatActivity {
             abrirTelaPrincipalConsumidor();
         }
         //Se já estiver logado pelo Facebook
-        else if(isLoggedIn()) abrirTelaPrincipalConsumidor();
+        if(isLoggedIn()) abrirTelaPrincipalConsumidor();
 
     }
 
@@ -350,13 +351,13 @@ public class LoginActivity extends AppCompatActivity {
     private boolean salvarUsuarioGoogle(GoogleSignInAccount account) {
         try {
 
-            mUsuario = new Usuario(account.getId(), account.getDisplayName(), account.getEmail());
+            mUsuario = new Usuario(account.getId(), account.getDisplayName(), account.getEmail(), account.getPhotoUrl().toString());
             salvarPreferencias("id", account.getId());
 
             //Chamada do DAO para salvar no banco
             EnderecoDaoImpl usuarioDao = new EnderecoDaoImpl(this);
             usuarioDao.inserirUsuario(mUsuario, account.getId());
-            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            Intent intent = new Intent(LoginActivity.this, NavigatorMenu.class);
             startActivity(intent);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             finish();
@@ -372,13 +373,14 @@ public class LoginActivity extends AppCompatActivity {
     private boolean salvarUsuarioFacebook(Bundle facebookData) {
         try {
 
-            mUsuario = new Usuario(facebookData.getString("idFacebook"), facebookData.getString("first_name") + " " + facebookData.getString("last_name"), facebookData.getString("email"));
+            mUsuario = new Usuario(facebookData.getString("idFacebook"), facebookData.getString("first_name") + " " + facebookData.getString("last_name")
+                    ,facebookData.getString("email"), facebookData.getString("profile_pic"));
             salvarPreferencias("id", facebookData.getString("idFacebook"));
 
             //Chamada do DAO para salvar no banco
             EnderecoDaoImpl usuarioDao = new EnderecoDaoImpl(this);
             usuarioDao.inserirUsuario(mUsuario, facebookData.getString("idFacebook"));
-            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            Intent intent = new Intent(LoginActivity.this, NavigatorMenu.class);
             startActivity(intent);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             finish();

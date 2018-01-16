@@ -40,7 +40,7 @@ public class LoginActivityTest {
         //Desloga caso já esteja logado.
         //Evita erros nos testes
         try{
-            TestTools.clicarBotao(R.id.btnSair);
+            TestTools.clicarItemNavigationMenu(R.id.drawer_layout, R.id.nav_busca, R.id.nav_sair);
         }catch (Exception e){
             e.getMessage();
         }
@@ -122,7 +122,7 @@ public class LoginActivityTest {
     }
 
     //Teste que simula uma tentativa de login pelo Google confirmando autorização
-    //@Test
+    @Test
     public void testeLoginComSucesso() {
         TestTools.clicarBotao(R.id.btnLoginGoogle);
         TestTools.checarToast(R.string.sucesso_login_Toast);

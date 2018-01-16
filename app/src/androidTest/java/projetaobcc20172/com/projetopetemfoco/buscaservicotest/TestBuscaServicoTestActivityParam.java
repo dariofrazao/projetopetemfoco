@@ -49,13 +49,13 @@ public class TestBuscaServicoTestActivityParam {
     @Before
     public void setUp() throws Exception {
         try{
-            TestTools.clicarBotao(R.id.btnSair);
+            TestTools.clicarItemNavigationMenu(R.id.drawer_layout, R.id.nav_busca, R.id.nav_sair);
         }catch (Exception e){
             e.getMessage();
         }
         LoginActivityTest log = new LoginActivityTest();
         log.testeLoginComSucesso();
-        TestTools.clicarBotao(R.id.btnBuscarServicos);
+        TestTools.clicarItemNavigationMenu(R.id.drawer_layout, R.id.nav_busca, R.id.nav_servicos);
         TestToolsBuscaServico.clicarBuscaServico();
     }
 

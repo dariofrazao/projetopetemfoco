@@ -1,4 +1,13 @@
+plugins {
+    id "org.sonarqube" version "2.5"
+    id "jacoco"
+}
 apply plugin: 'com.android.application'
+apply plugin: 'jacoco'
+
+jacoco {
+    toolVersion = '0.7.9'
+}
 
 android {
     compileSdkVersion 26
@@ -14,6 +23,10 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            testCoverageEnabled true
+        }
+        debug {
+            testCoverageEnabled true
         }
     }
 
@@ -48,6 +61,8 @@ dependencies {
     compile 'com.google.android.gms:play-services-auth:11.6.0'
     compile 'com.google.firebase:firebase-database:11.6.0'
     compile 'com.google.code.gson:gson:2.8.0'
+    compile 'com.github.bumptech.glide:glide:3.8.0'
+    compile 'de.hdodenhof:circleimageview:2.2.0'
     implementation 'com.facebook.android:facebook-login:[4,5)'
 }
 

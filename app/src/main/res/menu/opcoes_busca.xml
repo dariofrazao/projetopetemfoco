@@ -5,26 +5,33 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/nav_pets"
+            android:icon="@drawable/ic_action_meus_pets"
+            android:title="Meus Pets" />
+        <item
+            android:id="@+id/nav_endereco"
+            android:icon="@drawable/ic_action_endereco"
+            android:title="Endereço" />
+        <item
             android:id="@+id/nav_estabelecimentos"
-            android:icon="@drawable/estabelecimentos"
+            android:icon="@drawable/ic_action_estabelecimentos"
             android:title="Estabelecimentos" />
         <item
             android:id="@+id/nav_servicos"
-            android:icon="@drawable/servicos"
-            android:title="Servicos" />
+            android:icon="@drawable/ic_action_servicos"
+            android:title="Serviços" />
         <item
             android:id="@+id/nav_autonomos"
-            android:icon="@drawable/autonomo"
-            android:title="Autômatos" />
+            android:icon="@drawable/ic_action_autonomo"
+            android:title="Autônomos" />
         <item
             android:id="@+id/nav_mapa"
-            android:icon="@drawable/map"
+            android:icon="@drawable/ic_action_map"
             android:title="Mapa" />
-
         <item
-            android:id="@+id/nav_voltar"
-            android:icon="@drawable/setavoltar"
-            android:title="Voltar" />
+            android:id="@+id/nav_sair"
+            android:icon="@drawable/ic_action_sair"
+            android:title="Sair" />
 
     </group>
 

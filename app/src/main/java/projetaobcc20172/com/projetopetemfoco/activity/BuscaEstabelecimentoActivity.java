@@ -52,7 +52,7 @@ public class BuscaEstabelecimentoActivity extends Fragment implements Serializab
         super.onViewCreated(view, savedInstanceState);
 
         //you can set the title for your toolbar here for different fragments different titles
-        getActivity().setTitle("Busca por nome");
+        getActivity().setTitle("Estabelecimentos");
         ListView listView = getView().findViewById(R.id.lvBuscaEsta);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

@@ -1,13 +1,14 @@
 package projetaobcc20172.com.projetopetemfoco.activity;
 
+import android.support.v4.app.Fragment;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.preference.PreferenceManager;
-import android.support.v7.app.AppCompatActivity;
+import android.support.annotation.Nullable;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -25,39 +26,40 @@ import projetaobcc20172.com.projetopetemfoco.adapter.EnderecoAdapter;
 import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoFirebase;
 import projetaobcc20172.com.projetopetemfoco.model.Endereco;
 
-public class EnderecoActivity extends AppCompatActivity {
+public class EnderecoActivity extends Fragment {
 
     private ArrayList<Endereco> mEnderecos;
     private ArrayAdapter<Endereco> mAdapter;
 
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_endereco);
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        //returning our layout file
+        //change R.layout.yourlayoutfilename for each of your fragments
+        return inflater.inflate(R.layout.activity_endereco, container, false);
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        //you can set the title for your toolbar here for different fragments different titles
+        getActivity().setTitle("Endereço");
 
         //Recuperar id do usuário logado
         String idUsuarioLogado;
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         idUsuarioLogado = preferences.getString("id", "");
 
         ImageButton mCadastrarEndereco; //Botão de cadastrar o endereço
 
-        Toolbar toolbar;
-        toolbar = findViewById(R.id.tb_main);
 
-        // Configura toolbar
-        toolbar.setTitle(R.string.endereco);
-        toolbar.setTitleTextColor(Color.WHITE);
-        toolbar.setNavigationIcon(R.drawable.ic_action_arrow_left_white);
-        setSupportActionBar(toolbar);
-
-        mCadastrarEndereco = findViewById(R.id.btnCadastrarEndereco);
+        mCadastrarEndereco = getView().findViewById(R.id.btnCadastrarEndereco);
         ListView mListView;
-        mListView = findViewById(R.id.lv_enderecos);
+        mListView = getView().findViewById(R.id.lv_enderecos);
 
         // Monta listview e mAdapter
         mEnderecos = new ArrayList<>();
-        mAdapter = new EnderecoAdapter(EnderecoActivity.this, mEnderecos);
+        mAdapter = new EnderecoAdapter(getActivity(), mEnderecos);
         mListView.setAdapter(mAdapter);
 
         // Recuperar endereços do Firebase
@@ -81,14 +83,14 @@ public class EnderecoActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(EnderecoActivity.this, "Erro na leitura do banco de dados", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Erro na leitura do banco de dados", Toast.LENGTH_SHORT).show();
             }
         };
 
         mCadastrarEndereco.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(EnderecoActivity.this, CadastroEnderecoActivity.class);
+                Intent intent = new Intent(getActivity(), CadastroEnderecoActivity.class);
                 startActivity(intent);
             }
         });
@@ -96,9 +98,6 @@ public class EnderecoActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return true;
-    }
+
+
 }

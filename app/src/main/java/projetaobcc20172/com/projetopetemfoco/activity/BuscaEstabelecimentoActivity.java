@@ -88,10 +88,29 @@ public class BuscaEstabelecimentoActivity extends Fragment implements Serializab
     }
 
     //Método que chama a activity para exibir informações do estabelecimento
-    public void exibirEstabelecimento(Fornecedor fornecedor){
-        Intent intent = new Intent(getActivity(), AcessoInformacoesEstabelecimentoActivity.class);
-        intent.putExtra("Fornecedor", fornecedor);
-        getActivity().startActivity(intent);
+    public void exibirEstabelecimento(final Fornecedor fornecedor){
+        //Buscar servicos do estabelecimento selecionado
+        Query query = ConfiguracaoFirebase.getFirebase().child("servicos").orderByChild("idFornecedor").equalTo(fornecedor.getId());
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                ArrayList<Servico> servicos = new ArrayList<>();
+                for (DataSnapshot dados : dataSnapshot.getChildren()) {
+                    Servico servico = dados.getValue(Servico.class);
+                    servicos.add(servico);
+
+                }
+                fornecedor.setServicos(servicos);
+                Intent intent = new Intent(getActivity(), AcessoInformacoesEstabelecimentoActivity.class);
+                intent.putExtra("Fornecedor", fornecedor);
+                getActivity().startActivity(intent);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                assert true;
+            }
+        });
     }
 
     private void buscarEstabelecimentos(String nomeBuscado){
@@ -107,7 +126,6 @@ public class BuscaEstabelecimentoActivity extends Fragment implements Serializab
                         continue;
                     }
                     Fornecedor forn;
-                    ArrayList<Servico> servicos = new ArrayList<>();
                     float nota = 0;
                     if (dados.child("nota").getValue(float.class) != null) {
                         nota = dados.child("nota").getValue(float.class);
@@ -116,11 +134,6 @@ public class BuscaEstabelecimentoActivity extends Fragment implements Serializab
                             , dados.child("horarios").getValue(String.class), nota, dados.child("telefone").getValue(String.class),
                             dados.child("endereco").getValue(Endereco.class));
                     forn.setId(dados.getKey());
-                    for (DataSnapshot ds : dados.child("servicos").getChildren()) {
-                        Servico serv = ds.getValue(Servico.class);
-                        servicos.add(serv);
-                    }
-                    forn.setServicos(servicos);
                     mForncedores.add(forn);
                 }
                 mAdapter.notifyDataSetChanged();
@@ -128,7 +141,7 @@ public class BuscaEstabelecimentoActivity extends Fragment implements Serializab
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                //Se ocorrer um erro
+                assert true;
             }
         });
 

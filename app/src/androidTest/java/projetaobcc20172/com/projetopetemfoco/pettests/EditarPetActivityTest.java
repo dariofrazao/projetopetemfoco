@@ -31,7 +31,6 @@ public class EditarPetActivityTest {
     private static String sNomePet = "Raulf";
     private static String sRaca = "Vira-lata";
     private static String sGenero = "Macho";
-    private String mIdUsuarioLogado;
 
     @Rule
     public ActivityTestRule<LoginActivity> loginActivityRule = new ActivityTestRule<>(LoginActivity.class);
@@ -54,6 +53,7 @@ public class EditarPetActivityTest {
         PetDaoImpl petDao =  new PetDaoImpl(context);
 
         //Recuperar id do usuário logado
+        String mIdUsuarioLogado;
         mIdUsuarioLogado = getPreferences("id", context);
 
         //Chamada do DAO para salvar um pet no banco para fazer o teste de edição

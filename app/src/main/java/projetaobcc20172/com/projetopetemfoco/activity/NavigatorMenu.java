@@ -7,11 +7,9 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -47,8 +45,6 @@ public class NavigatorMenu extends AppCompatActivity
 
     private ImageView mFoto;
     private TextView mNome, mEmail;
-    private DatabaseReference mReferenciaFirebase;
-    private String mIdUsuarioLogado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,8 +82,10 @@ public class NavigatorMenu extends AppCompatActivity
         mEmail = header.findViewById(R.id.tvEmailProfile);
 
         //Recuperar id do usuário logado
+        String mIdUsuarioLogado;
         mIdUsuarioLogado = getPreferences("id", getApplication());
 
+        DatabaseReference mReferenciaFirebase;
         mReferenciaFirebase = ConfiguracaoFirebase.getFirebase();
         mReferenciaFirebase.child("usuarios").child(mIdUsuarioLogado).addValueEventListener(new ValueEventListener() {
             @Override

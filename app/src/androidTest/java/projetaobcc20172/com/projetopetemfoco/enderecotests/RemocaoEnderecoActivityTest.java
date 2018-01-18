@@ -37,7 +37,6 @@ public class RemocaoEnderecoActivityTest {
     private static String sCidade = "Naboo";
     private static String sUf = "SP";
     private UiDevice mDevice;
-    private String mIdUsuarioLogado;
 
     @Rule
     public ActivityTestRule<LoginActivity> loginActivityRule = new ActivityTestRule<>(LoginActivity.class);
@@ -60,6 +59,7 @@ public class RemocaoEnderecoActivityTest {
         EnderecoDaoImpl enderecoDao =  new EnderecoDaoImpl(context);
 
         //Recuperar id do usuário logado
+        String mIdUsuarioLogado;
         mIdUsuarioLogado = getPreferences("id", context);
 
         //Chamada do DAO para salvar um endereço no banco para fazer o teste de remoção

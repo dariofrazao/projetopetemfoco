@@ -34,7 +34,6 @@ public class EditarEnderecoActivityTest {
     private static String sUf = "SP";
     private static String sCep = "55290-000";
     private static int sBotaoEdicEnd = R.id.botao_editar_endereco;
-    private String mIdUsuarioLogado;
 
     @Rule
     public ActivityTestRule<LoginActivity> loginActivityRule = new ActivityTestRule<>(LoginActivity.class);
@@ -57,6 +56,7 @@ public class EditarEnderecoActivityTest {
         EnderecoDaoImpl enderecoDao =  new EnderecoDaoImpl(context);
 
         //Recuperar id do usuário logado
+        String mIdUsuarioLogado;
         mIdUsuarioLogado = getPreferences("id", context);
 
         //Chamada do DAO para salvar um endereço no banco para fazer o teste de edição

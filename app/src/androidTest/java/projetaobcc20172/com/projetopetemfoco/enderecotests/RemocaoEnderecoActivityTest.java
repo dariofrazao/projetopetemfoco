@@ -3,9 +3,7 @@ package projetaobcc20172.com.projetopetemfoco.enderecotests;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ActivityTestRule;
-import android.support.test.uiautomator.UiDevice;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 
 import org.junit.Before;
@@ -36,7 +34,6 @@ public class RemocaoEnderecoActivityTest {
     private static String sBairro = "gunga";
     private static String sCidade = "Naboo";
     private static String sUf = "SP";
-    private UiDevice mDevice;
 
     @Rule
     public ActivityTestRule<LoginActivity> loginActivityRule = new ActivityTestRule<>(LoginActivity.class);
@@ -45,7 +42,6 @@ public class RemocaoEnderecoActivityTest {
     public void setUp() throws Exception {
 
         Context context = getInstrumentation().getTargetContext();
-        mDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation());
 
         try{
 

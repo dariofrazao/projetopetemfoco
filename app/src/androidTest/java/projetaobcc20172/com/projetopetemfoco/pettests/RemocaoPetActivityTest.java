@@ -3,9 +3,7 @@ package projetaobcc20172.com.projetopetemfoco.pettests;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ActivityTestRule;
-import android.support.test.uiautomator.UiDevice;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 
 import org.junit.Before;
@@ -32,7 +30,6 @@ public class RemocaoPetActivityTest {
     private static String sNomePet = "Raulf";
     private static String sRaca = "Vira-lata";
     private static String sGenero = "Macho";
-    private UiDevice mDevice;
 
     @Rule
     public ActivityTestRule<LoginActivity> loginActivityRule = new ActivityTestRule<>(LoginActivity.class);
@@ -41,7 +38,6 @@ public class RemocaoPetActivityTest {
     public void setUp() throws Exception {
 
         Context context = getInstrumentation().getTargetContext();
-        mDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation());
 
         try{
 

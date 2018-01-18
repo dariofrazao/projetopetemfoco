@@ -20,7 +20,7 @@ import java.util.Random;
 
 
 
-import static android.support.test.espresso.Espresso.onData;
+
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.swipeLeft;
 import static android.support.test.espresso.action.ViewActions.swipeRight;
@@ -210,11 +210,11 @@ public class TestTools {
     }
 
     public static void clicarEmITemListView(int idView,int indice){
-        onData(anything()).inAdapterView(withId(idView)).atPosition(indice).perform(click());
+        Espresso.onData(anything()).inAdapterView(withId(idView)).atPosition(indice).perform(click());
     }
 
     public static void clicarEmItemDentroListView(int idView,int indice,int idItem){
-        onData(anything())
+        Espresso.onData(anything())
                 .inAdapterView(withId(idView))
                 .atPosition(indice)
                 .onChildView(withId(idItem))

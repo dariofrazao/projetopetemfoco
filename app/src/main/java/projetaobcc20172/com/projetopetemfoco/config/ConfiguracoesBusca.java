@@ -21,10 +21,11 @@ public class ConfiguracoesBusca {
     }
 
     private static ArrayList<String> sOpcaosPet;
-    private static Filtro sFiltro = Filtro.DISTANCIA;
+    private static Filtro sFiltro;
     private static String sOpcaoServico;
-    private static Estado sEstado = Estado.DEFAULT;
+    private static Estado sEstado;
     private static String sOpTodos = "Todos";
+    private static byte sRaio;
 
     public static ArrayList<String> getsOpcaosPet() {
         return sOpcaosPet;
@@ -57,6 +58,7 @@ public class ConfiguracoesBusca {
         sEstado = Estado.DEFAULT;
         sFiltro = Filtro.DISTANCIA;
         sOpcaoServico = sOpTodos;
+        sRaio = 10;
         sOpcaosPet = new ArrayList<>();
         sOpcaosPet.add(sOpTodos);
     }

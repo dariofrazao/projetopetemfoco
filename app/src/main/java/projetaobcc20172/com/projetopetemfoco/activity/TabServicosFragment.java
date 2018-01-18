@@ -47,7 +47,7 @@ public class TabServicosFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 TextView servicoClicado =  view.findViewById(R.id.gridTextServico);
-                irParaListaEstabelecimentos(servicoClicado.getText().toString(), ConfiguracoesBusca.getsOpcaosPet());
+                irParaListaEstabelecimentos(servicoClicado.getText().toString());
             }
         });
         ArrayList<String> tiposServico =  Utils.recuperaArrayR(getActivity(),R.array.servicos);
@@ -57,18 +57,15 @@ public class TabServicosFragment extends Fragment {
         btnFiltro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent openMainActivity= new Intent(getActivity(), TabPetOpcoesFragment.class);
-                openMainActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                openMainActivity.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                startActivity(openMainActivity);
+                Intent intent= new Intent(getActivity(), TabPetOpcoesFragment.class);
+                startActivity(intent);
             }
         });
     }
 
-    private void irParaListaEstabelecimentos(String servico,ArrayList<String> tipoPet){
+    private void irParaListaEstabelecimentos(String servico){
         Intent intent = new Intent(getActivity(), ListaEstabServicoActivity.class);
-        intent.putExtra("servico",servico);
-        intent.putStringArrayListExtra("pets",tipoPet);
+        ConfiguracoesBusca.setsOpcaoServico(servico);
         startActivity(intent);
     }
 

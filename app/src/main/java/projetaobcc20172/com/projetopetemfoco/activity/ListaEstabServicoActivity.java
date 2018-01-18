@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.adapter.ServicoAdapterListView;
 import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoFirebase;
+import projetaobcc20172.com.projetopetemfoco.config.ConfiguracoesBusca;
 
 /**
  * Created by raul1 on 05/01/2018.
@@ -31,7 +32,6 @@ public class ListaEstabServicoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_servicos);
-        Intent intent = getIntent();
         Toolbar toolbar = findViewById(R.id.tbBuscaServicos);
         // Configura toolbar
         toolbar.setTitle("Serviços");
@@ -42,7 +42,7 @@ public class ListaEstabServicoActivity extends AppCompatActivity {
         mResultado = new ArrayList<>();
         mAdapter = new ServicoAdapterListView(ListaEstabServicoActivity.this,mResultado);
         listView.setAdapter(mAdapter);
-        buscarServico(intent.getStringExtra("servico") , intent.getStringArrayListExtra("pets"));
+        buscarServico(ConfiguracoesBusca.getsOpcaoServico(),ConfiguracoesBusca.getsOpcaosPet());
         mAdapter.notifyDataSetChanged();
     }
 

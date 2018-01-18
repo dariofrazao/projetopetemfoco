@@ -103,6 +103,12 @@ public class Utils {
         if(tipoPet.equals(pets[2])){
             return R.drawable.tipo_pet_gato;
         }
+        if(tipoPet.equals(pets[1]+"_check")){
+            return R.drawable.tipo_pet_cachorro_check;
+        }
+        if(tipoPet.equals(pets[2]+"_check")){
+            return R.drawable.tipo_pet_gato_check;
+        }
         return R.drawable.tipo_pet_todos;
     }
 
@@ -123,6 +129,7 @@ public class Utils {
         if(servico.equals(pets[5])){
             return R.drawable.servico_vacinacao;
         }
+
         return R.drawable.servico_todos;
 
     }

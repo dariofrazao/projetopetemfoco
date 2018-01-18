@@ -106,7 +106,6 @@
     <string name="fb_login_protocol_scheme">fb1383454871782340</string>
 
 
-
     <!--Strings relacionadas ao estbelecimento-->
     <string name="tb_acesso_estabelecimento">Informações</string>
     <string name="servicos">Serviços:</string>
@@ -133,5 +132,6 @@
     <string name="avaliador">Usuário</string>
     <string name="comentario">Comentário</string>
     <string name="avaliar">Avaliar</string>
+    <string name="title_activity_filtro_busca">FiltroBuscaActivity</string>
 
 </resources>

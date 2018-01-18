@@ -3,13 +3,68 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
-    <GridView
-        android:id="@+id/gridOpPet"
-        android:numColumns="auto_fit"
-        android:gravity="center"
-        android:columnWidth="100dp"
-        android:stretchMode="columnWidth"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
-    </GridView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:orientation="vertical"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp">
+
+        <GridView
+            android:id="@+id/gridOpPet"
+            android:layout_marginTop="5dp"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:columnWidth="100dp"
+            android:gravity="center"
+            android:numColumns="auto_fit"
+            android:stretchMode="columnWidth">
+
+        </GridView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:text="Organizar Por:"
+            android:textColor="@color/colorSecondaryText" />
+
+        <CheckBox
+            android:id="@+id/cbProx"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="Próximidade" />
+
+        <CheckBox
+            android:id="@+id/cbAva"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Avaliação" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:text="Raio de busca:"
+            android:textColor="@color/colorSecondaryText" />
+
+        <SeekBar
+            android:id="@+id/sbRaio"
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/btnSalvarFiltro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Salvar" />
+
+    </LinearLayout>
+
 </RelativeLayout>

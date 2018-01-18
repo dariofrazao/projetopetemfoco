@@ -8,15 +8,15 @@
 
     <ImageView
         android:id="@+id/gridImgPet"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         app:srcCompat="@drawable/common_google_signin_btn_icon_dark_normal" />
 
     <TextView
         android:id="@+id/tvGridTextPet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="17dp"
+        android:layout_marginLeft="4dp"
         android:layout_marginTop="-5dp"
         android:text="servico"
         android:textColor="@color/colorSecondaryText"

@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.adapter.SectionsPageAdapter;
+import projetaobcc20172.com.projetopetemfoco.config.ConfiguracoesBusca;
 
 
 /**
@@ -41,13 +42,14 @@ public class BuscaServicoActivity extends Fragment{
         setupViewPager(mViewPager);
         TabLayout tabLayout = getActivity().findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
+        ConfiguracoesBusca.inicializar();
     }
 
     //Permite que as abas apareçam na tela
     private void setupViewPager(ViewPager viewPager) {
         SectionsPageAdapter adapter = new SectionsPageAdapter(getChildFragmentManager());
         adapter.addFragment(new TabServicosFragment(), "Serviços");
-        adapter.addFragment(new TabPetOpcoesFragment(), "Opções de Pet");
+        adapter.addFragment(new BuscaEstabelecimentoActivity(), "Estabelecimentos");
         viewPager.setAdapter(adapter);
     }
 }

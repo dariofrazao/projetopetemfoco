@@ -1,12 +1,11 @@
 package projetaobcc20172.com.projetopetemfoco.activity;
 
+import android.app.Activity;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -16,36 +15,34 @@ import java.util.HashMap;
 
 import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.adapter.OpPetGridAdapter;
+import projetaobcc20172.com.projetopetemfoco.config.ConfiguracoesBusca;
 import projetaobcc20172.com.projetopetemfoco.utils.Utils;
 
 /**
  * Created by raul1 on 05/01/2018.
  */
 
-public class TabPetOpcoesFragment extends Fragment {
+public class TabPetOpcoesFragment extends Activity implements View.OnClickListener {
 
-    private OpPetGridAdapter mPetAdapter;
-    private static ArrayList<String> sOpcaosSelecionada;
+    private OpPetGridAdapter mPetAdapter = null;
+    private ArrayList<String> mOpcaosSelecionada;
     private HashMap<String,Integer> botoesClicados;//Hash que verifica se o botão está marcado ou não. 1 se estiver e 0 se não estiver
     private String opcaoTodos = "Todos";
     private ArrayList<String> tiposPets;
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.tab_opcoes_pet_fragment, container, false);
-    }
-
+    private CheckBox cbProx;
+    private CheckBox cbAvaliacao;
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        final GridView gridView = getActivity().findViewById(R.id.gridOpPet);
-        this.tiposPets = Utils.recuperaArrayR(getActivity(),R.array.tiposPetBusca);
-        sOpcaosSelecionada = new ArrayList<>();
-        sOpcaosSelecionada.add(this.opcaoTodos);
-        this.inicializarHashBotoes();
-        ArrayList<String> tiposServico =  Utils.recuperaArrayR(getActivity(),R.array.tiposPetBusca);
-        mPetAdapter = new OpPetGridAdapter(getActivity(),tiposServico);
+    protected void onCreate(final Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.tab_opcoes_pet_fragment);
+        final GridView gridView = findViewById(R.id.gridOpPet);
+
+        Button btnSalvarFiltro = findViewById(R.id.btnSalvarFiltro);
+        cbProx = findViewById(R.id.cbProx);
+        cbAvaliacao = findViewById(R.id.cbAva);
+        this.tiposPets = Utils.recuperaArrayR(this,R.array.tiposPetBusca);
+        this.carregarFiltro();
         gridView.setAdapter(mPetAdapter);
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -55,36 +52,78 @@ public class TabPetOpcoesFragment extends Fragment {
                 addOpcoes(opcaoSelecionada.getText().toString(),im,gridView);
             }
         });
-        mPetAdapter.notifyDataSetChanged();
+
+        this.cbAvaliacao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                cbAvaliacao.setChecked(true);
+                cbProx.setChecked(false);
+            }
+        });
+
+        this.cbProx.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cbAvaliacao.setChecked(false);
+                cbProx.setChecked(true);
+            }
+        });
+
+        btnSalvarFiltro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                salvarOpcoes();
+                finish();
+            }
+        });
+
+
+      //  mPetAdapter.notifyDataSetChanged();
     }
 
-    public static ArrayList<String> getOpcaosSelecionada(){
-        return sOpcaosSelecionada;
+
+    @Override
+    public void onPause() {
+        super.onPause();
     }
 
+    @Override
+    public void onResume(){
+        super.onResume();
+        if(ConfiguracoesBusca.getsFiltro().equals(ConfiguracoesBusca.Filtro.DISTANCIA))
+            this.cbProx.setChecked(true);
+
+        else if(ConfiguracoesBusca.getsFiltro().equals(ConfiguracoesBusca.Filtro.AVALICAO))
+            this.cbAvaliacao.setChecked(true);
+    }
+
+    private void inicializarOpcoes(){
+        mOpcaosSelecionada = ConfiguracoesBusca.getsOpcaosPet();
+    }
 
     private void addOpcoes(String selecionado,ImageView im,GridView grid){
         if(selecionado.equals(this.opcaoTodos)){
-            sOpcaosSelecionada.clear();
+            mOpcaosSelecionada.clear();
             this.desmarcarTodos(grid);
-            sOpcaosSelecionada.add(this.opcaoTodos);
+            mOpcaosSelecionada.add(this.opcaoTodos);
             this.marcarImg(this.opcaoTodos,im);
         }
         else if(this.botoesClicados.get(this.opcaoTodos)==1){
             this.botoesClicados.put(this.opcaoTodos,0);
-            sOpcaosSelecionada.remove(this.opcaoTodos);
-            sOpcaosSelecionada.add(selecionado);
+            mOpcaosSelecionada.remove(this.opcaoTodos);
+            mOpcaosSelecionada.add(selecionado);
             this.desmarcarTodos(grid);
             this.marcarImg(selecionado,im);
         }
         //Desmarca um item marcado somente se a lista tiver mais de um item marcado
         //garante que sempre existirá pelo menos um item marcado para busca.
-        else if(this.botoesClicados.get(selecionado)==1 && sOpcaosSelecionada.size()>1){
-            sOpcaosSelecionada.remove(selecionado);
+        else if(this.botoesClicados.get(selecionado)==1 && mOpcaosSelecionada.size()>1){
+            mOpcaosSelecionada.remove(selecionado);
             this.desmarcarImg(selecionado,im);
         }//Se não está na lista add
         else if(this.botoesClicados.get(selecionado)==0){
-            sOpcaosSelecionada.add(selecionado);
+            mOpcaosSelecionada.add(selecionado);
             this.marcarImg(selecionado,im);
         }
 
@@ -133,4 +172,46 @@ public class TabPetOpcoesFragment extends Fragment {
         this.botoesClicados.put(this.opcaoTodos,1);
     }
 
+    private void salvarOpcoes(){
+        ConfiguracoesBusca.setsOpcaosPet(this.mOpcaosSelecionada);
+        if(this.cbAvaliacao.isChecked()){
+            ConfiguracoesBusca.setsFiltro(ConfiguracoesBusca.Filtro.AVALICAO);
+        }
+        else if(this.cbProx.isChecked()){
+            ConfiguracoesBusca.setsFiltro(ConfiguracoesBusca.Filtro.DISTANCIA);
+        }
+
+    }
+
+    private void carregarFiltro(){
+        this.inicializarOpcoes();
+        this.inicializarHashBotoes();
+        if(ConfiguracoesBusca.getsEstado().equals(ConfiguracoesBusca.Estado.DEFAULT)) {
+            mPetAdapter = new OpPetGridAdapter(this, tiposPets);
+        }
+        else{
+            ArrayList <String> pets = new ArrayList<>();
+            for(String pet:this.tiposPets){
+                if(ConfiguracoesBusca.getsOpcaosPet().contains(pet) && !pet.equalsIgnoreCase(this.opcaoTodos) ){
+                    pets.add(pet+"_check");
+                    this.botoesClicados.put(pet,1);
+                }
+                else{
+                    if(pet.equalsIgnoreCase(this.opcaoTodos)){
+                        pets.add(pet+"_uncheck");
+                        this.botoesClicados.put(pet,0);
+                    }
+                    else{
+                        pets.add(pet);
+                    }
+                }
+            }
+            mPetAdapter = new OpPetGridAdapter(this, pets);
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+
+    }
 }

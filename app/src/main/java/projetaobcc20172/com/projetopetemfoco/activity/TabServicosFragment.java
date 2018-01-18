@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.TextView;
 
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 
 import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.adapter.TiposServicoAdapterGrid;
+import projetaobcc20172.com.projetopetemfoco.config.ConfiguracoesBusca;
 import projetaobcc20172.com.projetopetemfoco.utils.Utils;
 
 /**
@@ -40,17 +42,27 @@ public class TabServicosFragment extends Fragment {
         //you can set the title for your toolbar here for different fragments different titles
         //getActivity().setTitle("Busca por serviço");
         final GridView gridView = getActivity().findViewById(R.id.gridServicos);
+        Button btnFiltro = getActivity().findViewById(R.id.btnFiltro);
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 TextView servicoClicado =  view.findViewById(R.id.gridTextServico);
-                irParaListaEstabelecimentos(servicoClicado.getText().toString(),TabPetOpcoesFragment.getOpcaosSelecionada());
+                irParaListaEstabelecimentos(servicoClicado.getText().toString(), ConfiguracoesBusca.getsOpcaosPet());
             }
         });
         ArrayList<String> tiposServico =  Utils.recuperaArrayR(getActivity(),R.array.servicos);
         mServAdpGrid = new TiposServicoAdapterGrid(getActivity(),tiposServico);
         gridView.setAdapter(mServAdpGrid);
         mServAdpGrid.notifyDataSetChanged();
+        btnFiltro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent openMainActivity= new Intent(getActivity(), TabPetOpcoesFragment.class);
+                openMainActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                openMainActivity.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(openMainActivity);
+            }
+        });
     }
 
     private void irParaListaEstabelecimentos(String servico,ArrayList<String> tipoPet){

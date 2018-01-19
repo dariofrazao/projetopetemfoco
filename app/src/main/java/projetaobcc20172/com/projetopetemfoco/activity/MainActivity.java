@@ -37,6 +37,7 @@ import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoFirebase;
 import projetaobcc20172.com.projetopetemfoco.config.ConfiguracoesBuscaServico;
 import projetaobcc20172.com.projetopetemfoco.model.Usuario;
+import projetaobcc20172.com.projetopetemfoco.utils.Localizacao;
 
 /*
 * Essa classe implementa o navigator Drawer existente na tela de busca*/
@@ -50,6 +51,7 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ConfiguracoesBuscaServico.inicializar();
+        Localizacao.getCurrentLocation(this);
         setContentView(R.layout.activity_main);//Activity em que se encontra o navigator
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);//toolbar do navigator
         setSupportActionBar(toolbar);

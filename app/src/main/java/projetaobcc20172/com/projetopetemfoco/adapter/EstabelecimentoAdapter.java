@@ -53,7 +53,7 @@ public class EstabelecimentoAdapter extends ArrayAdapter<Fornecedor> {
             cidade.setText(fornecedor.getEndereco().getLocalidade());
             uf.setText(" - " + fornecedor.getEndereco().getUf());
             //nota.setText(fornecedor.getNota()+"");
-            distancia.setText("Distância: 0");
+            distancia.setText("Distância: "+fornecedor.getDistancia());
         }
 
         return view;

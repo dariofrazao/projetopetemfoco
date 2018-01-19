@@ -21,6 +21,7 @@ import projetaobcc20172.com.projetopetemfoco.R;
 
 public class Utils {
 
+
     /**
      * Construtor privado, todos os métodos são estáticos
      */
@@ -133,4 +134,6 @@ public class Utils {
         return R.drawable.servico_todos;
 
     }
+
+
 }

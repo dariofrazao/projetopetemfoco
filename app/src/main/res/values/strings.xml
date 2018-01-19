@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Pet Em Foco</string>
     <string name="salvar">Salvar</string>
+    <string name="google_maps_key">AIzaSyA5ajs6LhgYb3YfbuQ-hyDrUq4GYMjMkT0</string>
 
     <!--Strings relacionadas a cadastro de consumidor-->
     <string name="sucesso_cadastro_Toast">Sucesso ao cadastrar usuário</string>
@@ -139,6 +140,7 @@
     <!--Strings relacionadas ao filtro de Serviço-->
     <string name="filtro_atualizado_servico">Filtro salvo com sucesso</string>
 
+    <string name="api_key_google_matrix">AIzaSyBrKPS2exi5vhLYY1H1islk4UUlRb4Z9Rk</string>
+    <string name="url_matrix_distance">https://maps.googleapis.com/maps/api/distancematrix/json?units=metric</string>
 
-    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyDG0zZ85UpJ0GqHLWfvq56rwJSy2N4v4_M</string>
 </resources>

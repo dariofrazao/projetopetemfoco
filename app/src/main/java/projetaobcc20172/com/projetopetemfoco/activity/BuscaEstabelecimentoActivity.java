@@ -153,9 +153,12 @@ public class BuscaEstabelecimentoActivity extends Fragment implements Serializab
                     forn = new Fornecedor(dados.child("nome").getValue(String.class), dados.child("email").getValue(String.class), dados.child("cpfCnpj").getValue(String.class)
                             , dados.child("horarios").getValue(String.class), nota, dados.child("telefone").getValue(String.class),
                             dados.child("endereco").getValue(Endereco.class));
+                    forn.setmLatitude(dados.child("mLatitude").getValue(double.class));
+                    forn.setmLongitude(dados.child("mLongitude").getValue(double.class));
                     forn.setId(dados.getKey());
                     mForncedores.add(forn);
                 }
+                mForncedores = ConfiguracaoBuscaEstab.filtrar(getActivity(),mForncedores);
                 mAdapter.notifyDataSetChanged();
                 mProgresso.setVisibility(View.INVISIBLE);
 

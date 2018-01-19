@@ -58,6 +58,7 @@
             android:name=".activity.NavigatorMenu"
             />
 
+        <activity android:name=".activity.MainActivity" />
         <activity
             android:name=".activity.CadastroPetActivity"
             android:windowSoftInputMode="stateHidden"

@@ -2,12 +2,12 @@ package projetaobcc20172.com.projetopetemfoco.activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.preference.PreferenceManager;
-import android.support.v7.app.AppCompatActivity;
+import android.support.annotation.Nullable;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
@@ -20,46 +20,48 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import android.support.v4.app.Fragment;
 
 import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.adapter.PetAdapter;
 import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoFirebase;
 import projetaobcc20172.com.projetopetemfoco.model.Pet;
 
-public class PetsActivity extends AppCompatActivity {
+public class PetsActivity extends Fragment {
 
     private ArrayList<Pet> mPets;
     private ArrayAdapter<Pet> mAdapter;
     private ListView mListView;
 
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pets);
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        //returning our layout file
+        //change R.layout.yourlayoutfilename for each of your fragments
+        return inflater.inflate(R.layout.activity_pets, container, false);
+    }
+
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        //you can set the title for your toolbar here for different fragments different titles
+        getActivity().setTitle("Meus Pets");
 
         //Recuperar id do usuário logado
         String idUsuarioLogado;
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         idUsuarioLogado = preferences.getString("id", "");
 
         ImageButton mCadastrarPet; //Botão de cadastrar o pet
 
-        Toolbar toolbar;
-        toolbar = findViewById(R.id.tb_main);
+        mCadastrarPet = getView().findViewById(R.id.btnCadastrarPet);
 
-        // Configura toolbar
-        toolbar.setTitle(R.string.pets);
-        toolbar.setTitleTextColor(Color.WHITE);
-        toolbar.setNavigationIcon(R.drawable.ic_action_arrow_left_white);
-        setSupportActionBar(toolbar);
-
-        mCadastrarPet = findViewById(R.id.btnCadastrarPet);
-
-        mListView = findViewById(R.id.lv_pets);
+        mListView = getView().findViewById(R.id.lv_pets);
 
         // Monta listview e mAdapter
         mPets = new ArrayList<>();
-        mAdapter = new PetAdapter(PetsActivity.this, mPets);
+        mAdapter = new PetAdapter(getActivity(), mPets);
         mListView.setAdapter(mAdapter);
 
         // Recuperar pets do Firebase
@@ -83,7 +85,7 @@ public class PetsActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(PetsActivity.this, "Erro na leitura do banco de dados", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Erro na leitura do banco de dados", Toast.LENGTH_SHORT).show();
             }
         };
 
@@ -95,7 +97,7 @@ public class PetsActivity extends AppCompatActivity {
         mCadastrarPet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(PetsActivity.this, CadastroPetActivity.class);
+                Intent intent = new Intent(getActivity(), CadastroPetActivity.class);
                 startActivity(intent);
             }
         });
@@ -103,22 +105,32 @@ public class PetsActivity extends AppCompatActivity {
 
     }
 
-    public void chamarInfoPetListener(){
+    public void chamarInfoPetListener() {
         this.mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                Intent intent = new Intent(PetsActivity.this,InfoPetActivity.class);
+                Intent intent = new Intent(getActivity(), InfoPetActivity.class);
                 Pet pet = mPets.get(position);
                 intent.putExtra("Pet", pet);
-                startActivity( intent );
+                startActivity(intent);
             }
         });
+
+
     }
 
-    @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return true;
-    }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+

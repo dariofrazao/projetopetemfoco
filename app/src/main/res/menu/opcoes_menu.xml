@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_pets"
+            android:icon="@drawable/ic_action_meus_pets"
+            android:title="Meus Pets" />
+        <item
+            android:id="@+id/nav_endereco"
+            android:icon="@drawable/ic_action_endereco"
+            android:title="Meu Endereço" />
+        <item
+            android:id="@+id/nav_favoritos"
+            android:icon="@drawable/ic_action_favoritos"
+            android:title="Meus Favoritos" />
+        <item
+            android:id="@+id/nav_estabelecimentos"
+            android:icon="@drawable/ic_action_estabelecimentos"
+            android:title="Estabelecimentos" />
+        <item
+            android:id="@+id/nav_servicos"
+            android:icon="@drawable/ic_action_servicos"
+            android:title="Serviços" />
+        <item
+            android:id="@+id/nav_autonomos"
+            android:icon="@drawable/ic_action_autonomo"
+            android:title="Autônomos" />
+        <item
+            android:id="@+id/nav_mapa"
+            android:icon="@drawable/ic_action_map"
+            android:title="Mapa" />
+        <item
+            android:id="@+id/nav_sair"
+            android:icon="@drawable/ic_action_sair"
+            android:title="Sair" />
+
+    </group>
+
+
+</menu>

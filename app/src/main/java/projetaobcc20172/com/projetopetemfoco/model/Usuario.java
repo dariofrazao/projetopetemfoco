@@ -8,12 +8,15 @@ public class Usuario implements Serializable {
     private String mId;
     private String mNome;
     private String mEmail;
-    private String mEnderecoUsuario = "0";
+    private String mFoto;
 
-    public Usuario(String idUsuario, String nome, String email){
+    public Usuario(){}
+
+    public Usuario(String idUsuario, String nome, String email, String foto){
         this.mId = idUsuario;
         this.mNome = nome;
         this.mEmail = email;
+        this.mFoto = foto;
     }
 
     public String getId() {
@@ -40,11 +43,11 @@ public class Usuario implements Serializable {
         this.mEmail = email;
     }
 
-    public String getEnderecoUsuario() {
-        return mEnderecoUsuario;
+    public String getmFoto() {
+        return mFoto;
     }
 
-    public void setEnderecoUsuario(String enderecoUsuario) {
-        this.mEnderecoUsuario = enderecoUsuario;
+    public void setmFoto(String mFoto) {
+        this.mFoto = mFoto;
     }
 }

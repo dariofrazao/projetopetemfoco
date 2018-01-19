@@ -29,7 +29,7 @@ public class TestToolsPet {
     }
 
     public static void clicarMeusPets(){
-        TestTools.clicarBotao(R.id.btnMeusPets);
+        TestTools.clicarItemNavigationMenu(R.id.drawer_layout, R.id.nav_busca, R.id.nav_pets);
     }
     public static void clicarCadastrarPet(){
         TestTools.clicarBotao(R.id.btnCadastrarPet);

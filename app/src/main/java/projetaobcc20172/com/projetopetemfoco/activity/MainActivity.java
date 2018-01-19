@@ -3,19 +3,27 @@ package projetaobcc20172.com.projetopetemfoco.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
-import android.preference.PreferenceManager;
-import android.support.v7.app.AppCompatActivity;
+import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.preference.PreferenceManager;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.view.View;
-import android.widget.Button;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -23,135 +31,159 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.Serializable;
+
 import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoFirebase;
+import projetaobcc20172.com.projetopetemfoco.model.Usuario;
 
-public class MainActivity extends AppCompatActivity {
+/*
+* Essa classe implementa o navigator Drawer existente na tela de busca*/
+public class MainActivity extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener , Serializable{
 
-    private TextView mTvTitulo, mTvSubtitulo;
+    private ImageView mFoto;
+    private TextView mNome, mEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        Button sair;
-        Button meusPets;
-        Button btnBuscarServ;
-        //Button meusFavoritos;
-
-        Toolbar toolbar;
-        toolbar = findViewById(R.id.tb_main);
-
-        // Configura toolbar
-        toolbar.setTitle("Pet Em Foco");
-        toolbar.setTitleTextColor(Color.WHITE);
-        toolbar.showOverflowMenu();
+        setContentView(R.layout.activity_main);//Activity em que se encontra o navigator
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);//toolbar do navigator
         setSupportActionBar(toolbar);
-        toolbar.inflateMenu(R.menu.main_menu);
 
-        sair = findViewById(R.id.btnSair);
-        meusPets =  findViewById(R.id.btnMeusPets);
-        btnBuscarServ = findViewById(R.id.btnBuscarServicos);
-        //meusFavoritos =  findViewById(R.id.botao_meus_favoritos);
+      /*  FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
+*/
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
 
-        mTvTitulo = findViewById(R.id.tvTituloConsumidor);
-        mTvSubtitulo = findViewById(R.id.tvSubtituloConsumidor);
+        NavigationView navigationView =  (NavigationView)findViewById(R.id.nav_busca);
+        //LayoutInflater.from(getApplicationContext()).inflate(R.layout.nav_header_main, navigationView);
+
+
+        displaySelectedScreen(R.id.nav_servicos);//Determina qual tela será aberta primeiro ao entrar
+
+        View header = navigationView.getHeaderView(0);
+
+        navigationView.setNavigationItemSelectedListener(this);
+        mNome = header.findViewById(R.id.tvNomeProfile);
+        mFoto = header.findViewById(R.id.imageViewProfile);
+        mEmail = header.findViewById(R.id.tvEmailProfile);
 
         //Recuperar id do usuário logado
-        final String idUsuarioLogado;
-        idUsuarioLogado = getPreferences("id", this);
+        String mIdUsuarioLogado;
+        mIdUsuarioLogado = getPreferences("id", getApplication());
 
-        // Recuperar usuários do Firebase
-        DatabaseReference mFirebase;
-        mFirebase = ConfiguracaoFirebase.getFirebase().child("usuarios").child(idUsuarioLogado);
-
-        mFirebase.addValueEventListener(new ValueEventListener() {
+        DatabaseReference mReferenciaFirebase;
+        mReferenciaFirebase = ConfiguracaoFirebase.getFirebase();
+        mReferenciaFirebase.child("usuarios").child(mIdUsuarioLogado).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                String nome = (String)dataSnapshot.child("nome").getValue();
-                String email = (String)dataSnapshot.child("email").getValue();
-                //Setar texto com o nome e o email do usuário logado
-                mTvTitulo.setText("Bem-vindo, " + nome);
-                mTvSubtitulo.setText("E-mail: " + email);
+                if(dataSnapshot.getValue() != null){
+                    Usuario usuario = dataSnapshot.getValue(Usuario.class);
+                    Glide.with(getApplicationContext()).load(usuario.getmFoto()).asBitmap().into(new BitmapImageViewTarget(mFoto){
+                        @Override
+                        protected void setResource(Bitmap resource) {
+                            RoundedBitmapDrawable circularBitmapDrawable =
+                                    RoundedBitmapDrawableFactory.create(MainActivity.this.getResources(), resource);
+                            circularBitmapDrawable.setCircular(true);
+                            mFoto.setImageDrawable(circularBitmapDrawable);
+                        }
+                    });
+                    mNome.setText(usuario.getNome());
+                    mEmail.setText(usuario.getEmail());
+                }
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
+                //vazio
             }
         });
-
-        //Ação do botão para abrir a tela dos Pets
-        meusPets.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent();
-                intent.setClass(MainActivity.this, PetsActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        btnBuscarServ.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                abrirBuscas();
-            }
-        });
-
-        //Ação do botão de deslogar o fornecedor
-        sair.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                deslogarUsuario();
-            }
-        });
-
     }
 
+    @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main_menu, menu);
-        Drawable drawable = menu.findItem(R.id.menu_cadastrar_endereco).getIcon();
-        if(drawable != null) {
-            drawable.mutate();
-            drawable.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
-        }
-
+    public boolean onNavigationItemSelected(MenuItem item) {
+        displaySelectedScreen(item.getItemId());
         return true;
     }
 
-    //Método que abre a tela de endereços ao clicar no item do menu
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if(id == R.id.menu_cadastrar_endereco){
-            Intent intent = new Intent(MainActivity.this, EnderecoActivity.class);
-            startActivity(intent);
-            return true;
+    private void displaySelectedScreen(int itemId) {
+
+        //creating fragment object
+        Fragment fragment = null;
+
+        //initializing the fragment object which is selected
+        switch (itemId) {
+            case R.id.nav_pets:
+                fragment = new PetsActivity();
+                break;
+            case R.id.nav_estabelecimentos:
+                fragment = new BuscaEstabelecimentoActivity();
+                break;
+            case R.id.nav_servicos:
+                fragment = new BuscaServicoActivity();
+                break;
+            case R.id.nav_sair:
+                this.deslogarUsuario();
+                break;
+            case R.id.nav_mapa:
+                //fragment = new MapaActivity();
+                break;
+            case R.id.nav_endereco:
+                fragment = new EnderecoActivity();
+                break;
+            default:
+                break;
         }
-        return super.onOptionsItemSelected(item);
+        this.fecharTeclado();
+
+        //Instancia o fragmento
+        if (fragment != null) {
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.content_main, fragment);
+            //ft.addToBackStack(null);
+            ft.commit();
+        }
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+    }
+
+
+
+    private void fecharTeclado(){
+        View view = this.getCurrentFocus();
+        if(view !=null){
+            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 
     //Método para deslogar usuário da aplicação e retornar a tela de Login
     private void deslogarUsuario(){
         FirebaseAuth.getInstance().signOut();
         LoginManager.getInstance().logOut();
-        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+        Intent intent = new Intent(getApplication(), LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
 
-    private void abrirBuscas(){
-        Intent intent = new Intent(MainActivity.this, NavigatorMenu.class);
-        startActivity( intent );
-        finish();
-    }
-
-    //Método que recupera o id do usuário logado
+    //Método que recupera o id do usuário logado, para salvar o pet no nó do usuário que o está cadastrando
     public static String getPreferences(String key, Context context) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         return preferences.getString(key, null);
     }
-
 }
+

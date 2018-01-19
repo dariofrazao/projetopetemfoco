@@ -30,7 +30,7 @@ public class CadastroPetActivityTest{
     @Before
     public void setUp() throws Exception {
         try{
-            TestTools.clicarBotao(R.id.btnSair);
+            TestTools.clicarItemNavigationMenu(R.id.drawer_layout, R.id.nav_busca, R.id.nav_sair);
         }catch (Exception e){
             e.getMessage();
         }
@@ -38,7 +38,7 @@ public class CadastroPetActivityTest{
         LoginActivityTest log = new LoginActivityTest();
         log.testeLoginComSucesso();
         Thread.sleep(4000);
-        TestToolsPet.clicarMeusPets();
+        TestTools.clicarItemNavigationMenu(R.id.drawer_layout, R.id.nav_busca, R.id.nav_pets);
         Thread.sleep(4000);
         TestToolsPet.clicarCadastrarPet();
         Espresso.closeSoftKeyboard();

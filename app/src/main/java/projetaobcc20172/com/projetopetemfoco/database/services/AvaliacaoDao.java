@@ -1,7 +1,6 @@
 package projetaobcc20172.com.projetopetemfoco.database.services;
 
 import java.util.ArrayList;
-import java.util.List;
 import projetaobcc20172.com.projetopetemfoco.model.Avaliacao;
 import projetaobcc20172.com.projetopetemfoco.model.Fornecedor;
 

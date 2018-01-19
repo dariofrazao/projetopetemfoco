@@ -3,9 +3,11 @@ package projetaobcc20172.com.projetopetemfoco.config;
 import android.app.Activity;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import projetaobcc20172.com.projetopetemfoco.model.Fornecedor;
 import projetaobcc20172.com.projetopetemfoco.utils.Enumerates;
+import projetaobcc20172.com.projetopetemfoco.utils.FornecedorComparatorDist;
 import projetaobcc20172.com.projetopetemfoco.utils.Localizacao;
 
 /**
@@ -43,16 +45,20 @@ public class ConfiguracaoBuscaEstab {
         sRaio = new Raio();
     }
 
-    public static ArrayList<Fornecedor> filtrar(Activity act, ArrayList<Fornecedor> resultados){
+    public static void filtrar(Activity act, ArrayList<Fornecedor> resultados){
         ArrayList<Fornecedor> resultadoFiltrados = new ArrayList<>();
         if(sFiltro.equals(Enumerates.Filtro.DISTANCIA)){
             double [] posicaoAtual = Localizacao.getCurrentLocation(act);
             for(Fornecedor forn:resultados){
                 double dist = Localizacao.distanciaEntreDoisPontos(act,posicaoAtual[0],posicaoAtual[1],forn.getmLatitude(),forn.getmLongitude());
-                forn.setDistancia(dist);
-                resultadoFiltrados.add(forn);
+                if(dist>0 && dist<=sRaio.getRaioReal()){//Só add a lista se possuir uma distância válida e estiver dentro do raio
+                    forn.setDistancia(dist);
+                    resultadoFiltrados.add(forn);
+                }
             }
         }
-        return resultadoFiltrados;
+        Collections.sort(resultadoFiltrados, new FornecedorComparatorDist());
+        resultados.clear();
+        resultados.addAll(resultadoFiltrados);
     }
 }

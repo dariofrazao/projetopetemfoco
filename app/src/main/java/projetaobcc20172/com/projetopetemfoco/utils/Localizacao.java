@@ -12,7 +12,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import projetaobcc20172.com.projetopetemfoco.R;
-import projetaobcc20172.com.projetopetemfoco.helper.JsonRequest;
+import projetaobcc20172.com.projetopetemfoco.helper.JsonRequestAsync;
 
 /**
  * Created by raul1 on 19/01/2018.
@@ -47,17 +47,19 @@ public class Localizacao {
 
 
     public static double distanciaEntreDoisPontos(Activity act,double latOri,double longiOri, double latDest, double longiDest){
-        double distancia = 0;
+        double distancia = -1;
         String url = act.getString(R.string.url_matrix_distance)+"&origins="+latOri+","+longiOri+"&destinations="+latDest+","+longiOri+"&key="+act.getString(R.string.api_key_google_matrix);
         try {
-            String json = JsonRequest.request(url);
-            JSONObject root=new JSONObject(json);
-            JSONArray array_rows=root.getJSONArray("rows");
-            JSONObject object_rows=array_rows.getJSONObject(0);
-            JSONArray array_elements=object_rows.getJSONArray("elements");
-            JSONObject  object_elements=array_elements.getJSONObject(0);
+            JsonRequestAsync jsonRequest = new JsonRequestAsync(url);
+            jsonRequest.execute();
+            String json = jsonRequest.getJson(act);
+            JSONObject root = new JSONObject(json);
+            JSONArray array_rows = root.getJSONArray("rows");
+            JSONObject object_rows = array_rows.getJSONObject(0);
+            JSONArray array_elements = object_rows.getJSONArray("elements");
+            JSONObject  object_elements = array_elements.getJSONObject(0);
 //            JSONObject object_duration=object_elements.getJSONObject("duration");
-            JSONObject object_distance=object_elements.getJSONObject("distance");
+            JSONObject object_distance = object_elements.getJSONObject("distance");
             distancia = Double.parseDouble(object_distance.getString("text").replace("km",""));
         } catch (Exception e) {
             e.printStackTrace();

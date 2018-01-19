@@ -9,9 +9,11 @@ public class Raio {
     private static byte sRange = 5;
     private static byte sInicial = 5;
     private byte raioAtual;
+    private byte raioReal;
 
     public Raio(){
         this.raioAtual = 0;
+        this.raioReal = sInicial;
     }
 
     public  byte getRange() {
@@ -28,6 +30,10 @@ public class Raio {
 
     public void setRaioAtual(byte raioAtual) {
         this.raioAtual = raioAtual;
+        this.raioReal = (byte) (this.raioAtual + sInicial);
     }
 
+    public byte getRaioReal() {
+        return raioReal;
+    }
 }

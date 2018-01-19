@@ -136,7 +136,7 @@
     <string name="comentario">Comentário</string>
     <string name="avaliar">Avaliar</string>
     <string name="title_activity_filtro_busca">FiltroBuscaActivity</string>
-
+    <string name="erro_timeout_msg">Operação demorou demais.Verfique sua conexão com a internet</string>
     <!--Strings relacionadas ao filtro de Serviço-->
     <string name="filtro_atualizado_servico">Filtro salvo com sucesso</string>
 

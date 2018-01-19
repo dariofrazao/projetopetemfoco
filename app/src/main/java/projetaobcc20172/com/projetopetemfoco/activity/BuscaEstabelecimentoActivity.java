@@ -158,7 +158,7 @@ public class BuscaEstabelecimentoActivity extends Fragment implements Serializab
                     forn.setId(dados.getKey());
                     mForncedores.add(forn);
                 }
-                mForncedores = ConfiguracaoBuscaEstab.filtrar(getActivity(),mForncedores);
+                ConfiguracaoBuscaEstab.filtrar(getActivity(),mForncedores);
                 mAdapter.notifyDataSetChanged();
                 mProgresso.setVisibility(View.INVISIBLE);
 

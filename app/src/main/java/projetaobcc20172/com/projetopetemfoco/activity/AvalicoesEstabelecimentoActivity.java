@@ -25,8 +25,8 @@ import projetaobcc20172.com.projetopetemfoco.model.Avaliacao;
 import projetaobcc20172.com.projetopetemfoco.model.Fornecedor;
 
 public class AvalicoesEstabelecimentoActivity extends AppCompatActivity implements Serializable {
-    Fornecedor mFornecedor;
-    ArrayAdapter<Avaliacao> mAdapter;
+    private Fornecedor mFornecedor;
+    private ArrayAdapter<Avaliacao> mAdapter;
     @SuppressLint("WrongConstant")
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     //permite que essa variavel seja vista pela classe de teste

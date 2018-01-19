@@ -1,4 +1,4 @@
-package projetaobcc20172.com.projetopetemfoco.avaliacaoTest;
+package projetaobcc20172.com.projetopetemfoco.avaliacaotest;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

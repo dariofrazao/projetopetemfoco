@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
@@ -65,7 +66,7 @@ public class BuscaEstabelecimentoActivity extends Fragment implements Serializab
         SearchView buscaEst = getView().findViewById(R.id.svBusca);
         mProgresso = (ProgressBar) getView().findViewById(R.id.pbProgresso);
         mProgresso.setVisibility(View.INVISIBLE);
-
+        Button btnFiltro = getActivity().findViewById(R.id.btnFiltroEstabelecimento);
         // Monta listview e mAdapter
         mForncedores = new ArrayList<>();
         mAdapter = new EstabelecimentoAdapter(getActivity(), mForncedores);
@@ -88,6 +89,14 @@ public class BuscaEstabelecimentoActivity extends Fragment implements Serializab
                     mAdapter.notifyDataSetChanged();
                 }
                 return false;
+            }
+        });
+
+        btnFiltro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent= new Intent(getActivity(), FiltroEstabelecimentoActivity.class);
+                startActivity(intent);
             }
         });
     }

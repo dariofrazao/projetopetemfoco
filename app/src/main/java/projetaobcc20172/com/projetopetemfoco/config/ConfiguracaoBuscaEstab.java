@@ -10,7 +10,7 @@ public class ConfiguracaoBuscaEstab {
 
     private static String sNomeEstabelecimento;
     private static Enumerates.Filtro sFiltro;
-    private static byte sRaio;
+    private static Raio sRaio;
 
     public static String getsNomeEstabelecimento() {
         return sNomeEstabelecimento;
@@ -20,7 +20,7 @@ public class ConfiguracaoBuscaEstab {
         return sFiltro;
     }
 
-    public static byte getsRaio() {
+    public static Raio getRaio() {
         return sRaio;
     }
 
@@ -32,12 +32,8 @@ public class ConfiguracaoBuscaEstab {
         ConfiguracaoBuscaEstab.sFiltro = sFiltro;
     }
 
-    public static void setsRaio(byte sRaio) {
-        ConfiguracaoBuscaEstab.sRaio = sRaio;
-    }
-
     public static void inicializar(){
         sFiltro = Enumerates.Filtro.DISTANCIA;
-        sRaio = 10;
+        sRaio = new Raio();
     }
 }

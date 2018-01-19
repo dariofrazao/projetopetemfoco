@@ -1,7 +1,6 @@
 package projetaobcc20172.com.projetopetemfoco.activity;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -9,6 +8,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -16,6 +16,7 @@ import java.util.HashMap;
 
 import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.adapter.OpPetGridAdapter;
+import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoBuscaEstab;
 import projetaobcc20172.com.projetopetemfoco.config.ConfiguracoesBuscaServico;
 import projetaobcc20172.com.projetopetemfoco.utils.Enumerates;
 import projetaobcc20172.com.projetopetemfoco.utils.Utils;
@@ -34,13 +35,14 @@ public class FiltroServicoDialog extends Activity implements View.OnClickListene
     private ArrayList<String> tiposPets;
     private CheckBox cbProx;
     private CheckBox cbAvaliacao;
+    private byte raio;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tab_opcoes_pet_fragment);
         final GridView gridView = findViewById(R.id.gridOpPet);
-
+        this.configurarSeekBar();
         Button btnSalvarFiltro = findViewById(R.id.btnSalvarFiltro);
         cbProx = findViewById(R.id.cbProx);
         cbAvaliacao = findViewById(R.id.cbAva);
@@ -188,7 +190,7 @@ public class FiltroServicoDialog extends Activity implements View.OnClickListene
         else if(this.cbProx.isChecked()){
             ConfiguracoesBuscaServico.setsFiltro(Enumerates.Filtro.DISTANCIA);
         }
-
+        ConfiguracoesBuscaServico.getRaio().setRaioAtual((this.raio));
     }
 
     private void carregarFiltro(){
@@ -229,4 +231,31 @@ public class FiltroServicoDialog extends Activity implements View.OnClickListene
     }
 
 
+    private void configurarSeekBar(){
+        SeekBar skRaio = findViewById(R.id.sbRaio);
+        final TextView tvRaio = findViewById(R.id.tvRaio);
+        this.raio = (ConfiguracoesBuscaServico.getRaio().getRaioAtual());
+        skRaio.setMax(ConfiguracoesBuscaServico.getRaio().getRange());
+        skRaio.setProgress(this.raio);
+        tvRaio.setText(this.raio+ConfiguracoesBuscaServico.getRaio().getInicial()+" km");
+        skRaio.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                raio = (byte) i;
+                i = i + ConfiguracoesBuscaServico.getRaio().getInicial();
+                tvRaio.setText(i +" km");
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+    }
 }

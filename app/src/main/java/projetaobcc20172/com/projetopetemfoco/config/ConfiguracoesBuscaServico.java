@@ -17,7 +17,7 @@ public class ConfiguracoesBuscaServico {
     private static String sOpcaoServico;
     private static Enumerates.Estado sEstado;
     private static String sOpTodos = "Todos";
-    private static byte sRaio;
+    private static Raio sRaio;
 
     public static ArrayList<String> getsOpcaosPet() {
         return sOpcaosPet;
@@ -50,12 +50,16 @@ public class ConfiguracoesBuscaServico {
         sEstado = Enumerates.Estado.DEFAULT;
         sFiltro = Enumerates.Filtro.DISTANCIA;
         sOpcaoServico = sOpTodos;
-        sRaio = 10;
+        sRaio = new Raio();
         sOpcaosPet = new ArrayList<>();
         sOpcaosPet.add(sOpTodos);
     }
 
     public static Enumerates.Estado getsEstado(){
         return sEstado;
+    }
+
+    public static Raio getRaio() {
+        return sRaio;
     }
 }

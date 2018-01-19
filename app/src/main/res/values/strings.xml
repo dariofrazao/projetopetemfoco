@@ -106,7 +106,6 @@
     <string name="fb_login_protocol_scheme">fb1383454871782340</string>
 
 
-
     <!--Strings relacionadas ao estabelecimento-->
     <string name="tb_acesso_estabelecimento">Informações</string>
     <string name="servicos">Serviços:</string>
@@ -141,5 +140,5 @@
     <string name="filtro_atualizado_servico">Filtro salvo com sucesso</string>
 
 
-
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyDG0zZ85UpJ0GqHLWfvq56rwJSy2N4v4_M</string>
 </resources>

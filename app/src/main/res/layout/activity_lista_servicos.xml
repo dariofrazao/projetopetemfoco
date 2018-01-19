@@ -14,13 +14,13 @@
         <ListView
             android:id="@+id/lvEstaServicoBusca"
             android:layout_width="match_parent"
-            android:layout_height="514dp"
+            android:layout_height="520dp"
             android:layout_below="@+id/tbBuscaServicos" />
 
         <Button
             android:id="@+id/btnFiltroServico"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:text="Filtro" />
     </LinearLayout>
 

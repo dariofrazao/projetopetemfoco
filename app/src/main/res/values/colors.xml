@@ -22,4 +22,5 @@
     <color name="slategrey">#708090</color>
     <color name="grey2">#606060</color>
     <color name="colorAccent">#AAAAAA</color>
+    <color name="black">#000000</color>
 </resources>

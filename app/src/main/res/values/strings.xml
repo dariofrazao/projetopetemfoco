@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Pet Em Foco</string>
     <string name="salvar">Salvar</string>
+    <string name="google_maps_key">AIzaSyA5ajs6LhgYb3YfbuQ-hyDrUq4GYMjMkT0</string>
+
 
     <!--Strings relacionadas a cadastro de consumidor-->
     <string name="sucesso_cadastro_Toast">Sucesso ao cadastrar usuário</string>
@@ -108,9 +110,9 @@
 
 
     <!--Strings relacionadas ao estbelecimento-->
-    <string name="tb_acesso_estabelecimento">Informações</string>
-    <string name="servicos">Serviços:</string>
     <string name="estabelecimento">Estabelecimento:</string>
+    <string name="tb_acesso_estabelecimento">Informações do Estabelecimento</string>
+    <string name="servicos">Serviços:</string>
     <string name="telefone">Telefone:</string>
     <string name="cpf_cnpj">CPF/CNPJ:</string>
     <string name="horario">Horário:</string>

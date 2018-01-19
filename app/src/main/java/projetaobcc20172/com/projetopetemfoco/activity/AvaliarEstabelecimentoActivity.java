@@ -13,26 +13,35 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.Toast;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 import projetaobcc20172.com.projetopetemfoco.R;
+import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoFirebase;
 import projetaobcc20172.com.projetopetemfoco.database.services.AvaliacaoDaoImpl;
 import projetaobcc20172.com.projetopetemfoco.excecoes.CampoObrAusenteException;
 import projetaobcc20172.com.projetopetemfoco.model.Avaliacao;
 import projetaobcc20172.com.projetopetemfoco.model.Fornecedor;
+import projetaobcc20172.com.projetopetemfoco.model.Usuario;
 import projetaobcc20172.com.projetopetemfoco.utils.VerificadorDeObjetos;
 
 public class AvaliarEstabelecimentoActivity extends AppCompatActivity {
     private Avaliacao mAvaliacao;
     public Toast mToast;
     private Fornecedor mFornecedor;
-    private EditText mComentario;
-    private RatingBar mRatingBar;
+    private Usuario mUsuario;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_avaliar_estabelecimento);
 
-        Toolbar toolbar;
-        toolbar = findViewById(R.id.tb_avaliacao_estabelecimento);
+        // Associa os componetes ao layout XML
+        final EditText mComentario = findViewById(R.id.etComentarioAvaliacao);
+        final RatingBar mRatingBar = findViewById(R.id.rbEstrelasAvaliacao);
+        Button mBtnAvaliar = findViewById(R.id.botao_avaliar);
+        Toolbar toolbar = findViewById(R.id.tb_avaliacao_estabelecimento);
 
         // Configura toolbar
         toolbar.setTitle(R.string.tb_avaliar_estabelecimento);
@@ -40,19 +49,20 @@ public class AvaliarEstabelecimentoActivity extends AppCompatActivity {
         toolbar.setNavigationIcon(R.drawable.ic_action_arrow_left_white);
         setSupportActionBar(toolbar);
 
-        mComentario = findViewById(R.id.etComentarioAvaliacao);
-        mRatingBar = findViewById(R.id.rbEstrelasAvaliacao);
-        mAvaliacao = new Avaliacao();
         //Receber os dados do estabelecimento da outra activity
         Intent i = getIntent();
         mFornecedor = (Fornecedor) i.getSerializableExtra("Fornecedor");
 
-        Button mBtnAvaliar;
-        mBtnAvaliar = findViewById(R.id.botao_avaliar);
+        //Recuperar id do fornecedor logado
+        String idUsuarioLogado = getPreferences("id", this);
+
+        buscaNomeUsuario(idUsuarioLogado);
+
+        // Confirma a avaliação
         mBtnAvaliar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                avaliar();
+                avaliar(mComentario.getText().toString(),String.valueOf(mRatingBar.getRating()));
             }
         });
 
@@ -64,16 +74,17 @@ public class AvaliarEstabelecimentoActivity extends AppCompatActivity {
         return true;
     }
 
-    public void avaliar() {
+    public void avaliar(String comentario, String estrelas ) {
         try {
             //Recuperar id do fornecedor logado
-            String idUsuarioLogado;
-            idUsuarioLogado = getPreferences("id", this);
+            String idUsuarioLogado = getPreferences("id", this);
 
-            mAvaliacao.setCometario(mComentario.getText().toString());
-            mAvaliacao.setEstrelas(String.valueOf(mRatingBar.getRating()));
-            mAvaliacao.setIdUsuario(idUsuarioLogado);
+            buscaNomeUsuario(idUsuarioLogado);
 
+            // Instância uma avaliação
+            mAvaliacao = new Avaliacao(idUsuarioLogado, mUsuario.getNome(), estrelas, comentario);
+
+            // Verifica a avaliação
             VerificadorDeObjetos.vDadosObjAvaliacao(mAvaliacao);
 
             //Chamada do DAO para salvar no banco
@@ -82,12 +93,13 @@ public class AvaliarEstabelecimentoActivity extends AppCompatActivity {
             abrirMain();
 
         } catch (CampoObrAusenteException e) {
-            mToast = Toast.makeText(AvaliarEstabelecimentoActivity.this, R.string.erro_cadastro_campos_obrigatorios_Pet, Toast.LENGTH_SHORT);
+            mToast = Toast.makeText(AvaliarEstabelecimentoActivity.this, R.string.erro_avaliacao_estabelecimento, Toast.LENGTH_SHORT);
             mToast.show();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
     //Método que recupera o id do usuario logado, para realizar a avaliacao
     public static String getPreferences(String key, Context context) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
@@ -95,8 +107,35 @@ public class AvaliarEstabelecimentoActivity extends AppCompatActivity {
     }
 
     public void abrirMain() {
-        Intent intent = new Intent(AvaliarEstabelecimentoActivity.this, MainActivity.class);
+        Intent intent = new Intent(AvaliarEstabelecimentoActivity.this, NavigatorMenu.class);
         startActivity(intent);
         finish();
     }
+
+
+    //Método que busca o nome do usuário
+    public void buscaNomeUsuario(final String idUsuariologado){
+        //Buscar nome do usuário logado
+        DatabaseReference mReferenciaFirebase;
+        mReferenciaFirebase = ConfiguracaoFirebase.getFirebase();
+        mReferenciaFirebase.child("usuarios").child(idUsuariologado).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.getValue() != null){
+                    Usuario usuario = dataSnapshot.getValue(Usuario.class);
+                    mUsuario = new Usuario();//idUsuario, nome, email, foto
+                    mUsuario.setNome(usuario.getNome());
+                    mUsuario.setEmail(usuario.getEmail());
+                    mUsuario.setId(idUsuariologado);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                assert true;
+            }
+        });
+
+    }
+
 }

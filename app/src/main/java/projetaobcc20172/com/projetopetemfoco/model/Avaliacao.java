@@ -8,6 +8,7 @@ package projetaobcc20172.com.projetopetemfoco.model;
 public class Avaliacao {
     private String mId;
     private String mIdUsuario;
+    private String mNomeUsuario;
     private String mEstrelas;
     private String mCometario;
 
@@ -15,10 +16,11 @@ public class Avaliacao {
     public Avaliacao() {
     }
 
-    public Avaliacao(String mIdUsuario, String mEstrelas, String mCometario) {
+    public Avaliacao(String mIdUsuario, String mNomeUsuario, String mEstrelas, String mCometario) {
         this.mIdUsuario = mIdUsuario;
         this.mEstrelas = mEstrelas;
         this.mCometario = mCometario;
+        this.mNomeUsuario = mNomeUsuario;
     }
 
     public String getIdUsuario() {
@@ -51,5 +53,13 @@ public class Avaliacao {
 
     public void setCometario(String mCometario) {
         this.mCometario = mCometario;
+    }
+
+    public String getmNomeUsuario() {
+        return mNomeUsuario;
+    }
+
+    public void setmNome(String mNomeUsuario) {
+        this.mNomeUsuario = mNomeUsuario;
     }
 }

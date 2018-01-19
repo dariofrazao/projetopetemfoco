@@ -90,30 +90,24 @@ import projetaobcc20172.com.projetopetemfoco.utils.Utils;
             });
 
         }
-        @Override
-        public List<Avaliacao> buscarPorFornecedor(String idFornecedor) {
-            final String nome = idFornecedor;
-            Query query1 = ConfiguracaoFirebase.getFirebase().child("fornecedor").orderByChild("nome").startAt(nome);
-            query1.addListenerForSingleValueEvent(new ValueEventListener() {
+
+        public ArrayList<Avaliacao> buscarPorFornecedor(final Fornecedor fornecedor) {
+            //Buscar avaliações do estabelecimento selecionado
+            DatabaseReference mFireBase;
+            mFireBase = ConfiguracaoFirebase.getFirebase().child("fornecedor").child(fornecedor.getId()).child("avaliacao");
+            mFireBase.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    mAvaliacoes.clear();
                     for (DataSnapshot dados : dataSnapshot.getChildren()) {
-                        String nomeT = dados.child("nome").getValue(String.class);
-                        if(!nomeT.contains(nome)){
-                            continue;
-                        }
-                        Avaliacao avaliacao;
-                        avaliacao = new Avaliacao(dados.child("usuario").getValue(String.class), dados.child("estrelas").getValue(String.class)
-                                , dados.child("cometario").getValue(String.class));
-                        mAvaliacoes.add(avaliacao);
+                        Avaliacao avaliacao = dados.getValue(Avaliacao.class);
+                        mAvaliacoes.add((avaliacao));
                     }
                     mAdapter.notifyDataSetChanged();
                 }
 
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
-                    //Se ocorrer um erro
+                    assert true;
                 }
             });
             return  mAvaliacoes;

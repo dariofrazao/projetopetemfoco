@@ -31,7 +31,7 @@ public class VerificadorDeObjetos {
 
     //Método responsável por avaliar se um obj avaliacao possui todas os atributos obrigatorios
     public static void vDadosObjAvaliacao(Avaliacao avaliacao) throws CampoObrAusenteException {
-        if (avaliacao.getIdUsuario().isEmpty()) {
+        if (avaliacao.getIdUsuario().isEmpty()||avaliacao.getmNomeUsuario().isEmpty()) {
             throw new CampoObrAusenteException();
         }
     }

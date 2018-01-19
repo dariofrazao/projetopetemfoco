@@ -119,6 +119,8 @@
     <string name="email">Email:</string>
     <string name="avaliacoes">Avaliações</string>
     <string name="sucesso_avaliacao_estabelecimento">avaliacao realizada com sucesso</string>
+    <string name="sucesso_atualizacao_nota">Busca realizada com sucesso!</string>
+    <string name="erro_atualizacao_nota">Busca realizada com problema!</string>
     <string name="erro_avaliacao_estabelecimento">erro ao realizar avaliação</string>
 
     <!--Strings relacionadas a tela de busca-->

@@ -62,7 +62,7 @@ public class AvaliarEstabelecimentoActivity extends AppCompatActivity {
         mBtnAvaliar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                avaliar(mComentario.getText().toString(),String.valueOf(mRatingBar.getRating()));
+                avaliar(mComentario.getText().toString(), (int) mRatingBar.getRating());
             }
         });
 
@@ -74,7 +74,7 @@ public class AvaliarEstabelecimentoActivity extends AppCompatActivity {
         return true;
     }
 
-    public void avaliar(String comentario, String estrelas ) {
+    public void avaliar(String comentario, int estrelas ) {
         try {
             //Recuperar id do fornecedor logado
             String idUsuarioLogado = getPreferences("id", this);

@@ -3,6 +3,7 @@ package projetaobcc20172.com.projetopetemfoco.activity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
+import android.support.annotation.NonNull;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +12,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -21,8 +24,10 @@ import java.io.Serializable;
 import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.adapter.ListaAvaliacoesAdapterView;
 import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoFirebase;
+import projetaobcc20172.com.projetopetemfoco.database.services.AvaliacaoDaoImpl;
 import projetaobcc20172.com.projetopetemfoco.model.Avaliacao;
 import projetaobcc20172.com.projetopetemfoco.model.Fornecedor;
+import projetaobcc20172.com.projetopetemfoco.utils.Utils;
 
 public class AvalicoesEstabelecimentoActivity extends AppCompatActivity implements Serializable {
     private Fornecedor mFornecedor;
@@ -70,15 +75,23 @@ public class AvalicoesEstabelecimentoActivity extends AppCompatActivity implemen
     //Método que chama a activity para exibir as avaliações do estabelecimento
     public void buscaAvaliacoes(final Fornecedor fornecedor){
         //Buscar avaliações do estabelecimento selecionado
-        DatabaseReference mFireBase;
+        final DatabaseReference mFireBase;
         mFireBase = ConfiguracaoFirebase.getFirebase().child("fornecedor").child(fornecedor.getId()).child("avaliacao");
         mFireBase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                int contador = 0;
+                int estrelas = 0;
+
                 for (DataSnapshot dados : dataSnapshot.getChildren()) {
                     Avaliacao avaliacao = dados.getValue(Avaliacao.class);
+                    estrelas = estrelas + avaliacao.getEstrelas();
+                    contador++;
                     mFornecedor.getAvaliacoes().add((avaliacao));
+                    mFornecedor.setNota((float)estrelas/contador);
                 }
+                mFornecedor.setNota((float)estrelas/contador);
+                inserirNota(mFornecedor);
                 mAdapter.notifyDataSetChanged();
             }
 
@@ -87,5 +100,11 @@ public class AvalicoesEstabelecimentoActivity extends AppCompatActivity implemen
                 assert true;
             }
         });
+    }
+
+    public void inserirNota(final Fornecedor fornecedor) {
+        //Chamada do DAO para salvar no banco
+        AvaliacaoDaoImpl avaliacaoDao = new AvaliacaoDaoImpl(this);
+        avaliacaoDao.inserirNota(mFornecedor);
     }
 }

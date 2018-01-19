@@ -45,7 +45,7 @@ public class ListaAvaliacoesAdapterView extends ArrayAdapter<Avaliacao> {
             TextView mComentario = view.findViewById(R.id.etComentarioAvaliacoes);
 
             mNomeUsuarioAvaliador.setText(mAvaliacoes.get(position).getmNomeUsuario());
-            mEstrelaAvaliacoes.setRating(Float.parseFloat(mAvaliacoes.get(position).getEstrelas()));
+            mEstrelaAvaliacoes.setRating(mAvaliacoes.get(position).getEstrelas());
             mComentario.setText(mAvaliacoes.get(position).getCometario());
         }else{
             // inicializar objeto para montagem da view

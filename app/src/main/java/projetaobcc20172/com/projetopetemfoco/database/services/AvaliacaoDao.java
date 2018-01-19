@@ -11,6 +11,7 @@ import projetaobcc20172.com.projetopetemfoco.model.Fornecedor;
 
 public interface AvaliacaoDao {
     void inserir(Avaliacao avaliacao, Fornecedor fornecedor);
+    void inserirNota(Fornecedor fornecedor);
 //   void remover(Avaliacao avaliacao,  String idUsuario, String idFornecedor);
     void atualizar(Avaliacao avaliacao,  String idUsuario, String idFornecedor);
     ArrayList<Avaliacao> buscarPorFornecedor(Fornecedor fornecedor);

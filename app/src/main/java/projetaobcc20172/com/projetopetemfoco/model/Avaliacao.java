@@ -9,14 +9,14 @@ public class Avaliacao {
     private String mId;
     private String mIdUsuario;
     private String mNomeUsuario;
-    private String mEstrelas;
+    private int mEstrelas;
     private String mCometario;
 
 
     public Avaliacao() {
     }
 
-    public Avaliacao(String mIdUsuario, String mNomeUsuario, String mEstrelas, String mCometario) {
+    public Avaliacao(String mIdUsuario, String mNomeUsuario, int mEstrelas, String mCometario) {
         this.mIdUsuario = mIdUsuario;
         this.mEstrelas = mEstrelas;
         this.mCometario = mCometario;
@@ -39,11 +39,11 @@ public class Avaliacao {
         this.mIdUsuario = mIdUsuario;
     }
 
-    public String getEstrelas() {
+    public int getEstrelas() {
         return mEstrelas;
     }
 
-    public void setEstrelas(String mEstrelas) {
+    public void setEstrelas(int mEstrelas) {
         this.mEstrelas = mEstrelas;
     }
 

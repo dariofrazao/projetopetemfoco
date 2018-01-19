@@ -13,12 +13,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-
 import java.util.ArrayList;
-import java.util.List;
-
 import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoFirebase;
 import projetaobcc20172.com.projetopetemfoco.model.Avaliacao;
@@ -64,9 +60,46 @@ import projetaobcc20172.com.projetopetemfoco.utils.Utils;
                     }
                 }
             });
-
-
         }
+
+        @Override
+        public void inserirNota(final Fornecedor fornecedor) {
+            //Adicionar um listener no nó do fornecedor que será editado
+            //O método orderByChild ordena os fornecedores pelo seu id e o equalTo busca o id do forncedor que será editado
+            mReferenciaFirebase.child("fornecedor").child(fornecedor.getId()).orderByChild("id").
+                    equalTo(fornecedor.getId()).addListenerForSingleValueEvent(new ValueEventListener() {
+
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    mReferenciaFirebase.child("fornecedor").child(fornecedor.getId()).child("nota").setValue(fornecedor.getNota()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            //Se a edição foi feita com sucesso
+                            if(task.isSuccessful()){
+                                Utils.mostrarMensagemCurta(getContexto(), getContexto().getString(R.string.sucesso_atualizacao_nota));
+                            }
+                            //Senão
+                            else{
+                                Utils.mostrarMensagemCurta(getContexto(), getContexto().getString(R.string.erro_atualizacao_nota));
+                                try {
+                                    throw  task.getException();
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                    });
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    //vazio
+                }
+
+            });
+        }
+
+
 
         @Override
         public void atualizar(Avaliacao avaliacao, String idUsuario, String idFornecedor) {

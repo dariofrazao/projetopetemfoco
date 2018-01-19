@@ -236,7 +236,7 @@ public class LoginActivity extends AppCompatActivity {
 
     //Abrir tela principal do consumidor
     private void abrirTelaPrincipalConsumidor() {
-        Intent intent = new Intent(LoginActivity.this, NavigatorMenu.class);
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         startActivity(intent);
         //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         finish();
@@ -356,7 +356,7 @@ public class LoginActivity extends AppCompatActivity {
             //Chamada do DAO para salvar no banco
             EnderecoDaoImpl usuarioDao = new EnderecoDaoImpl(this);
             usuarioDao.inserirUsuario(mUsuario, account.getId());
-            Intent intent = new Intent(LoginActivity.this, NavigatorMenu.class);
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intent);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             finish();
@@ -379,7 +379,7 @@ public class LoginActivity extends AppCompatActivity {
             //Chamada do DAO para salvar no banco
             EnderecoDaoImpl usuarioDao = new EnderecoDaoImpl(this);
             usuarioDao.inserirUsuario(mUsuario, facebookData.getString("idFacebook"));
-            Intent intent = new Intent(LoginActivity.this, NavigatorMenu.class);
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intent);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             finish();

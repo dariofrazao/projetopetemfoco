@@ -1,67 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:descendantFocusability="blocksDescendants"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/estabelecimentos" />
+
+        <TextView
+            android:id="@+id/tvNomeForn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="110dp"
+            android:textColor="@color/colorSecondaryText"
+            android:textSize="20sp"
+            android:text="Nome"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvBairroForn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="110dp"
+            android:layout_below="@+id/tvNomeForn"
+            android:text="Bairro"
+            android:textColor="@color/colorSecondaryText"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:id="@+id/tvCidadeForn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="110dp"
+            android:layout_below="@+id/tvBairroForn"
+            android:textColor="@color/colorSecondaryText"
+            android:textSize="16sp"
+            android:text="Cidade"/>
+
+        <TextView
+            android:id="@+id/tvUfForn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/tvCidadeForn"
+            android:layout_below="@+id/tvBairroForn"
+            android:textColor="@color/colorSecondaryText"
+            android:textSize="16sp"
+            android:text=" - PE"/>
+
+        <TextView
+            android:id="@+id/tvTextDist"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="110dp"
+            android:layout_below="@+id/tvCidadeForn"
+            android:layout_alignParentStart="true"
+            android:text="Distância:"
+            android:textColor="@color/colorSecondaryText"
+            android:textSize="16sp" />
 
     <TextView
-        android:id="@+id/tvNomeForn"
+        android:id="@+id/tvNotaForn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="19dp"
-        android:text="Pet e cia"
-        android:textColor="@color/colorSecondaryText"
-        android:textSize="24sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/tvNotaText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/tvNota"
-        android:layout_alignBottom="@+id/tvNota"
-        android:layout_toLeftOf="@+id/tvNota"
-        android:layout_toStartOf="@+id/tvNota"
+        android:layout_below="@+id/tvUfForn"
+        android:layout_toEndOf="@+id/tvTextDist"
         android:text="Nota: "
         android:textColor="@color/colorSecondaryText"
         android:textSize="16sp" />
 
-    <TextView
-        android:id="@+id/tvNota"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/tvDistancia"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginEnd="12dp"
-        android:layout_marginRight="12dp"
-        android:text="0"
-        android:textColor="@color/colorSecondaryText"
-        android:textSize="16sp" />
-
-    <TextView
-        android:id="@+id/tbTextDist"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/tvNota"
-        android:text="Distância:"
-        android:textColor="@color/colorSecondaryText"
-        android:textSize="16sp" />
-
-    <TextView
-        android:id="@+id/tvDistancia"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/tvNomeForn"
-        android:layout_marginLeft="75dp"
-        android:layout_marginStart="75dp"
-        android:text="1km"
-        android:textColor="@color/colorSecondaryText"
-        android:textSize="16sp" />
 </RelativeLayout>

@@ -31,8 +31,11 @@ public class CadastroEnderecoActivityTest {
 
     @Before
     public void setUp() throws Exception {
+
         try{
-            TestTools.clicarBotao(R.id.btnSair);
+
+            TestTools.clicarItemNavigationMenu(R.id.drawer_layout, R.id.nav_busca, R.id.nav_sair);
+
         }catch (Exception e){
             e.getMessage();
         }
@@ -40,7 +43,7 @@ public class CadastroEnderecoActivityTest {
         LoginActivityTest log = new LoginActivityTest();
         log.testeLoginComSucesso();
         Thread.sleep(4000);
-        TestToolsEndereco.clicarMenuEndereco();
+        TestTools.clicarItemNavigationMenu(R.id.drawer_layout, R.id.nav_busca, R.id.nav_endereco);
         Thread.sleep(4000);
         TestToolsEndereco.clicarBtnCadastrarEnd();
     }

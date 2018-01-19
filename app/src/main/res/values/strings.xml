@@ -106,7 +106,8 @@
     <string name="fb_login_protocol_scheme">fb1383454871782340</string>
 
 
-    <!--Strings relacionadas ao estbelecimento-->
+
+    <!--Strings relacionadas ao estabelecimento-->
     <string name="tb_acesso_estabelecimento">Informações</string>
     <string name="servicos">Serviços:</string>
     <string name="estabelecimento">Estabelecimento:</string>
@@ -121,6 +122,7 @@
     <!--Strings relacionadas a tela de busca-->
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="estabelecimento_nao_encontrado">Estabelecimento não encontrado</string>
 
     <string name="action_settings">Settings</string>
 

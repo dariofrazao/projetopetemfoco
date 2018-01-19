@@ -16,14 +16,14 @@ import java.util.ArrayList;
 
 import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.adapter.TiposServicoAdapterGrid;
-import projetaobcc20172.com.projetopetemfoco.config.ConfiguracoesBusca;
+import projetaobcc20172.com.projetopetemfoco.config.ConfiguracoesBuscaServico;
 import projetaobcc20172.com.projetopetemfoco.utils.Utils;
 
 /**
  * Created by raul1 on 05/01/2018.
  */
 
-public class TabServicosFragment extends Fragment {
+public class BuscaServicosActivity extends Fragment {
 
     private TiposServicoAdapterGrid mServAdpGrid;
 
@@ -57,7 +57,7 @@ public class TabServicosFragment extends Fragment {
         btnFiltro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent= new Intent(getActivity(), TabPetOpcoesFragment.class);
+                Intent intent= new Intent(getActivity(), FiltroServicoDialog.class);
                 startActivity(intent);
             }
         });
@@ -65,7 +65,7 @@ public class TabServicosFragment extends Fragment {
 
     private void irParaListaEstabelecimentos(String servico){
         Intent intent = new Intent(getActivity(), ListaEstabServicoActivity.class);
-        ConfiguracoesBusca.setsOpcaoServico(servico);
+        ConfiguracoesBuscaServico.setsOpcaoServico(servico);
         startActivity(intent);
     }
 

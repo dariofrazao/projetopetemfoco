@@ -74,7 +74,7 @@
             android:windowSoftInputMode="stateHidden" />
         <activity android:name=".activity.ListaEstabServicoActivity" />
         <activity
-            android:name=".activity.TabPetOpcoesFragment"
+            android:name=".activity.FiltroServicoDialog"
             android:theme="@style/Base.Theme.AppCompat.Light.Dialog" />
     </application>
 

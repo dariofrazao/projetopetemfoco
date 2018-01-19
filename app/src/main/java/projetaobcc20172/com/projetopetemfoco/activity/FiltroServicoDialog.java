@@ -1,6 +1,7 @@
 package projetaobcc20172.com.projetopetemfoco.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -15,14 +16,16 @@ import java.util.HashMap;
 
 import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.adapter.OpPetGridAdapter;
-import projetaobcc20172.com.projetopetemfoco.config.ConfiguracoesBusca;
+import projetaobcc20172.com.projetopetemfoco.config.ConfiguracoesBuscaServico;
+import projetaobcc20172.com.projetopetemfoco.utils.Enumerates;
 import projetaobcc20172.com.projetopetemfoco.utils.Utils;
 
 /**
  * Created by raul1 on 05/01/2018.
+ * Classe que representa o filtro para a tela de busca por servico
  */
 
-public class TabPetOpcoesFragment extends Activity implements View.OnClickListener {
+public class FiltroServicoDialog extends Activity implements View.OnClickListener {
 
     private OpPetGridAdapter mPetAdapter = null;
     private ArrayList<String> mOpcaosSelecionada;
@@ -42,7 +45,7 @@ public class TabPetOpcoesFragment extends Activity implements View.OnClickListen
         cbProx = findViewById(R.id.cbProx);
         cbAvaliacao = findViewById(R.id.cbAva);
         this.tiposPets = Utils.recuperaArrayR(this,R.array.tiposPetBusca);
-        this.carregarFiltro();
+        this.carregarFiltro();//Carrega as informações existentes no obj ConfiguracaoBuscaServico
         gridView.setAdapter(mPetAdapter);
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -74,6 +77,7 @@ public class TabPetOpcoesFragment extends Activity implements View.OnClickListen
             @Override
             public void onClick(View view) {
                 salvarOpcoes();
+                Utils.mostrarMensagemCurta(FiltroServicoDialog.this, getString(R.string.filtro_atualizado_servico));
                 finish();
             }
         });
@@ -91,17 +95,21 @@ public class TabPetOpcoesFragment extends Activity implements View.OnClickListen
     @Override
     public void onResume(){
         super.onResume();
-        if(ConfiguracoesBusca.getsFiltro().equals(ConfiguracoesBusca.Filtro.DISTANCIA))
+        if(ConfiguracoesBuscaServico.getsFiltro().equals(Enumerates.Filtro.DISTANCIA)) {
             this.cbProx.setChecked(true);
-
-        else if(ConfiguracoesBusca.getsFiltro().equals(ConfiguracoesBusca.Filtro.AVALICAO))
+            this.cbAvaliacao.setChecked(false);
+        }
+        else if(ConfiguracoesBuscaServico.getsFiltro().equals(Enumerates.Filtro.AVALICAO)){
             this.cbAvaliacao.setChecked(true);
+            this.cbProx.setChecked(false);
+        }
     }
 
     private void inicializarOpcoes(){
-        mOpcaosSelecionada = ConfiguracoesBusca.getsOpcaosPet();
+        mOpcaosSelecionada = ConfiguracoesBuscaServico.getsOpcaosPet();
     }
 
+    //Método responsável por controlar os cliques nos ícones de tipos de pets
     private void addOpcoes(String selecionado,ImageView im,GridView grid){
         if(selecionado.equals(this.opcaoTodos)){
             mOpcaosSelecionada.clear();
@@ -128,7 +136,7 @@ public class TabPetOpcoesFragment extends Activity implements View.OnClickListen
         }
 
     }
-
+    //coloca o marcado de "certo" na no botao
     private void marcarImg(String selecionado, ImageView im){
         if(selecionado.equals(tiposPets.get(0))){
             im.setImageResource(R.drawable.tipo_pet_todos_check);
@@ -173,12 +181,12 @@ public class TabPetOpcoesFragment extends Activity implements View.OnClickListen
     }
 
     private void salvarOpcoes(){
-        ConfiguracoesBusca.setsOpcaosPet(this.mOpcaosSelecionada);
+        ConfiguracoesBuscaServico.setsOpcaosPet(this.mOpcaosSelecionada);
         if(this.cbAvaliacao.isChecked()){
-            ConfiguracoesBusca.setsFiltro(ConfiguracoesBusca.Filtro.AVALICAO);
+            ConfiguracoesBuscaServico.setsFiltro(Enumerates.Filtro.AVALICAO);
         }
         else if(this.cbProx.isChecked()){
-            ConfiguracoesBusca.setsFiltro(ConfiguracoesBusca.Filtro.DISTANCIA);
+            ConfiguracoesBuscaServico.setsFiltro(Enumerates.Filtro.DISTANCIA);
         }
 
     }
@@ -186,14 +194,19 @@ public class TabPetOpcoesFragment extends Activity implements View.OnClickListen
     private void carregarFiltro(){
         this.inicializarOpcoes();
         this.inicializarHashBotoes();
-        if(ConfiguracoesBusca.getsEstado().equals(ConfiguracoesBusca.Estado.DEFAULT)) {
+        if(ConfiguracoesBuscaServico.getsEstado().equals(Enumerates.Estado.DEFAULT)) {
             mPetAdapter = new OpPetGridAdapter(this, tiposPets);
         }
         else{
             ArrayList <String> pets = new ArrayList<>();
             for(String pet:this.tiposPets){
-                if(ConfiguracoesBusca.getsOpcaosPet().contains(pet) && !pet.equalsIgnoreCase(this.opcaoTodos) ){
-                    pets.add(pet+"_check");
+                if(ConfiguracoesBuscaServico.getsOpcaosPet().contains(pet)){
+                    if(pet.equalsIgnoreCase(this.opcaoTodos)){
+                        pets.add(pet);
+                    }
+                    else{
+                        pets.add(pet+"_check");
+                    }
                     this.botoesClicados.put(pet,1);
                 }
                 else{
@@ -214,4 +227,6 @@ public class TabPetOpcoesFragment extends Activity implements View.OnClickListen
     public void onClick(View v) {
 
     }
+
+
 }

@@ -5,4 +5,14 @@ package projetaobcc20172.com.projetopetemfoco.utils;
  */
 
 public class Enumerates {
+
+    public enum Filtro {
+        AVALICAO,
+        DISTANCIA;
+    }
+
+    public enum Estado{
+        DEFAULT,
+        ALTERADO;
+    }
 }

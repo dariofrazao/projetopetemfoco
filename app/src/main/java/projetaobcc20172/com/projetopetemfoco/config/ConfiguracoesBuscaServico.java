@@ -2,28 +2,20 @@ package projetaobcc20172.com.projetopetemfoco.config;
 
 import java.util.ArrayList;
 
+import projetaobcc20172.com.projetopetemfoco.utils.Enumerates;
+
 /**
  * Created by raul1 on 18/01/2018.
  * Classe responsavel por guardar as configurações de busca.
  * Como qual servico está sendo procurado,quais os tipos de pet
  */
 
-public class ConfiguracoesBusca {
-
-    public enum Filtro {
-        AVALICAO,
-        DISTANCIA;
-    }
-
-    public enum Estado{
-        DEFAULT,
-        ALTERADO;
-    }
+public class ConfiguracoesBuscaServico {
 
     private static ArrayList<String> sOpcaosPet;
-    private static Filtro sFiltro;
+    private static Enumerates.Filtro sFiltro;
     private static String sOpcaoServico;
-    private static Estado sEstado;
+    private static Enumerates.Estado sEstado;
     private static String sOpTodos = "Todos";
     private static byte sRaio;
 
@@ -36,34 +28,34 @@ public class ConfiguracoesBusca {
     }
 
     public static void setsOpcaosPet(ArrayList<String> sOpcaosPet) {
-        sEstado = Estado.ALTERADO;
-        ConfiguracoesBusca.sOpcaosPet = sOpcaosPet;
+        sEstado = Enumerates.Estado.ALTERADO;
+        ConfiguracoesBuscaServico.sOpcaosPet = sOpcaosPet;
     }
 
     public static void setsOpcaoServico(String sOpcaoServico) {
-        sEstado = Estado.ALTERADO;
-        ConfiguracoesBusca.sOpcaoServico = sOpcaoServico;
+        sEstado = Enumerates.Estado.ALTERADO;
+        ConfiguracoesBuscaServico.sOpcaoServico = sOpcaoServico;
     }
 
-    public static void setsFiltro(Filtro sFiltro) {
-        sEstado = Estado.ALTERADO;
-        ConfiguracoesBusca.sFiltro = sFiltro;
+    public static void setsFiltro(Enumerates.Filtro sFiltro) {
+        sEstado = Enumerates.Estado.ALTERADO;
+        ConfiguracoesBuscaServico.sFiltro = sFiltro;
     }
 
-    public static Filtro getsFiltro() {
+    public static Enumerates.Filtro getsFiltro() {
         return sFiltro;
     }
 
     public static void inicializar(){
-        sEstado = Estado.DEFAULT;
-        sFiltro = Filtro.DISTANCIA;
+        sEstado = Enumerates.Estado.DEFAULT;
+        sFiltro = Enumerates.Filtro.DISTANCIA;
         sOpcaoServico = sOpTodos;
         sRaio = 10;
         sOpcaosPet = new ArrayList<>();
         sOpcaosPet.add(sOpTodos);
     }
 
-    public static Estado getsEstado(){
+    public static Enumerates.Estado getsEstado(){
         return sEstado;
     }
 }

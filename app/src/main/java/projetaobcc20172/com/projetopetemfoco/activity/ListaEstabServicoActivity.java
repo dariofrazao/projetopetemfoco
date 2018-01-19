@@ -5,7 +5,9 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -18,13 +20,15 @@ import java.util.ArrayList;
 import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.adapter.ServicoAdapterListView;
 import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoFirebase;
-import projetaobcc20172.com.projetopetemfoco.config.ConfiguracoesBusca;
+import projetaobcc20172.com.projetopetemfoco.config.ConfiguracoesBuscaServico;
+import projetaobcc20172.com.projetopetemfoco.utils.Utils;
 
 /**
  * Created by raul1 on 05/01/2018.
  */
 
 public class ListaEstabServicoActivity extends AppCompatActivity {
+
     private ArrayList<String[]> mResultado;
     private ArrayAdapter<String[]> mAdapter;
 
@@ -33,6 +37,7 @@ public class ListaEstabServicoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_servicos);
         Toolbar toolbar = findViewById(R.id.tbBuscaServicos);
+        Button btnFiltro = findViewById(R.id.btnFiltroServico);
         // Configura toolbar
         toolbar.setTitle("Serviços");
         toolbar.setTitleTextColor(Color.WHITE);
@@ -42,8 +47,21 @@ public class ListaEstabServicoActivity extends AppCompatActivity {
         mResultado = new ArrayList<>();
         mAdapter = new ServicoAdapterListView(ListaEstabServicoActivity.this,mResultado);
         listView.setAdapter(mAdapter);
-        buscarServico(ConfiguracoesBusca.getsOpcaoServico(),ConfiguracoesBusca.getsOpcaosPet());
+        btnFiltro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent= new Intent(ListaEstabServicoActivity.this, FiltroServicoDialog.class);
+                startActivity(intent);
+            }
+        });
         mAdapter.notifyDataSetChanged();
+
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        buscarServico(ConfiguracoesBuscaServico.getsOpcaoServico(), ConfiguracoesBuscaServico.getsOpcaosPet());
     }
 
     @Override
@@ -76,6 +94,10 @@ public class ListaEstabServicoActivity extends AppCompatActivity {
                         mResultado.add(resultado);
 
                     }
+                    //Caso não tenham sido encontrados resultados
+                    if(mResultado.size()==0){
+                        Utils.mostrarMensagemCurta(ListaEstabServicoActivity.this,getString(R.string.servicos_nao_encontrado));
+                    }
                     mAdapter.notifyDataSetChanged();
                 }
 
@@ -86,4 +108,6 @@ public class ListaEstabServicoActivity extends AppCompatActivity {
             });
         }
     }
+
+
 }

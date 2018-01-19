@@ -123,6 +123,7 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="estabelecimento_nao_encontrado">Estabelecimento não encontrado</string>
+    <string name="servicos_nao_encontrado">Não foram encontrados resultados para sua busca</string>
 
     <string name="action_settings">Settings</string>
 
@@ -135,5 +136,10 @@
     <string name="comentario">Comentário</string>
     <string name="avaliar">Avaliar</string>
     <string name="title_activity_filtro_busca">FiltroBuscaActivity</string>
+
+    <!--Strings relacionadas ao filtro de Serviço-->
+    <string name="filtro_atualizado_servico">Filtro salvo com sucesso</string>
+
+
 
 </resources>

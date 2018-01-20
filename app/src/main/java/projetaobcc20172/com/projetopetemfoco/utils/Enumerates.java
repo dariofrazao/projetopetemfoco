@@ -8,7 +8,8 @@ public class Enumerates {
 
     public enum Filtro {
         AVALICAO,
-        DISTANCIA;
+        DISTANCIA,
+        PRECO;
     }
 
     public enum Estado{

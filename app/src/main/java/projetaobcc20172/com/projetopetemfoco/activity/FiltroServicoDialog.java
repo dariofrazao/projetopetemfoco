@@ -35,6 +35,7 @@ public class FiltroServicoDialog extends Activity implements View.OnClickListene
     private ArrayList<String> tiposPets;
     private CheckBox cbProx;
     private CheckBox cbAvaliacao;
+    private CheckBox cbPreco;
     private byte raio;
 
     @Override
@@ -46,6 +47,7 @@ public class FiltroServicoDialog extends Activity implements View.OnClickListene
         Button btnSalvarFiltro = findViewById(R.id.btnSalvarFiltro);
         cbProx = findViewById(R.id.cbProx);
         cbAvaliacao = findViewById(R.id.cbAva);
+        cbPreco = findViewById(R.id.cbPreco);
         this.tiposPets = Utils.recuperaArrayR(this,R.array.tiposPetBusca);
         this.carregarFiltro();//Carrega as informações existentes no obj ConfiguracaoBuscaServico
         gridView.setAdapter(mPetAdapter);
@@ -61,20 +63,22 @@ public class FiltroServicoDialog extends Activity implements View.OnClickListene
         this.cbAvaliacao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                cbAvaliacao.setChecked(true);
-                cbProx.setChecked(false);
+                controleCheckBox(1);
             }
         });
 
         this.cbProx.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                cbAvaliacao.setChecked(false);
-                cbProx.setChecked(true);
+                controleCheckBox(0);
             }
         });
-
+        this.cbPreco.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                controleCheckBox(2);
+            }
+        });
         btnSalvarFiltro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -98,12 +102,13 @@ public class FiltroServicoDialog extends Activity implements View.OnClickListene
     public void onResume(){
         super.onResume();
         if(ConfiguracoesBuscaServico.getsFiltro().equals(Enumerates.Filtro.DISTANCIA)) {
-            this.cbProx.setChecked(true);
-            this.cbAvaliacao.setChecked(false);
+            controleCheckBox(0);
         }
         else if(ConfiguracoesBuscaServico.getsFiltro().equals(Enumerates.Filtro.AVALICAO)){
-            this.cbAvaliacao.setChecked(true);
-            this.cbProx.setChecked(false);
+            controleCheckBox(1);
+        }
+        else if(ConfiguracoesBuscaServico.getsFiltro().equals(Enumerates.Filtro.PRECO)){
+            controleCheckBox(2);
         }
     }
 
@@ -190,6 +195,9 @@ public class FiltroServicoDialog extends Activity implements View.OnClickListene
         else if(this.cbProx.isChecked()){
             ConfiguracoesBuscaServico.setsFiltro(Enumerates.Filtro.DISTANCIA);
         }
+        else if(this.cbPreco.isChecked()){
+            ConfiguracoesBuscaServico.setsFiltro(Enumerates.Filtro.PRECO);
+        }
         ConfiguracoesBuscaServico.getRaio().setRaioAtual((this.raio));
     }
 
@@ -242,6 +250,10 @@ public class FiltroServicoDialog extends Activity implements View.OnClickListene
 
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                if(!cbProx.isChecked()){
+                    ConfiguracoesBuscaServico.setsFiltro(Enumerates.Filtro.DISTANCIA);
+                    controleCheckBox(0);
+                }
                 raio = (byte) i;
                 i = i + ConfiguracoesBuscaServico.getRaio().getInicial();
                 tvRaio.setText(i +" km");
@@ -257,5 +269,20 @@ public class FiltroServicoDialog extends Activity implements View.OnClickListene
 
             }
         });
+    }
+
+    private void controleCheckBox(int i){
+        this.cbProx.setChecked(false);
+        this.cbAvaliacao.setChecked(false);
+        this.cbPreco.setChecked(false);
+        if(i==0){
+            this.cbProx.setChecked(true);
+        }
+        else if(i==1){
+            this.cbAvaliacao.setChecked(true);
+        }
+        else if(i==2){
+            this.cbPreco.setChecked(true);
+        }
     }
 }

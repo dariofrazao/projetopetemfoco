@@ -26,6 +26,7 @@ import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.adapter.EstabelecimentoAdapter;
 import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoBuscaEstab;
 import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoFirebase;
+import projetaobcc20172.com.projetopetemfoco.config.ConfiguracoesBuscaServico;
 import projetaobcc20172.com.projetopetemfoco.model.Endereco;
 import projetaobcc20172.com.projetopetemfoco.model.Fornecedor;
 import projetaobcc20172.com.projetopetemfoco.model.Servico;
@@ -63,7 +64,7 @@ public class BuscaEstabelecimentoActivity extends Fragment implements Serializab
             }
         });
         ConfiguracaoBuscaEstab.inicializar();
-        SearchView buscaEst = getView().findViewById(R.id.svBusca);
+        final SearchView buscaEst = getView().findViewById(R.id.svBusca);
         mProgresso = (ProgressBar) getView().findViewById(R.id.pbProgresso);
         mProgresso.setVisibility(View.INVISIBLE);
         Button btnFiltro = getActivity().findViewById(R.id.btnFiltroEstabelecimento);
@@ -99,6 +100,14 @@ public class BuscaEstabelecimentoActivity extends Fragment implements Serializab
                 startActivity(intent);
             }
         });
+        mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        if(ConfiguracaoBuscaEstab.getsNomeEstabelecimento()!=null)
+            buscarEstabelecimentos(ConfiguracaoBuscaEstab.getsNomeEstabelecimento());
     }
 
     //Método que chama a activity para exibir informações do estabelecimento
@@ -176,6 +185,8 @@ public class BuscaEstabelecimentoActivity extends Fragment implements Serializab
         });
 
     }
+
+
 
 
 }

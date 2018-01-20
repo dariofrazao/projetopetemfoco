@@ -41,6 +41,7 @@ public class ConfiguracaoBuscaEstab {
     }
 
     public static void inicializar(){
+        sNomeEstabelecimento = null;
         sFiltro = Enumerates.Filtro.DISTANCIA;
         sRaio = new Raio();
     }
@@ -56,8 +57,8 @@ public class ConfiguracaoBuscaEstab {
                     resultadoFiltrados.add(forn);
                 }
             }
+            Collections.sort(resultadoFiltrados, new FornecedorComparatorDist());
         }
-        Collections.sort(resultadoFiltrados, new FornecedorComparatorDist());
         resultados.clear();
         resultados.addAll(resultadoFiltrados);
     }

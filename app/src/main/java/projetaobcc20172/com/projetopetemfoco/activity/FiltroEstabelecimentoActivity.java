@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoBuscaEstab;
+import projetaobcc20172.com.projetopetemfoco.config.ConfiguracoesBuscaServico;
 import projetaobcc20172.com.projetopetemfoco.utils.Enumerates;
 import projetaobcc20172.com.projetopetemfoco.utils.Utils;
 
@@ -32,14 +33,14 @@ public class FiltroEstabelecimentoActivity extends Activity implements View.OnCl
         this.cbAvaliacao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                clickCheckBoxAvaliacao();
+                controleCheckBox(1);
             }
         });
 
         this.cbProx.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                clickCheckBoxDist();
+                controleCheckBox(0);
             }
         });
 
@@ -59,9 +60,9 @@ public class FiltroEstabelecimentoActivity extends Activity implements View.OnCl
     protected void onResume(){
         super.onResume();
         if(ConfiguracaoBuscaEstab.getsFiltro().equals(Enumerates.Filtro.DISTANCIA)) {
-            clickCheckBoxDist();
+            controleCheckBox(0);
         }else if(ConfiguracaoBuscaEstab.getsFiltro().equals(Enumerates.Filtro.AVALICAO)){
-            clickCheckBoxAvaliacao();
+            controleCheckBox(1);
         }
     }
     private void salvarOpcoes(){
@@ -80,16 +81,6 @@ public class FiltroEstabelecimentoActivity extends Activity implements View.OnCl
 
     }
 
-    private void clickCheckBoxDist(){
-        cbProx.setChecked(true);
-        cbAvaliacao.setChecked(false);
-    }
-
-    private void clickCheckBoxAvaliacao(){
-        cbAvaliacao.setChecked(true);
-        cbProx.setChecked(false);
-    }
-
     private void configurarSeekBar(){
         SeekBar skRaio = findViewById(R.id.sbRaio);
         final TextView tvRaio = findViewById(R.id.tvRaio);
@@ -101,6 +92,10 @@ public class FiltroEstabelecimentoActivity extends Activity implements View.OnCl
 
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                if(!cbProx.isChecked()){
+                    ConfiguracoesBuscaServico.setsFiltro(Enumerates.Filtro.DISTANCIA);
+                    controleCheckBox(0);
+                }
                 raio = (byte) i;
                 i = i + ConfiguracaoBuscaEstab.getRaio().getInicial();
                 tvRaio.setText(i +" km");
@@ -116,5 +111,16 @@ public class FiltroEstabelecimentoActivity extends Activity implements View.OnCl
 
             }
         });
+    }
+
+    private void controleCheckBox(int i){
+        this.cbProx.setChecked(false);
+        this.cbAvaliacao.setChecked(false);
+        if(i==0){
+            this.cbProx.setChecked(true);
+        }
+        else if(i==1){
+            this.cbAvaliacao.setChecked(true);
+        }
     }
 }

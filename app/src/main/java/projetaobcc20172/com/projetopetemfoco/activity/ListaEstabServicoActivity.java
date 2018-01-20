@@ -90,11 +90,12 @@ public class ListaEstabServicoActivity extends AppCompatActivity {
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     for (DataSnapshot dado : dataSnapshot.getChildren()) {
                         String tipoServico = dado.child("nome_tipoPet").getValue(String.class).split("_")[0];
-                        System.out.println(tipoServico);
-                        String[] resultado = {tipoServico, dado.child("nomeFornecedor").getValue(String.class), dado.child("valor").getValue(String.class), dado.child("pet").getValue(String.class)};
+                        String[] resultado = {tipoServico, dado.child("nomeFornecedor").getValue(String.class), dado.child("valor").getValue(String.class), dado.child("pet").getValue(String.class),
+                        dado.child("latitude").getValue(String.class),dado.child("longitude").getValue(String.class),"0"};
                         mResultado.add(resultado);
 
                     }
+                    ConfiguracoesBuscaServico.filtrar(ListaEstabServicoActivity.this,mResultado);
                     //Caso não tenham sido encontrados resultados
                     if(mResultado.size()==0){
                         Utils.mostrarMensagemCurta(ListaEstabServicoActivity.this,getString(R.string.servicos_nao_encontrado));

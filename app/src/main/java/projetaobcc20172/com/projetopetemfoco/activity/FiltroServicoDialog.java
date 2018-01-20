@@ -250,10 +250,10 @@ public class FiltroServicoDialog extends Activity implements View.OnClickListene
 
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                if(!cbProx.isChecked()){
-                    ConfiguracoesBuscaServico.setsFiltro(Enumerates.Filtro.DISTANCIA);
-                    controleCheckBox(0);
-                }
+//                if(!cbProx.isChecked()){
+//                    ConfiguracoesBuscaServico.setsFiltro(Enumerates.Filtro.DISTANCIA);
+//                    controleCheckBox(0);
+//                }
                 raio = (byte) i;
                 i = i + ConfiguracoesBuscaServico.getRaio().getInicial();
                 tvRaio.setText(i +" km");

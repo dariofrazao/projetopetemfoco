@@ -72,18 +72,18 @@ public class ConfiguracoesBuscaServico {
     }
 
     public static void filtrar(Activity act, ArrayList<String[]> resultados){
-        if(sFiltro.equals(Enumerates.Filtro.DISTANCIA)){
-            ArrayList<String[]> resultadoFiltrados = new ArrayList<>();
-            double [] posicaoAtual = Localizacao.getCurrentLocation(act);
-            for(String[] valores:resultados){
-                double dist = Localizacao.distanciaEntreDoisPontos(act,posicaoAtual[0],posicaoAtual[1],Double.parseDouble(valores[4]),Double.parseDouble(valores[5]));
-                if(dist>0 && dist<=sRaio.getRaioReal()){//Só add a lista se possuir uma distância válida e estiver dentro do raio
-                    valores[6] = dist+"";
-                    resultadoFiltrados.add(valores);
-                }
+        ArrayList<String[]> resultadoFiltrados = new ArrayList<>();
+        double [] posicaoAtual = Localizacao.getCurrentLocation(act);
+        for(String[] valores:resultados){
+            double dist = Localizacao.distanciaEntreDoisPontos(act,posicaoAtual[0],posicaoAtual[1],Double.parseDouble(valores[4]),Double.parseDouble(valores[5]));
+            if(dist>0 && dist<=sRaio.getRaioReal()){//Só add a lista se possuir uma distância válida e estiver dentro do raio
+                valores[6] = dist+"";
+                resultadoFiltrados.add(valores);
             }
-            resultados.clear();
-            resultados.addAll(resultadoFiltrados);
+        }
+        resultados.clear();
+        resultados.addAll(resultadoFiltrados);
+        if(sFiltro.equals(Enumerates.Filtro.DISTANCIA)){
             Collections.sort(resultadoFiltrados, new ServicoFornecedorComparatorDist());
         }
         else if(sFiltro.equals(Enumerates.Filtro.PRECO)){

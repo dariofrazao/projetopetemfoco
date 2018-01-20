@@ -48,18 +48,18 @@ public class ConfiguracaoBuscaEstab {
 
     public static void filtrar(Activity act, ArrayList<Fornecedor> resultados){
         ArrayList<Fornecedor> resultadoFiltrados = new ArrayList<>();
-        if(sFiltro.equals(Enumerates.Filtro.DISTANCIA)){
-            double [] posicaoAtual = Localizacao.getCurrentLocation(act);
-            for(Fornecedor forn:resultados){
-                double dist = Localizacao.distanciaEntreDoisPontos(act,posicaoAtual[0],posicaoAtual[1],forn.getmLatitude(),forn.getmLongitude());
-                if(dist>0 && dist<=sRaio.getRaioReal()){//Só add a lista se possuir uma distância válida e estiver dentro do raio
-                    forn.setDistancia(dist);
-                    resultadoFiltrados.add(forn);
-                }
+        double [] posicaoAtual = Localizacao.getCurrentLocation(act);
+        for(Fornecedor forn:resultados){
+            double dist = Localizacao.distanciaEntreDoisPontos(act,posicaoAtual[0],posicaoAtual[1],forn.getmLatitude(),forn.getmLongitude());
+            if(dist>0 && dist<=sRaio.getRaioReal()){//Só add a lista se possuir uma distância válida e estiver dentro do raio
+                forn.setDistancia(dist);
+                resultadoFiltrados.add(forn);
             }
-            Collections.sort(resultadoFiltrados, new FornecedorComparatorDist());
         }
         resultados.clear();
         resultados.addAll(resultadoFiltrados);
+        if(sFiltro.equals(Enumerates.Filtro.DISTANCIA)){
+            Collections.sort(resultadoFiltrados, new FornecedorComparatorDist());
+        }
     }
 }

@@ -33,7 +33,7 @@ public class JsonRequestAsync extends AsyncTask<String, Void, String> {
     //Lança uma exceção de erro
     public String getJson(Activity act) throws InterruptedException, TimeOutException {
         int cont = 0;
-        int incremento = 100;
+        int incremento = 25;
         while(json==null) {
             if(cont==tempoEspera*1000){
                 throw new TimeOutException(act.getString(R.string.erro_timeout_msg));

@@ -136,8 +136,7 @@ public class Utils {
     }
 
     public static String moedaParaNumero(String valor){
-        return valor.replace("R$","").replace(",",".");
+        return valor.replace("R$","").replace(",",".").replace(" ","");
     }
-
 
 }

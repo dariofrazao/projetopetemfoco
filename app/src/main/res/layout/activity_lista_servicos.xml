@@ -4,26 +4,25 @@
 
     <include
         android:id="@+id/tbBuscaServicos"
-        layout="@layout/toolbar"></include>
+        layout="@layout/toolbar"
+        android:layout_width="500dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true" />
 
-    <LinearLayout
+    <ListView
+        android:id="@+id/lvEstaServicoBusca"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/tbBuscaServicos"
-        android:orientation="vertical">
+        android:layout_gravity="center" />
 
-        <ListView
-            android:id="@+id/lvEstaServicoBusca"
-            android:layout_width="match_parent"
-            android:layout_height="460dp"
-            android:layout_below="@+id/tbBuscaServicos" />
-
-        <Button
-            android:id="@+id/btnFiltroServico"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Filtro" />
-    </LinearLayout>
+    <Button
+        android:id="@+id/btnFiltroServico"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="Filtro" />
 
 </RelativeLayout>

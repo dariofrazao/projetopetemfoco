@@ -22,16 +22,12 @@ import projetaobcc20172.com.projetopetemfoco.utils.Utils;
 public class OpPetGridAdapter extends BaseAdapter {
     private final ArrayList<String> mTiposPetPadrao;
     private ArrayList<String> mTiposPet;
-    private Activity mContext;
     private static LayoutInflater inflater=null;
-    private View rowView;
-    private TextView tv;
-    private ImageView img;
 
     public OpPetGridAdapter(@NonNull Activity context, ArrayList<String> tiposPet) {
-        this.mContext = context;
+        Activity mContext = context;
         this.mTiposPet = tiposPet;
-        this.mTiposPetPadrao = Utils.recuperaArrayR(this.mContext,R.array.tiposPetBusca);
+        this.mTiposPetPadrao = Utils.recuperaArrayR(mContext,R.array.tiposPetBusca);
         inflater = ( LayoutInflater )context.
                 getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
@@ -58,9 +54,9 @@ public class OpPetGridAdapter extends BaseAdapter {
     public View getView(final int position, View convertView, ViewGroup parent) {
         // TODO Auto-generated method stub
 
-            rowView = inflater.inflate(R.layout.grid_op_pets, null);
-            tv = rowView.findViewById(R.id.tvGridTextPet);
-            img = rowView.findViewById(R.id.gridImgPet);
+        View rowView = inflater.inflate(R.layout.grid_op_pets, null);
+        TextView tv = rowView.findViewById(R.id.tvGridTextPet);
+        ImageView img = rowView.findViewById(R.id.gridImgPet);
             tv.setText(this.mTiposPetPadrao.get(position));
             img.setImageResource(Utils.escolherIconPet(this.mTiposPet.get(position), rowView));
             if (this.mTiposPet.get(position).equals("Todos")) {

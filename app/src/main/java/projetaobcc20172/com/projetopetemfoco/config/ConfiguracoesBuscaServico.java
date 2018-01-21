@@ -5,9 +5,8 @@ import android.app.Activity;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import projetaobcc20172.com.projetopetemfoco.model.Fornecedor;
+
 import projetaobcc20172.com.projetopetemfoco.utils.Enumerates;
-import projetaobcc20172.com.projetopetemfoco.utils.FornecedorComparatorDist;
 import projetaobcc20172.com.projetopetemfoco.utils.Localizacao;
 import projetaobcc20172.com.projetopetemfoco.utils.ServicoFornecedorComparatorDist;
 import projetaobcc20172.com.projetopetemfoco.utils.ServicoFornecedorComparatorPreco;
@@ -83,9 +82,11 @@ public class ConfiguracoesBuscaServico {
         }
         resultados.clear();
         resultados.addAll(resultadoFiltrados);
+        //Ordena por distância
         if(sFiltro.equals(Enumerates.Filtro.DISTANCIA)){
             Collections.sort(resultadoFiltrados, new ServicoFornecedorComparatorDist());
         }
+        //Ordena por preço
         else if(sFiltro.equals(Enumerates.Filtro.PRECO)){
             Collections.sort(resultados, new ServicoFornecedorComparatorPreco());
         }

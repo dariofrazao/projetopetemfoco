@@ -16,7 +16,6 @@ import java.util.HashMap;
 
 import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.adapter.OpPetGridAdapter;
-import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoBuscaEstab;
 import projetaobcc20172.com.projetopetemfoco.config.ConfiguracoesBuscaServico;
 import projetaobcc20172.com.projetopetemfoco.utils.Enumerates;
 import projetaobcc20172.com.projetopetemfoco.utils.Utils;
@@ -235,7 +234,7 @@ public class FiltroServicoDialog extends Activity implements View.OnClickListene
 
     @Override
     public void onClick(View v) {
-
+        assert true;
     }
 
 
@@ -261,12 +260,12 @@ public class FiltroServicoDialog extends Activity implements View.OnClickListene
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-
+                assert true;
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-
+                assert true;
             }
         });
     }

@@ -50,7 +50,7 @@ public class ConfiguracaoBuscaEstab {
         ArrayList<Fornecedor> resultadoFiltrados = new ArrayList<>();
         double [] posicaoAtual = Localizacao.getCurrentLocation(act);
         for(Fornecedor forn:resultados){
-            double dist = Localizacao.distanciaEntreDoisPontos(act,posicaoAtual[0],posicaoAtual[1],forn.getmLatitude(),forn.getmLongitude());
+            double dist = Localizacao.distanciaEntreDoisPontos(act,posicaoAtual[0],posicaoAtual[1],forn.getEndereco().getmLatitude(),forn.getEndereco().getmLongitude());
             if(dist>0 && dist<=sRaio.getRaioReal()){//Só add a lista se possuir uma distância válida e estiver dentro do raio
                 forn.setDistancia(dist);
                 resultadoFiltrados.add(forn);
@@ -58,6 +58,7 @@ public class ConfiguracaoBuscaEstab {
         }
         resultados.clear();
         resultados.addAll(resultadoFiltrados);
+        //Ordena por distância
         if(sFiltro.equals(Enumerates.Filtro.DISTANCIA)){
             Collections.sort(resultadoFiltrados, new FornecedorComparatorDist());
         }

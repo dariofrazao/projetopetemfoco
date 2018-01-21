@@ -1,6 +1,5 @@
 package projetaobcc20172.com.projetopetemfoco.config;
 
-import android.content.Context;
 
 import projetaobcc20172.com.projetopetemfoco.helper.Preferencias;
 

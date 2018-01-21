@@ -20,7 +20,7 @@ import projetaobcc20172.com.projetopetemfoco.helper.JsonRequestAsync;
 
 public class Localizacao {
 
-    static final int REQUEST_LOCATION = 1;
+    private static final int REQUEST_LOCATION = 1;
 
     public static double[] getCurrentLocation(Activity act){
         LocationManager locationManager = (LocationManager)act.getSystemService(Context.LOCATION_SERVICE);

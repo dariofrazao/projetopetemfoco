@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoBuscaEstab;
-import projetaobcc20172.com.projetopetemfoco.config.ConfiguracoesBuscaServico;
 import projetaobcc20172.com.projetopetemfoco.utils.Enumerates;
 import projetaobcc20172.com.projetopetemfoco.utils.Utils;
 
@@ -78,7 +77,7 @@ public class FiltroEstabelecimentoActivity extends Activity implements View.OnCl
 
     @Override
     public void onClick(View view) {
-
+        assert true;
     }
 
     private void configurarSeekBar(){
@@ -103,12 +102,12 @@ public class FiltroEstabelecimentoActivity extends Activity implements View.OnCl
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-
+                assert true;
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-
+                assert true;
             }
         });
     }

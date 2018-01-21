@@ -12,56 +12,56 @@
         android:layout_marginTop="10dp"
         android:src="@drawable/estabelecimentos" />
 
-        <TextView
-            android:id="@+id/tvNomeForn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="110dp"
-            android:textColor="@color/colorSecondaryText"
-            android:textSize="20sp"
-            android:text="Nome"
-            android:textStyle="bold" />
+    <TextView
+        android:id="@+id/tvNomeForn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="110dp"
+        android:text="Nome"
+        android:textColor="@color/colorSecondaryText"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/tvBairroForn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="110dp"
-            android:layout_below="@+id/tvNomeForn"
-            android:text="Bairro"
-            android:textColor="@color/colorSecondaryText"
-            android:textSize="16sp"/>
+    <TextView
+        android:id="@+id/tvBairroForn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvNomeForn"
+        android:layout_marginLeft="110dp"
+        android:text="Bairro"
+        android:textColor="@color/colorSecondaryText"
+        android:textSize="16sp" />
 
-        <TextView
-            android:id="@+id/tvCidadeForn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="110dp"
-            android:layout_below="@+id/tvBairroForn"
-            android:textColor="@color/colorSecondaryText"
-            android:textSize="16sp"
-            android:text="Cidade"/>
+    <TextView
+        android:id="@+id/tvCidadeForn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvBairroForn"
+        android:layout_marginLeft="110dp"
+        android:text="Cidade"
+        android:textColor="@color/colorSecondaryText"
+        android:textSize="16sp" />
 
-        <TextView
-            android:id="@+id/tvUfForn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/tvCidadeForn"
-            android:layout_below="@+id/tvBairroForn"
-            android:textColor="@color/colorSecondaryText"
-            android:textSize="16sp"
-            android:text=" - PE"/>
+    <TextView
+        android:id="@+id/tvUfForn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvBairroForn"
+        android:layout_toRightOf="@+id/tvCidadeForn"
+        android:text=" - PE"
+        android:textColor="@color/colorSecondaryText"
+        android:textSize="16sp" />
 
-        <TextView
-            android:id="@+id/tvTextDist"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="110dp"
-            android:layout_below="@+id/tvCidadeForn"
-            android:layout_alignParentStart="true"
-            android:text="Distância:"
-            android:textColor="@color/colorSecondaryText"
-            android:textSize="16sp" />
+    <TextView
+        android:id="@+id/tvTextDist"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/tvCidadeForn"
+        android:layout_marginLeft="110dp"
+        android:text="Distância:"
+        android:textColor="@color/colorSecondaryText"
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/tvNotaForn"
@@ -70,6 +70,16 @@
         android:layout_below="@+id/tvUfForn"
         android:layout_toEndOf="@+id/tvTextDist"
         android:text="Nota: "
+        android:textColor="@color/colorSecondaryText"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tvNota"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvUfForn"
+        android:layout_toEndOf="@+id/tvNotaForn"
+        android:text="N"
         android:textColor="@color/colorSecondaryText"
         android:textSize="16sp" />
 

@@ -19,11 +19,11 @@ import projetaobcc20172.com.projetopetemfoco.utils.Utils;
  * Created by Alexsandro on 07/01/2018.
  */
 
-public class ServicoAdapterListaViewInformacoes  extends ArrayAdapter<Servico> {
+public class ListaInformacoesAdapterView extends ArrayAdapter<Servico> {
     private ArrayList<Servico> mServicos;
     private Context mContext;
 
-    public ServicoAdapterListaViewInformacoes(@NonNull Context context, ArrayList<Servico> resultados) {
+    public ListaInformacoesAdapterView(@NonNull Context context, ArrayList<Servico> resultados) {
         super(context, 0,resultados);
         this.mContext = context;
         this.mServicos = resultados;

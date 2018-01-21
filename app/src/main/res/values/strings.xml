@@ -3,6 +3,7 @@
     <string name="salvar">Salvar</string>
     <string name="google_maps_key">AIzaSyA5ajs6LhgYb3YfbuQ-hyDrUq4GYMjMkT0</string>
 
+
     <!--Strings relacionadas a cadastro de consumidor-->
     <string name="sucesso_cadastro_Toast">Sucesso ao cadastrar usuário</string>
     <string name="digite_seu_nome">Digite seu nome</string>
@@ -125,16 +126,19 @@
     <string name="fb_login_protocol_scheme">fb1383454871782340</string>
 
 
-    <!--Strings relacionadas ao estabelecimento-->
-    <string name="tb_acesso_estabelecimento">Informações</string>
-    <string name="servicos">Serviços:</string>
+
+    <!--Strings relacionadas ao estbelecimento-->
     <string name="estabelecimento">Estabelecimento:</string>
+    <string name="tb_acesso_estabelecimento">Informações do Estabelecimento</string>
+    <string name="servicos">Serviços:</string>
     <string name="telefone">Telefone:</string>
     <string name="cpf_cnpj">CPF/CNPJ:</string>
     <string name="horario">Horário:</string>
     <string name="email">Email:</string>
     <string name="avaliacoes">Avaliações</string>
     <string name="sucesso_avaliacao_estabelecimento">avaliacao realizada com sucesso</string>
+    <string name="sucesso_atualizacao_nota">Atualização Realizado com Sucesso!</string>
+    <string name="erro_atualizacao_nota">Atualização com problema!</string>
     <string name="erro_avaliacao_estabelecimento">erro ao realizar avaliação</string>
 
     <!--Strings relacionadas a tela de busca-->

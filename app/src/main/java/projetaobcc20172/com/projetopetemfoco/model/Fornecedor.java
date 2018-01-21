@@ -25,8 +25,6 @@ public class Fornecedor implements Serializable {
     private String mEnderecoFornecedor = "1";
     private Endereco mEndereco;
     private ArrayList<Servico> mServicos = new ArrayList<Servico>();
-    private double mLatitude = 0;
-    private double mLongitude = 0;
     private float mNota = 0;
     private ArrayList<Avaliacao> mAvaliacoes = new ArrayList<>();
     private double mDistancia = -1;
@@ -169,20 +167,11 @@ public class Fornecedor implements Serializable {
         this.mAvaliacoes = avaliacoes;
     }
 
-    public double getmLatitude() {
-        return mLatitude;
-    }
-
-    public double getmLongitude() {
-        return mLongitude;
-    }
-
-    public void setmLatitude(double mLatitude) {
-        this.mLatitude = mLatitude;
-    }
-
-    public void setmLongitude(double mLongitude) {
-        this.mLongitude = mLongitude;
+    public String getmEnderecoCombinado() {
+        String mEnderecoCombinado = "";
+        mEnderecoCombinado = mEndereco.getLogradouro()+", "+mEndereco.getNumero()+", "+mEndereco.getBairro()+", "+
+                mEndereco.getLocalidade()+"/"+mEndereco.getUf()+", "+mEndereco.getCep();
+        return mEnderecoCombinado;
     }
 
     public double getDistancia() {

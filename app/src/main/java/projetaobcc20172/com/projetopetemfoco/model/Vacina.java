@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 public class Vacina implements Serializable{
 
+    private String mIdUsuario;
+    private String mIdPet;
     private String id;
     private String mDescricao;
     private String mData;
@@ -12,7 +14,21 @@ public class Vacina implements Serializable{
 
     }
 
+    public String getIdPet() {
+        return mIdPet;
+    }
 
+    public void setIdPet(String idPet) {
+        this.mIdPet = idPet;
+    }
+
+    public String getIdUsuario() {
+        return mIdUsuario;
+    }
+
+    public void setIdUsuario(String idUsuario) {
+        this.mIdUsuario = idUsuario;
+    }
 
     public String getId() {
         return id;

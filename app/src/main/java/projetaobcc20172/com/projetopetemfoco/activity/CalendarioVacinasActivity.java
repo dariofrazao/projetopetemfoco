@@ -1,13 +1,12 @@
 package projetaobcc20172.com.projetopetemfoco.activity;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -15,7 +14,7 @@ import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -30,27 +29,23 @@ public class CalendarioVacinasActivity extends AppCompatActivity {
     private ArrayList<Vacina> mVacinas;
     private ArrayAdapter<Vacina> mAdapter;
     private ListView mListView;
+    private String idPet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendario_vacinas);
 
-        //recupera a id do pet
-        final String petId = getIntent().getStringExtra("petId");
+        //Recupera o id do pet
+        idPet = getIntent().getStringExtra("idPet");
 
-        //Recuperar id do usuário logado
-        String idUsuarioLogado;
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        idUsuarioLogado = preferences.getString("id", "");
-
-        ImageButton cadastrar; //Botão de cadastrar o pet
+        ImageButton cadastrar; //Botão de cadastrar uma vacina
 
         Toolbar toolbar;
         toolbar = findViewById(R.id.tb_main);
 
         // Configura toolbar
-        toolbar.setTitle("Calendario");
+        toolbar.setTitle(R.string.tb_calendario_vacina);
         toolbar.setTitleTextColor(Color.WHITE);
         toolbar.setNavigationIcon(R.drawable.ic_action_arrow_left_white);
         setSupportActionBar(toolbar);
@@ -61,26 +56,55 @@ public class CalendarioVacinasActivity extends AppCompatActivity {
 
         // Monta listview e mAdapter
         mVacinas = new ArrayList<>();
-        mAdapter = new VacinaAdapter(CalendarioVacinasActivity.this, mVacinas,petId);
+        mAdapter = new VacinaAdapter(CalendarioVacinasActivity.this, mVacinas);
         mListView.setAdapter(mAdapter);
 
-        // Recuperar pets do Firebase
-        DatabaseReference mFirebase;
-        mFirebase = ConfiguracaoFirebase.getFirebase().child("usuarios").child(idUsuarioLogado).child("pets").child(petId).child("calendarioVacinas");
+        carregarVacinas();
 
-        ValueEventListener mValueEventListenerPet;
-        mValueEventListenerPet = new ValueEventListener() {
+        this.chamarInfoVacinaListener();
+
+        //Ação do botão de cadastrar uma vacina, que abre a tela para o seu cadastro
+        cadastrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CalendarioVacinasActivity.this, CadastroVacinaActivity.class);
+                intent.putExtra("idPet", idPet);
+                startActivity(intent);
+            }
+
+        });
+    }
+
+    public void chamarInfoVacinaListener() {
+        this.mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Intent intent = new Intent(CalendarioVacinasActivity.this, InfoVacinaActivity.class);
+                Vacina vacina = mVacinas.get(position);
+                intent.putExtra("Vacina", vacina);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
+        });
+    }
+
+    public void carregarVacinas(){
+        //Recuperar vacinas do Firebase
+        Query query = ConfiguracaoFirebase.getFirebase().child("vacinas").orderByChild("idPet").equalTo(idPet);
+
+        ValueEventListener mValueEventListenerVacina;
+        mValueEventListenerVacina = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 mVacinas.clear();
 
-                // Recupera mPets
+                // Recupera vacinas
                 for (DataSnapshot dados : dataSnapshot.getChildren()) {
                     Vacina vacina = dados.getValue(Vacina.class);
-                    vacina.setId(dados.getKey());
                     mVacinas.add(vacina);
                 }
-                //Notificar o adaptar que exibe a lista de mPets se houver alteração no banco
+                //Notificar o adaptar que exibe a lista de vacinas se houver alteração no banco
                 mAdapter.notifyDataSetChanged();
             }
 
@@ -90,17 +114,7 @@ public class CalendarioVacinasActivity extends AppCompatActivity {
             }
         };
 
-        mFirebase.addValueEventListener(mValueEventListenerPet);
-
-        //Ação do botão de cadastrar o pet, que abre a tela para o seu cadastro
-        cadastrar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(CalendarioVacinasActivity.this, CadastroVacinaActivity.class);
-                intent.putExtra("petId",petId);
-                startActivity(intent);
-            }
-        });
+        query.addValueEventListener(mValueEventListenerVacina);
     }
 
     @Override

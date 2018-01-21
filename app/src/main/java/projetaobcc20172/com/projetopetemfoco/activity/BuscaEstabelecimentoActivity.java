@@ -47,12 +47,11 @@ public class BuscaEstabelecimentoActivity extends Fragment implements Serializab
         return inflater.inflate(R.layout.activity_busca_estabelecimento, container, false);
     }
 
-
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        getActivity().setTitle("Estabelecimentos");
+        getActivity().setTitle(R.string.tb_estabelecimentos);
         final ListView listView = getView().findViewById(R.id.lvBuscaEsta);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -62,6 +61,9 @@ public class BuscaEstabelecimentoActivity extends Fragment implements Serializab
         });
 
         SearchView buscaEst = getView().findViewById(R.id.svBusca);
+
+        buscaEst.setSubmitButtonEnabled(true);
+
         mProgresso = (ProgressBar) getView().findViewById(R.id.pbProgresso);
         mProgresso.setVisibility(View.INVISIBLE);
 
@@ -81,17 +83,19 @@ public class BuscaEstabelecimentoActivity extends Fragment implements Serializab
 
             @Override
             public boolean onQueryTextChange(String s) {
-                if(s.equals("")){//apaga os resultado quando se apaga o texto
+                if (s.equals("")) {//apaga os resultado quando se apaga o texto
                     mForncedores.clear();
                     mAdapter.notifyDataSetChanged();
                 }
                 return false;
             }
         });
+
     }
 
     //Método que chama a activity para exibir informações do estabelecimento
-    public void exibirEstabelecimento(final Fornecedor fornecedor){
+    public void exibirEstabelecimento(final Fornecedor fornecedor) {
+
         //Buscar servicos do estabelecimento selecionado
         Query query = ConfiguracaoFirebase.getFirebase().child("servicos").orderByChild("idFornecedor").equalTo(fornecedor.getId());
         query.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -116,7 +120,7 @@ public class BuscaEstabelecimentoActivity extends Fragment implements Serializab
         });
     }
 
-    private void buscarEstabelecimentos(final String nomeBuscado){
+    private void buscarEstabelecimentos(final String nomeBuscado) {
 
         final String nome = nomeBuscado;
         Query query1 = ConfiguracaoFirebase.getFirebase().child("fornecedor").orderByChild("nomeBusca").startAt(nome);
@@ -129,7 +133,7 @@ public class BuscaEstabelecimentoActivity extends Fragment implements Serializab
 
                     String nomeT = dados.child("nomeBusca").getValue(String.class);
 
-                    if(!nomeT.contains(nome)){
+                    if (!nomeT.contains(nome)) {
                         continue;
                     }
 
@@ -149,7 +153,7 @@ public class BuscaEstabelecimentoActivity extends Fragment implements Serializab
                 mProgresso.setVisibility(View.INVISIBLE);
 
                 //Se a busca não retornar nada
-                if(mAdapter.isEmpty()){
+                if (mAdapter.isEmpty()) {
                     Utils.mostrarMensagemCurta(getContext(), getContext().getString(R.string.estabelecimento_nao_encontrado));
                 }
 
@@ -162,6 +166,6 @@ public class BuscaEstabelecimentoActivity extends Fragment implements Serializab
         });
 
     }
-
-
 }
+
+

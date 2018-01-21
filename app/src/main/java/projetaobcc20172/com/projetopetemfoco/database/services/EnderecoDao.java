@@ -10,8 +10,8 @@ import projetaobcc20172.com.projetopetemfoco.model.Usuario;
 public interface EnderecoDao {
 
     void inserirUsuario(Usuario usuario, String idUsuario);
-    void inserirEndereco(Endereco endereco, String idUsuario);
-    void removerEndereco(Endereco endereco,  String idUsuario);
-    void atualizarEndereco(Endereco endereco,  String idUsuario);
+    void inserir(Endereco endereco, String idUsuario);
+    void remover(Endereco endereco,  String idUsuario);
+    void atualizar(Endereco endereco,  String idUsuario);
 
 }

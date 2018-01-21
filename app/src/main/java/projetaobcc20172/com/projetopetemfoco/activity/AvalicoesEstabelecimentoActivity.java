@@ -73,31 +73,16 @@ public class AvalicoesEstabelecimentoActivity extends AppCompatActivity implemen
         mFireBase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                int contador = 0;
-                int estrelas = 0;
-
                 for (DataSnapshot dados : dataSnapshot.getChildren()) {
                     Avaliacao avaliacao = dados.getValue(Avaliacao.class);
-                    estrelas = estrelas + avaliacao.getEstrelas();
-                    contador++;
                     mFornecedor.getAvaliacoes().add((avaliacao));
-                    mFornecedor.setNota((float)estrelas/contador);
                 }
-                mFornecedor.setNota((float)estrelas/contador);
-                inserirNota(mFornecedor);
                 mAdapter.notifyDataSetChanged();
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 assert true;
             }
         });
-    }
-
-    public void inserirNota(final Fornecedor fornecedor) {
-        //Chamada do DAO para salvar no banco
-        AvaliacaoDaoImpl avaliacaoDao = new AvaliacaoDaoImpl(this);
-        avaliacaoDao.inserirNota(mFornecedor);
     }
 }

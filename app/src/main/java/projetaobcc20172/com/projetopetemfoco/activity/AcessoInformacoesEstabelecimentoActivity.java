@@ -143,7 +143,7 @@ public class AcessoInformacoesEstabelecimentoActivity extends AppCompatActivity 
 
     private void setUpMap(GoogleMap googleMap) {
         // Localização as coordenadas geograficas do estabelecimento
-        LatLng latLng = new LatLng(mFornecedor.getmLatitude(),mFornecedor.getmLongitude());
+        LatLng latLng = new LatLng(mFornecedor.getEndereco().getmLatitude(),mFornecedor.getEndereco().getmLongitude());
 
         // Configura o visial do Mapa
         googleMap.setMapType(googleMap.MAP_TYPE_NORMAL);

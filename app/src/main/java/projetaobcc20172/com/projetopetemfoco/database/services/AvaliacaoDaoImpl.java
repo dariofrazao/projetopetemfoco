@@ -6,8 +6,6 @@ package projetaobcc20172.com.projetopetemfoco.database.services;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.widget.ArrayAdapter;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
@@ -22,127 +20,105 @@ import projetaobcc20172.com.projetopetemfoco.model.Fornecedor;
 import projetaobcc20172.com.projetopetemfoco.utils.Utils;
 
 
-    public class AvaliacaoDaoImpl implements AvaliacaoDao{
-        private ArrayList<Avaliacao> mAvaliacoes = new ArrayList<>();
-        private ArrayAdapter<Avaliacao> mAdapter;
+public class AvaliacaoDaoImpl implements AvaliacaoDao {
+    private ArrayList<Avaliacao> mAvaliacoes = new ArrayList<>();
+    private DatabaseReference mReferenciaFirebase;
+    private Context mContexto;
 
-        private DatabaseReference mReferenciaFirebase;
-        private Context mContexto;
-
-        public AvaliacaoDaoImpl(Context contexto){
-            this.mReferenciaFirebase = ConfiguracaoFirebase.getFirebase();
-            this.mContexto = contexto;
-
-        }
-
-        private Context getContexto(){
-            return this.mContexto;
-        }
-
-        @Override
-        public void inserir(Avaliacao avaliacao, Fornecedor fornecedor) {
-          //O método push() cria uma chave exclusiva para cada mAvaliacao cadastrada
-            mReferenciaFirebase = mReferenciaFirebase.child("fornecedor").child(fornecedor.getId()).child("avaliacao").push();
-            avaliacao.setId(mReferenciaFirebase.getKey());
-            mReferenciaFirebase.setValue(avaliacao).addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    if(task.isSuccessful()){
-                        Utils.mostrarMensagemCurta(getContexto(), getContexto().getString(R.string.sucesso_avaliacao_estabelecimento));
-                    }
-                    else{
-                        Utils.mostrarMensagemCurta(getContexto(), getContexto().getString(R.string.erro_avaliacao_estabelecimento));
-                        try {
-                            throw  task.getException();
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-            });
-        }
-
-        @Override
-        public void inserirNota(final Fornecedor fornecedor) {
-            //Adicionar um listener no nó do fornecedor que será editado
-            //O método orderByChild ordena os fornecedores pelo seu id e o equalTo busca o id do forncedor que será editado
-            mReferenciaFirebase.child("fornecedor").child(fornecedor.getId()).orderByChild("id").
-                    equalTo(fornecedor.getId()).addListenerForSingleValueEvent(new ValueEventListener() {
-
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    mReferenciaFirebase.child("fornecedor").child(fornecedor.getId()).child("nota").setValue(fornecedor.getNota()).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            //Se a edição foi feita com sucesso
-                            if(task.isSuccessful()){
-                                Utils.mostrarMensagemCurta(getContexto(), getContexto().getString(R.string.sucesso_atualizacao_nota));
-                            }
-                            //Senão
-                            else{
-                                Utils.mostrarMensagemCurta(getContexto(), getContexto().getString(R.string.erro_atualizacao_nota));
-                                try {
-                                    throw  task.getException();
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        }
-                    });
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-                    //vazio
-                }
-
-            });
-        }
-
-
-
-        @Override
-        public void atualizar(Avaliacao avaliacao, String idUsuario, String idFornecedor) {
-
-            mReferenciaFirebase = mReferenciaFirebase.child("fornecedor").child(idFornecedor);
-            mReferenciaFirebase.child(String.format("%s/%s", "avaliacao", avaliacao.getId()))
-                    .setValue(avaliacao).addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    if (task.isSuccessful()) {
-                        Utils.mostrarMensagemLonga(getContexto(), getContexto().getString(R.string.sucesso_atualizacao));
-                    } else {
-                        Utils.mostrarMensagemLonga(getContexto(), getContexto().getString(R.string.falha_atualizacao));
-                        try {
-                            throw task.getException();
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-            });
-
-        }
-
-        public ArrayList<Avaliacao> buscarPorFornecedor(final Fornecedor fornecedor) {
-            //Buscar avaliações do estabelecimento selecionado
-            DatabaseReference mFireBase;
-            mFireBase = ConfiguracaoFirebase.getFirebase().child("fornecedor").child(fornecedor.getId()).child("avaliacao");
-            mFireBase.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    for (DataSnapshot dados : dataSnapshot.getChildren()) {
-                        Avaliacao avaliacao = dados.getValue(Avaliacao.class);
-                        mAvaliacoes.add((avaliacao));
-                    }
-                    mAdapter.notifyDataSetChanged();
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-                    assert true;
-                }
-            });
-            return  mAvaliacoes;
-        }
+    public AvaliacaoDaoImpl(Context contexto) {
+        this.mReferenciaFirebase = ConfiguracaoFirebase.getFirebase();
+        this.mContexto = contexto;
     }
+
+    private Context getContexto() {
+        return this.mContexto;
+    }
+
+    @Override
+    public void inserir(Avaliacao avaliacao, Fornecedor fornecedor) {
+        final String idFornecedor = fornecedor.getId();
+        //O método push() cria uma chave exclusiva para cada mAvaliacao cadastrada
+        DatabaseReference mFireBase;
+        mFireBase = mReferenciaFirebase.child("fornecedor").child(fornecedor.getId()).child("avaliacao").push();
+        avaliacao.setId(mReferenciaFirebase.getKey());
+        mFireBase.setValue(avaliacao).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    Utils.mostrarMensagemCurta(getContexto(), getContexto().getString(R.string.sucesso_avaliacao_estabelecimento));
+                    atualizaNota(idFornecedor);
+                } else {
+                    Utils.mostrarMensagemCurta(getContexto(), getContexto().getString(R.string.erro_avaliacao_estabelecimento));
+                    try {
+                        throw task.getException();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+    }
+
+    public void atualizaNota(final String idFornecedor) {
+        //Buscar avaliações do estabelecimento selecionado
+        DatabaseReference mFireBase;
+        mFireBase = ConfiguracaoFirebase.getFirebase().child("fornecedor").child(idFornecedor).child("avaliacao");
+        mFireBase.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                float mNota = 0;
+                int contador = 0;
+                int estrelas = 0;
+                for (DataSnapshot dados : dataSnapshot.getChildren()) {
+                    Avaliacao avaliacao = dados.getValue(Avaliacao.class);
+                    estrelas = estrelas + avaliacao.getEstrelas();
+                    contador++;
+                    mNota = (float) estrelas / contador;
+                }
+                inserirNota(idFornecedor, mNota);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                assert true;
+            }
+        });
+    }
+
+    @Override
+    public void inserirNota(final String idFornecedor, final float mNota) {
+        //Adicionar um listener no nó do fornecedor que será editado
+        //O método orderByChild ordena os fornecedores pelo seu id e o equalTo busca o id do forncedor que será editado
+        final DatabaseReference mFireBase = mReferenciaFirebase;
+        mFireBase.child("fornecedor").child(idFornecedor).orderByChild("id").equalTo(idFornecedor).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                mFireBase.child("fornecedor").child(idFornecedor).child("nota").setValue(mNota).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        //Se a edição foi feita com sucesso
+                        if (task.isSuccessful()) {
+                            Utils.mostrarMensagemCurta(getContexto(), getContexto().getString(R.string.sucesso_atualizacao_nota));
+                        }
+                        //Senão
+                        else {
+                            Utils.mostrarMensagemCurta(getContexto(), getContexto().getString(R.string.erro_atualizacao_nota));
+                            try {
+                                throw task.getException();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                });
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+}

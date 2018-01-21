@@ -2,13 +2,11 @@ package projetaobcc20172.com.projetopetemfoco.activity;
 
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
 import android.preference.PreferenceManager;
 import android.support.annotation.RequiresApi;
-import android.support.annotation.VisibleForTesting;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -17,7 +15,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import java.util.Calendar;
 
@@ -31,14 +28,12 @@ import projetaobcc20172.com.projetopetemfoco.utils.VerificadorDeObjetos;
 
 public class CadastroVacinaActivity extends AppCompatActivity {
 
-    EditText mData;
-    EditText mDescricao;
-    Button mCadastrarVacina;
-    DatePickerDialog mDatePickerDialog;
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE) //permite que essa variavel seja vista pela classe de teste
-    private Toast mToast;
+    private EditText mData;
+    private EditText mDescricao;
+    private Button mCadastrarVacina;
+    private Toolbar toolbar;
+    private DatePickerDialog mDatePickerDialog;
     private boolean mEditavel;
-
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -54,17 +49,16 @@ public class CadastroVacinaActivity extends AppCompatActivity {
 
         mCadastrarVacina = (Button) findViewById(R.id.btnCadastroVacina);
 
-        Toolbar toolbar;
         toolbar = findViewById(R.id.tb_main);
 
         // Configura toolbar
-        toolbar.setTitle("Cadatro de vacinas");
+        toolbar.setTitle(R.string.tb_cadastro_vacina);
         toolbar.setTitleTextColor(Color.WHITE);
         toolbar.setNavigationIcon(R.drawable.ic_action_arrow_left_white);
         setSupportActionBar(toolbar);
 
+        final String petId = getIntent().getStringExtra("idPet");
 
-        final String petId = getIntent().getStringExtra("petId");
         //funcao responsavel por preencher o campo de mData com a mData selecionada do datapicker
         getDateFromActivityListener();
 
@@ -86,7 +80,9 @@ public class CadastroVacinaActivity extends AppCompatActivity {
                         vacina.setmDescricao(mDescricao.getText().toString());
                         vacina.setmData(mData.getText().toString());
                         VerificadorDeObjetos.vDadosVacina(vacina);
-                        vacinaDao.atualizar(vacina,idUsuarioLogado,petId);
+                        vacinaDao.atualizar(vacina, idUsuarioLogado, petId);
+
+                        abrirCalendario();
 
                     }catch (CampoObrAusenteException e){
                         Utils.mostrarMensagemCurta(getApplicationContext(), "Erro ao editar vacina: Preencha o campo descrição");
@@ -99,15 +95,16 @@ public class CadastroVacinaActivity extends AppCompatActivity {
                         vacina.setmDescricao(mDescricao.getText().toString());
                         vacina.setmData(mData.getText().toString());
                         VerificadorDeObjetos.vDadosVacina(vacina);
-                        vacinaDao.inserir(vacina,idUsuarioLogado,petId);
+                        vacinaDao.inserir(vacina, idUsuarioLogado, petId);
+
+                        abrirCalendario();
+
                     }catch (CampoObrAusenteException e){
                         Utils.mostrarMensagemCurta(getApplicationContext(), "Erro ao cadastrar vacina: Preencha o campo descrição");
                     }catch (Exception e){
                         e.printStackTrace();
                     }
                 }
-
-                abrirCalendario();
             }
         });
     }
@@ -116,6 +113,7 @@ public class CadastroVacinaActivity extends AppCompatActivity {
         mEditavel = getIntent().getBooleanExtra("editar",false);
         if(mEditavel){
             Vacina vacina = (Vacina) getIntent().getSerializableExtra("vacina");
+            toolbar.setTitle(R.string.tb_editar_vacina);
             mDescricao.setText(vacina.getmDescricao());
             mData.setText(vacina.getmData());
             mCadastrarVacina.setText("Editar");

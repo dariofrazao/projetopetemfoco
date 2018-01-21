@@ -1,11 +1,15 @@
 package projetaobcc20172.com.projetopetemfoco.activity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.net.Uri;
 import android.preference.PreferenceManager;
-import android.support.annotation.VisibleForTesting;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -16,6 +20,10 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.database.services.PetDaoImpl;
@@ -33,12 +41,12 @@ public class CadastroPetActivity extends AppCompatActivity {
     private Button mCadastrarPet;
     private EditText mNome, mRaca;
     private RadioGroup mRadioGroup;
+    private Button mFoto;
     private Pet mPet;
-    private String mIdPet;
+    public static final int GET_FROM_GALLERY = 1;
     private String mIdUsuarioLogado;
-
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
-    //permite que essa variavel seja vista pela classe de teste
+    private Uri imagemSelecionada;
+    private byte[] imagemCompressed;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,14 +83,50 @@ public class CadastroPetActivity extends AppCompatActivity {
         mNome = findViewById(R.id.etCadastroNomePet);
         mRaca = findViewById(R.id.etCadastroRaçaPet);
 
+        mFoto = findViewById(R.id.bFoto);
+        mFoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivityForResult(new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI), GET_FROM_GALLERY);
+            }
+        });
+
         mCadastrarPet = findViewById(R.id.botao_cadastrar_pet);
         mCadastrarPet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 //Chamar o método para salvar o pet no banco
                 salvarPet();
             }
         });
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == GET_FROM_GALLERY && resultCode == Activity.RESULT_OK) {
+            //Caso o usuário tenha escolhido uma foto do pet, mudar o texto do botão
+            mFoto.setText("  Foto Selecionada ");
+            imagemSelecionada = data.getData();
+
+            Bitmap bitmap;
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imagemSelecionada);
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                //Converter a imagem do pet para ocupar menos espaço
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 30, baos);
+                imagemCompressed = baos.toByteArray();
+
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
     }
 
     private boolean verificarCamposPreenchidos(){
@@ -101,15 +145,21 @@ public class CadastroPetActivity extends AppCompatActivity {
             mRadioGroup = findViewById(R.id.rgGenero);
             //Recupera o texto do item selecionado no gênero do pet
             String itemSelecionado = ((RadioButton) findViewById(mRadioGroup.getCheckedRadioButtonId())).getText().toString();
-            mPet = new Pet(mIdPet, mNome.getText().toString(), mSpinnerTipo.getSelectedItem().toString(),
-                    mSpinnerIdade.getSelectedItem().toString(),mSpinnerPorte.getSelectedItem().toString(),
-                    mRaca.getText().toString(), itemSelecionado);
+
+            mPet = new Pet();
+            mPet.setNome(mNome.getText().toString());
+            mPet.setTipo(mSpinnerTipo.getSelectedItem().toString());
+            mPet.setIdade(mSpinnerIdade.getSelectedItem().toString());
+            mPet.setPorte(mSpinnerPorte.getSelectedItem().toString());
+            mPet.setRaça(mRaca.getText().toString());
+            mPet.setGenero(itemSelecionado);
 
             VerificadorDeObjetos.vDadosPet(mPet);
 
             //Chamada do DAO para salvar no banco
             PetDaoImpl petDao =  new PetDaoImpl(this);
-            petDao.inserir(mPet, mIdUsuarioLogado);
+            petDao.inserir(mPet, mIdUsuarioLogado, imagemCompressed);
+
             abrirTelaPets();
 
         } catch (CampoObrAusenteException e) {

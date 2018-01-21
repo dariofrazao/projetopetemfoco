@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -16,7 +18,7 @@ import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -30,31 +32,30 @@ public class EnderecoActivity extends Fragment {
 
     private ArrayList<Endereco> mEnderecos;
     private ArrayAdapter<Endereco> mAdapter;
+    private ListView mListView;
+    private String mIdUsuarioLogado;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        //returning our layout file
-        //change R.layout.yourlayoutfilename for each of your fragments
+
         return inflater.inflate(R.layout.activity_endereco, container, false);
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        //you can set the title for your toolbar here for different fragments different titles
-        getActivity().setTitle("Endereço");
+        getActivity().setTitle(R.string.endereco);
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         //Recuperar id do usuário logado
-        String idUsuarioLogado;
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        idUsuarioLogado = preferences.getString("id", "");
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+        mIdUsuarioLogado = preferences.getString("id", "");
 
         ImageButton mCadastrarEndereco; //Botão de cadastrar o endereço
 
 
         mCadastrarEndereco = getView().findViewById(R.id.btnCadastrarEndereco);
-        ListView mListView;
         mListView = getView().findViewById(R.id.lv_enderecos);
 
         // Monta listview e mAdapter
@@ -62,9 +63,38 @@ public class EnderecoActivity extends Fragment {
         mAdapter = new EnderecoAdapter(getActivity(), mEnderecos);
         mListView.setAdapter(mAdapter);
 
-        // Recuperar endereços do Firebase
-        DatabaseReference mFirebase;
-        mFirebase = ConfiguracaoFirebase.getFirebase().child("usuarios").child(idUsuarioLogado).child("enderecos");
+        carregarEnderecos();
+
+        this.chamarInfoEnderecoListener();
+
+        mCadastrarEndereco.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), CadastroEnderecoActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    //Método que passa as informações de um endereço para a Activity que exibe seus detalhes
+    public void chamarInfoEnderecoListener() {
+        this.mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Intent intent = new Intent(getContext(), InfoEnderecoActivity.class);
+                Endereco endereco = mEnderecos.get(position);
+                intent.putExtra("Endereco", endereco);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
+        });
+    }
+
+    public void carregarEnderecos(){
+        //Recuperar endereços do Firebase
+
+        Query query = ConfiguracaoFirebase.getFirebase().child("enderecos").orderByChild("idUsuario").equalTo(mIdUsuarioLogado);
 
         ValueEventListener mValueEventListenerEndereco;
         mValueEventListenerEndereco = new ValueEventListener() {
@@ -77,27 +107,17 @@ public class EnderecoActivity extends Fragment {
                     Endereco endereco = dados.getValue(Endereco.class);
                     mEnderecos.add(endereco);
                 }
-                //Notificar o adaptador que exibe a lista de endereços se houver alteração no banco
+                //Notificar o adaptar que exibe a lista de endereços se houver alteração no banco
                 mAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(getActivity(), "Erro na leitura do banco de dados", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Erro na leitura do banco de dados", Toast.LENGTH_SHORT).show();
             }
         };
 
-        mCadastrarEndereco.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), CadastroEnderecoActivity.class);
-                startActivity(intent);
-            }
-        });
-        mFirebase.addValueEventListener(mValueEventListenerEndereco);
-
+        query.addValueEventListener(mValueEventListenerEndereco);
     }
-
-
 
 }

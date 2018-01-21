@@ -9,10 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-
 import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.adapter.SectionsPageAdapter;
-
 
 /**
  * Created by raul1 on 03/01/2018.
@@ -23,8 +21,7 @@ public class BuscaServicoActivity extends Fragment{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        //returning our layout file
-        //change R.layout.yourlayoutfilename for each of your fragments
+
         return inflater.inflate(R.layout.activity_busca_servicos, container, false);
     }
 
@@ -32,11 +29,9 @@ public class BuscaServicoActivity extends Fragment{
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        //you can set the title for your toolbar here for different fragments different titles
-        getActivity().setTitle("Serviços");
-        SectionsPageAdapter mSectionsPageAdapter = new SectionsPageAdapter(getActivity().getSupportFragmentManager());
 
-        // Set up the ViewPager with the sections adapter.
+        getActivity().setTitle(R.string.tb_servicos);
+
         ViewPager mViewPager = getActivity().findViewById(R.id.container);
         setupViewPager(mViewPager);
         TabLayout tabLayout = getActivity().findViewById(R.id.tabs);

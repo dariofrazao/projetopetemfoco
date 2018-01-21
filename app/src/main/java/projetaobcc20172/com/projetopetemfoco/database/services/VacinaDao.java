@@ -9,6 +9,6 @@ import projetaobcc20172.com.projetopetemfoco.model.Vacina;
 public interface VacinaDao {
 
     void inserir(Vacina vacina, String idUsuario,String petId);
-    void remover(Vacina vacina,  String idUsuario, String petId);
+    void remover(Vacina vacina,  String idUsuario);
     void atualizar(Vacina vacina,  String idUsuario,String petId);
 }

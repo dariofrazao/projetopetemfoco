@@ -1,4 +1,5 @@
 package projetaobcc20172.com.projetopetemfoco.activity;
+
 /**
  * Created by Alexsandro on 03/12/17.
  */
@@ -164,7 +165,7 @@ public class CadastroEnderecoActivity extends AppCompatActivity{
             EnderecoDaoImpl enderecoDao =  new EnderecoDaoImpl(this);
 
             //Chamada do DAO para salvar no banco
-            enderecoDao.inserirEndereco(mEndereco, mIdUsuarioLogado);
+            enderecoDao.inserir(mEndereco, mIdUsuarioLogado);
             abrirTelaEnderecos();
 
             } catch (CampoObrAusenteException e) {

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="0dp"
     android:background="@drawable/fundo_degrade"
     tools:context="projetaobcc20172.com.projetopetemfoco.activity.CadastroPetActivity">
 
@@ -19,8 +19,7 @@
         android:layout_below="@+id/tb_cadastro_pet"
         android:paddingBottom="@dimen/activity_vertical_margin"
         android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin">
+        android:paddingRight="@dimen/activity_horizontal_margin">
 
         <ScrollView
             android:id="@+id/scrollView"
@@ -31,12 +30,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-
-                <View
-                    android:layout_width="fill_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginBottom="2dp"
-                    android:layout_marginTop="2dp" />
 
                 <TextView
                     android:id="@+id/tvCadastroNomePet"
@@ -135,14 +128,31 @@
                     android:layout_marginBottom="2dp"
                     android:layout_marginTop="2dp" />
 
-                <TextView
-                    android:id="@+id/tvCadastroGeneroPet"
-                    android:layout_width="fill_parent"
+                <LinearLayout
+                    android:orientation="horizontal"
                     android:layout_height="wrap_content"
-                    android:layout_margin="6dp"
-                    android:text="@string/prompt_genero_pet"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textStyle="bold" />
+                    android:layout_width="match_parent">
+
+                    <TextView
+                        android:id="@+id/tvCadastroGeneroPet"
+                        android:layout_width="140dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="6dp"
+                        android:text="@string/prompt_genero_pet"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvCadastroImagemPet"
+                        android:paddingLeft="20dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="6dp"
+                        android:text="@string/prompt_imagem_pet"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
 
                 <View
                     android:layout_width="fill_parent"
@@ -169,6 +179,20 @@
                         android:layout_height="wrap_content"
                         android:text = "@string/femea"
                     />
+
+                    <Button
+                        android:id="@+id/bFoto"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:background="@drawable/cornersbuttonfoto"
+                        android:padding="7dp"
+                        android:textSize="15dp"
+                        android:textColor="@color/preto"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Selecione uma foto"/>
+
+
                 </RadioGroup>
 
                 <View
@@ -227,15 +251,18 @@
                 </LinearLayout>
 
                 <View
-                    android:layout_width="fill_parent"
+                    android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="8dp" />
 
                 <Button
                     android:id="@+id/botao_cadastrar_pet"
-                    android:layout_width="fill_parent"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/shapebutton"
+                    android:paddingRight="40dp"
+                    android:paddingLeft="15dp"
+                    android:drawableLeft="@drawable/ic_action_check"
                     android:text="@string/cadastrar" />
 
             </LinearLayout>

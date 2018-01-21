@@ -246,7 +246,7 @@ public class FiltroServicoDialog extends Activity implements View.OnClickListene
         skRaio.setProgress(this.raio);
         tvRaio.setText(this.raio+ConfiguracoesBuscaServico.getRaio().getInicial()+" km");
         skRaio.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-
+            int i1;
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
 //                if(!cbProx.isChecked()){
@@ -254,8 +254,8 @@ public class FiltroServicoDialog extends Activity implements View.OnClickListene
 //                    controleCheckBox(0);
 //                }
                 raio = (byte) i;
-                i = i + ConfiguracoesBuscaServico.getRaio().getInicial();
-                tvRaio.setText(i +" km");
+                i1 = i + ConfiguracoesBuscaServico.getRaio().getInicial();
+                tvRaio.setText(i1 +" km");
             }
 
             @Override

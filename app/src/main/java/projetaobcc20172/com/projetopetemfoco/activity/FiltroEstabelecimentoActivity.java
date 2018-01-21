@@ -88,7 +88,7 @@ public class FiltroEstabelecimentoActivity extends Activity implements View.OnCl
         skRaio.setProgress(this.raio);
         tvRaio.setText(this.raio+ConfiguracaoBuscaEstab.getRaio().getInicial()+" km");
         skRaio.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-
+            int i1;
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
 //                if(!cbProx.isChecked()){
@@ -96,8 +96,8 @@ public class FiltroEstabelecimentoActivity extends Activity implements View.OnCl
 //                    controleCheckBox(0);
 //                }
                 raio = (byte) i;
-                i = i + ConfiguracaoBuscaEstab.getRaio().getInicial();
-                tvRaio.setText(i +" km");
+                i1 = i + ConfiguracaoBuscaEstab.getRaio().getInicial();
+                tvRaio.setText(i1 +" km");
             }
 
             @Override

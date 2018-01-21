@@ -18,7 +18,6 @@ import java.io.Serializable;
 import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.adapter.ListaAvaliacoesAdapterView;
 import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoFirebase;
-import projetaobcc20172.com.projetopetemfoco.database.services.AvaliacaoDaoImpl;
 import projetaobcc20172.com.projetopetemfoco.model.Avaliacao;
 import projetaobcc20172.com.projetopetemfoco.model.Fornecedor;
 

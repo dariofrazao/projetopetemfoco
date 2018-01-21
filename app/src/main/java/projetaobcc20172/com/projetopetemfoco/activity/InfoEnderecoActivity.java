@@ -66,13 +66,13 @@ public class InfoEnderecoActivity extends AppCompatActivity {
     //Método que preenche os campos com as informações do endereço
     public void preencherCampos() {
         mTvLogradouro.setText(mEndereco.getLogradouro());
-        if(mEndereco.getNumero() == ""){
+        if(mEndereco.getNumero().equals("")){
             mTvNumero.setVisibility(View.INVISIBLE);
         }
         else{
             mTvNumero.setText("Número: " + mEndereco.getNumero());
         }
-        if(mEndereco.getComplemento() == ""){
+        if(mEndereco.getComplemento().equals("")){
             mTvComplemento.setVisibility(View.INVISIBLE);
         }
         else{

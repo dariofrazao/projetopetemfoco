@@ -235,6 +235,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/shapebutton"
+                    android:paddingRight="40dp"
+                    android:paddingLeft="15dp"
+                    android:drawableLeft="@drawable/ic_action_check"
                     android:text="@string/editar"
                     android:visibility="visible" />
 

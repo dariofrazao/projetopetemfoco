@@ -1,8 +1,12 @@
 package projetaobcc20172.com.projetopetemfoco.model;
 
+import com.google.firebase.database.Exclude;
+
 import java.io.Serializable;
 
 public class Pet implements Serializable{
+
+    private String mIdUsuario;
     private String mIdPet;
     private String mNome;
     private String mTipo;
@@ -10,6 +14,7 @@ public class Pet implements Serializable{
     private String mPorte;
     private String mRaca;
     private String mGenero;
+    private String mFoto;
 
     public Pet(){
     }
@@ -27,6 +32,14 @@ public class Pet implements Serializable{
     public Pet(String nome,String raca){
         this.mNome = nome;
         this.mRaca = raca;
+    }
+
+    public String getIdUsuario() {
+        return mIdUsuario;
+    }
+
+    public void setIdUsuario(String idUsuario) {
+        this.mIdUsuario = idUsuario;
     }
 
     public String getNome() {
@@ -83,6 +96,14 @@ public class Pet implements Serializable{
 
     public void setIdPet(String idPet) {
         this.mIdPet = idPet;
+    }
+
+    public String getFoto() {
+        return mFoto;
+    }
+
+    public void setFoto(String foto) {
+        this.mFoto = foto;
     }
 
 }

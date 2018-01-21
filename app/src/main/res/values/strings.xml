@@ -54,6 +54,7 @@
     <string name="endereco">Endereço</string>
     <string name="cadastrar_endereco">Continuar o Cadastro</string>
     <string name="tb_cadastro_endereco">Cadastro de Endereço</string>
+    <string name="tb_detalhes_endereco">Detalhes do Endereço</string>
     <string name="tb_editar_endereco">Edição de Endereço</string>
     <string name="digite_seu_logradouro">Digite seu logradouro</string>
     <string name="endereco_numero">Número</string>
@@ -79,7 +80,7 @@
 
     <!--Strings relacionadas a pet-->
     <string name="pets">Pets</string>
-    <string name="botao_meus_pets">Meus Pets</string>
+    <string name="tb_meus_pets">Meus Pets</string>
     <string name="botao_buscar_servicos">Buscar Serviços</string>
     <string name="botao_meus_favoritos">Meus Favoritos</string>
     <string name="tb_cadastro_pet">Cadastro de Pet</string>
@@ -90,18 +91,35 @@
     <string name="prompt_genero_pet">Gênero</string>
     <string name="prompt_raca_pet">Raça</string>
     <string name="prompt_porte_pet">Porte</string>
+    <string name="prompt_imagem_pet">Imagem</string>
+    <string name="prompt_remover_imagem_pet">Remover Imagem</string>
     <string name="digite_nome_pet">Digite o nome do seu pet</string>
     <string name="digite_idade_pet">Digite a idade do seu pet</string>
     <string name="macho">Macho</string>
     <string name="femea">Fêmea</string>
     <string name="digite_raca_pet">Digite a raça do seu pet</string>
+    <string name="tb_detalhes_pet">Detalhes do Pet</string>
     <string name="erro_cadastro_campos_obrigatorios_Pet">Erro ao cadastrar pet: Preencha o campo nome</string>
     <string name="erro_atualizacao_campos_obrigatorios_Pet">Erro ao atualizar pet: Preencha o campo nome</string>
     <string name="sucesso_cadastro_Pet">Pet cadastrado com sucesso!</string>
     <string name="sucesso_atualizacao_Pet">Pet atualizado com sucesso!</string>
-    <string name="sucesso_atualizacao_vacina">Vacina atualizada com sucesso!</string>
     <string name="sucesso_remocao_Pet">Pet removido com sucesso!</string>
     <string name="pergunta_confirma_remocao_pet">O pet será removido. Confirma?</string>
+
+    <!--Strings relacionadas a vacina-->
+    <string name="tb_calendario_vacina">Calendário de Vacinas</string>
+    <string name="tb_cadastro_vacina">Cadastro de Vacina</string>
+    <string name="tb_detalhes_vacina">Detalhes da Vacina</string>
+    <string name="tb_editar_vacina">Edição de Vacina</string>
+    <string name="descricao">Descrição</string>
+    <string name="digite_descricao_vacina">Digite a descrição da vacina</string>
+    <string name="data">Data</string>
+    <string name="excluir">Excluir</string>
+    <string name="botao_registrar_vacina">Registrar Vacina</string>
+    <string name="botao_calendario_vacina">Calendário de Vacinas</string>
+    <string name="sucesso_atualizacao_vacina">Vacina atualizada com sucesso!</string>
+    <string name="sucesso_cadastro_vacina">Vacina cadastrada com sucesso!</string>
+    <string name="sucesso_remocao_vacina">Vacina removida com sucesso!</string>
     <string name="pergunta_confirma_remocao_vacina">A vacina será removida. Confirma?</string>
 
     <string name="facebook_app_id">1383454871782340</string>
@@ -124,13 +142,15 @@
     <string name="erro_avaliacao_estabelecimento">erro ao realizar avaliação</string>
 
     <!--Strings relacionadas a tela de busca-->
+    <string name="tb_estabelecimentos">Estabelecimentos</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="estabelecimento_nao_encontrado">Estabelecimento não encontrado</string>
-
     <string name="action_settings">Settings</string>
+    <string name="buscaEstabelecimento">Nome do estabelecimento</string>
 
-    <string name="buscaEstabelecimento">Nome estabelecimento</string>
+    <!--Strings relacionadas a vacina-->
+    <string name="tb_servicos">Serviços</string>
 
     <!--Strings relacionadas a avaliação-->
     <string name="tb_avaliar_estabelecimento">Avaliação</string>

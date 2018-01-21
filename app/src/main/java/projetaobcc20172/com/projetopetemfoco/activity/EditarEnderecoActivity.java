@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.preference.PreferenceManager;
-import android.support.annotation.VisibleForTesting;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -29,9 +28,6 @@ public class EditarEnderecoActivity extends AppCompatActivity {
     private EditText mLogradouro, mNumero, mComplemento, mBairro, mLocalidade, mCep;
     private Spinner mSpinnerUf;
     private String mIdEndereco;
-
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
-    //permite que essa variavel seja vista pela classe de teste
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +79,6 @@ public class EditarEnderecoActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 editarEnderecoUsuario();
-
             }
         });
 
@@ -159,10 +154,10 @@ public class EditarEnderecoActivity extends AppCompatActivity {
             mEndereco.setUf(mSpinnerUf.getSelectedItem().toString());
 
             VerificadorDeObjetos.vDadosObrEndereco(mEndereco);
-            EnderecoDaoImpl usuarioDao =  new EnderecoDaoImpl(this);
+            EnderecoDaoImpl enderecoDao =  new EnderecoDaoImpl(this);
 
             //Chamada do DAO para editar no banco
-            usuarioDao.atualizarEndereco(mEndereco, mIdUsuarioLogado);
+            enderecoDao.atualizar(mEndereco, mIdUsuarioLogado);
             abrirTelaEnderecos();
 
         } catch (CampoObrAusenteException e) {

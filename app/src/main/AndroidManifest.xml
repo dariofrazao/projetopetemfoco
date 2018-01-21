@@ -36,8 +36,10 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
+
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
@@ -53,8 +55,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".activity.MainActivity" />
+        <activity
+            android:name=".activity.MainActivity"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".activity.CadastroPetActivity"
             android:windowSoftInputMode="stateHidden"
@@ -106,6 +109,10 @@
             android:name=".activity.ListaEstabServicoActivity"
             />
 
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".activity.ListaEstabServicoActivity" />
+        <activity android:name=".activity.InfoVacinaActivity" />
+        <activity android:name=".activity.InfoEnderecoActivity"></activity>
     </application>
 
 </manifest>

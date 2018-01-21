@@ -5,6 +5,7 @@ public class Endereco  implements Serializable {
 
     //Atributos do endereço
     //Estas variáveis não podem ter seus nomes alterados (devido a pesquisa no viacep)
+    private String idUsuario;
     private String id;
     private String logradouro;
     private String numero;
@@ -25,6 +26,14 @@ public class Endereco  implements Serializable {
 
     public Endereco(){
 
+    }
+
+    public String getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(String idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     public String getId() {

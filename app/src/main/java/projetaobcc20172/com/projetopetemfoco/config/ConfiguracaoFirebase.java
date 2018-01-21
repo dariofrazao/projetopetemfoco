@@ -6,6 +6,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public final class ConfiguracaoFirebase {
 
+    private static FirebaseDatabase database;
     private static DatabaseReference referenciaFirebase; //Variável para acesso ao banco de dados do Firebase
     private static FirebaseAuth autenticacao; //Variável para acesso a autenticação de usuário no Firebase
 
@@ -16,6 +17,14 @@ public final class ConfiguracaoFirebase {
         }
 
         return referenciaFirebase;
+    }
+
+    public static FirebaseDatabase getDatabase() {
+        if (database == null) {
+            database = FirebaseDatabase.getInstance();
+            database.setPersistenceEnabled(true);
+        }
+        return database;
     }
 
     public static FirebaseAuth getFirebaseAutenticacao(){ //Método para obter uma instância da Autenticação do Firebase

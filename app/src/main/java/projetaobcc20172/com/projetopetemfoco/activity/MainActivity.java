@@ -56,15 +56,6 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);//toolbar do navigator
         setSupportActionBar(toolbar);
 
-      /*  FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-*/
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -72,8 +63,6 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
 
         NavigationView navigationView =  (NavigationView)findViewById(R.id.nav_busca);
-        //LayoutInflater.from(getApplicationContext()).inflate(R.layout.nav_header_main, navigationView);
-
 
         displaySelectedScreen(R.id.nav_servicos);//Determina qual tela será aberta primeiro ao entrar
 
@@ -91,19 +80,25 @@ public class MainActivity extends AppCompatActivity
         DatabaseReference mReferenciaFirebase;
         mReferenciaFirebase = ConfiguracaoFirebase.getFirebase();
         mReferenciaFirebase.child("usuarios").child(mIdUsuarioLogado).addValueEventListener(new ValueEventListener() {
+
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+
                 if(dataSnapshot.getValue() != null){
                     Usuario usuario = dataSnapshot.getValue(Usuario.class);
+                    //Exibe a foto de perfil do usuário através do Glide
                     Glide.with(getApplicationContext()).load(usuario.getmFoto()).asBitmap().into(new BitmapImageViewTarget(mFoto){
                         @Override
                         protected void setResource(Bitmap resource) {
+
+                            //Transforma a foto em formato circular
                             RoundedBitmapDrawable circularBitmapDrawable =
                                     RoundedBitmapDrawableFactory.create(MainActivity.this.getResources(), resource);
                             circularBitmapDrawable.setCircular(true);
                             mFoto.setImageDrawable(circularBitmapDrawable);
                         }
                     });
+
                     mNome.setText(usuario.getNome());
                     mEmail.setText(usuario.getEmail());
                 }
@@ -125,10 +120,8 @@ public class MainActivity extends AppCompatActivity
 
     private void displaySelectedScreen(int itemId) {
 
-        //creating fragment object
         Fragment fragment = null;
 
-        //initializing the fragment object which is selected
         switch (itemId) {
             case R.id.nav_pets:
                 fragment = new PetsActivity();
@@ -157,7 +150,6 @@ public class MainActivity extends AppCompatActivity
         if (fragment != null) {
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.content_main, fragment);
-            //ft.addToBackStack(null);
             ft.commit();
         }
 

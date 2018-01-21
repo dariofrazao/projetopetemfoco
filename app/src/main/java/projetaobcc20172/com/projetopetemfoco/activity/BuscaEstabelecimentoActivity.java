@@ -29,7 +29,6 @@ import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.adapter.EstabelecimentoAdapter;
 import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoBuscaEstab;
 import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoFirebase;
-import projetaobcc20172.com.projetopetemfoco.config.ConfiguracoesBuscaServico;
 import projetaobcc20172.com.projetopetemfoco.model.Endereco;
 import projetaobcc20172.com.projetopetemfoco.model.Fornecedor;
 import projetaobcc20172.com.projetopetemfoco.model.Servico;
@@ -55,12 +54,11 @@ public class BuscaEstabelecimentoActivity extends Fragment implements Serializab
         return inflater.inflate(R.layout.activity_busca_estabelecimento, container, false);
     }
 
-
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        getActivity().setTitle("Estabelecimentos");
+        getActivity().setTitle(R.string.tb_estabelecimentos);
         final ListView listView = getView().findViewById(R.id.lvBuscaEsta);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -70,6 +68,7 @@ public class BuscaEstabelecimentoActivity extends Fragment implements Serializab
         });
         ConfiguracaoBuscaEstab.inicializar();
         final SearchView buscaEst = getView().findViewById(R.id.svBusca);
+        buscaEst.setSubmitButtonEnabled(true);
         mProgresso = (ProgressBar) getView().findViewById(R.id.pbProgresso);
         mProgresso.setVisibility(View.INVISIBLE);
         Button btnFiltro = getActivity().findViewById(R.id.btnFiltroEstabelecimento);
@@ -90,7 +89,7 @@ public class BuscaEstabelecimentoActivity extends Fragment implements Serializab
 
             @Override
             public boolean onQueryTextChange(String s) {
-                if(s.equals("")){//apaga os resultado quando se apaga o texto
+                if (s.equals("")) {//apaga os resultado quando se apaga o texto
                     mForncedores.clear();
                     mAdapter.notifyDataSetChanged();
                 }
@@ -117,7 +116,8 @@ public class BuscaEstabelecimentoActivity extends Fragment implements Serializab
     }
 
     //Método que chama a activity para exibir informações do estabelecimento
-    public void exibirEstabelecimento(final Fornecedor fornecedor){
+    public void exibirEstabelecimento(final Fornecedor fornecedor) {
+
         //Buscar servicos do estabelecimento selecionado
         Query query = ConfiguracaoFirebase.getFirebase().child("servicos").orderByChild("idFornecedor").equalTo(fornecedor.getId());
         query.addListenerForSingleValueEvent(new ValueEventListener() {

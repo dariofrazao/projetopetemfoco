@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/fundo_degrade"
-    tools:context="projetaobcc20172.com.projetopetemfoco.activity.CalendarioVacinasActivity">
+    tools:context="projetaobcc20172.com.projetopetemfoco.activity.CadastroVacinaActivity">
 
     <include
         android:id="@+id/tb_main"
@@ -12,18 +12,18 @@
 
     </include>
 
-
     <LinearLayout
-
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tb_main"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin">
+
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/scrollView"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true">
+            android:layout_height="match_parent"
+            android:id="@+id/scrollView">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -33,7 +33,7 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="match_parent"
                     android:layout_marginBottom="2dp"
                     android:layout_marginTop="2dp" />
 
@@ -42,7 +42,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="6dp"
-                    android:text="Descrição"
+                    android:text="@string/descricao"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textStyle="bold" />
 
@@ -51,6 +51,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
+                    android:hint="@string/digite_descricao_vacina"
                     android:inputType="textMultiLine" />
 
                 <View
@@ -64,7 +65,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="6dp"
-                    android:text="Data"
+                    android:text="@string/data"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textStyle="bold" />
 
@@ -82,39 +83,32 @@
                     android:inputType="date"
                     android:singleLine="false" />
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="8dp" />
+
                 <Button
                     android:id="@+id/btnCadastroVacina"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_below="@+id/linearLayout4"
-                    android:layout_centerHorizontal="true"
                     android:layout_margin="4dp"
                     android:background="@drawable/shapebutton"
-
-                    android:text="Registrar Vacina" />
-
-                <!--android:layout_marginTop="24dp"-->
+                    android:paddingRight="40dp"
+                    android:paddingLeft="15dp"
+                    android:drawableLeft="@drawable/ic_action_check"
+                    android:text="@string/cadastrar" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginBottom="2dp"
                     android:layout_marginTop="2dp" />
-                <!--<TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="4dp"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="@string/pergunta_nao_possui_cadastro"
-                    andrmIdd:idmId@+id/TextViewPerguntaCadastro"
-                    android:textStyle="bold" />-->
-                <!--android:layout_marginTop="24dp" -->
-
 
             </LinearLayout>
+
         </ScrollView>
+
     </LinearLayout>
 
 </RelativeLayout>

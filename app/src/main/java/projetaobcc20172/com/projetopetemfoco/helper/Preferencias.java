@@ -15,6 +15,7 @@ public class Preferencias {
 
     private final String CHAVE_IDENTIFICADOR = "identificadorUsuarioLogado"; //Variável para identificar usuário logado
     private final String CHAVE_NOME = "nomeUsuarioLogado"; //Nome do usuário logado
+    private final String CHAVE_RAIO = "raio";
 
     public Preferencias( Context contextoParametro){
 
@@ -32,6 +33,11 @@ public class Preferencias {
 
     }
 
+    public void salvarRaio(byte raio){
+        editor.putInt("raio",raio);
+        editor.commit();
+    }
+
     public String getIdentificador(){
         return preferences.getString(CHAVE_IDENTIFICADOR, null);
     }
@@ -40,4 +46,7 @@ public class Preferencias {
         return preferences.getString(CHAVE_NOME, null);
     }
 
+    public byte getRaio(){
+        return (byte) preferences.getInt(CHAVE_RAIO,0);
+    }
 }

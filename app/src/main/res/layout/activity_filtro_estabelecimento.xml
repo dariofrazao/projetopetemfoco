@@ -10,23 +10,12 @@
         android:paddingLeft="15dp"
         android:paddingRight="15dp">
 
-        <GridView
-            android:id="@+id/gridOpPet"
-            android:layout_marginTop="5dp"
-            android:layout_width="300dp"
-            android:layout_height="60dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:columnWidth="100dp"
-            android:gravity="center"
-            android:numColumns="auto_fit"
-            android:stretchMode="columnWidth">
 
-        </GridView>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             android:text="Organizar Por:"
             android:textColor="@color/colorSecondaryText" />
@@ -44,16 +33,11 @@
             android:layout_height="wrap_content"
             android:text="Avaliação" />
 
-        <CheckBox
-            android:id="@+id/cbPreco"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Preço" />
-
         <TextView
             android:id="@+id/textView4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             android:text="Raio de busca:"
             android:textColor="@color/colorSecondaryText" />
@@ -61,8 +45,7 @@
         <TextView
             android:id="@+id/tvRaio"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:layout_height="wrap_content" />
 
         <SeekBar
             android:id="@+id/sbRaio"

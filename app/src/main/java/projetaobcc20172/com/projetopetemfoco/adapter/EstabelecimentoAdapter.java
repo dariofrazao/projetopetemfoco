@@ -52,10 +52,11 @@ public class EstabelecimentoAdapter extends ArrayAdapter<Fornecedor> {
             bairro.setText(fornecedor.getEndereco().getBairro());
             cidade.setText(fornecedor.getEndereco().getLocalidade());
             uf.setText(" - " + fornecedor.getEndereco().getUf());
+            distancia.setText("Distância: "+fornecedor.getDistancia()+" km");
             nota.setText(String.format("%.2f", fornecedor.getNota()));
-            distancia.setText("Distância: 0");
         }
 
         return view;
     }
+
 }

@@ -44,12 +44,16 @@ public class ServicoAdapterListView extends ArrayAdapter<String[]> {
             TextView nomeServico = view.findViewById(R.id.tvExibirServico);
             TextView estabelecimento = view.findViewById(R.id.tvEstabServico);
             TextView valor = view.findViewById(R.id.tvExibirServicoValor);
+            TextView distancia = view.findViewById(R.id.tvExibirDist);
             ImageView img = view.findViewById(R.id.ivPetServicoBusca);
+            ImageView imgServico = view.findViewById(R.id.ivServicoBusca);
             String[] valores = mResuBusca.get(position);
             nomeServico.setText(valores[0]);
             estabelecimento.setText(valores[1]);
             valor.setText(valores[2]);
+            distancia.setText(valores[6]+" km");
             img.setImageResource(Utils.escolherIconPet(valores[3],view));
+            imgServico.setImageResource(Utils.escolherIconServico(valores[0],view));
 
         }
         return view;

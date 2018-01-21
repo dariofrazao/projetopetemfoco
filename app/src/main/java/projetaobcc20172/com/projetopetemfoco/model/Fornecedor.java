@@ -1,5 +1,6 @@
 package projetaobcc20172.com.projetopetemfoco.model;
 
+
 import com.google.firebase.database.Exclude;
 
 import java.io.Serializable;
@@ -26,6 +27,7 @@ public class Fornecedor implements Serializable {
     private ArrayList<Servico> mServicos = new ArrayList<Servico>();
     private float mNota = 0;
     private ArrayList<Avaliacao> mAvaliacoes = new ArrayList<>();
+    private double mDistancia = -1;
 
     public Fornecedor() {
     }
@@ -171,5 +173,14 @@ public class Fornecedor implements Serializable {
                 mEndereco.getLocalidade()+"/"+mEndereco.getUf()+", "+mEndereco.getCep();
         return mEnderecoCombinado;
     }
+
+    public double getDistancia() {
+        return mDistancia;
+    }
+
+    public void setDistancia(double mDistancia) {
+        this.mDistancia = mDistancia;
+    }
+
 }
 

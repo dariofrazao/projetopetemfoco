@@ -234,7 +234,7 @@ public class FiltroServicoDialog extends Activity implements View.OnClickListene
 
     @Override
     public void onClick(View v) {
-        assert true;
+        //Método com corpo vazio
     }
 
 
@@ -260,12 +260,12 @@ public class FiltroServicoDialog extends Activity implements View.OnClickListene
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-                assert true;
+                //Método com corpo vazio
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                assert true;
+                //Método com corpo vazio
             }
         });
     }

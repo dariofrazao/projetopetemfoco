@@ -21,7 +21,6 @@ import projetaobcc20172.com.projetopetemfoco.utils.Utils;
 
 
 public class AvaliacaoDaoImpl implements AvaliacaoDao {
-    private ArrayList<Avaliacao> mAvaliacoes = new ArrayList<>();
     private DatabaseReference mReferenciaFirebase;
     private Context mContexto;
 
@@ -116,7 +115,7 @@ public class AvaliacaoDaoImpl implements AvaliacaoDao {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
+                //Vazio
             }
         });
 

@@ -44,7 +44,7 @@ public class EstabelecimentoAdapter extends ArrayAdapter<Fornecedor> {
             TextView bairro = view.findViewById(R.id.tvBairroForn);
             TextView cidade = view.findViewById(R.id.tvCidadeForn);
             TextView uf = view.findViewById(R.id.tvUfForn);
-            //TextView nota = view.findViewById(R.id.tvNota);
+            TextView nota = view.findViewById(R.id.tvNota);
             TextView distancia = view.findViewById(R.id.tvTextDist);
 
             final Fornecedor fornecedor = mForncedores.get(position);
@@ -52,7 +52,7 @@ public class EstabelecimentoAdapter extends ArrayAdapter<Fornecedor> {
             bairro.setText(fornecedor.getEndereco().getBairro());
             cidade.setText(fornecedor.getEndereco().getLocalidade());
             uf.setText(" - " + fornecedor.getEndereco().getUf());
-            //nota.setText(fornecedor.getNota()+"");
+            nota.setText(String.format("%.2f", fornecedor.getNota()));
             distancia.setText("Distância: 0");
         }
 

@@ -122,9 +122,12 @@ public class BuscaEstabelecimentoActivity extends Fragment implements Serializab
         verificarGPS();
         if(ConfiguracaoBuscaEstab.getsNomeEstabelecimento()!=null && !ConfiguracaoBuscaEstab.getsNomeEstabelecimento().equals("TODOS"))
             buscarEstabelecimentos(ConfiguracaoBuscaEstab.getsNomeEstabelecimento());
-        else{
+        else if (ConfiguracaoBuscaEstab.getsNomeEstabelecimento()!=null && ConfiguracaoBuscaEstab.getsNomeEstabelecimento().equals("TODOS")){
+
             buscarTodosEstabelecimentos();
         }
+
+
     }
 
     //Método que chama a activity para exibir informações do estabelecimento

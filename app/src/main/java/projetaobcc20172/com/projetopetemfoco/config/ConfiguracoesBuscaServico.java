@@ -84,7 +84,7 @@ public class ConfiguracoesBuscaServico {
         resultados.addAll(resultadoFiltrados);
         //Ordena por distância
         if(sFiltro.equals(Enumerates.Filtro.DISTANCIA)){
-            Collections.sort(resultadoFiltrados, new ServicoFornecedorComparatorDist());
+            Collections.sort(resultados, new ServicoFornecedorComparatorDist());
         }
         //Ordena por preço
         else if(sFiltro.equals(Enumerates.Filtro.PRECO)){

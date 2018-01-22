@@ -27,11 +27,20 @@
             android:focusableInTouchMode="true">
 
         </SearchView>
+        <Button
+            android:id="@+id/botao_todos_estabelecimentos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/shapebutton"
+            android:paddingRight="20dp"
+            android:paddingLeft="10dp"
+            android:text="  Todos Estabelecimentos" />
 
         <ListView
             android:id="@+id/lvBuscaEsta"
             android:layout_width="match_parent"
-            android:layout_height="462dp"
+            android:layout_height="384dp"
             android:padding="8dp" />
 
         <Button

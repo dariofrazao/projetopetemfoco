@@ -6,6 +6,8 @@ package projetaobcc20172.com.projetopetemfoco.database.services;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.util.Log;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
@@ -97,11 +99,11 @@ public class AvaliacaoDaoImpl implements AvaliacaoDao {
                     public void onComplete(@NonNull Task<Void> task) {
                         //Se a edição foi feita com sucesso
                         if (task.isSuccessful()) {
-                            Utils.mostrarMensagemCurta(getContexto(), getContexto().getString(R.string.sucesso_atualizacao_nota));
+                            Log.i("Debug", "Suceso ao atualizar nota ");
                         }
                         //Senão
                         else {
-                            Utils.mostrarMensagemCurta(getContexto(), getContexto().getString(R.string.erro_atualizacao_nota));
+                            Log.i("Debug", "Erro ao atualizar nota ");
                             try {
                                 throw task.getException();
                             } catch (Exception e) {

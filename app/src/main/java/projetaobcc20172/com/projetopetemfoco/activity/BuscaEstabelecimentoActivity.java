@@ -69,6 +69,15 @@ public class BuscaEstabelecimentoActivity extends Fragment implements Serializab
         ConfiguracaoBuscaEstab.inicializar();
         final SearchView buscaEst = getView().findViewById(R.id.svBusca);
         buscaEst.setSubmitButtonEnabled(true);
+        Button btnBuscaFonecedorAvaliacao = getView().findViewById(R.id.botao_todos_estabelecimentos);
+        btnBuscaFonecedorAvaliacao.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                buscarTodosEstabelecimentos();
+            }
+        });
+
         mProgresso = (ProgressBar) getView().findViewById(R.id.pbProgresso);
         mProgresso.setVisibility(View.INVISIBLE);
         Button btnFiltro = getActivity().findViewById(R.id.btnFiltroEstabelecimento);
@@ -111,8 +120,11 @@ public class BuscaEstabelecimentoActivity extends Fragment implements Serializab
     public void onResume(){
         super.onResume();
         verificarGPS();
-        if(ConfiguracaoBuscaEstab.getsNomeEstabelecimento()!=null)
+        if(ConfiguracaoBuscaEstab.getsNomeEstabelecimento()!=null && !ConfiguracaoBuscaEstab.getsNomeEstabelecimento().equals("TODOS"))
             buscarEstabelecimentos(ConfiguracaoBuscaEstab.getsNomeEstabelecimento());
+        else{
+            buscarTodosEstabelecimentos();
+        }
     }
 
     //Método que chama a activity para exibir informações do estabelecimento
@@ -190,6 +202,47 @@ public class BuscaEstabelecimentoActivity extends Fragment implements Serializab
             });
         }
 
+    }
+
+    private void buscarTodosEstabelecimentos(){
+        ConfiguracaoBuscaEstab.setsNomeEstabelecimento("TODOS");
+        mForncedores.clear();
+        verificarGPS();
+        if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+            Query query1 = ConfiguracaoFirebase.getFirebase().child("fornecedor").orderByChild("nomeBusca");
+            query1.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    for (final DataSnapshot dados : dataSnapshot.getChildren()) {
+                        Fornecedor forn;
+                        float nota = 0;
+                        if (dados.child("nota").getValue(float.class) != null) {
+                            nota = dados.child("nota").getValue(float.class);
+                        }
+
+                        forn = new Fornecedor(dados.child("nome").getValue(String.class), dados.child("email").getValue(String.class), dados.child("cpfCnpj").getValue(String.class)
+                                , dados.child("horarios").getValue(String.class), nota, dados.child("telefone").getValue(String.class),
+                                dados.child("endereco").getValue(Endereco.class));
+                        forn.setId(dados.getKey());
+                        mForncedores.add(forn);
+                    }
+                    ConfiguracaoBuscaEstab.filtrar(getActivity(), mForncedores);
+                    mAdapter.notifyDataSetChanged();
+                    mProgresso.setVisibility(View.INVISIBLE);
+
+                    //Se a busca não retornar nada
+                    if (mAdapter.isEmpty()) {
+                        Utils.mostrarMensagemCurta(getContext(), getContext().getString(R.string.estabelecimento_nao_encontrado));
+                    }
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    assert true;
+                }
+            });
+        }
     }
 
     private void verificarGPS(){

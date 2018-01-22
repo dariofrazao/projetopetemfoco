@@ -28,133 +28,154 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/ivFotoDetalhesPet"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:background="@drawable/estabelecimentos"/>
 
             <TextView
                 android:id="@+id/tvExibeNomeEstabelecimento"
-                android:layout_width="210dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Estabelecimento"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textStyle="bold" />
-
-            <ImageButton
-                android:id="@+id/botao_mostrar_avaliacoes_estabelecimento"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_alignParentRight="true"
-                android:background="@drawable/ic_action_avaliacoes" />
-
-            <View
-                android:layout_width="5dp"
-                android:layout_height="50dp" />
-
-            <ImageButton
-                android:id="@+id/botao_avaliar_estabelecimento"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_alignParentRight="true"
-                android:background="@drawable/ic_action_avaliar" />
+                android:gravity="center"
+                android:textColor="@android:color/black"
+                android:textStyle="bold|italic"
+                android:textSize="20sp"
+                android:textAppearance="?android:attr/textAppearanceMedium"/>
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="330dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/botao_mostrar_avaliacoes_estabelecimento"
+                android:layout_width="45dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="100dp"
+                android:background="@drawable/ic_action_avaliacoes"
+                android:text="Avaliar" />
+
+            <ImageButton
+                android:id="@+id/botao_avaliar_estabelecimento"
+                android:layout_width="45dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="60dp"
+                android:background="@drawable/ic_action_avaliar"
+                android:text="Avaliar" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="90dp"
+                android:text="Avaliações"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="35dp"
+                android:text="Avaliar"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="1dp"
+            android:layout_marginTop="5dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/tvEmail"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="left"
                 android:text="@string/email"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textStyle="normal" />
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="1dp"
+                android:layout_marginTop="1dp" />
 
             <TextView
-                android:id="@+id/tvExibeEmailEstabelecimentor"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="Email"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textStyle="bold" />
-
-            <LinearLayout
+                android:id="@+id/tvTelefone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:gravity="left"
+                android:text="@string/telefone"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
-                <TextView
-                    android:id="@+id/tvTelefone"
-                    android:layout_width="130dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/telefone"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textStyle="normal" />
-
-                <TextView
-                    android:id="@+id/tvCpfCnpj"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="20dp"
-                    android:text="@string/cpf_cnpj"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textStyle="normal" />
-            </LinearLayout>
-
-            <LinearLayout
+            <View
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/tvExibeTelefoneEstabelecimento"
-                    android:layout_width="135dp"
-                    android:layout_height="wrap_content"
-                    android:text="Telefone"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/tvExibeCpfCnpjEstabelecimento"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="20dp"
-                    android:text="CPF/CNPJ"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textStyle="bold" />
-            </LinearLayout>
+                android:layout_height="1dp"
+                android:layout_marginBottom="1dp"
+                android:layout_marginTop="1dp" />
 
             <TextView
                 android:id="@+id/tvHorario"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="left"
                 android:text="@string/horario"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textStyle="normal" />
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
-            <TextView
-                android:id="@+id/tvExibeHorarioEstabelecimento"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="Horario"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textStyle="bold" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="1dp"
+                android:layout_marginTop="1dp" />
 
             <TextView
                 android:id="@+id/tvEnderecoEstabelecimento"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Endereço"
+                android:text="Endereço:"
+                android:gravity="center"
+                android:textColor="@android:color/black"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textStyle="normal" />
+                android:textSize="16sp"
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/tvEnderecoEstabelecimentoCombinado"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Endereco"
+                android:gravity="center"
+                android:text="Endereco:"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textStyle="bold" />
 
@@ -167,9 +188,12 @@
 
             <TextView
                 android:id="@+id/tvServicos"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:text="@string/servicos"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textStyle="bold" />
 
@@ -185,18 +209,10 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <LinearLayout
+                <ListView
+                    android:id="@+id/lvListaServicos"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                    <ListView
-                        android:id="@+id/lvListaServicos"
-                        android:layout_width="match_parent"
-                        android:layout_height="200dp" />
-
-                </LinearLayout>
-
+                    android:layout_height="200dp" />
 
             </LinearLayout>
 

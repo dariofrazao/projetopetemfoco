@@ -107,10 +107,10 @@
 
         <activity
             android:name=".activity.ListaEstabServicoActivity"
-            />
+            /><![CDATA[
 
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".activity.ListaEstabServicoActivity" />
+        ]]>
         <activity android:name=".activity.InfoVacinaActivity" />
         <activity android:name=".activity.InfoEnderecoActivity"></activity>
         <activity

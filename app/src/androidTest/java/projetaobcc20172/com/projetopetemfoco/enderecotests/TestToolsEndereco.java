@@ -52,11 +52,11 @@ public class TestToolsEndereco {
         }
 
         public static void clicarIconeEditar(){
-            TestTools.clicarEmItemDentroListView(R.id.lv_enderecos,0,R.id.ibtnEditar);
+            TestTools.clicarEmItemDentroListView(R.id.lv_enderecos,0,R.id.btnEditar);
         }
 
         public static void clicarIconeExcluir(){
-            TestTools.clicarEmItemDentroListView(R.id.lv_enderecos,0,R.id.ibtnRemover);
+            TestTools.clicarEmItemDentroListView(R.id.lv_enderecos,0,R.id.btnExcluir);
         }
 
         public static void clicarMenuEndereco(){

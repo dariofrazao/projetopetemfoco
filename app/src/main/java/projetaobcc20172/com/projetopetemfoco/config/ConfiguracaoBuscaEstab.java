@@ -7,6 +7,7 @@ import java.util.Collections;
 
 import projetaobcc20172.com.projetopetemfoco.model.Fornecedor;
 import projetaobcc20172.com.projetopetemfoco.utils.Enumerates;
+import projetaobcc20172.com.projetopetemfoco.utils.FornecedorComparatorAvaliacao;
 import projetaobcc20172.com.projetopetemfoco.utils.FornecedorComparatorDist;
 import projetaobcc20172.com.projetopetemfoco.utils.Localizacao;
 
@@ -59,8 +60,14 @@ public class ConfiguracaoBuscaEstab {
         resultados.clear();
         resultados.addAll(resultadoFiltrados);
         //Ordena por distância
+
         if(sFiltro.equals(Enumerates.Filtro.DISTANCIA)){
-            Collections.sort(resultadoFiltrados, new FornecedorComparatorDist());
+            Collections.sort(resultados, new FornecedorComparatorDist());
+        }
+        //Ordena por avaliação
+        else if(sFiltro.equals(Enumerates.Filtro.AVALICAO)){
+            Collections.sort(resultados, new FornecedorComparatorAvaliacao());
+            Collections.reverse(resultados);
         }
     }
 }

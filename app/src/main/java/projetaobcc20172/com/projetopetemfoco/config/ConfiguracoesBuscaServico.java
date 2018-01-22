@@ -8,6 +8,7 @@ import java.util.Collections;
 
 import projetaobcc20172.com.projetopetemfoco.utils.Enumerates;
 import projetaobcc20172.com.projetopetemfoco.utils.Localizacao;
+import projetaobcc20172.com.projetopetemfoco.utils.ServicoFornecedorComparatorAvaliacao;
 import projetaobcc20172.com.projetopetemfoco.utils.ServicoFornecedorComparatorDist;
 import projetaobcc20172.com.projetopetemfoco.utils.ServicoFornecedorComparatorPreco;
 
@@ -89,6 +90,10 @@ public class ConfiguracoesBuscaServico {
         //Ordena por preço
         else if(sFiltro.equals(Enumerates.Filtro.PRECO)){
             Collections.sort(resultados, new ServicoFornecedorComparatorPreco());
+        }
+        //Ordena por avaliação
+        else if(sFiltro.equals(Enumerates.Filtro.AVALICAO)){
+            Collections.sort(resultados, new ServicoFornecedorComparatorAvaliacao());
         }
 
     }

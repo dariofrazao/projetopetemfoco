@@ -12,14 +12,11 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-
 import java.util.ArrayList;
-
 import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.adapter.ServicoAdapterListView;
 import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoFirebase;
@@ -76,9 +73,20 @@ public class ListaEstabServicoActivity extends AppCompatActivity {
         return true;
     }
 
+    private void verificarGPS(){
+
+        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)){
+            perdirParaLigarGPS();
+            //Toast.makeText(this, "GPS is Enabled in your devide", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
     private void buscarServico(String servico,ArrayList<String> pets) {
         mResultado.clear();
         verificarGPS();
+
         if(locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
             for (String pet : pets) {
                 Query query;
@@ -91,20 +99,22 @@ public class ListaEstabServicoActivity extends AppCompatActivity {
                 } else {
                     query = ConfiguracaoFirebase.getFirebase().child("servico_fornecedor").orderByChild("nome_tipoPet").equalTo(servico + "_" + pet);
                 }
+
                 query.addListenerForSingleValueEvent(new ValueEventListener() {
+
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         for (DataSnapshot dado : dataSnapshot.getChildren()) {
                             String tipoServico = dado.child("nome_tipoPet").getValue(String.class).split("_")[0];
                             String[] resultado = {tipoServico, dado.child("nomeFornecedor").getValue(String.class), dado.child("valor").getValue(String.class), dado.child("pet").getValue(String.class),
-                                    dado.child("latitude").getValue(String.class), dado.child("longitude").getValue(String.class), "0"};
+                                    dado.child("latitude").getValue(String.class), dado.child("longitude").getValue(String.class), "0" , dado.child("nota").getValue(String.class)};
                             mResultado.add(resultado);
-
                         }
-                        ConfiguracoesBuscaServico.filtrar(ListaEstabServicoActivity.this, mResultado);
+                        ConfiguracoesBuscaServico.filtrar(projetaobcc20172.com.projetopetemfoco.activity.ListaEstabServicoActivity.this, mResultado);
+
                         //Caso não tenham sido encontrados resultados
                         if (mResultado.size() == 0) {
-                            Utils.mostrarMensagemCurta(ListaEstabServicoActivity.this, getString(R.string.servicos_nao_encontrado));
+                            Utils.mostrarMensagemCurta(projetaobcc20172.com.projetopetemfoco.activity.ListaEstabServicoActivity.this, getString(R.string.servicos_nao_encontrado));
                         }
                         mAdapter.notifyDataSetChanged();
                     }
@@ -118,15 +128,6 @@ public class ListaEstabServicoActivity extends AppCompatActivity {
         }
     }
 
-    private void verificarGPS(){
-
-        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-        if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)){
-            perdirParaLigarGPS();
-            //Toast.makeText(this, "GPS is Enabled in your devide", Toast.LENGTH_SHORT).show();
-        }
-
-    }
 
     private void perdirParaLigarGPS(){
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);

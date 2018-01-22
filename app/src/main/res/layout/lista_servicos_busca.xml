@@ -7,10 +7,10 @@
         android:id="@+id/ivServicoBusca"
         android:layout_width="100dp"
         android:layout_height="80dp"
-        android:layout_marginTop="5dp"
-        android:layout_alignBottom="@+id/tvExibirServicoValor"
+        android:layout_alignBottom="@+id/view"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
+        android:layout_marginTop="5dp"
         app:srcCompat="@drawable/servico_passeio" />
 
     <TextView
@@ -29,7 +29,7 @@
     <TextView
         android:id="@+id/tvEstabServico"
         android:layout_width="wrap_content"
-        android:layout_height="15dp"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/tvExibirServico"
         android:layout_marginBottom="5dp"
         android:layout_marginStart="8dp"
@@ -49,6 +49,17 @@
         android:textSize="16sp" />
 
     <TextView
+        android:id="@+id/tvExibirNota"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_alignTop="@+id/tvExibirDist"
+        android:layout_toEndOf="@+id/view"
+        android:text="nota"
+        android:textColor="@color/colorSecondaryText"
+        android:textSize="16sp" />
+
+
+    <TextView
         android:id="@+id/tvExibirServicoValor"
         android:layout_width="wrap_content"
         android:layout_height="20dp"
@@ -58,6 +69,14 @@
         android:text="Valor"
         android:textColor="@color/colorSecondaryText"
         android:textSize="16sp" />
+
+    <View
+        android:layout_width="10dp"
+        android:layout_height="50dp"
+        android:layout_alignBottom="@+id/tvExibirDist"
+        android:layout_below="@+id/tvExibirNota"
+        android:layout_toEndOf="@+id/tvExibirDist"
+        android:id="@+id/view" />
 
     <ImageView
         android:id="@+id/ivPetServicoBusca"

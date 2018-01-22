@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@drawable/fundo_degrade">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="330dp"
         android:orientation="vertical"
         android:paddingLeft="15dp"
         android:paddingRight="15dp">
 
         <GridView
             android:id="@+id/gridOpPet"
-            android:layout_marginTop="5dp"
             android:layout_width="300dp"
             android:layout_height="60dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
+            android:layout_marginTop="5dp"
             android:columnWidth="100dp"
             android:gravity="center"
             android:numColumns="auto_fit"
@@ -66,15 +66,16 @@
 
         <SeekBar
             android:id="@+id/sbRaio"
-            android:layout_marginTop="5dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp" />
 
         <Button
             android:id="@+id/btnSalvarFiltro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
+            android:background="@drawable/shapebutton"
             android:text="Salvar" />
 
     </LinearLayout>

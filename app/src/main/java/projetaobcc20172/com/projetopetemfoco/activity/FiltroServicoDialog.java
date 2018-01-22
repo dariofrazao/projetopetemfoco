@@ -40,7 +40,7 @@ public class FiltroServicoDialog extends Activity implements View.OnClickListene
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.tab_opcoes_pet_fragment);
+        setContentView(R.layout.activity_filtro_servicos);
         final GridView gridView = findViewById(R.id.gridOpPet);
         this.configurarSeekBar();
         Button btnSalvarFiltro = findViewById(R.id.btnSalvarFiltro);

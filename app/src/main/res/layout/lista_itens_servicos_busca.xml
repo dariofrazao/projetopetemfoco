@@ -54,6 +54,14 @@
         android:textColor="@color/colorSecondaryText"
         android:textSize="16sp" />
 
+    <View
+        android:layout_width="10dp"
+        android:layout_height="50dp"
+        android:layout_alignBottom="@+id/tvExibirDist"
+        android:layout_below="@+id/tvExibirNota"
+        android:layout_toEndOf="@+id/tvExibirDist"
+        android:id="@+id/view" />
+
     <TextView
         android:id="@+id/tvExibirNota"
         android:layout_width="wrap_content"
@@ -63,18 +71,6 @@
         android:text="nota"
         android:textColor="@color/colorSecondaryText"
         android:textSize="16sp" />
-
-
-
-    <ImageView
-        android:id="@+id/ivPetServicoBusca"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_alignBottom="@+id/tvEstabServico"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="84dp"
-        android:scaleType="centerCrop"
-        app:srcCompat="@drawable/tipo_pet_gato" />
 
     <TextView
         android:id="@+id/tvExibirServicoValor"

@@ -10,9 +10,6 @@ import projetaobcc20172.com.projetopetemfoco.utils.Enumerates;
 import projetaobcc20172.com.projetopetemfoco.utils.FornecedorComparatorAvaliacao;
 import projetaobcc20172.com.projetopetemfoco.utils.FornecedorComparatorDist;
 import projetaobcc20172.com.projetopetemfoco.utils.Localizacao;
-import projetaobcc20172.com.projetopetemfoco.utils.ServicoFornecedorComparatorAvaliacao;
-import projetaobcc20172.com.projetopetemfoco.utils.ServicoFornecedorComparatorDist;
-import projetaobcc20172.com.projetopetemfoco.utils.ServicoFornecedorComparatorPreco;
 
 /**
  * Created by raul1 on 18/01/2018.

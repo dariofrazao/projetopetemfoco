@@ -1,7 +1,5 @@
 package projetaobcc20172.com.projetopetemfoco.utils;
 
-import android.util.Log;
-
 import java.util.Comparator;
 
 /**

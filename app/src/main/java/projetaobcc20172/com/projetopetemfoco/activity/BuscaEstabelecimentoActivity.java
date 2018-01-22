@@ -32,7 +32,6 @@ import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoFirebase;
 import projetaobcc20172.com.projetopetemfoco.model.Endereco;
 import projetaobcc20172.com.projetopetemfoco.model.Fornecedor;
 import projetaobcc20172.com.projetopetemfoco.model.Servico;
-import projetaobcc20172.com.projetopetemfoco.utils.Enumerates;
 import projetaobcc20172.com.projetopetemfoco.utils.Utils;
 
 import static android.content.Context.LOCATION_SERVICE;
@@ -211,7 +210,6 @@ public class BuscaEstabelecimentoActivity extends Fragment implements Serializab
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     for (final DataSnapshot dados : dataSnapshot.getChildren()) {
-                        String nomeT = dados.child("nomeBusca").getValue(String.class);
                         Fornecedor forn;
                         float nota = 0;
                         if (dados.child("nota").getValue(float.class) != null) {

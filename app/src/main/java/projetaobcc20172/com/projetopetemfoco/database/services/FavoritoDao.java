@@ -9,6 +9,7 @@ import projetaobcc20172.com.projetopetemfoco.model.Favorito;
 public interface FavoritoDao {
 
     void inserir(Favorito favorito, String idUsuario);
+    void comparar(Favorito favorito, String idUsuario);
     void remover(Favorito favorito, String idUsuario);
 
 }

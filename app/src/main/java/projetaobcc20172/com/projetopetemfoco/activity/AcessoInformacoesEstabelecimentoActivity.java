@@ -134,6 +134,7 @@ public class AcessoInformacoesEstabelecimentoActivity extends AppCompatActivity 
 
             //Chamada do DAO para salvar no banco
             FavoritoDaoImpl favoritoDao =  new FavoritoDaoImpl(this);
+            favoritoDao.comparar(mFavorito, mIdUsuarioLogado);
             favoritoDao.inserir(mFavorito, mIdUsuarioLogado);
             salvar_favorito.setVisibility(View.INVISIBLE);
             remover_favorito.setVisibility(View.VISIBLE);

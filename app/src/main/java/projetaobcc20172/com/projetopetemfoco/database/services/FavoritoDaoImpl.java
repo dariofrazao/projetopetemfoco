@@ -2,6 +2,8 @@ package projetaobcc20172.com.projetopetemfoco.database.services;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -9,6 +11,9 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoFirebase;
@@ -29,7 +34,7 @@ public class FavoritoDaoImpl implements FavoritoDao {
         this.mContexto = contexto;
 
     }
-//
+
 //    public void checharBancoVazio(final Favorito favorito, final String idUsuarioLogado){
 //
 //        mReferenciaFirebase.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -145,7 +150,11 @@ public class FavoritoDaoImpl implements FavoritoDao {
         final String id = mReferenciaFirebase.getKey();
         favorito.setIdFavorito(id);
 
-        //Log.d("teste", String.valueOf(mFavoritos.size()));
+        //mIdsFavoritos = new ArrayList<>();
+        //mIdsFavoritos.add(id);
+//        final String mGroupId = mReferenciaFirebase.getKey();
+//        mReferenciaFirebase.child(mGroupId).setValue(new ChatGroup());
+
 
         mReferenciaFirebase.setValue(favorito).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
@@ -165,8 +174,6 @@ public class FavoritoDaoImpl implements FavoritoDao {
         });
 
     }
-
-
 
         /*if (favorito.getChecar() == "0") {
 
@@ -202,9 +209,29 @@ public class FavoritoDaoImpl implements FavoritoDao {
         }*/
 
 
+    public void comparar(final Favorito favorito, final String idUsuario) {
 
+        mReferenciaFirebase.child("favoritos").orderByChild("idUsuario").equalTo(idUsuario).
+                addListenerForSingleValueEvent(new ValueEventListener() {
 
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
 
+                        for (DataSnapshot child : dataSnapshot.getChildren()) {
+                            String idFavorito = child.getKey();
+                            child.child("f");
+                            Log.d("User key", child.getKey());
+                            //Log.d("User ref", child.getRef().toString());
+                            //Log.d("User val", child.child("idFornecedor").getValue().toString());
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+    }
 
     @Override
     public void remover(final Favorito favorito, final String idUsuario) {

@@ -62,7 +62,7 @@ public class ConfiguracaoBuscaEstab {
         //Ordena por distância
 
         if(sFiltro.equals(Enumerates.Filtro.DISTANCIA)){
-            Collections.sort(resultadoFiltrados, new FornecedorComparatorDist());
+            Collections.sort(resultados, new FornecedorComparatorDist());
         }
         //Ordena por avaliação
         else if(sFiltro.equals(Enumerates.Filtro.AVALICAO)){

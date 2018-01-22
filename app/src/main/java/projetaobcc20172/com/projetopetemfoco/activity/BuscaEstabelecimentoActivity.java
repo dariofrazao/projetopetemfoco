@@ -120,8 +120,11 @@ public class BuscaEstabelecimentoActivity extends Fragment implements Serializab
     public void onResume(){
         super.onResume();
         verificarGPS();
-        if(ConfiguracaoBuscaEstab.getsNomeEstabelecimento()!=null)
+        if(ConfiguracaoBuscaEstab.getsNomeEstabelecimento()!=null && !ConfiguracaoBuscaEstab.getsNomeEstabelecimento().equals("TODOS"))
             buscarEstabelecimentos(ConfiguracaoBuscaEstab.getsNomeEstabelecimento());
+        else{
+            buscarTodosEstabelecimentos();
+        }
     }
 
     //Método que chama a activity para exibir informações do estabelecimento
@@ -202,6 +205,7 @@ public class BuscaEstabelecimentoActivity extends Fragment implements Serializab
     }
 
     private void buscarTodosEstabelecimentos(){
+        ConfiguracaoBuscaEstab.setsNomeEstabelecimento("TODOS");
         mForncedores.clear();
         verificarGPS();
         if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {

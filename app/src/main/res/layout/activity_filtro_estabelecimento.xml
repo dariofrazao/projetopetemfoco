@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@drawable/fundo_degrade">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -25,12 +25,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:checked="true"
+            android:buttonTint="@color/colorPrimaryDark"
             android:text="Próximidade" />
 
         <CheckBox
             android:id="@+id/cbAva"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:buttonTint="@color/colorPrimaryDark"
             android:text="Avaliação" />
 
         <TextView
@@ -51,13 +53,16 @@
             android:id="@+id/sbRaio"
             android:layout_marginTop="5dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:progressTint="@color/colorPrimaryDark"
+            android:thumbTint="@color/colorPrimaryDark"/>
 
         <Button
             android:id="@+id/btnSalvarFiltro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
+            android:background="@drawable/shapebutton"
             android:text="Salvar" />
 
     </LinearLayout>

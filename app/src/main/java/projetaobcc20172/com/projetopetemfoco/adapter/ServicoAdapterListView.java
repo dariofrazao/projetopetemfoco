@@ -47,6 +47,7 @@ public class ServicoAdapterListView extends ArrayAdapter<String[]> {
             assert inflater != null;
 
             view = inflater.inflate(R.layout.lista_servicos_busca, parent, false);
+            view = inflater.inflate(R.layout.lista_itens_servicos_busca, parent, false);
 
             TextView nomeServico = view.findViewById(R.id.tvExibirServico);
 

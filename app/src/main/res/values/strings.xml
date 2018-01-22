@@ -143,6 +143,7 @@
 
     <!--Strings relacionadas a tela de busca-->
     <string name="tb_estabelecimentos">Estabelecimentos</string>
+    <string name="tb_servicos">Busca por serviços</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="estabelecimento_nao_encontrado">Estabelecimento não encontrado.Tente ampliar o raio de busca</string>
@@ -150,9 +151,6 @@
 
     <string name="action_settings">Settings</string>
     <string name="buscaEstabelecimento">Nome do estabelecimento</string>
-
-    <!--Strings relacionadas a vacina-->
-    <string name="tb_servicos">Serviços</string>
 
     <!--Strings relacionadas a avaliação-->
     <string name="tb_avaliar_estabelecimento">Avaliação</string>

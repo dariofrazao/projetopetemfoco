@@ -3,14 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/ivServicoBusca"
-        android:layout_width="100dp"
-        android:layout_height="80dp"
-        android:layout_alignBottom="@+id/view"
+        android:layout_width="66dp"
+        android:layout_height="66dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="2dp"
+        android:layout_alignBottom="@+id/tvExibirServicoValor"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="5dp"
+        app:civ_border_width="1dp"
+        app:civ_border_color="@color/colorPrimary"
         app:srcCompat="@drawable/servico_passeio" />
 
     <TextView
@@ -23,7 +26,8 @@
         android:layout_toEndOf="@+id/ivServicoBusca"
         android:text="Servico"
         android:textColor="@color/colorSecondaryText"
-        android:textSize="18sp"
+        android:textSize="20sp"
+        android:paddingLeft="8dp"
         android:textStyle="bold" />
 
     <TextView
@@ -35,6 +39,7 @@
         android:layout_marginStart="8dp"
         android:layout_toEndOf="@+id/ivServicoBusca"
         android:text="est"
+        android:paddingLeft="10dp"
         android:textColor="@color/colorSecondaryText"
         android:textSize="14sp" />
 
@@ -45,6 +50,7 @@
         android:layout_alignStart="@+id/tvEstabServico"
         android:layout_below="@+id/tvEstabServico"
         android:text="distância"
+        android:paddingLeft="10dp"
         android:textColor="@color/colorSecondaryText"
         android:textSize="16sp" />
 
@@ -59,24 +65,29 @@
         android:textSize="16sp" />
 
 
+
+    <ImageView
+        android:id="@+id/ivPetServicoBusca"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignBottom="@+id/tvEstabServico"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="84dp"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/tipo_pet_gato" />
+
     <TextView
         android:id="@+id/tvExibirServicoValor"
         android:layout_width="wrap_content"
         android:layout_height="20dp"
         android:layout_alignBaseline="@+id/tvExibirDist"
         android:layout_alignBottom="@+id/tvExibirDist"
-        android:layout_toStartOf="@+id/ivPetServicoBusca"
+        android:layout_alignEnd="@+id/ivPetServicoBusca"
         android:text="Valor"
+        android:gravity="center"
+        android:layout_centerInParent="true"
         android:textColor="@color/colorSecondaryText"
         android:textSize="16sp" />
-
-    <View
-        android:layout_width="10dp"
-        android:layout_height="50dp"
-        android:layout_alignBottom="@+id/tvExibirDist"
-        android:layout_below="@+id/tvExibirNota"
-        android:layout_toEndOf="@+id/tvExibirDist"
-        android:id="@+id/view" />
 
     <ImageView
         android:id="@+id/ivPetServicoBusca"

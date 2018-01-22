@@ -32,7 +32,7 @@ public class BuscaServicosActivity extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         //returning our layout file
         //change R.layout.yourlayoutfilename for each of your fragments
-        return inflater.inflate(R.layout.tab_servico_fragment, container, false);
+        return inflater.inflate(R.layout.busca_servico_fragment, container, false);
     }
 
 
@@ -40,7 +40,7 @@ public class BuscaServicosActivity extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         //you can set the title for your toolbar here for different fragments different titles
-        //getActivity().setTitle("Busca por serviço");
+        getActivity().setTitle(R.string.tb_servicos);
         final GridView gridView = getActivity().findViewById(R.id.gridServicos);
         Button btnFiltro = getActivity().findViewById(R.id.btnFiltro);
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

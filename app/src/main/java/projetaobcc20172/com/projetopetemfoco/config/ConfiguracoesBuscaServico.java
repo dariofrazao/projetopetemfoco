@@ -74,10 +74,14 @@ public class ConfiguracoesBuscaServico {
         ArrayList<String[]> resultadoFiltrados = new ArrayList<>();
         double [] posicaoAtual = Localizacao.getCurrentLocation(act);
         for(String[] valores:resultados){
-            double dist = Localizacao.distanciaEntreDoisPontos(act,posicaoAtual[0],posicaoAtual[1],Double.parseDouble(valores[4]),Double.parseDouble(valores[5]));
-            if(dist>0 && dist<=sRaio.getRaioReal()){//Só add a lista se possuir uma distância válida e estiver dentro do raio
-                valores[6] = dist+"";
-                resultadoFiltrados.add(valores);
+            try {//Evita qualquer erro relacioanado com distância ou a latitude e longitude
+                double dist = Localizacao.distanciaEntreDoisPontos(act, posicaoAtual[0], posicaoAtual[1], Double.parseDouble(valores[4]), Double.parseDouble(valores[5]));
+                if (dist > 0 && dist <= sRaio.getRaioReal()) {//Só add a lista se possuir uma distância válida e estiver dentro do raio
+                    valores[6] = dist + "";
+                    resultadoFiltrados.add(valores);
+                }
+            }catch (Exception e){
+                continue;
             }
         }
         resultados.clear();

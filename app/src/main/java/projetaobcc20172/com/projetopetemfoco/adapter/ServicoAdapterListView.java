@@ -70,8 +70,11 @@ public class ServicoAdapterListView extends ArrayAdapter<String[]> {
 
             valor.setText(valores[2]);
 
-            nota.setText(String.format("%.2f", Double.parseDouble(valores[7])) + "pt");
-
+            if(valores[7]!=null) {
+                nota.setText(String.format("%.2f", Double.parseDouble(valores[7])) + "pt");
+            }else{
+                nota.setText(String.format("%.2f", 0.0) + "pt");
+            }
             distancia.setText(valores[6] + " km");
 
             img.setImageResource(Utils.escolherIconPet(valores[3], view));

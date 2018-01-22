@@ -34,15 +34,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
                 <TextView
                     android:id="@+id/tvNomeUsuarioAvaliador"
-                    android:layout_width="fill_parent"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Nome"
+                    android:text="Avaliação:"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textStyle="bold" />
 
             </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="1dp"
+                android:layout_marginTop="5dp" />
 
             <RatingBar
                 android:id="@+id/rbEstrelasAvaliacao"
@@ -57,33 +66,64 @@
                 android:id="@+id/tvComentario"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/comentario"
+                android:text="Comentário:"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textStyle="bold" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="1dp"
+                android:layout_marginTop="5dp" />
+
             <ScrollView
                 android:id="@+id/scrollView"
                 android:layout_width="match_parent"
-                android:layout_height="254dp">
-            <EditText
-                android:id="@+id/etComentarioAvaliacao"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:ems="10"
-                android:gravity="left|top"
-                android:inputType="textMultiLine"
-                android:background="@color/branco"
-                android:lines="8"
-                android:maxLines="12"
-                android:minLines="12"
-                android:hint="Digite seu comentário"/>
+                android:layout_height="150dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <EditText
+                        android:id="@+id/etComentarioAvaliacao"
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        android:ems="10"
+                        android:gravity="left|top"
+                        android:inputType="textMultiLine"
+                        android:background="@drawable/cornersbutton"
+                        android:lines="8"
+                        android:padding="10dp"
+                        android:hint="Digite seu comentário"/>
+
+                </LinearLayout>
+
             </ScrollView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="1dp"
+                android:layout_marginTop="5dp" />
+
             <Button
                 android:id="@+id/botao_avaliar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Avaliar" />
+                android:layout_gravity="center"
+                android:background="@drawable/shapebutton"
+                android:paddingRight="20dp"
+                android:paddingLeft="10dp"
+                android:drawableLeft="@drawable/ic_action_favoritos"
+                android:text="  Avaliar" />
 
 
         </LinearLayout>
+
     </LinearLayout>
+
 </RelativeLayout>

@@ -169,8 +169,11 @@ public class Fornecedor implements Serializable {
 
     public String getmEnderecoCombinado() {
         String mEnderecoCombinado = "";
-        mEnderecoCombinado = mEndereco.getLogradouro()+", "+mEndereco.getNumero()+", "+mEndereco.getBairro()+", "+
-                mEndereco.getLocalidade()+"/"+mEndereco.getUf()+", "+mEndereco.getCep();
+        if(mEndereco.getNumero().equals("")){
+            mEndereco.setNumero("S/N");
+        }
+        mEnderecoCombinado = mEndereco.getLogradouro()+", "+ mEndereco.getNumero()+", "+mEndereco.getBairro()+", "+
+                mEndereco.getLocalidade()+"/"+mEndereco.getUf()+", "+"CEP: "+ mEndereco.getCep();
         return mEnderecoCombinado;
     }
 
@@ -183,4 +186,3 @@ public class Fornecedor implements Serializable {
     }
 
 }
-

@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -34,6 +35,7 @@ import projetaobcc20172.com.projetopetemfoco.model.Fornecedor;
 import projetaobcc20172.com.projetopetemfoco.model.Servico;
 
 public class AcessoInformacoesEstabelecimentoActivity extends AppCompatActivity implements Serializable {
+
     private Fornecedor mFornecedor;
     private MapView mapView;
 
@@ -56,10 +58,10 @@ public class AcessoInformacoesEstabelecimentoActivity extends AppCompatActivity 
         // Associa os componetes ao layout XML
         Toolbar toolbar = findViewById(R.id.tb_acesso_infomacoes_estabelecimento);
         TextView mExibeNomeEstabelecimento = findViewById(R.id.tvExibeNomeEstabelecimento);
-        TextView mExibeEmailEstabelecimentor = findViewById(R.id.tvExibeEmailEstabelecimentor);
-        TextView mExibeTelefoneEstabelecimento = findViewById(R.id.tvExibeTelefoneEstabelecimento);
-        TextView mExibeCpfCnpjEstabelecimento = findViewById(R.id.tvExibeCpfCnpjEstabelecimento);
-        TextView mExibeHorarioEstabelecimento = findViewById(R.id.tvExibeHorarioEstabelecimento);
+        TextView mExibeEmailEstabelecimentor = findViewById(R.id.tvEmail);
+        TextView mExibeTelefoneEstabelecimento = findViewById(R.id.tvTelefone);
+        //TextView mExibeCpfCnpjEstabelecimento = findViewById(R.id.tvExibeCpfCnpjEstabelecimento);
+        TextView mExibeHorarioEstabelecimento = findViewById(R.id.tvHorario);
         TextView mExibeEnderecoEstabelecimento = findViewById(R.id.tvEnderecoEstabelecimentoCombinado);
         ListView mExibeListaServicos = findViewById(R.id.lvListaServicos);
         mapView = findViewById(R.id.map_view);
@@ -84,10 +86,10 @@ public class AcessoInformacoesEstabelecimentoActivity extends AppCompatActivity 
         mapView.onCreate(savedInstanceState);
 
         mExibeNomeEstabelecimento.setText(mFornecedor.getNome());
-        mExibeEmailEstabelecimentor.setText(mFornecedor.getEmail());
-        mExibeTelefoneEstabelecimento.setText(mFornecedor.getTelefone());
-        mExibeCpfCnpjEstabelecimento.setText(mFornecedor.getCpfCnpj());
-        mExibeHorarioEstabelecimento.setText(mFornecedor.getHorarios());
+        mExibeEmailEstabelecimentor.setText("E-mail: " + mFornecedor.getEmail());
+        mExibeTelefoneEstabelecimento.setText("Fone: " + mFornecedor.getTelefone());
+        //mExibeCpfCnpjEstabelecimento.setText(mFornecedor.getCpfCnpj());
+        mExibeHorarioEstabelecimento.setText("Horário de Funcionamento: " + mFornecedor.getHorarios());
         mExibeEnderecoEstabelecimento.setText(mFornecedor.getmEnderecoCombinado());
 
         // Monta listview e mAdapter

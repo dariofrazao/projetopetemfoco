@@ -136,10 +136,10 @@
     <string name="horario">Horário:</string>
     <string name="email">Email:</string>
     <string name="avaliacoes">Avaliações</string>
-    <string name="sucesso_avaliacao_estabelecimento">avaliacao realizada com sucesso</string>
+    <string name="sucesso_avaliacao_estabelecimento">Avaliação realizada com Sucesso!</string>
     <string name="sucesso_atualizacao_nota">Atualização Realizado com Sucesso!</string>
     <string name="erro_atualizacao_nota">Atualização com problema!</string>
-    <string name="erro_avaliacao_estabelecimento">erro ao realizar avaliação</string>
+    <string name="erro_avaliacao_estabelecimento">Erro ao realizar Avaliação</string>
 
     <!--Strings relacionadas a tela de busca-->
     <string name="tb_estabelecimentos">Estabelecimentos</string>
@@ -158,7 +158,7 @@
     <string name="tb_avaliar_estabelecimento">Avaliação</string>
     <string name="tb_avaliacoes_estabelecimento">Avaliações</string>
     <string name="avaliador">Usuário</string>
-    <string name="comentario">Comentário</string>
+    <string name="comentario">Comentário:</string>
     <string name="avaliar">Avaliar</string>
     <string name="title_activity_filtro_busca">FiltroBuscaActivity</string>
     <string name="erro_timeout_msg">Operação demorou demais.Verfique sua conexão com a internet</string>

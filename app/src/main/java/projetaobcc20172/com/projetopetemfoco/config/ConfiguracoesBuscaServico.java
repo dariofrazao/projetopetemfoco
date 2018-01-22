@@ -94,6 +94,7 @@ public class ConfiguracoesBuscaServico {
         //Ordena por avaliação
         else if(sFiltro.equals(Enumerates.Filtro.AVALICAO)){
             Collections.sort(resultados, new ServicoFornecedorComparatorAvaliacao());
+            Collections.reverse(resultados);
         }
 
     }

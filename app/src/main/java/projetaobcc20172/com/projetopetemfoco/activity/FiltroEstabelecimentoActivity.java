@@ -77,7 +77,7 @@ public class FiltroEstabelecimentoActivity extends Activity implements View.OnCl
 
     @Override
     public void onClick(View view) {
-        assert true;
+        //Método com corpo vazio
     }
 
     private void configurarSeekBar(){
@@ -102,12 +102,12 @@ public class FiltroEstabelecimentoActivity extends Activity implements View.OnCl
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-                assert true;
+                //Método com corpo vazio
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                assert true;
+                //Método com corpo vazio
             }
         });
     }

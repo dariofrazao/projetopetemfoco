@@ -137,7 +137,7 @@ public class BuscaEstabelecimentoActivity extends Fragment implements Serializab
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                assert true;
+                //Método com corpo vazio
             }
         });
     }
@@ -185,7 +185,7 @@ public class BuscaEstabelecimentoActivity extends Fragment implements Serializab
 
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
-                    assert true;
+                    //Método com corpo vazio
                 }
             });
         }

@@ -128,6 +128,9 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_servicos:
                 fragment = new BuscaServicoActivity();
                 break;
+            case R.id.nav_favoritos:
+                fragment = new MeusFavoritosActivity();
+                break;
             case R.id.nav_sair:
                 this.deslogarUsuario();
                 break;

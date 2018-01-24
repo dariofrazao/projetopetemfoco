@@ -1,5 +1,6 @@
 package projetaobcc20172.com.projetopetemfoco.activity;
 
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -12,6 +13,8 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.ProgressBar;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.Query;
@@ -21,6 +24,7 @@ import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.adapter.ServicoAdapterListView;
 import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoFirebase;
 import projetaobcc20172.com.projetopetemfoco.config.ConfiguracoesBuscaServico;
+import projetaobcc20172.com.projetopetemfoco.utils.Enumerates;
 import projetaobcc20172.com.projetopetemfoco.utils.Utils;
 
 /**
@@ -32,6 +36,7 @@ public class ListaEstabServicoActivity extends AppCompatActivity {
     private ArrayList<String[]> mResultado;
     private ArrayAdapter<String[]> mAdapter;
     private LocationManager locationManager;
+    private ProgressBar mProgresso;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +44,7 @@ public class ListaEstabServicoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_lista_servicos);
         Toolbar toolbar = findViewById(R.id.tbBuscaServicos);
         Button btnFiltro = findViewById(R.id.btnFiltroServico);
+        mProgresso = findViewById(R.id.pbProgressoBuscaServico);
         // Configura toolbar
         toolbar.setTitle("Serviços");
         toolbar.setTitleTextColor(Color.WHITE);
@@ -63,6 +69,7 @@ public class ListaEstabServicoActivity extends AppCompatActivity {
     @Override
     protected void onResume(){
         super.onResume();
+        mProgresso.setVisibility(View.VISIBLE);
         buscarServico(ConfiguracoesBuscaServico.getsOpcaoServico(), ConfiguracoesBuscaServico.getsOpcaosPet());
     }
 
@@ -86,8 +93,9 @@ public class ListaEstabServicoActivity extends AppCompatActivity {
     private void buscarServico(String servico,ArrayList<String> pets) {
         mResultado.clear();
         verificarGPS();
-
-        if(locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+        if(locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) && ConfiguracoesBuscaServico.getsEstado().equals(Enumerates.Estado.DEFAULT)) {
+            //mProgresso.setVisibility(View.VISIBLE);
+            ConfiguracoesBuscaServico.setsEstado(Enumerates.Estado.BUSCANDO);
             for (String pet : pets) {
                 Query query;
                 if ("Todos".equals(servico) && "Todos".equals(pet)) {
@@ -117,6 +125,7 @@ public class ListaEstabServicoActivity extends AppCompatActivity {
                             Utils.mostrarMensagemCurta(projetaobcc20172.com.projetopetemfoco.activity.ListaEstabServicoActivity.this, getString(R.string.servicos_nao_encontrado));
                         }
                         mAdapter.notifyDataSetChanged();
+                        mProgresso.setVisibility(View.INVISIBLE);
                     }
 
                     @Override

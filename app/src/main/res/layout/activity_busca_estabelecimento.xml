@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/relativeBuscaEstab"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/fundo_degrade">
 
     <ProgressBar
         android:id="@+id/pbProgresso"
-        android:layout_centerInParent="true"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
-    </ProgressBar>
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"></ProgressBar>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,27 +20,28 @@
             android:id="@+id/svBusca"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:queryHint="@string/buscaEstabelecimento"
             android:background="@drawable/fundo_degrade"
-            android:iconifiedByDefault="false"
             android:focusable="true"
-            android:focusableInTouchMode="true">
+            android:focusableInTouchMode="true"
+            android:iconifiedByDefault="false"
+            android:queryHint="@string/buscaEstabelecimento">
 
         </SearchView>
+
         <Button
             android:id="@+id/botao_todos_estabelecimentos"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:background="@drawable/shapebutton"
-            android:paddingRight="20dp"
             android:paddingLeft="10dp"
+            android:paddingRight="20dp"
             android:text="  Todos Estabelecimentos" />
 
         <ListView
             android:id="@+id/lvBuscaEsta"
             android:layout_width="match_parent"
-            android:layout_height="384dp"
+            android:layout_height="403dp"
             android:padding="8dp" />
 
         <Button
@@ -48,6 +49,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/shapebutton"
+            android:layout_alignParentBottom="true"
             android:text="Filtro" />
 
     </LinearLayout>

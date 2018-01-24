@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -26,6 +27,7 @@ import projetaobcc20172.com.projetopetemfoco.utils.Utils;
 public class BuscaServicosActivity extends Fragment {
 
     private TiposServicoAdapterGrid mServAdpGrid;
+    private ProgressBar prog;
 
     @Nullable
     @Override
@@ -43,6 +45,7 @@ public class BuscaServicosActivity extends Fragment {
         getActivity().setTitle(R.string.tb_servicos);
         final GridView gridView = getActivity().findViewById(R.id.gridServicos);
         Button btnFiltro = getActivity().findViewById(R.id.btnFiltro);
+
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {

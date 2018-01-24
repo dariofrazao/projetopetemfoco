@@ -36,17 +36,14 @@ public class ConfiguracoesBuscaServico {
     }
 
     public static void setsOpcaosPet(ArrayList<String> sOpcaosPet) {
-        sEstado = Enumerates.Estado.ALTERADO;
         ConfiguracoesBuscaServico.sOpcaosPet = sOpcaosPet;
     }
 
     public static void setsOpcaoServico(String sOpcaoServico) {
-        sEstado = Enumerates.Estado.ALTERADO;
         ConfiguracoesBuscaServico.sOpcaoServico = sOpcaoServico;
     }
 
     public static void setsFiltro(Enumerates.Filtro sFiltro) {
-        sEstado = Enumerates.Estado.ALTERADO;
         ConfiguracoesBuscaServico.sFiltro = sFiltro;
     }
 
@@ -69,6 +66,10 @@ public class ConfiguracoesBuscaServico {
 
     public static Raio getRaio() {
         return sRaio;
+    }
+
+    public static void setsEstado(Enumerates.Estado sEstado) {
+        ConfiguracoesBuscaServico.sEstado = sEstado;
     }
 
     public static void filtrar(Activity act, ArrayList<String[]> resultados){
@@ -100,6 +101,6 @@ public class ConfiguracoesBuscaServico {
             Collections.sort(resultados, new ServicoFornecedorComparatorAvaliacao());
             Collections.reverse(resultados);
         }
-
+        sEstado = Enumerates.Estado.DEFAULT;
     }
 }

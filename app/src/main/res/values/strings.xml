@@ -126,7 +126,6 @@
     <string name="fb_login_protocol_scheme">fb1383454871782340</string>
 
 
-
     <!--Strings relacionadas ao estbelecimento-->
     <string name="estabelecimento">Estabelecimento:</string>
     <string name="tb_acesso_estabelecimento">Informações do Estabelecimento</string>
@@ -138,8 +137,11 @@
     <string name="avaliacoes">Avaliações</string>
     <string name="sucesso_avaliacao_estabelecimento">Avaliação realizada com Sucesso!</string>
     <string name="sucesso_atualizacao_nota">Atualização Realizado com Sucesso!</string>
+    <string name="sucesso_avaliacao_servico">Avaliação realizada com Sucesso!</string>
     <string name="erro_atualizacao_nota">Atualização com problema!</string>
-    <string name="erro_avaliacao_estabelecimento">Erro ao realizar Avaliação</string>
+    <string name="erro_avaliacao_estabelecimento">Erro ao realizar Avaliação do Estabelecimento</string>
+    <string name="erro_avaliacao_servico">Erro ao realizar Avaliação do Serviço</string>
+
 
     <!--Strings relacionadas a tela de busca-->
     <string name="tb_estabelecimentos">Estabelecimentos</string>
@@ -154,6 +156,7 @@
 
     <!--Strings relacionadas a avaliação-->
     <string name="tb_avaliar_estabelecimento">Avaliação</string>
+    <string name="tb_avaliar_servico">Avaliação</string>
     <string name="tb_avaliacoes_estabelecimento">Avaliações</string>
     <string name="avaliador">Usuário</string>
     <string name="comentario">Comentário:</string>
@@ -165,5 +168,6 @@
 
     <string name="api_key_google_matrix">AIzaSyBrKPS2exi5vhLYY1H1islk4UUlRb4Z9Rk</string>
     <string name="url_matrix_distance">https://maps.googleapis.com/maps/api/distancematrix/json?units=metric</string>
+    <string name="title_activity_avaliar_servico">AvaliarServicoActivity</string>
 
 </resources>

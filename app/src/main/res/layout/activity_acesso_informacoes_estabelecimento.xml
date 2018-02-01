@@ -37,72 +37,72 @@
                 android:layout_height="70dp"
                 android:background="@drawable/estabelecimentos"/>
 
-            <TextView
-                android:id="@+id/tvExibeNomeEstabelecimento"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Estabelecimento"
-                android:gravity="center"
-                android:textColor="@android:color/black"
-                android:textStyle="bold|italic"
-                android:textSize="20sp"
-                android:textAppearance="?android:attr/textAppearanceMedium"/>
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvExibeNomeEstabelecimento"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Estabelecimento"
+                    android:gravity="center"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold|italic"
+                    android:textSize="20sp"
+                    android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageButton
+                        android:id="@+id/botao_mostrar_avaliacoes_estabelecimento"
+                        android:layout_width="45dp"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="100dp"
+                        android:background="@drawable/ic_action_avaliacoes"
+                        android:text="Avaliar" />
+
+                    <ImageButton
+                        android:id="@+id/botao_avaliar_estabelecimento"
+                        android:layout_width="45dp"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="60dp"
+                        android:background="@drawable/ic_action_avaliar"
+                        android:text="Avaliar" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="90dp"
+                        android:text="Avaliações"
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="35dp"
+                        android:text="Avaliar"
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                </LinearLayout>
+
+            </LinearLayout>
 
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <ImageButton
-                android:id="@+id/botao_mostrar_avaliacoes_estabelecimento"
-                android:layout_width="45dp"
-                android:layout_height="40dp"
-                android:layout_marginLeft="100dp"
-                android:background="@drawable/ic_action_avaliacoes"
-                android:text="Avaliar" />
-
-            <ImageButton
-                android:id="@+id/botao_avaliar_estabelecimento"
-                android:layout_width="45dp"
-                android:layout_height="40dp"
-                android:layout_marginLeft="60dp"
-                android:background="@drawable/ic_action_avaliar"
-                android:text="Avaliar" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="90dp"
-                android:text="Avaliações"
-                android:textColor="@android:color/black"
-                android:textSize="16sp"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-
-            <TextView
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="35dp"
-                android:text="Avaliar"
-                android:textColor="@android:color/black"
-                android:textSize="16sp"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginBottom="1dp"
-            android:layout_marginTop="5dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -119,12 +119,6 @@
                 android:textSize="16sp"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginBottom="1dp"
-                android:layout_marginTop="1dp" />
-
             <TextView
                 android:id="@+id/tvTelefone"
                 android:layout_width="match_parent"
@@ -135,11 +129,6 @@
                 android:textSize="16sp"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginBottom="1dp"
-                android:layout_marginTop="1dp" />
 
             <TextView
                 android:id="@+id/tvHorario"
@@ -150,12 +139,6 @@
                 android:textColor="@android:color/black"
                 android:textSize="16sp"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginBottom="1dp"
-                android:layout_marginTop="1dp" />
 
             <TextView
                 android:id="@+id/tvEnderecoEstabelecimento"
@@ -182,7 +165,7 @@
             <com.google.android.gms.maps.MapView
                 android:id="@+id/map_view"
                 android:layout_width="match_parent"
-                android:layout_height="130dp"
+                android:layout_height="120dp"
                 android:layout_weight="2"
                 map:liteMode="true" />
 

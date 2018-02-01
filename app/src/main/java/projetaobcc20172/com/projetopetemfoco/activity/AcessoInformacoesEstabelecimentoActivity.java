@@ -122,7 +122,6 @@ public class AcessoInformacoesEstabelecimentoActivity extends AppCompatActivity 
         Intent intent = new Intent(AcessoInformacoesEstabelecimentoActivity.this, AvaliarEstabelecimentoActivity.class);
         intent.putExtra("Fornecedor", fornecedor);
         startActivity(intent);
-        finish();
     }
 
     @Override
@@ -136,7 +135,6 @@ public class AcessoInformacoesEstabelecimentoActivity extends AppCompatActivity 
         Intent intent = new Intent(AcessoInformacoesEstabelecimentoActivity.this, AvalicoesEstabelecimentoActivity.class);
         intent.putExtra("Fornecedor", fornecedor);
         startActivity(intent);
-        finish();
     }
 
     private void setUpMap(GoogleMap googleMap) {

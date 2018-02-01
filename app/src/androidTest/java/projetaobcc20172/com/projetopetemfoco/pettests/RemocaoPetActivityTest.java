@@ -56,7 +56,7 @@ public class RemocaoPetActivityTest {
         mIdUsuarioLogado = getPreferences("id", context);
 
         //Chamada do DAO para salvar um pet no banco para fazer o teste de remoção
-        petDao.inserir(pet, mIdUsuarioLogado);
+        petDao.inserir(pet, mIdUsuarioLogado,null);
 
         Thread.sleep(4000);
         LoginActivityTest log = new LoginActivityTest();

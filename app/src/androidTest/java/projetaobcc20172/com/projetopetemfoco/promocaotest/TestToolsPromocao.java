@@ -2,7 +2,6 @@ package projetaobcc20172.com.projetopetemfoco.promocaotest;
 
 import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.TestTools;
-
 import projetaobcc20172.com.projetopetemfoco.activity.VisualizarPromocaoActivity;
 import projetaobcc20172.com.projetopetemfoco.model.Promocao;
 

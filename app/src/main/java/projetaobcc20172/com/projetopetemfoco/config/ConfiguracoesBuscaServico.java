@@ -5,7 +5,6 @@ import android.app.Activity;
 import java.util.ArrayList;
 import java.util.Collections;
 
-
 import projetaobcc20172.com.projetopetemfoco.utils.Enumerates;
 import projetaobcc20172.com.projetopetemfoco.utils.Localizacao;
 import projetaobcc20172.com.projetopetemfoco.utils.ServicoFornecedorComparatorAvaliacao;

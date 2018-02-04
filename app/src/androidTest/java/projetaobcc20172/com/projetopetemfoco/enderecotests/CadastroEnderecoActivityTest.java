@@ -7,8 +7,8 @@ import org.junit.Rule;
 import org.junit.Test;
 
 import projetaobcc20172.com.projetopetemfoco.R;
-import projetaobcc20172.com.projetopetemfoco.activity.LoginActivity;
 import projetaobcc20172.com.projetopetemfoco.TestTools;
+import projetaobcc20172.com.projetopetemfoco.activity.LoginActivity;
 import projetaobcc20172.com.projetopetemfoco.logintests.LoginActivityTest;
 
 /**

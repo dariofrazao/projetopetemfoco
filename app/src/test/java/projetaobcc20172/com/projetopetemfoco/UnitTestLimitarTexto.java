@@ -1,6 +1,7 @@
 package projetaobcc20172.com.projetopetemfoco;
 
 import org.junit.Test;
+
 import projetaobcc20172.com.projetopetemfoco.utils.Utils;
 
 import static junit.framework.Assert.assertEquals;

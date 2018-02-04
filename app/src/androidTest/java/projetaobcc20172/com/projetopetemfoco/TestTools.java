@@ -19,9 +19,6 @@ import org.hamcrest.Matcher;
 
 import java.util.Random;
 
-
-
-
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.swipeLeft;
 import static android.support.test.espresso.action.ViewActions.swipeRight;

@@ -65,7 +65,7 @@ public class EditarPetActivityTest {
         TestToolsPet.clicarIconeEditar();
     }
 
-    //Teste que simula uma edição do pet com o campo nome em branco
+    //Teste que simula uma edição do pet com o campo titulo em branco
     @Test
     public void testeNomeEmBranco() throws InterruptedException {
         TestTools.apagarCampo(R.id.etEditarNomePet);

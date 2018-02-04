@@ -138,6 +138,9 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_mapa:
                 //fragment = new MapaActivity();
                 break;
+            case R.id.nav_promocoes:
+                fragment = new FeedPromocoesFragment();
+                break;
             case R.id.nav_endereco:
                 fragment = new EnderecoActivity();
                 break;

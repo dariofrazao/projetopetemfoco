@@ -44,7 +44,7 @@ public class CadastroPetActivityTest{
         Espresso.closeSoftKeyboard();
     }
 
-    //Teste que simula um cadastro do pet com o campo nome em branco
+    //Teste que simula um cadastro do pet com o campo titulo em branco
     @Test
     public void testeNomeEmBranco(){
         TestToolsPet.preencherCadastro("",sraca);

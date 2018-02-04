@@ -208,7 +208,7 @@ public class BuscaEstabelecimentoActivity extends Fragment implements Serializab
                             nota = dados.child("nota").getValue(float.class);
                         }
 
-                        forn = new Fornecedor(dados.child("nome").getValue(String.class), dados.child("email").getValue(String.class), dados.child("cpfCnpj").getValue(String.class)
+                        forn = new Fornecedor(dados.child("titulo").getValue(String.class), dados.child("email").getValue(String.class), dados.child("cpfCnpj").getValue(String.class)
                                 , dados.child("horarios").getValue(String.class), nota, dados.child("telefone").getValue(String.class),
                                 dados.child("endereco").getValue(Endereco.class));
                         forn.setId(dados.getKey());

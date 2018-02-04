@@ -113,9 +113,9 @@ public class AvaliarEstabelecimentoActivity extends AppCompatActivity {
     }
 
 
-    //Método que busca o nome do usuário
+    //Método que busca o titulo do usuário
     public void buscaNomeUsuario(final String idUsuariologado){
-        //Buscar nome do usuário logado
+        //Buscar titulo do usuário logado
         DatabaseReference mReferenciaFirebase;
         mReferenciaFirebase = ConfiguracaoFirebase.getFirebase();
         mReferenciaFirebase.child("usuarios").child(idUsuariologado).addValueEventListener(new ValueEventListener() {
@@ -123,7 +123,7 @@ public class AvaliarEstabelecimentoActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot.getValue() != null){
                     Usuario usuario = dataSnapshot.getValue(Usuario.class);
-                    mUsuario = new Usuario();//idUsuario, nome, email, foto
+                    mUsuario = new Usuario();//idUsuario, titulo, email, foto
                     mUsuario.setNome(usuario.getNome());
                     mUsuario.setEmail(usuario.getEmail());
                     mUsuario.setId(idUsuariologado);

@@ -55,7 +55,8 @@ public class EditarPetActivityTest {
         mIdUsuarioLogado = getPreferences("id", context);
 
         //Chamada do DAO para salvar um pet no banco para fazer o teste de edição
-        petDao.inserir(pet, mIdUsuarioLogado);
+        byte [] img = new byte[0];
+        petDao.inserir(pet, mIdUsuarioLogado, img);
 
         Thread.sleep(4000);
         LoginActivityTest log = new LoginActivityTest();

@@ -2,6 +2,7 @@ package projetaobcc20172.com.projetopetemfoco.activity;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.support.annotation.VisibleForTesting;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -14,7 +15,8 @@ import projetaobcc20172.com.projetopetemfoco.model.Promocao;
 
 public class VisualizarPromocaoActivity extends AppCompatActivity {
 
-    private Promocao mPromocao;
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    public Promocao mPromocao;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

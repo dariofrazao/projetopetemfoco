@@ -3,15 +3,14 @@ package projetaobcc20172.com.projetopetemfoco.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.CardView;
+
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -34,6 +33,7 @@ import projetaobcc20172.com.projetopetemfoco.model.Promocao;
 public class FeedPromocoesFragment  extends Fragment implements Serializable {
 
     private StaggeredGridLayoutManager layoutManager;
+
     private List<Promocao> mPromocoes;
     private PromocoesRecyclerViewAdapter mAdapter;
 

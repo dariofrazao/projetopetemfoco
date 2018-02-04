@@ -1,13 +1,17 @@
 package projetaobcc20172.com.projetopetemfoco.activity;
 
+
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -20,6 +24,7 @@ import java.util.List;
 import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.adapter.PromocoesRecyclerViewAdapter;
 import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoFirebase;
+import projetaobcc20172.com.projetopetemfoco.model.Fornecedor;
 import projetaobcc20172.com.projetopetemfoco.model.Promocao;
 
 /**
@@ -41,13 +46,13 @@ public class FeedPromocoesFragment  extends Fragment implements Serializable {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        RecyclerView recyclerView = getActivity().findViewById(R.id.recyclerView);
+        final RecyclerView recyclerView = getActivity().findViewById(R.id.recyclerView);
         getActivity().setTitle(R.string.tv_promocoes);
-        recyclerView.setHasFixedSize(true);
+        recyclerView.setHasFixedSize(false);
         layoutManager = new StaggeredGridLayoutManager(3,1);
         recyclerView.setLayoutManager(layoutManager);
         this.mPromocoes = new ArrayList<>();
-        this.mAdapter = new PromocoesRecyclerViewAdapter(getActivity(),this.mPromocoes);
+        this.mAdapter = new PromocoesRecyclerViewAdapter(getActivity(),this.mPromocoes,getActivity());
         buscaPromocoes();
         recyclerView.setAdapter(this.mAdapter);
 
@@ -59,9 +64,8 @@ public class FeedPromocoesFragment  extends Fragment implements Serializable {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for(DataSnapshot dado : dataSnapshot.getChildren()){
                     Promocao promo = dado.getValue(Promocao.class);
-                    mPromocoes.add(promo);
+                    buscaFornecedor(promo);
                 }
-                mAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -70,4 +74,26 @@ public class FeedPromocoesFragment  extends Fragment implements Serializable {
             }
         });
     }
+
+    private void buscaFornecedor(final Promocao promo) {
+        ConfiguracaoFirebase.getFirebase().child("fornecedor").child(promo.getFornecedorId()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Fornecedor f = dataSnapshot.getValue(Fornecedor.class);
+                if(f!=null) {
+                    promo.setmFornecedor(f);
+                    mPromocoes.add(promo);
+                    mAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+
+
 }

@@ -5,11 +5,13 @@ package projetaobcc20172.com.projetopetemfoco.model;
  */
 
 
+import java.io.Serializable;
+
 /**
  * Created by Cloves on 19/01/2018.
  */
 
-public class Promocao{
+public class Promocao implements Serializable{
 
     private String mId;
     private String mTitulo;
@@ -17,6 +19,7 @@ public class Promocao{
     private String mValor;
     private String mData;
     private String mFornecedorId;
+    private Fornecedor mFornecedor;
 
     public String getId() {
         return mId;
@@ -64,5 +67,13 @@ public class Promocao{
 
     public void setFornecedorId(String mFornecedorId) {
         this.mFornecedorId = mFornecedorId;
+    }
+
+    public Fornecedor getmFornecedor() {
+        return mFornecedor;
+    }
+
+    public void setmFornecedor(Fornecedor mFornecedor) {
+        this.mFornecedor = mFornecedor;
     }
 }

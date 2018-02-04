@@ -16,9 +16,9 @@ import android.widget.TextView;
 import java.util.List;
 
 import projetaobcc20172.com.projetopetemfoco.R;
-import projetaobcc20172.com.projetopetemfoco.activity.AcessoInformacoesEstabelecimentoActivity;
 import projetaobcc20172.com.projetopetemfoco.activity.VisualizarPromocaoActivity;
 import projetaobcc20172.com.projetopetemfoco.model.Promocao;
+import projetaobcc20172.com.projetopetemfoco.utils.Utils;
 
 /**
  * Created by raul1 on 03/02/2018.
@@ -57,6 +57,7 @@ public class PromocoesRecyclerViewAdapter extends RecyclerView.Adapter<Promocoes
 
         private void exibirDetalhes(int pos){
             Intent intent = new Intent(activityAtual, VisualizarPromocaoActivity.class);
+            System.out.println("promo2 "+promocaoList.get(pos).getTitulo());
             intent.putExtra("promocao", promocaoList.get(pos));
             activityAtual.startActivity(intent);
         }
@@ -66,6 +67,7 @@ public class PromocoesRecyclerViewAdapter extends RecyclerView.Adapter<Promocoes
     private List<Promocao> promocaoList;
     private Context context;
     private Activity activityAtual;
+    private int tamanhoDescricao = 35;
 
     public PromocoesRecyclerViewAdapter(Context context, List<Promocao> itemList,Activity activityAtual) {
         this.promocaoList = itemList;
@@ -86,7 +88,7 @@ public class PromocoesRecyclerViewAdapter extends RecyclerView.Adapter<Promocoes
     @Override
     public void onBindViewHolder(PromocaoHolder holder, int position) {
         holder.titulo.setText(promocaoList.get(position).getTitulo());
-        holder.descricao.setText(promocaoList.get(position).getDescricao());
+        holder.descricao.setText(Utils.limitarTexto(promocaoList.get(position).getDescricao(),tamanhoDescricao));
         holder.valor.setText(promocaoList.get(position).getValor());
         holder.forncedor.setText(promocaoList.get(position).getmFornecedor().getNome());
 //        if(position%2==0)

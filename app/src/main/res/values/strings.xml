@@ -167,5 +167,6 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="tv_promocoes">Promoções</string>
+    <string name="tb_detalhes_promocao">Detalhes da promoção</string>
 
 </resources>

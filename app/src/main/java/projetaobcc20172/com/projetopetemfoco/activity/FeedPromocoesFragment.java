@@ -48,7 +48,7 @@ public class FeedPromocoesFragment  extends Fragment implements Serializable {
         StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(3, 1);
         recyclerView.setLayoutManager(layoutManager);
         this.mPromocoes = new ArrayList<>();
-        this.mAdapter = new PromocoesRecyclerViewAdapter(getActivity(),this.mPromocoes,getActivity());
+        this.mAdapter = new PromocoesRecyclerViewAdapter(this.mPromocoes,getActivity());
         buscaPromocoes();
         recyclerView.setAdapter(this.mAdapter);
 
@@ -66,7 +66,7 @@ public class FeedPromocoesFragment  extends Fragment implements Serializable {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
+                //vazio
             }
         });
     }

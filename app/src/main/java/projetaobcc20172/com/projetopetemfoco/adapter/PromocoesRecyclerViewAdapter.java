@@ -67,7 +67,7 @@ public class PromocoesRecyclerViewAdapter extends RecyclerView.Adapter<Promocoes
 
 
 
-    public PromocoesRecyclerViewAdapter(Context context, List<Promocao> itemList,Activity activityAtual) {
+    public PromocoesRecyclerViewAdapter(List<Promocao> itemList,Activity activityAtual) {
         this.mPromocaoList = itemList;
         this.mActivityAtual = activityAtual;
     }

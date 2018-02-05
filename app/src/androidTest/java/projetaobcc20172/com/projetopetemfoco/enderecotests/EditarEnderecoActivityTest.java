@@ -67,7 +67,8 @@ public class EditarEnderecoActivityTest {
         log.testeLoginComSucesso();
         Thread.sleep(4000);
         TestTools.clicarItemNavigationMenu(R.id.drawer_layout, R.id.nav_busca, R.id.nav_endereco);
-        TestToolsEndereco.clicarIconeEditar();
+        TestTools.clicarEmITemListView(R.id.lv_enderecos, 0);
+        TestTools.clicarBotao(R.id.btnEditar);
     }
 
     @Test

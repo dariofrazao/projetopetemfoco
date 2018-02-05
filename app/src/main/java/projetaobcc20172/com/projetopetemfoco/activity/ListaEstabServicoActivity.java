@@ -10,8 +10,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 
@@ -37,6 +38,7 @@ public class ListaEstabServicoActivity extends AppCompatActivity {
 
     private ArrayList<String[]> mResultado;
     private ArrayAdapter<String[]> mAdapter;
+    private ListView mListView;
     private LocationManager locationManager;
     private ProgressBar mProgresso;
 
@@ -45,26 +47,29 @@ public class ListaEstabServicoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_servicos);
         Toolbar toolbar = findViewById(R.id.tbBuscaServicos);
-        Button btnFiltro = findViewById(R.id.btnFiltroServico);
+        ImageView mFiltro = findViewById(R.id.ivFiltro);
         mProgresso = findViewById(R.id.pbProgressoBuscaServico);
         // Configura toolbar
         toolbar.setTitle("Serviços");
         toolbar.setTitleTextColor(Color.WHITE);
         toolbar.setNavigationIcon(R.drawable.ic_action_arrow_left_white);
         setSupportActionBar(toolbar);
-        ListView listView = findViewById(R.id.lvEstaServicoBusca);
-        mResultado = new ArrayList<>();
+        mListView = findViewById(R.id.lvEstaServicoBusca);
+        mResultado = new ArrayList<String[]>();
         mAdapter = new ServicoAdapterListView(ListaEstabServicoActivity.this,mResultado);
-        listView.setAdapter(mAdapter);
-        btnFiltro.setOnClickListener(new View.OnClickListener() {
+        mListView.setAdapter(mAdapter);
+        mFiltro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent= new Intent(ListaEstabServicoActivity.this, FiltroServicoDialog.class);
                 startActivity(intent);
             }
         });
+
         verificarGPS();
         mAdapter.notifyDataSetChanged();
+
+        this.chamarInfoServicoListener();
 
     }
 
@@ -117,7 +122,8 @@ public class ListaEstabServicoActivity extends AppCompatActivity {
                         for (DataSnapshot dado : dataSnapshot.getChildren()) {
                             String tipoServico = dado.child("nome_tipoPet").getValue(String.class).split("_")[0];
                             String[] resultado = {tipoServico, dado.child("nomeFornecedor").getValue(String.class), dado.child("valor").getValue(String.class), dado.child("pet").getValue(String.class),
-                                    dado.child("latitude").getValue(String.class), dado.child("longitude").getValue(String.class), "0" , dado.child("nota").getValue(String.class)};
+                                    dado.child("latitude").getValue(String.class), dado.child("longitude").getValue(String.class), "0" , dado.child("nota").getValue(String.class),
+                                    dado.child("idFornecedor").getValue(String.class)};
                             mResultado.add(resultado);
                         }
                         ConfiguracoesBuscaServico.filtrar(projetaobcc20172.com.projetopetemfoco.activity.ListaEstabServicoActivity.this, mResultado);
@@ -160,6 +166,21 @@ public class ListaEstabServicoActivity extends AppCompatActivity {
                 });
         AlertDialog alert = alertDialogBuilder.create();
         alert.show();
+    }
+
+    //Método que passa as informações de um endereço para a Activity que exibe seus detalhes
+    public void chamarInfoServicoListener() {
+        this.mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Intent intent = new Intent(ListaEstabServicoActivity.this, InfoServicoActivity.class);
+                String[] servico = mResultado.get(position);
+                intent.putExtra("Servico", servico);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
+        });
     }
 
 }

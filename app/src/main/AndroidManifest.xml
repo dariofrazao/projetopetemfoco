@@ -7,9 +7,11 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_CALENDAR" />
+    <uses-permission android:name="android.permission.WRITE_CALENDAR"/>
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
-    <uses-permission android:name="com.example.permission.MAPS_RECEIVE" />
+    <uses-permission android:name="com.example.permission.MAPS_RECEIVE"/>
 
     <application
         android:allowBackup="false"
@@ -92,6 +94,8 @@
             android:name=".activity.FiltroEstabelecimentoActivity"
             android:theme="@style/Base.Theme.AppCompat.Light.Dialog" />
         <activity android:name=".activity.VisualizarPromocaoActivity"></activity>
+        <activity android:name=".activity.InfoServicoActivity" />
+        <activity android:name=".activity.ContratarServicoActivity"></activity>
     </application>
 
 </manifest>

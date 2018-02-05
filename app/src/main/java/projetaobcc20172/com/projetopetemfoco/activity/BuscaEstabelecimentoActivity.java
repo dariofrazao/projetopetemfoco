@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -76,7 +77,7 @@ public class BuscaEstabelecimentoActivity extends Fragment implements Serializab
 
         mProgresso = (ProgressBar) getView().findViewById(R.id.pbProgresso);
         mProgresso.setVisibility(View.INVISIBLE);
-        Button btnFiltro = getActivity().findViewById(R.id.btnFiltroEstabelecimento);
+        ImageView mFiltro = getActivity().findViewById(R.id.ivFiltro);
         // Monta listview e mAdapter
         mForncedores = new ArrayList<>();
         mAdapter = new EstabelecimentoAdapter(getActivity(), mForncedores);
@@ -128,7 +129,7 @@ public class BuscaEstabelecimentoActivity extends Fragment implements Serializab
             }
         });
 
-        btnFiltro.setOnClickListener(new View.OnClickListener() {
+        mFiltro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent= new Intent(getActivity(), FiltroEstabelecimentoActivity.class);

@@ -53,7 +53,7 @@
                     android:layout_marginBottom="5dp"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="@android:color/black"
-                    android:textSize="20sp"
+                    android:textSize="25sp"
                     android:textStyle="bold|italic" />
 
                 <ScrollView
@@ -107,13 +107,12 @@
                 android:id="@+id/tvValor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_marginBottom="10dp"
+                android:layout_marginRight="10dp"
                 android:minHeight="50dp"
+                android:gravity="center_vertical"
                 android:text="valor"
                 android:textColor="@android:color/black"
-                android:textSize="16sp"
-                android:background="@color/amarelo"
+                android:textSize="25sp"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textStyle="bold" />
 
@@ -128,7 +127,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@drawable/shapebutton"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="15dp"
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
         android:text="Detalhes Estabelecimento" />

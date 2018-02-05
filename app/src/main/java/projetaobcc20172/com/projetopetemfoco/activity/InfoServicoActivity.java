@@ -35,11 +35,10 @@ public class InfoServicoActivity extends AppCompatActivity {
 
     private static final int PERMISSION_GRANTED = 1;
     private TextView mTvNome, mTvNomeFornecedor, mTvValor, mTvTipoAnimalServico;
-    private Button mEstabelecimento, mAgendaEstabelecimento;
+    private Button mEstabelecimento;
     private ImageView mImagemDetalhesServico;
     private String[] mServico;
     private Fornecedor fornecedor;
-    private String mIdUsuarioLogado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,10 +55,6 @@ public class InfoServicoActivity extends AppCompatActivity {
         mTvTipoAnimalServico = findViewById(R.id.tvTipoAnimalServico);
 
         mServico = (String[]) getIntent().getSerializableExtra("Servico");
-
-        //Recuperar id do usuário logado
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        mIdUsuarioLogado = preferences.getString("id", "");
 
         Toolbar toolbar;
         toolbar = findViewById(R.id.tb_main);
@@ -81,6 +76,7 @@ public class InfoServicoActivity extends AppCompatActivity {
             }
         });
 
+        Button mAgendaEstabelecimento;
         mAgendaEstabelecimento = findViewById(R.id.btnAgendaEstabelecimento);
         mAgendaEstabelecimento.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,7 +106,7 @@ public class InfoServicoActivity extends AppCompatActivity {
 
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
-
+                        //vazio
                     }
                 });
 
@@ -118,33 +114,6 @@ public class InfoServicoActivity extends AppCompatActivity {
         });
 
 
-    }
-
-    private void makeAllCalendarsInvisibleExcept(long calendarId) {
-        ContentValues updateValues = new ContentValues();
-        updateValues.put(CalendarContract.Calendars.VISIBLE, 0);
-
-        // make all invisible
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_CALENDAR) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
-        getContentResolver().update(CalendarContract.Calendars.CONTENT_URI,
-                updateValues, null, null);
-
-        updateValues.clear();
-        updateValues.put(CalendarContract.Calendars.VISIBLE, 1);
-
-
-        // make calendarId visible
-        getContentResolver().update(CalendarContract.Calendars.CONTENT_URI,
-                updateValues, null, null);
     }
 
     private void checkPermissions(int callbackId, String... permissionsId) {

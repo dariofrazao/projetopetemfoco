@@ -25,9 +25,9 @@ import projetaobcc20172.com.projetopetemfoco.utils.Utils;
 public class ContratarServicoActivity extends AppCompatActivity {
 
     private WebView mWebView;
-    private ProgressBar progressBar;
+    private ProgressBar mProgressBar;
     private Button mAgendar;
-    private Fornecedor fornecedor;
+    private Fornecedor mFornecedor;
     private String[] mServico;
 
     @Override
@@ -35,7 +35,7 @@ public class ContratarServicoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contratar_servico);
 
-        fornecedor = (Fornecedor) getIntent().getSerializableExtra("Fornecedor");
+        mFornecedor = (Fornecedor) getIntent().getSerializableExtra("Fornecedor");
         mServico = (String[]) getIntent().getSerializableExtra("Servico");
 
         Toolbar toolbar;
@@ -47,9 +47,9 @@ public class ContratarServicoActivity extends AppCompatActivity {
         toolbar.setNavigationIcon(R.drawable.ic_action_arrow_left_white);
         setSupportActionBar(toolbar);
 
-        progressBar = findViewById(R.id.progressBar1);
+        mProgressBar = findViewById(R.id.progressBar1);
 
-        String email = fornecedor.getEmail();
+        String email = mFornecedor.getEmail();
         String emailSplit = email.replace("@gmail.com", "%40gmail.com");
 
         mWebView = findViewById(R.id.activity_main_webview);
@@ -75,7 +75,7 @@ public class ContratarServicoActivity extends AppCompatActivity {
                             .putExtra(CalendarContract.Events.TITLE, mServico[0] + " (" + mServico[3] + ")")
                             .putExtra(CalendarContract.Events.DESCRIPTION, mServico[1])
                             .putExtra(CalendarContract.Events.AVAILABILITY, CalendarContract.Events.AVAILABILITY_BUSY)
-                            .putExtra(Intent.EXTRA_EMAIL, fornecedor.getEmail());
+                            .putExtra(Intent.EXTRA_EMAIL, mFornecedor.getEmail());
                     startActivity(intent);
                     Utils.mostrarMensagemLonga(getApplicationContext(), getApplicationContext().getString(R.string.selecione_dia_horario));
                 }
@@ -110,7 +110,7 @@ public class ContratarServicoActivity extends AppCompatActivity {
             // TODO Auto-generated method stub
             super.onPageFinished(view, url);
 
-            progressBar.setVisibility(view.GONE);
+            mProgressBar.setVisibility(view.GONE);
             mAgendar.setVisibility(View.VISIBLE);
 
         }
@@ -148,7 +148,7 @@ public class ContratarServicoActivity extends AppCompatActivity {
 
     @Override
     protected void onRestart() {
-        progressBar.setVisibility(View.VISIBLE);
+        mProgressBar.setVisibility(View.VISIBLE);
         mWebView.reload();
         super.onRestart();
     }

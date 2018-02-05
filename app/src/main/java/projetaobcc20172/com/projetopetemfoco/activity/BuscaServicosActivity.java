@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -25,9 +24,6 @@ import projetaobcc20172.com.projetopetemfoco.utils.Utils;
  */
 
 public class BuscaServicosActivity extends Fragment {
-
-    private TiposServicoAdapterGrid mServAdpGrid;
-    private ProgressBar prog;
 
     @Nullable
     @Override
@@ -54,7 +50,7 @@ public class BuscaServicosActivity extends Fragment {
             }
         });
         ArrayList<String> tiposServico =  Utils.recuperaArrayR(getActivity(),R.array.servicos);
-        mServAdpGrid = new TiposServicoAdapterGrid(getActivity(),tiposServico);
+        TiposServicoAdapterGrid mServAdpGrid = new TiposServicoAdapterGrid(getActivity(), tiposServico);
         gridView.setAdapter(mServAdpGrid);
         mServAdpGrid.notifyDataSetChanged();
         btnFiltro.setOnClickListener(new View.OnClickListener() {

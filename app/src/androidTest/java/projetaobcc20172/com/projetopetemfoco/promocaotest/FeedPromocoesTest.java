@@ -28,7 +28,7 @@ public class FeedPromocoesTest {
     public void setUp() throws Exception {
 
         TestTools.clicarItemNavigationMenu(R.id.drawer_layout, R.id.nav_busca, R.id.nav_promocoes);
-        Thread.sleep(4000);
+        Thread.sleep(5000);
     }
 
     @Test

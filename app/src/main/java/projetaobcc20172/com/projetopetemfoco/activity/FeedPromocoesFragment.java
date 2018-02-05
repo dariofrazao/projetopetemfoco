@@ -30,8 +30,6 @@ import projetaobcc20172.com.projetopetemfoco.model.Promocao;
 
 public class FeedPromocoesFragment  extends Fragment implements Serializable {
 
-    private StaggeredGridLayoutManager layoutManager;
-
     private List<Promocao> mPromocoes;
     private PromocoesRecyclerViewAdapter mAdapter;
 
@@ -47,7 +45,7 @@ public class FeedPromocoesFragment  extends Fragment implements Serializable {
         final RecyclerView recyclerView = getActivity().findViewById(R.id.recyclerView);
         getActivity().setTitle(R.string.tv_promocoes);
         recyclerView.setHasFixedSize(false);
-        layoutManager = new StaggeredGridLayoutManager(3,1);
+        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(3, 1);
         recyclerView.setLayoutManager(layoutManager);
         this.mPromocoes = new ArrayList<>();
         this.mAdapter = new PromocoesRecyclerViewAdapter(getActivity(),this.mPromocoes,getActivity());
@@ -87,7 +85,7 @@ public class FeedPromocoesFragment  extends Fragment implements Serializable {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
+                //vazio
             }
         });
     }

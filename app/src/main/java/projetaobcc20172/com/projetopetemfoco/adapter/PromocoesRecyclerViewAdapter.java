@@ -24,6 +24,9 @@ import projetaobcc20172.com.projetopetemfoco.utils.Utils;
 
 public class PromocoesRecyclerViewAdapter extends RecyclerView.Adapter<PromocoesRecyclerViewAdapter.PromocaoHolder> {
 
+    private List<Promocao> mPromocaoList;
+    private Activity mActivityAtual;
+
     public static class PromocaoHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         protected TextView titulo;
@@ -62,15 +65,11 @@ public class PromocoesRecyclerViewAdapter extends RecyclerView.Adapter<Promocoes
 
     }
 
-    private List<Promocao> promocaoList;
-    private Context context;
-    private Activity activityAtual;
-    private int tamanhoDescricao = 35;
+
 
     public PromocoesRecyclerViewAdapter(Context context, List<Promocao> itemList,Activity activityAtual) {
-        this.promocaoList = itemList;
-        this.context = context;
-        this.activityAtual = activityAtual;
+        this.mPromocaoList = itemList;
+        this.mActivityAtual = activityAtual;
     }
 
     @Override
@@ -78,29 +77,30 @@ public class PromocoesRecyclerViewAdapter extends RecyclerView.Adapter<Promocoes
 
         View layoutView = LayoutInflater.from(parent.getContext()).inflate(R.layout.lista_itens_promocao, null);
         PromocaoHolder rcv = new PromocaoHolder(layoutView);
-        rcv.promocaoList = this.promocaoList;
-        rcv.activityAtual = activityAtual;
+        rcv.promocaoList = this.mPromocaoList;
+        rcv.activityAtual = mActivityAtual;
         return rcv;
     }
 
     @Override
     public void onBindViewHolder(PromocaoHolder holder, int position) {
-        holder.titulo.setText(promocaoList.get(position).getTitulo());
-        holder.descricao.setText(Utils.limitarTexto(promocaoList.get(position).getDescricao(),tamanhoDescricao));
-        holder.valor.setText(promocaoList.get(position).getValor());
-        holder.forncedor.setText(promocaoList.get(position).getmFornecedor().getNome());
+        holder.titulo.setText(mPromocaoList.get(position).getTitulo());
+        int tamanhoDescricao = 35;
+        holder.descricao.setText(Utils.limitarTexto(mPromocaoList.get(position).getDescricao(), tamanhoDescricao));
+        holder.valor.setText(mPromocaoList.get(position).getValor());
+        holder.forncedor.setText(mPromocaoList.get(position).getmFornecedor().getNome());
 //        if(position%2==0)
 //            holder.imgAnuncio.setImageResource(R.drawable.tipo_pet_gato);
 //        else{
 //            holder.imgAnuncio.setImageResource(R.drawable.servico_banho);
        // }
-        // holder.countryPhoto.setImageResource(promocaoList.get(position).getPhoto());
+        // holder.countryPhoto.setImageResource(mPromocaoList.get(position).getPhoto());
     }
 
 
     @Override
     public int getItemCount() {
-        return this.promocaoList.size();
+        return this.mPromocaoList.size();
     }
 
 

@@ -49,7 +49,6 @@ public class BuscaEstabelecimentoActivity extends Fragment implements Serializab
     private ArrayAdapter<Fornecedor> mAdapter;
     private ProgressBar mProgresso;
     private LocationManager locationManager;
-    private SearchView mBuscaEst;
 
     @Nullable
     @Override
@@ -71,7 +70,7 @@ public class BuscaEstabelecimentoActivity extends Fragment implements Serializab
             }
         });
         ConfiguracaoBuscaEstab.inicializar();
-        mBuscaEst = getView().findViewById(R.id.svBusca);
+        SearchView mBuscaEst = getView().findViewById(R.id.svBusca);
         mBuscaEst.setSubmitButtonEnabled(true);
         Button btnBuscaTodos = getView().findViewById(R.id.botao_todos_estabelecimentos);
 

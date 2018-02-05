@@ -1,13 +1,8 @@
 package projetaobcc20172.com.projetopetemfoco.activity;
 
 import android.Manifest;
-import android.content.ContentValues;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.graphics.Color;
-import android.preference.PreferenceManager;
-import android.provider.CalendarContract;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -35,7 +30,6 @@ public class InfoServicoActivity extends AppCompatActivity {
 
     private static final int PERMISSION_GRANTED = 1;
     private TextView mTvNome, mTvNomeFornecedor, mTvValor, mTvTipoAnimalServico;
-    private Button mEstabelecimento;
     private ImageView mImagemDetalhesServico;
     private String[] mServico;
     private Fornecedor fornecedor;
@@ -67,6 +61,7 @@ public class InfoServicoActivity extends AppCompatActivity {
 
         preencherCampos();
 
+        Button mEstabelecimento;
         mEstabelecimento = findViewById(R.id.btnEstabelecimento);
         mEstabelecimento.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -19,14 +19,14 @@ public class TestToolsPet {
         TestTools.digitarCampo(R.id.etEditarRaçaPet,raca);
     }
 
-    protected static void clicariconeExcluir(){
-        TestTools.clicarEmItemDentroListView(R.id.lv_pets,0,R.id.ibtnRemover);
-    }
+    //protected static void clicariconeExcluir(){
+    //    TestTools.clicarEmItemDentroListView(R.id.lv_pets,0,R.id.ibtnRemover);
+    //}
 
 
-    public static void clicarIconeEditar(){
-        TestTools.clicarEmItemDentroListView(R.id.lv_pets,0,R.id.ibtnEditar);
-    }
+    //public static void clicarIconeEditar(){
+     //   TestTools.clicarEmItemDentroListView(R.id.lv_pets,0,R.id.ibtnEditar);
+    //}
 
     public static void clicarMeusPets(){
         TestTools.clicarItemNavigationMenu(R.id.drawer_layout, R.id.nav_busca, R.id.nav_pets);

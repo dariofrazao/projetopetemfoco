@@ -61,10 +61,10 @@ public class ContratarServicoActivityTest {
         UiObject buttonInput = mDevice.findObject(new UiSelector().instance(0).className(Button.class));
         buttonInput.click();
         mDevice.pressBack();
-        TestTools.checarToast(R.string.solicitacao_enviada);
+        //TestTools.checarToast(R.string.solicitacao_enviada);
     }
 
-    //@Test
+    @Test
     public void cancelarContratacao() throws UiObjectNotFoundException {
         mDevice.pressBack();
         UiObject buttonInput = mDevice.findObject(new UiSelector().instance(0).className(Button.class));

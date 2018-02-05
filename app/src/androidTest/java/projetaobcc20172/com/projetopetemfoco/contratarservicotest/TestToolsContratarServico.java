@@ -12,10 +12,6 @@ import projetaobcc20172.com.projetopetemfoco.TestTools;
 
 public class TestToolsContratarServico {
 
-    protected static void clicarBuscaServico() {
-        TestTools.clicarItemNavigationMenu(R.id.drawer_layout, R.id.nav_busca, R.id.nav_servicos);
-    }
-
     protected static void selecionarServico(String servico) throws InterruptedException {
         GridView gridServico = TestTools.activityAtual().findViewById(R.id.gridServicos);
         for(int i=0;i<gridServico.getCount();i++){

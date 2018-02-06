@@ -1,5 +1,6 @@
 package projetaobcc20172.com.projetopetemfoco.model;
 
+
 import com.google.firebase.database.Exclude;
 
 import java.io.Serializable;
@@ -24,10 +25,9 @@ public class Fornecedor implements Serializable {
     private String mEnderecoFornecedor = "1";
     private Endereco mEndereco;
     private ArrayList<Servico> mServicos = new ArrayList<Servico>();
-    private float mLatitude = 0;
-    private float mLongitude = 0;
     private float mNota = 0;
     private ArrayList<Avaliacao> mAvaliacoes = new ArrayList<>();
+    private double mDistancia = -1;
 
     public Fornecedor() {
     }
@@ -167,20 +167,22 @@ public class Fornecedor implements Serializable {
         this.mAvaliacoes = avaliacoes;
     }
 
-    public float getmLatitude() {
-        return mLatitude;
+    public String getmEnderecoCombinado() {
+        String mEnderecoCombinado = "";
+        if(mEndereco.getNumero().equals("")){
+            mEndereco.setNumero("S/N");
+        }
+        mEnderecoCombinado = mEndereco.getLogradouro()+", "+ mEndereco.getNumero()+", "+mEndereco.getBairro()+", "+
+                mEndereco.getLocalidade()+"/"+mEndereco.getUf()+", "+"CEP: "+ mEndereco.getCep();
+        return mEnderecoCombinado;
     }
 
-    public float getmLongitude() {
-        return mLongitude;
+    public double getDistancia() {
+        return mDistancia;
     }
 
-    public void setmLatitude(float mLatitude) {
-        this.mLatitude = mLatitude;
+    public void setDistancia(double mDistancia) {
+        this.mDistancia = mDistancia;
     }
 
-    public void setmLongitude(float mLongitude) {
-        this.mLongitude = mLongitude;
-    }
 }
-

@@ -60,7 +60,7 @@ public class EditarEnderecoActivityTest {
         mIdUsuarioLogado = getPreferences("id", context);
 
         //Chamada do DAO para salvar um endereço no banco para fazer o teste de edição
-        enderecoDao.inserirEndereco(endereco, mIdUsuarioLogado);
+        enderecoDao.inserir(endereco, mIdUsuarioLogado);
 
         Thread.sleep(4000);
         LoginActivityTest log = new LoginActivityTest();

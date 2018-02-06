@@ -14,6 +14,8 @@ public class Endereco  implements Serializable {
     private String localidade;
     private String uf;
     private String cep;
+    private double mLatitude;
+    private double mLongitude;
 
     public Endereco(String logradouro,String bairro,String localidade,String uf) {
         this.logradouro = logradouro;
@@ -97,4 +99,20 @@ public class Endereco  implements Serializable {
     public void setCep(String cep) {
         this.cep = cep;
     }
+    public double getmLatitude() {
+        return mLatitude;
+    }
+
+    public void setmLatitude(double mLatitude) {
+        this.mLatitude = mLatitude;
+    }
+
+    public double getmLongitude() {
+        return mLongitude;
+    }
+
+    public void setmLongitude(double mLongitude) {
+        this.mLongitude = mLongitude;
+    }
+
 }

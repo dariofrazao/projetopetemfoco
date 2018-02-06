@@ -17,25 +17,34 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
-
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.MapsInitializer;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import java.io.Serializable;
 import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.adapter.ServicoAdapterListaViewInformacoes;
 import projetaobcc20172.com.projetopetemfoco.database.services.FavoritoDaoImpl;
 import projetaobcc20172.com.projetopetemfoco.model.Favorito;
+import projetaobcc20172.com.projetopetemfoco.adapter.ListaInformacoesAdapterView;
 import projetaobcc20172.com.projetopetemfoco.model.Fornecedor;
 import projetaobcc20172.com.projetopetemfoco.model.Servico;
 
 public class AcessoInformacoesEstabelecimentoActivity extends AppCompatActivity implements Serializable {
-
     private Fornecedor mFornecedor;
     private Favorito mFavorito;
     private Button salvar_favorito, remover_favorito;
     private String mIdFavorito;
     private String mIdUsuarioLogado;
+    private MapView mapView;
+
     @SuppressLint("WrongConstant")
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     //permite que essa variavel seja vista pela classe de teste
@@ -44,10 +53,24 @@ public class AcessoInformacoesEstabelecimentoActivity extends AppCompatActivity 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_acesso_informacoes_estabelecimento);
+
+        // lista de serviços pertencente ao fornecedor
         ArrayAdapter<Servico> mAdapter;
 
-        Toolbar toolbar;
-        toolbar = findViewById(R.id.tb_acesso_infomacoes_estabelecimento);
+        // Receber os dados do estabelecimento da outra activity
+        Intent i = getIntent();
+        mFornecedor = (Fornecedor) i.getSerializableExtra("Fornecedor");
+
+        // Associa os componetes ao layout XML
+        Toolbar toolbar = findViewById(R.id.tb_acesso_infomacoes_estabelecimento);
+        TextView mExibeNomeEstabelecimento = findViewById(R.id.tvExibeNomeEstabelecimento);
+        TextView mExibeEmailEstabelecimentor = findViewById(R.id.tvEmail);
+        TextView mExibeTelefoneEstabelecimento = findViewById(R.id.tvTelefone);
+        //TextView mExibeCpfCnpjEstabelecimento = findViewById(R.id.tvExibeCpfCnpjEstabelecimento);
+        TextView mExibeHorarioEstabelecimento = findViewById(R.id.tvHorario);
+        TextView mExibeEnderecoEstabelecimento = findViewById(R.id.tvEnderecoEstabelecimentoCombinado);
+        ListView mExibeListaServicos = findViewById(R.id.lvListaServicos);
+        mapView = findViewById(R.id.map_view);
 
         // Configura toolbar
         toolbar.setTitle(R.string.tb_acesso_estabelecimento);
@@ -55,25 +78,28 @@ public class AcessoInformacoesEstabelecimentoActivity extends AppCompatActivity 
         toolbar.setNavigationIcon(R.drawable.ic_action_arrow_left_white);
         setSupportActionBar(toolbar);
 
-        //Receber os dados do estabelecimento da outra activity
-        Intent i = getIntent();
-        mFornecedor = (Fornecedor) i.getSerializableExtra("Fornecedor");
+        // Inicializa o maps
+        MapsInitializer.initialize(this);
 
-        TextView mExibeNomeEstabelecimento = findViewById(R.id.tvExibeNomeEstabelecimento);
-        TextView mExibeEmailEstabelecimentor = findViewById(R.id.tvExibeEmailEstabelecimentor);
-        TextView mExibeTelefoneEstabelecimento = findViewById(R.id.tvExibeTelefoneEstabelecimento);
-        TextView mExibeCpfCnpjEstabelecimento = findViewById(R.id.tvExibeCpfCnpjEstabelecimento);
-        TextView mExibeHorarioEstabelecimento = findViewById(R.id.tvExibeHorarioEstabelecimento);
-        ListView mExibeListaServicos = findViewById(R.id.lvListaServicos);
+        // Gets to GoogleMap from the MapView and does initialization stuff
+        mapView.getMapAsync(new OnMapReadyCallback() {
+
+            @Override
+            public void onMapReady(GoogleMap googleMap) {
+                setUpMap(googleMap);
+            }
+        });
+        mapView.onCreate(savedInstanceState);
 
         mExibeNomeEstabelecimento.setText(mFornecedor.getNome());
-        mExibeEmailEstabelecimentor.setText(mFornecedor.getEmail());
-        mExibeTelefoneEstabelecimento.setText(mFornecedor.getTelefone());
-        mExibeCpfCnpjEstabelecimento.setText(mFornecedor.getCpfCnpj());
-        mExibeHorarioEstabelecimento.setText(mFornecedor.getHorarios());
+        mExibeEmailEstabelecimentor.setText("E-mail: " + mFornecedor.getEmail());
+        mExibeTelefoneEstabelecimento.setText("Fone: " + mFornecedor.getTelefone());
+        //mExibeCpfCnpjEstabelecimento.setText(mFornecedor.getCpfCnpj());
+        mExibeHorarioEstabelecimento.setText("Horário de Funcionamento: " + mFornecedor.getHorarios());
+        mExibeEnderecoEstabelecimento.setText(mFornecedor.getmEnderecoCombinado());
 
         // Monta listview e mAdapter
-        mAdapter = new ServicoAdapterListaViewInformacoes(this, mFornecedor.getServicos());
+        mAdapter = new ListaInformacoesAdapterView(this, mFornecedor.getServicos());
         mExibeListaServicos.setAdapter(mAdapter);
 
         //Recuperar id do usuário logado
@@ -85,6 +111,8 @@ public class AcessoInformacoesEstabelecimentoActivity extends AppCompatActivity 
         Log.d("User key", mFavorito.getIdFornecedor());
 
         Button mBotaoAvaliarEstabelecimento = findViewById(R.id.botao_avaliar_estabelecimento);
+        // Exibe a tela para avaliar
+        ImageButton mBotaoAvaliarEstabelecimento = findViewById(R.id.botao_avaliar_estabelecimento);
         mBotaoAvaliarEstabelecimento.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -92,7 +120,8 @@ public class AcessoInformacoesEstabelecimentoActivity extends AppCompatActivity 
             }
         });
 
-        Button mBotaoExibirAvaliacoesEstabelecimento = findViewById(R.id.botao_mostrar_avaliacoes_estabelecimento);
+        // Exibe a tela com as avaliações
+        ImageButton mBotaoExibirAvaliacoesEstabelecimento = findViewById(R.id.botao_mostrar_avaliacoes_estabelecimento);
         mBotaoExibirAvaliacoesEstabelecimento.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -120,6 +149,8 @@ public class AcessoInformacoesEstabelecimentoActivity extends AppCompatActivity 
 
     }
 
+
+    }
 
     @Override
     public boolean onSupportNavigateUp() {
@@ -172,6 +203,12 @@ public class AcessoInformacoesEstabelecimentoActivity extends AppCompatActivity 
         finish();
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        mapView.onSaveInstanceState(outState);
+    }
+
     //Método que chama a activity para exibir as avaliações
     public void avaliacoes(Fornecedor fornecedor) {
         Intent intent = new Intent(AcessoInformacoesEstabelecimentoActivity.this, AvalicoesEstabelecimentoActivity.class);
@@ -184,6 +221,53 @@ public class AcessoInformacoesEstabelecimentoActivity extends AppCompatActivity 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         return preferences.getString(key, null);
     }
+
+    private void setUpMap(GoogleMap googleMap) {
+        // Localização as coordenadas geograficas do estabelecimento
+        LatLng latLng = new LatLng(mFornecedor.getEndereco().getmLatitude(),mFornecedor.getEndereco().getmLongitude());
+
+        // Configura o visial do Mapa
+        googleMap.setMapType(googleMap.MAP_TYPE_NORMAL);
+        googleMap.getUiSettings().setZoomControlsEnabled(true);
+        googleMap.getUiSettings().setCompassEnabled(true);
+        googleMap.getUiSettings().setRotateGesturesEnabled(true);
+        googleMap.getUiSettings().setTiltGesturesEnabled(true);
+        googleMap.getUiSettings().setScrollGesturesEnabled(true);
+        googleMap.getUiSettings().setTiltGesturesEnabled(true);
+        googleMap.getUiSettings().setZoomControlsEnabled(true);
+        googleMap.getUiSettings().setZoomGesturesEnabled(true);
+
+        // Adiciona no map a localização do estabelecimento
+        googleMap.addMarker(new MarkerOptions().position(latLng).title(mFornecedor.getNome()));
+        CameraUpdate yourLocation = CameraUpdateFactory.newLatLngZoom(latLng, 13);
+
+        // Direciona a camera para a local do estabelecimento
+        googleMap.moveCamera(yourLocation);
+    }
+
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        mapView.onLowMemory();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mapView.onDestroy();
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mapView.onResume();
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mapView.onPause();
+    }
+}
 
 }
 

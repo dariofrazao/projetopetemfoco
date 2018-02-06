@@ -250,7 +250,7 @@ public class FavoritoDaoImpl implements FavoritoDao {
 
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
-
+                        //vazio
                     }
                 });
     }

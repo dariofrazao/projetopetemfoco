@@ -166,6 +166,9 @@
     <!--Strings relacionadas ao filtro de Serviço-->
     <string name="filtro_atualizado_servico">Filtro salvo com sucesso</string>
 
+    <!--Strings relacionadas ao Serviço-->
+    <string name="tb_avaliacoes_servico">Avaliações</string>
+
     <string name="api_key_google_matrix">AIzaSyBrKPS2exi5vhLYY1H1islk4UUlRb4Z9Rk</string>
     <string name="url_matrix_distance">https://maps.googleapis.com/maps/api/distancematrix/json?units=metric</string>
     <string name="title_activity_avaliar_servico">AvaliarServicoActivity</string>

@@ -30,7 +30,7 @@ import projetaobcc20172.com.projetopetemfoco.adapter.ListaInformacoesAdapterView
 import projetaobcc20172.com.projetopetemfoco.model.Fornecedor;
 import projetaobcc20172.com.projetopetemfoco.model.Servico;
 
-public class AcessoInformacoesEstabelecimentoActivity extends AppCompatActivity implements Serializable {
+public class ExibiInformacoesEstabelecimentoActivity extends AppCompatActivity implements Serializable {
 
     private Fornecedor mFornecedor;
     private MapView mapView;
@@ -119,7 +119,7 @@ public class AcessoInformacoesEstabelecimentoActivity extends AppCompatActivity 
 
     //Método que chama a activity para realizar a avaliação
     public void avaliar(Fornecedor fornecedor) {
-        Intent intent = new Intent(AcessoInformacoesEstabelecimentoActivity.this, AvaliarEstabelecimentoActivity.class);
+        Intent intent = new Intent(ExibiInformacoesEstabelecimentoActivity.this, AvaliarEstabelecimentoActivity.class);
         intent.putExtra("Fornecedor", fornecedor);
         startActivity(intent);
     }
@@ -132,7 +132,7 @@ public class AcessoInformacoesEstabelecimentoActivity extends AppCompatActivity 
 
     //Método que chama a activity para exibir as avaliações
     public void avaliacoes(Fornecedor fornecedor) {
-        Intent intent = new Intent(AcessoInformacoesEstabelecimentoActivity.this, AvalicoesEstabelecimentoActivity.class);
+        Intent intent = new Intent(ExibiInformacoesEstabelecimentoActivity.this, ExibiAvalicoesEstabelecimentoActivity.class);
         intent.putExtra("Fornecedor", fornecedor);
         startActivity(intent);
     }

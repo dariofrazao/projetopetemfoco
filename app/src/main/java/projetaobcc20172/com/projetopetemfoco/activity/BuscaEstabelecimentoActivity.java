@@ -139,7 +139,7 @@ public class BuscaEstabelecimentoActivity extends Fragment implements Serializab
 
                 }
                 fornecedor.setServicos(servicos);
-                Intent intent = new Intent(getActivity(), AcessoInformacoesEstabelecimentoActivity.class);
+                Intent intent = new Intent(getActivity(), ExibiInformacoesEstabelecimentoActivity.class);
                 intent.putExtra("Fornecedor", fornecedor);
                 getActivity().startActivity(intent);
             }

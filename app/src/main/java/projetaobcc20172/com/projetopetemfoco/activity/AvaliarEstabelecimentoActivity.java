@@ -107,7 +107,7 @@ public class AvaliarEstabelecimentoActivity extends AppCompatActivity {
     }
 
     public void abrirActivityAnterior() {
-        Intent intent = new Intent(AvaliarEstabelecimentoActivity.this, AcessoInformacoesEstabelecimentoActivity.class);
+        Intent intent = new Intent(AvaliarEstabelecimentoActivity.this, ExibiInformacoesEstabelecimentoActivity.class);
         startActivity(intent);
         finish();
     }

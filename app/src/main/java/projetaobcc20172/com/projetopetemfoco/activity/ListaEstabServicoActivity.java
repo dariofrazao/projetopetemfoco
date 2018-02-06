@@ -9,7 +9,9 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -24,6 +26,9 @@ import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.adapter.ServicoAdapterListView;
 import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoFirebase;
 import projetaobcc20172.com.projetopetemfoco.config.ConfiguracoesBuscaServico;
+import projetaobcc20172.com.projetopetemfoco.model.Avaliacao;
+import projetaobcc20172.com.projetopetemfoco.model.Fornecedor;
+import projetaobcc20172.com.projetopetemfoco.model.Servico;
 import projetaobcc20172.com.projetopetemfoco.utils.Enumerates;
 import projetaobcc20172.com.projetopetemfoco.utils.Utils;
 
@@ -32,7 +37,7 @@ import projetaobcc20172.com.projetopetemfoco.utils.Utils;
  */
 
 public class ListaEstabServicoActivity extends AppCompatActivity {
-
+    private Servico mServico;
     private ArrayList<String[]> mResultado;
     private ArrayAdapter<String[]> mAdapter;
     private LocationManager locationManager;
@@ -51,6 +56,14 @@ public class ListaEstabServicoActivity extends AppCompatActivity {
         toolbar.setNavigationIcon(R.drawable.ic_action_arrow_left_white);
         setSupportActionBar(toolbar);
         ListView listView = findViewById(R.id.lvEstaServicoBusca);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                exibirServico(position);
+            }
+        });
+
         mResultado = new ArrayList<>();
         mAdapter = new ServicoAdapterListView(ListaEstabServicoActivity.this,mResultado);
         listView.setAdapter(mAdapter);
@@ -115,7 +128,7 @@ public class ListaEstabServicoActivity extends AppCompatActivity {
                         for (DataSnapshot dado : dataSnapshot.getChildren()) {
                             String tipoServico = dado.child("nome_tipoPet").getValue(String.class).split("_")[0];
                             String[] resultado = {tipoServico, dado.child("nomeFornecedor").getValue(String.class), dado.child("valor").getValue(String.class), dado.child("pet").getValue(String.class),
-                                    dado.child("latitude").getValue(String.class), dado.child("longitude").getValue(String.class), "0" , dado.child("nota").getValue(String.class)};
+                                    dado.child("latitude").getValue(String.class), dado.child("longitude").getValue(String.class), "0" , dado.child("nota").getValue(String.class), dado.getKey()};
                             mResultado.add(resultado);
                         }
                         ConfiguracoesBuscaServico.filtrar(projetaobcc20172.com.projetopetemfoco.activity.ListaEstabServicoActivity.this, mResultado);
@@ -136,6 +149,15 @@ public class ListaEstabServicoActivity extends AppCompatActivity {
             }
         }
     }
+
+
+    //Método que chama a activity para exibir informações do servico
+    public void exibirServico(final int position) {
+        String idServico  = mResultado.get(position)[8];
+        Intent intent = new Intent(this, ExibiAvalicoesServicosActivity.class);
+        intent.putExtra("Servico", idServico);
+        startActivity(intent);
+}
 
 
     private void perdirParaLigarGPS(){

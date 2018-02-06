@@ -114,7 +114,7 @@
             android:paddingRight="10dp"
             android:paddingLeft="15dp"
             android:drawableLeft="@drawable/ic_action_estabelecimentos"
-            android:text="@string/botao_ver_estabelecimento"/>
+            android:text="Detalhes do Estabelecimento"/>
 
         <Button
             android:id="@+id/btnAvaliarServico"

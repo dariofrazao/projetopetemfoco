@@ -58,36 +58,46 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <ImageButton
-                        android:id="@+id/botao_mostrar_avaliacoes_estabelecimento"
-                        android:layout_width="45dp"
-                        android:layout_height="40dp"
-                        android:layout_marginLeft="100dp"
-                        android:background="@drawable/ic_action_avaliacoes"
-                        android:text="Avaliar" />
+            <ImageButton
+                android:id="@+id/botao_mostrar_avaliacoes_estabelecimento"
+                android:layout_width="45dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="60dp"
+                android:background="@drawable/ic_action_avaliacoes"
+                android:text="Avaliar" />
 
-                    <ImageButton
-                        android:id="@+id/botao_avaliar_estabelecimento"
-                        android:layout_width="45dp"
-                        android:layout_height="40dp"
-                        android:layout_marginLeft="60dp"
-                        android:background="@drawable/ic_action_avaliar"
-                        android:text="Avaliar" />
+            <ImageButton
+                android:id="@+id/botao_avaliar_estabelecimento"
+                android:layout_width="45dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="50dp"
+                android:background="@drawable/ic_action_avaliar"
+                android:text="Avaliar" />
 
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+            <ImageButton
+                android:id="@+id/bt_salvar_favorito"
+                android:layout_width="20dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="35dp"
+                android:layout_weight="1"
+                android:background="@drawable/ic_action_favoritar_true" />
 
-                    <TextView
-                        android:layout_width="80dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="90dp"
-                        android:text="Avaliações"
-                        android:textColor="@android:color/black"
-                        android:textSize="16sp"
-                        android:textAppearance="?android:attr/textAppearanceMedium" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:text="Avaliações"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
                     <TextView
                         android:layout_width="80dp"
@@ -99,6 +109,16 @@
                         android:textAppearance="?android:attr/textAppearanceMedium" />
 
                 </LinearLayout>
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="9dp"
+                android:text="Favoritar"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        </LinearLayout>
 
             </LinearLayout>
 
@@ -115,9 +135,9 @@
                 android:layout_height="wrap_content"
                 android:gravity="left"
                 android:text="@string/email"
+                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="@android:color/black"
-                android:textSize="16sp"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/tvTelefone"
@@ -125,9 +145,9 @@
                 android:layout_height="wrap_content"
                 android:gravity="left"
                 android:text="@string/telefone"
+                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="@android:color/black"
-                android:textSize="16sp"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:textSize="16sp" />
 
 
             <TextView
@@ -136,20 +156,20 @@
                 android:layout_height="wrap_content"
                 android:gravity="left"
                 android:text="@string/horario"
+                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="@android:color/black"
-                android:textSize="16sp"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/tvEnderecoEstabelecimento"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Endereço:"
                 android:gravity="center"
-                android:textColor="@android:color/black"
+                android:text="Endereço:"
                 android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@android:color/black"
                 android:textSize="16sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tvEnderecoEstabelecimentoCombinado"
@@ -157,9 +177,9 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="Endereco:"
+                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="@android:color/black"
                 android:textSize="16sp"
-                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textStyle="bold" />
 
             <com.google.android.gms.maps.MapView
@@ -175,9 +195,9 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="@string/servicos"
+                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="@android:color/black"
                 android:textSize="16sp"
-                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textStyle="bold" />
 
         </LinearLayout>

@@ -1,6 +1,7 @@
 package projetaobcc20172.com.projetopetemfoco.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Usuario implements Serializable {
 
@@ -8,6 +9,7 @@ public class Usuario implements Serializable {
     private String mId;
     private String mNome;
     private String mEmail;
+    public static ArrayList<Favorito> favs = new ArrayList<>();
     private String mFoto;
 
     public Usuario(){}

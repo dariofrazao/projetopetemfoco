@@ -19,6 +19,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -27,11 +28,13 @@ import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+
 import java.io.Serializable;
+
 import projetaobcc20172.com.projetopetemfoco.R;
+import projetaobcc20172.com.projetopetemfoco.adapter.ListaInformacoesAdapterView;
 import projetaobcc20172.com.projetopetemfoco.database.services.FavoritoDaoImpl;
 import projetaobcc20172.com.projetopetemfoco.model.Favorito;
-import projetaobcc20172.com.projetopetemfoco.adapter.ListaInformacoesAdapterView;
 import projetaobcc20172.com.projetopetemfoco.model.Fornecedor;
 import projetaobcc20172.com.projetopetemfoco.model.Servico;
 
@@ -102,7 +105,7 @@ public class ExibiInformacoesEstabelecimentoActivity extends AppCompatActivity i
         mExibeListaServicos.setAdapter(mAdapter);
 
         //Recuperar id do usuário logado
-        mIdUsuarioLogado = getPreferences("id", AcessoInformacoesEstabelecimentoActivity.this);
+        mIdUsuarioLogado = getPreferences("id", ExibiInformacoesEstabelecimentoActivity.this);
 
         mFavorito = new Favorito(mIdFavorito, mFornecedor.getId(), mFornecedor.getNome(), mFornecedor.getTelefone(), mConfirma) ;
 

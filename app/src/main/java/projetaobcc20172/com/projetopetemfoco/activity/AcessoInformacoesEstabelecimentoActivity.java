@@ -126,8 +126,8 @@ public class AcessoInformacoesEstabelecimentoActivity extends AppCompatActivity 
             }
         });
 
-        ImageButton salvar_favorito = findViewById(R.id.bt_salvar_favorito);
-        salvar_favorito.setOnClickListener(new View.OnClickListener() {
+        ImageButton mSalvarFavorito = findViewById(R.id.bt_salvar_favorito);
+        mSalvarFavorito.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //Toast.makeText(AcessoInformacoesEstabelecimentoActivity.this, mFavorito.getIdFornecedor(), Toast.LENGTH_SHORT).show();

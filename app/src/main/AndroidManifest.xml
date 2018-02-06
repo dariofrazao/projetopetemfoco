@@ -63,12 +63,16 @@
             android:name=".activity.CadastroEnderecoActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity
+            android:name=".activity.ExibiInformacoesEstabelecimentoActivity"
+            android:windowSoftInputMode="stateHidden" />
             android:name=".activity.AcessoInformacoesEstabelecimentoActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".activity.AvaliarEstabelecimentoActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity
+            android:name=".activity.ExibiAvalicoesEstabelecimentoActivity"
+            android:windowSoftInputMode="stateHidden" />
             android:name=".activity.AvalicoesEstabelecimentoActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity
@@ -94,6 +98,11 @@
             android:name=".activity.FiltroEstabelecimentoActivity"
             android:theme="@style/Base.Theme.AppCompat.Light.Dialog" />
         <activity android:name=".activity.VisualizarPromocaoActivity"></activity>
+        <activity
+            android:name=".activity.AvaliarServicoActivity"
+            android:label="@string/title_activity_avaliar_servico"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".activity.ExibiAvalicoesServicosActivity"></activity>
         <activity android:name=".activity.InfoServicoActivity" />
         <activity android:name=".activity.ContratarServicoActivity"></activity>
     </application>

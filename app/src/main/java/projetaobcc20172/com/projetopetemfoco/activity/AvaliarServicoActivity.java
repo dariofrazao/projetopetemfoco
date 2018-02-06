@@ -21,53 +21,55 @@ import com.google.firebase.database.ValueEventListener;
 
 import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoFirebase;
-import projetaobcc20172.com.projetopetemfoco.database.services.AvaliacaoDaoImpl;
+import projetaobcc20172.com.projetopetemfoco.database.services.AvaliacaoServicoDaoImpl;
 import projetaobcc20172.com.projetopetemfoco.excecoes.CampoObrAusenteException;
 import projetaobcc20172.com.projetopetemfoco.model.Avaliacao;
-import projetaobcc20172.com.projetopetemfoco.model.Fornecedor;
 import projetaobcc20172.com.projetopetemfoco.model.Usuario;
 import projetaobcc20172.com.projetopetemfoco.utils.VerificadorDeObjetos;
 
-public class AvaliarEstabelecimentoActivity extends AppCompatActivity {
+/**
+ * Created by Alexsandro on 24/01/2018.
+ */
+
+
+public class AvaliarServicoActivity extends AppCompatActivity {
     private Avaliacao mAvaliacao;
     public Toast mToast;
-    private Fornecedor mFornecedor;
+    private String idUsuarioLogado;
     private Usuario mUsuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_avaliar_estabelecimento);
+        setContentView(R.layout.activity_avaliar_servico);
+
+        //Recuperar id do usuário logado
+        idUsuarioLogado = getPreferences("id", this);
+        buscaNomeUsuario(idUsuarioLogado);
 
         // Associa os componetes ao layout XML
-        final EditText mComentario = findViewById(R.id.etComentarioAvaliacao);
-        final RatingBar mRatingBar = findViewById(R.id.rbEstrelasAvaliacao);
-        Button mBtnAvaliar = findViewById(R.id.botao_avaliar);
-        Toolbar toolbar = findViewById(R.id.tb_avaliacao_estabelecimento);
+        final EditText mComentario = findViewById(R.id.etComentarioAvaliacaoServico);
+        final RatingBar mRatingBar = findViewById(R.id.rbEstrelasAvaliacaoServico);
+        Button mBtnAvaliar = findViewById(R.id.botao_avaliar_servico);
+        Toolbar toolbar = findViewById(R.id.tb_avaliacao_servico);
 
         // Configura toolbar
-        toolbar.setTitle(R.string.tb_avaliar_estabelecimento);
+        toolbar.setTitle(R.string.tb_avaliar_servico);
         toolbar.setTitleTextColor(Color.WHITE);
         toolbar.setNavigationIcon(R.drawable.ic_action_arrow_left_white);
         setSupportActionBar(toolbar);
 
-        //Receber os dados do estabelecimento da outra activity
+        //Receber os dados do serviço de outra activity
         Intent i = getIntent();
-        mFornecedor = (Fornecedor) i.getSerializableExtra("Fornecedor");
-
-        //Recuperar id do fornecedor logado
-        String idUsuarioLogado = getPreferences("id", this);
-
-        buscaNomeUsuario(idUsuarioLogado);
+        final String idServico = (String) i.getSerializableExtra("Servico");
 
         // Confirma a avaliação
         mBtnAvaliar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                avaliar(mComentario.getText().toString(), (int) mRatingBar.getRating());
+                avaliar(mComentario.getText().toString(), (int) mRatingBar.getRating(), idServico);
             }
         });
-
     }
 
     @Override
@@ -76,11 +78,10 @@ public class AvaliarEstabelecimentoActivity extends AppCompatActivity {
         return true;
     }
 
-    public void avaliar(String comentario, int estrelas ) {
+    public void avaliar(String comentario, int estrelas, String idServico ) {
         try {
-            //Recuperar id do fornecedor logado
-            String idUsuarioLogado = getPreferences("id", this);
-
+            //Recuperar id do usuário logado
+            idUsuarioLogado = getPreferences("id", this);
             buscaNomeUsuario(idUsuarioLogado);
 
             // Instância uma avaliação
@@ -90,12 +91,12 @@ public class AvaliarEstabelecimentoActivity extends AppCompatActivity {
             VerificadorDeObjetos.vDadosObjAvaliacao(mAvaliacao);
 
             //Chamada do DAO para salvar no banco
-            AvaliacaoDaoImpl avaliacaoDao =  new AvaliacaoDaoImpl(this);
-            avaliacaoDao.inserir(mAvaliacao, mFornecedor);
+            AvaliacaoServicoDaoImpl avaliacaoServicoDao =  new AvaliacaoServicoDaoImpl(this);
+            avaliacaoServicoDao.inserir(mAvaliacao, idServico);
             abrirActivityAnterior();
 
         } catch (CampoObrAusenteException e) {
-            mToast = Toast.makeText(AvaliarEstabelecimentoActivity.this, R.string.erro_avaliacao_estabelecimento, Toast.LENGTH_SHORT);
+            mToast = Toast.makeText(AvaliarServicoActivity.this, R.string.erro_avaliacao_servico, Toast.LENGTH_SHORT);
             mToast.show();
         } catch (Exception e) {
             e.printStackTrace();
@@ -109,15 +110,13 @@ public class AvaliarEstabelecimentoActivity extends AppCompatActivity {
     }
 
     public void abrirActivityAnterior() {
-        Intent intent = new Intent(AvaliarEstabelecimentoActivity.this, ExibiInformacoesEstabelecimentoActivity.class);
-        startActivity(intent);
-        finish();
+        onBackPressed();
     }
 
 
-    //Método que busca o titulo do usuário
+    //Método que busca o nome do usuário
     public void buscaNomeUsuario(final String idUsuariologado){
-        //Buscar titulo do usuário logado
+        //Buscar nome do usuário logado
         DatabaseReference mReferenciaFirebase;
         mReferenciaFirebase = ConfiguracaoFirebase.getFirebase();
         mReferenciaFirebase.child("usuarios").child(idUsuariologado).addValueEventListener(new ValueEventListener() {
@@ -125,7 +124,7 @@ public class AvaliarEstabelecimentoActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot.getValue() != null){
                     Usuario usuario = dataSnapshot.getValue(Usuario.class);
-                    mUsuario = new Usuario();//idUsuario, titulo, email, foto
+                    mUsuario = new Usuario();//idUsuario, nome, email, foto
                     mUsuario.setNome(usuario.getNome());
                     mUsuario.setEmail(usuario.getEmail());
                     mUsuario.setId(idUsuariologado);
@@ -137,14 +136,5 @@ public class AvaliarEstabelecimentoActivity extends AppCompatActivity {
                 // Vazio
             }
         });
-
     }
-
-    //Método do botão voltar
-    @Override
-    public void onBackPressed() {
-        AvaliarEstabelecimentoActivity.super.onBackPressed();
-    }
-
-
 }

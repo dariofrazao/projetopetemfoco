@@ -19,6 +19,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -27,15 +28,18 @@ import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+
 import java.io.Serializable;
+
 import projetaobcc20172.com.projetopetemfoco.R;
+import projetaobcc20172.com.projetopetemfoco.adapter.ListaInformacoesAdapterView;
 import projetaobcc20172.com.projetopetemfoco.database.services.FavoritoDaoImpl;
 import projetaobcc20172.com.projetopetemfoco.model.Favorito;
-import projetaobcc20172.com.projetopetemfoco.adapter.ListaInformacoesAdapterView;
 import projetaobcc20172.com.projetopetemfoco.model.Fornecedor;
 import projetaobcc20172.com.projetopetemfoco.model.Servico;
 
-public class AcessoInformacoesEstabelecimentoActivity extends AppCompatActivity implements Serializable {
+public class ExibiInformacoesEstabelecimentoActivity extends AppCompatActivity implements Serializable {
+
     private Fornecedor mFornecedor;
     private Favorito mFavorito;
     private String mIdFavorito;
@@ -101,7 +105,7 @@ public class AcessoInformacoesEstabelecimentoActivity extends AppCompatActivity 
         mExibeListaServicos.setAdapter(mAdapter);
 
         //Recuperar id do usuário logado
-        mIdUsuarioLogado = getPreferences("id", AcessoInformacoesEstabelecimentoActivity.this);
+        mIdUsuarioLogado = getPreferences("id", ExibiInformacoesEstabelecimentoActivity.this);
 
         mFavorito = new Favorito(mIdFavorito, mFornecedor.getId(), mFornecedor.getNome(), mFornecedor.getTelefone(), mConfirma) ;
 
@@ -165,7 +169,7 @@ public class AcessoInformacoesEstabelecimentoActivity extends AppCompatActivity 
 
     //Método que chama a activity para realizar a avaliação
     public void avaliar(Fornecedor fornecedor) {
-        Intent intent = new Intent(AcessoInformacoesEstabelecimentoActivity.this, AvaliarEstabelecimentoActivity.class);
+        Intent intent = new Intent(ExibiInformacoesEstabelecimentoActivity.this, AvaliarEstabelecimentoActivity.class);
         intent.putExtra("Fornecedor", fornecedor);
         startActivity(intent);
         finish();
@@ -179,7 +183,7 @@ public class AcessoInformacoesEstabelecimentoActivity extends AppCompatActivity 
 
     //Método que chama a activity para exibir as avaliações
     public void avaliacoes(Fornecedor fornecedor) {
-        Intent intent = new Intent(AcessoInformacoesEstabelecimentoActivity.this, AvalicoesEstabelecimentoActivity.class);
+        Intent intent = new Intent(ExibiInformacoesEstabelecimentoActivity.this, ExibiAvalicoesEstabelecimentoActivity.class);
         intent.putExtra("Fornecedor", fornecedor);
         startActivity(intent);
         finish();

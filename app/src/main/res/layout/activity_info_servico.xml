@@ -116,6 +116,27 @@
             android:drawableLeft="@drawable/ic_action_estabelecimentos"
             android:text="Detalhes do Estabelecimento"/>
 
+        <Button
+            android:id="@+id/btnAvaliarServico"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:background="@drawable/shapebuttonborder"
+            android:paddingRight="10dp"
+            android:paddingLeft="15dp"
+            android:drawableLeft="@drawable/ic_action_avaliar"
+            android:text="@string/avaliar_servico"/>
+
+        <Button
+            android:id="@+id/btnAvaliacoesServico"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:background="@drawable/shapebuttonborder"
+            android:paddingRight="10dp"
+            android:paddingLeft="15dp"
+            android:drawableLeft="@drawable/ic_action_avaliacoes"
+            android:text="@string/avaliacoes_do_servico"/>
     </LinearLayout>
 
 </RelativeLayout>

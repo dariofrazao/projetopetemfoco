@@ -71,6 +71,24 @@ public class InfoServicoActivity extends AppCompatActivity {
             }
         });
 
+        Button mAvaliarServico;
+        mAvaliarServico = findViewById(R.id.btnAvaliarServico);
+        mAvaliarServico.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                exibirAvaliarServico();
+            }
+        });
+
+        Button mAvaliacoesServico;
+        mAvaliacoesServico = findViewById(R.id.btnAvaliacoesServico);
+        mAvaliacoesServico.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                exibirAvaliacoesServico();
+            }
+        });
+
         Button mAgendaEstabelecimento;
         mAgendaEstabelecimento = findViewById(R.id.btnAgendaEstabelecimento);
         mAgendaEstabelecimento.setOnClickListener(new View.OnClickListener() {
@@ -109,6 +127,18 @@ public class InfoServicoActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    private void exibirAvaliacoesServico() {
+        Intent intent = new Intent(InfoServicoActivity.this, ExibiAvalicoesServicosActivity.class);
+        intent.putExtra("Servico", mServico);// id serviço
+        startActivity(intent);
+    }
+
+    private void exibirAvaliarServico() {
+        Intent intent = new Intent(InfoServicoActivity.this, AvaliarServicoActivity.class);
+        intent.putExtra("Servico", mServico[9]);// id serviço
+        startActivity(intent);
     }
 
     private void checkPermissions(int callbackId, String... permissionsId) {
@@ -194,7 +224,7 @@ public class InfoServicoActivity extends AppCompatActivity {
 
                 }
                 fornecedor.setServicos(servicos);
-                Intent intent = new Intent(InfoServicoActivity.this, AcessoInformacoesEstabelecimentoActivity.class);
+                Intent intent = new Intent(InfoServicoActivity.this, ExibiInformacoesEstabelecimentoActivity.class);
                 intent.putExtra("Fornecedor", fornecedor);
                 startActivity(intent);
             }

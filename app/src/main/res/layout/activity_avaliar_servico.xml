@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fundo_degrade"
+    android:padding="0dp"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="projetaobcc20172.com.projetopetemfoco.activity.AvaliarServicoActivity">
+
+    <include
+        android:id="@+id/tb_avaliacao_servico"
+        layout="@layout/toolbar"></include>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tb_avaliacao_servico"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvNomeUsuarioAvaliadorServico"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Avaliação:"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="1dp"
+                android:layout_marginTop="5dp" />
+
+            <RatingBar
+                android:id="@+id/rbEstrelasAvaliacaoServico"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:numStars="5"
+                android:layout_gravity="center"
+                android:stepSize="1.0"
+                android:rating="0.0" />
+
+            <TextView
+                android:id="@+id/tvComentarioServico"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Comentário:"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="1dp"
+                android:layout_marginTop="5dp" />
+
+            <ScrollView
+                android:id="@+id/scrollView"
+                android:layout_width="match_parent"
+                android:layout_height="150dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <EditText
+                        android:id="@+id/etComentarioAvaliacaoServico"
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        android:ems="10"
+                        android:gravity="left|top"
+                        android:inputType="textMultiLine"
+                        android:background="@drawable/cornersbutton"
+                        android:lines="8"
+                        android:padding="10dp"
+                        android:hint="Digite seu comentário"/>
+
+                </LinearLayout>
+
+            </ScrollView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="1dp"
+                android:layout_marginTop="5dp" />
+
+            <Button
+                android:id="@+id/botao_avaliar_servico"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/shapebutton"
+                android:paddingRight="20dp"
+                android:paddingLeft="10dp"
+                android:drawableLeft="@drawable/ic_action_favoritos"
+                android:text="  Avaliar" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

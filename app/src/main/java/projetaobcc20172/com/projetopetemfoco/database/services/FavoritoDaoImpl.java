@@ -3,7 +3,6 @@ package projetaobcc20172.com.projetopetemfoco.database.services;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -13,7 +12,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoFirebase;
@@ -145,13 +143,11 @@ public class FavoritoDaoImpl implements FavoritoDao {
     public void inserir(final Favorito favorito, final String idUsuario) {
 
         favorito.setIdUsuario(idUsuario);
-
         mReferenciaFirebase = mReferenciaFirebase.child("favoritos").push();
         final String id = mReferenciaFirebase.getKey();
         favorito.setIdFavorito(id);
 
-        //mIdsFavoritos = new ArrayList<>();
-        //mIdsFavoritos.add(id);
+
 //        final String mGroupId = mReferenciaFirebase.getKey();
 //        mReferenciaFirebase.child(mGroupId).setValue(new ChatGroup());
 
@@ -209,20 +205,25 @@ public class FavoritoDaoImpl implements FavoritoDao {
         }*/
 
 
-    public void comparar(final Favorito favorito, final String idUsuario) {
+    public void compararInserir(final Favorito favorito, final String idUsuario) {
 
         mReferenciaFirebase.child("favoritos").orderByChild("idUsuario").equalTo(idUsuario).
                 addListenerForSingleValueEvent(new ValueEventListener() {
 
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-
-                        for (DataSnapshot child : dataSnapshot.getChildren()) {
-                            String idFavorito = child.getKey();
-                            child.child("f");
-                            Log.d("User key", child.getKey());
-                            //Log.d("User ref", child.getRef().toString());
-                            //Log.d("User val", child.child("idFornecedor").getValue().toString());
+                        //Favorito favoritos = dataSnapshot.getValue(Favorito.class);
+                        for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                            //Log.d("User key12", (postSnapshot.child("idFornecedor").getValue()).toString());
+                            //Log.d("User key13", favorito.getIdFornecedor());
+                            if(postSnapshot.child("idFornecedor").getValue().toString().equals(favorito.getIdFornecedor())){
+                                Utils.mostrarMensagemCurta(getContexto(), getContexto().getString(R.string.existente));
+                                favorito.setConfirma("1");
+                                break;
+                            }
+                        }
+                        if(favorito.getConfirma().equals("0")){
+                            inserir(favorito, idUsuario);
                         }
                     }
 
@@ -232,6 +233,32 @@ public class FavoritoDaoImpl implements FavoritoDao {
                     }
                 });
     }
+
+    public void compararRemover(final Favorito favorito, final String idUsuario) {
+
+        mReferenciaFirebase.child("favoritos").orderByChild("idUsuario").equalTo(idUsuario).
+                addListenerForSingleValueEvent(new ValueEventListener() {
+
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                            if(postSnapshot.child("idFornecedor").getValue().toString().equals(favorito.getIdFornecedor())){
+                                Utils.mostrarMensagemCurta(getContexto(), getContexto().getString(R.string.existente));
+                                //favorito.setConfirma("1");
+                                //remover(favorito, idUsuario);
+                                break;
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+    }
+
+
 
     @Override
     public void remover(final Favorito favorito, final String idUsuario) {

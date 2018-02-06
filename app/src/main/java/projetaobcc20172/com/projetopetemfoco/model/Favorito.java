@@ -16,16 +16,18 @@ public class Favorito implements Serializable {
     private String mIdFornecedor;
     private String mTelefone;
     private String mNome;
+    private String mConfirma;
 
 
     public Favorito() {
     }
 
-    public Favorito(String idFavorito, String idFornecedor, String nome, String telefone) {
+    public Favorito(String idFavorito, String idFornecedor, String nome, String telefone, String confirma) {
         this.mIdFavorito = idFavorito;
         this.mIdFornecedor = idFornecedor;
         this.mTelefone = telefone;
         this.mNome = nome;
+        this.mConfirma = confirma;
     }
 
     public String getIdUsuario() {
@@ -67,4 +69,27 @@ public class Favorito implements Serializable {
     public void setNome(String nome) {
         this.mNome = nome;
     }
+
+    public String getConfirma() {
+        return mConfirma;
+    }
+
+    public void setConfirma(String confirma) {
+        this.mConfirma = confirma;
+    }
+
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (o instanceof Favorito)
+        {
+            Favorito c = (Favorito) o;
+            if ( this.getIdFornecedor()==c.getIdFornecedor() ) //whatever here
+                return true;
+        }
+        return false;
+    }
+
+
 }

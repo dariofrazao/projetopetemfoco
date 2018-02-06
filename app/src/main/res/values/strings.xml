@@ -129,11 +129,7 @@
     <string name="tb_meus_favoritos">Meus Favoritos</string>
     <string name="favoritado">Estalecimento adicionado aos favoritos!</string>
     <string name="desfavoritado">Estalecimento removido dos favoritos!:</string>
-
-    <!--Strings relacionadas ao estabelecimento-->
-    <string name="tb_acesso_estabelecimento">Informações</string>
-    <string name="servicos">Serviços:</string>
-
+    <string name="existente">Estalecimento já favoritado!</string>
     <!--Strings relacionadas ao estbelecimento-->
     <string name="estabelecimento">Estabelecimento:</string>
     <string name="tb_acesso_estabelecimento">Informações do Estabelecimento</string>

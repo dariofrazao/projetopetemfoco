@@ -1,13 +1,16 @@
 package projetaobcc20172.com.projetopetemfoco.activity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -23,10 +26,13 @@ import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.adapter.FavoritoAdapter;
 import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoFirebase;
 import projetaobcc20172.com.projetopetemfoco.model.Favorito;
+import projetaobcc20172.com.projetopetemfoco.model.Fornecedor;
+import projetaobcc20172.com.projetopetemfoco.model.Servico;
 
 public class MeusFavoritosActivity extends Fragment {
 
     private ArrayList<Favorito> mFavoritos;
+    private ArrayList<Fornecedor> mFornecedores;
     private ArrayAdapter<Favorito> mAdapter;
     private ListView mListView;
     private String mIdUsuarioLogado;
@@ -51,6 +57,13 @@ public class MeusFavoritosActivity extends Fragment {
         mIdUsuarioLogado = preferences.getString("id", "");
 
         mListView = getView().findViewById(R.id.lv_meus_favoritos);
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //exibirEstabelecimento(mFavoritos.get(position));
+                Log.d("teste", "sds");
+            }
+        });
 
         // Monta listview e mAdapter
         mFavoritos = new ArrayList<>();
@@ -89,6 +102,33 @@ public class MeusFavoritosActivity extends Fragment {
         };
         query.addValueEventListener(mValueEventListenerFavoritos);
     }
+//
+//    //Método que chama a activity para exibir informações do estabelecimento
+//    public void exibirEstabelecimento(final Favorito favorito) {
+//
+//        //Buscar servicos do estabelecimento selecionado
+//        Query query = ConfiguracaoFirebase.getFirebase().child("servicos").orderByChild("idFornecedor").equalTo(favorito.getIdFornecedor());
+//        query.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                ArrayList<Servico> servicos = new ArrayList<>();
+//                for (DataSnapshot dados : dataSnapshot.getChildren()) {
+//                    Servico servico = dados.getValue(Servico.class);
+//                    servicos.add(servico);
+//
+//                }
+//                fornecedor.setServicos(servicos);
+//                Intent intent = new Intent(getActivity(), AcessoInformacoesEstabelecimentoActivity.class);
+//                intent.putExtra("Fornecedor", fornecedor);
+//                getActivity().startActivity(intent);
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//                //Método com corpo vazio
+//            }
+//        });
+//    }
 }
 
 

@@ -20,7 +20,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -29,11 +28,8 @@ import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-
 import java.io.Serializable;
-
 import projetaobcc20172.com.projetopetemfoco.R;
-import projetaobcc20172.com.projetopetemfoco.adapter.ServicoAdapterListaViewInformacoes;
 import projetaobcc20172.com.projetopetemfoco.database.services.FavoritoDaoImpl;
 import projetaobcc20172.com.projetopetemfoco.model.Favorito;
 import projetaobcc20172.com.projetopetemfoco.adapter.ListaInformacoesAdapterView;
@@ -43,9 +39,9 @@ import projetaobcc20172.com.projetopetemfoco.model.Servico;
 public class AcessoInformacoesEstabelecimentoActivity extends AppCompatActivity implements Serializable {
     private Fornecedor mFornecedor;
     private Favorito mFavorito;
-    private Button salvar_favorito, remover_favorito;
     private String mIdFavorito;
     private String mIdUsuarioLogado;
+    private String mConfirma = "0";
     private MapView mapView;
 
     @SuppressLint("WrongConstant")
@@ -108,12 +104,11 @@ public class AcessoInformacoesEstabelecimentoActivity extends AppCompatActivity 
         //Recuperar id do usuário logado
         mIdUsuarioLogado = getPreferences("id", AcessoInformacoesEstabelecimentoActivity.this);
 
-        mFavorito = new Favorito(mIdFavorito, mFornecedor.getId(), mFornecedor.getNome(), mFornecedor.getTelefone());
+        mFavorito = new Favorito(mIdFavorito, mFornecedor.getId(), mFornecedor.getNome(), mFornecedor.getTelefone(), mConfirma) ;
 
 
-        Log.d("User key", mFavorito.getIdFornecedor());
+        //Log.d("User key", mFavorito.getIdFornecedor());
 
-        Button mBotaoAvaliarEstabelecimento = findViewById(R.id.botao_avaliar_estabelecimento);
         // Exibe a tela para avaliar
         ImageButton mBotaoAvaliarEstabelecimento = findViewById(R.id.botao_avaliar_estabelecimento);
         mBotaoAvaliarEstabelecimento.setOnClickListener(new View.OnClickListener() {
@@ -132,28 +127,18 @@ public class AcessoInformacoesEstabelecimentoActivity extends AppCompatActivity 
             }
         });
 
-
-        salvar_favorito = findViewById(R.id.bt_salvar_favorito);
+        ImageButton salvar_favorito = findViewById(R.id.bt_salvar_favorito);
         salvar_favorito.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //Toast.makeText(AcessoInformacoesEstabelecimentoActivity.this, mFavorito.getIdFornecedor(), Toast.LENGTH_SHORT).show();
+                //salvar_favorito.setBackground("@drawable/ic_action_favoritar_true");
                 salvarFavorito();
             }
         });
 
-        remover_favorito = findViewById(R.id.bt_remover_favorito);
-        remover_favorito.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                removerFavorito();
-            }
-        });
-
     }
 
-
-    }
 
     @Override
     public boolean onSupportNavigateUp() {
@@ -168,10 +153,8 @@ public class AcessoInformacoesEstabelecimentoActivity extends AppCompatActivity 
 
             //Chamada do DAO para salvar no banco
             FavoritoDaoImpl favoritoDao =  new FavoritoDaoImpl(this);
-            favoritoDao.comparar(mFavorito, mIdUsuarioLogado);
-            favoritoDao.inserir(mFavorito, mIdUsuarioLogado);
-            salvar_favorito.setVisibility(View.INVISIBLE);
-            remover_favorito.setVisibility(View.VISIBLE);
+            favoritoDao.compararInserir(mFavorito, mIdUsuarioLogado);
+            //favoritoDao.inserir(mFavorito, mIdUsuarioLogado);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -187,9 +170,9 @@ public class AcessoInformacoesEstabelecimentoActivity extends AppCompatActivity 
 
             //Chamada do DAO para remover no banco
             FavoritoDaoImpl favoritoDao =  new FavoritoDaoImpl(AcessoInformacoesEstabelecimentoActivity.this);
-            favoritoDao.remover(mFavorito, mIdUsuarioLogado);
-            remover_favorito.setVisibility(View.INVISIBLE);
-            salvar_favorito.setVisibility(View.VISIBLE);
+            //favoritoDao.remover(mFavorito, mIdUsuarioLogado);
+            //favoritoDao.compararRemover(mFavorito, mIdUsuarioLogado);
+
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -203,7 +186,7 @@ public class AcessoInformacoesEstabelecimentoActivity extends AppCompatActivity 
         Intent intent = new Intent(AcessoInformacoesEstabelecimentoActivity.this, AvaliarEstabelecimentoActivity.class);
         intent.putExtra("Fornecedor", fornecedor);
         startActivity(intent);
-        //finish();
+        finish();
     }
 
     @Override
@@ -217,7 +200,7 @@ public class AcessoInformacoesEstabelecimentoActivity extends AppCompatActivity 
         Intent intent = new Intent(AcessoInformacoesEstabelecimentoActivity.this, AvalicoesEstabelecimentoActivity.class);
         intent.putExtra("Fornecedor", fornecedor);
         startActivity(intent);
-        //finish();
+        finish();
     }
     //Método que recupera o id do usuário logado, para salvar o pet no nó do favorito que o está cadastrando--LuizAlberes
     public static String getPreferences(String key, Context context) {
@@ -270,7 +253,5 @@ public class AcessoInformacoesEstabelecimentoActivity extends AppCompatActivity 
         super.onPause();
         mapView.onPause();
     }
-}
-
 }
 

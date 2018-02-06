@@ -35,11 +35,10 @@ public class AvaliacaoServicoDaoImpl implements AvaliacaoServicoDao {
     }
 
     @Override
-    public void inserir(Avaliacao avaliacao, Servico servico) {
-        final String idServico = servico.getId();
+    public void inserir(Avaliacao avaliacao, final String idServico) {
         //O método push() cria uma chave exclusiva para cada mAvaliacao cadastrada
         DatabaseReference mFireBase;
-        mFireBase = mReferenciaFirebase.child("servico_fornecedor").child(servico.getId()).child("avaliacao").push();
+        mFireBase = mReferenciaFirebase.child("servico_fornecedor").child(idServico).child("avaliacao").push();
         avaliacao.setId(mReferenciaFirebase.getKey());
         mFireBase.setValue(avaliacao).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
@@ -75,7 +74,7 @@ public class AvaliacaoServicoDaoImpl implements AvaliacaoServicoDao {
                     contador++;
                     mNota = (float) estrelas / contador;
                 }
-                inserirNota(idServico, mNota);
+                inserirNota(idServico, String.valueOf(mNota));
             }
 
             @Override
@@ -86,7 +85,7 @@ public class AvaliacaoServicoDaoImpl implements AvaliacaoServicoDao {
     }
 
     @Override
-    public void inserirNota(final String idServico, final float mNota) {
+    public void inserirNota(final String idServico, final String mNota) {
         //Adicionar um listener no nó do servico que será editado
         //O método orderByChild ordena os serviços pelo seu id e o equalTo busca o id do serviço que será editado
         final DatabaseReference mFireBase = mReferenciaFirebase;

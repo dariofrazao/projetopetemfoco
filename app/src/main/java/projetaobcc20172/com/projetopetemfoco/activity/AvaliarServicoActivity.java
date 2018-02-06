@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
@@ -36,13 +37,17 @@ import projetaobcc20172.com.projetopetemfoco.utils.VerificadorDeObjetos;
 public class AvaliarServicoActivity extends AppCompatActivity {
     private Avaliacao mAvaliacao;
     public Toast mToast;
+    private String idUsuarioLogado;
     private Usuario mUsuario;
-    private Servico mServico;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_avaliar_estabelecimento);
+        setContentView(R.layout.activity_avaliar_servico);
+
+        //Recuperar id do usuário logado
+        idUsuarioLogado = getPreferences("id", this);
+        buscaNomeUsuario(idUsuarioLogado);
 
         // Associa os componetes ao layout XML
         final EditText mComentario = findViewById(R.id.etComentarioAvaliacaoServico);
@@ -58,18 +63,15 @@ public class AvaliarServicoActivity extends AppCompatActivity {
 
         //Receber os dados do serviço de outra activity
         Intent i = getIntent();
-        mServico = (Servico) i.getSerializableExtra("Servico");
+        final String idServico = (String) i.getSerializableExtra("Servico");
 
         // Confirma a avaliação
         mBtnAvaliar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                avaliar(mComentario.getText().toString(), (int) mRatingBar.getRating());
+                avaliar(mComentario.getText().toString(), (int) mRatingBar.getRating(), idServico);
             }
         });
-
-
-
     }
 
     @Override
@@ -78,11 +80,10 @@ public class AvaliarServicoActivity extends AppCompatActivity {
         return true;
     }
 
-    public void avaliar(String comentario, int estrelas ) {
+    public void avaliar(String comentario, int estrelas, String idServico ) {
         try {
             //Recuperar id do usuário logado
-            String idUsuarioLogado = getPreferences("id", this);
-
+            idUsuarioLogado = getPreferences("id", this);
             buscaNomeUsuario(idUsuarioLogado);
 
             // Instância uma avaliação
@@ -93,8 +94,8 @@ public class AvaliarServicoActivity extends AppCompatActivity {
 
             //Chamada do DAO para salvar no banco
             AvaliacaoServicoDaoImpl avaliacaoServicoDao =  new AvaliacaoServicoDaoImpl(this);
-            avaliacaoServicoDao.inserir(mAvaliacao, mServico);
-            abrirMain();
+            avaliacaoServicoDao.inserir(mAvaliacao, idServico);
+            abrirActivityAnterior();
 
         } catch (CampoObrAusenteException e) {
             mToast = Toast.makeText(AvaliarServicoActivity.this, R.string.erro_avaliacao_servico, Toast.LENGTH_SHORT);
@@ -110,10 +111,8 @@ public class AvaliarServicoActivity extends AppCompatActivity {
         return preferences.getString(key, null);
     }
 
-    public void abrirMain() {
-        Intent intent = new Intent(AvaliarServicoActivity.this, MainActivity.class);
-        startActivity(intent);
-        finish();
+    public void abrirActivityAnterior() {
+        onBackPressed();
     }
 
 
@@ -139,29 +138,5 @@ public class AvaliarServicoActivity extends AppCompatActivity {
                 // Vazio
             }
         });
-
-    }
-
-
-    private void perdirParaLigarGPS(){
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setMessage("GPS está desligado, deseja liga-lo?")
-                .setCancelable(false)
-                .setPositiveButton("Vá para as configurações de localização para ativa-lo",
-                        new DialogInterface.OnClickListener(){
-                            public void onClick(DialogInterface dialog, int id){
-                                Intent callGPSSettingIntent = new Intent(
-                                        android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                                startActivity(callGPSSettingIntent);
-                            }
-                        });
-        alertDialogBuilder.setNegativeButton("Cancelar",
-                new DialogInterface.OnClickListener(){
-                    public void onClick(DialogInterface dialog, int id){
-                        dialog.cancel();
-                    }
-                });
-        AlertDialog alert = alertDialogBuilder.create();
-        alert.show();
     }
 }

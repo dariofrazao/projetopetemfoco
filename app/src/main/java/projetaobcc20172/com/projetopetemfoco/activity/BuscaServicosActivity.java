@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.ProgressBar;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -27,7 +26,6 @@ import projetaobcc20172.com.projetopetemfoco.utils.Utils;
 public class BuscaServicosActivity extends Fragment {
 
     private TiposServicoAdapterGrid mServAdpGrid;
-    private ProgressBar prog;
 
     @Nullable
     @Override
@@ -44,8 +42,6 @@ public class BuscaServicosActivity extends Fragment {
         //you can set the title for your toolbar here for different fragments different titles
         getActivity().setTitle(R.string.tb_servicos);
         final GridView gridView = getActivity().findViewById(R.id.gridServicos);
-        Button btnFiltro = getActivity().findViewById(R.id.btnFiltro);
-
         ImageView mFiltro = getActivity().findViewById(R.id.ivFiltro);
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

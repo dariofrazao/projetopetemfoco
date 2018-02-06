@@ -7,7 +7,6 @@ import android.support.annotation.VisibleForTesting;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -16,17 +15,14 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 import java.io.Serializable;
+import java.util.ArrayList;
 import projetaobcc20172.com.projetopetemfoco.R;
-import projetaobcc20172.com.projetopetemfoco.adapter.ListaAvaliacoesAdapterView;
 import projetaobcc20172.com.projetopetemfoco.adapter.ListaAvaliacoesServicoAdapterView;
 import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoFirebase;
 import projetaobcc20172.com.projetopetemfoco.model.Avaliacao;
-import projetaobcc20172.com.projetopetemfoco.model.Fornecedor;
-import projetaobcc20172.com.projetopetemfoco.model.Servico;
 
 public class ExibiAvalicoesServicosActivity extends AppCompatActivity implements Serializable {
-
-    private Servico mServico;
+    private ArrayList<Avaliacao> mAvaliacoes;
     private ArrayAdapter<Avaliacao> mAdapter;
     @SuppressLint("WrongConstant")
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
@@ -35,10 +31,10 @@ public class ExibiAvalicoesServicosActivity extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_exibi_avalicoes_servicos);
+        setContentView(R.layout.activity_avalicoes_servico);
 
         // Associa os componetes ao layout XML
-        TextView mNomeServico = findViewById(R.id.tvExibeNomeServicoAvaliacao);
+        TextView mTipoServico = findViewById(R.id.tvExibeTipoServicoAvaliacoes);
         ListView mExibeListaAvaliacao = findViewById(R.id.lvListaAvaliacoesServico);
         Toolbar toolbar = findViewById(R.id.tb_lista_avaliacoes_servico);
 
@@ -50,16 +46,15 @@ public class ExibiAvalicoesServicosActivity extends AppCompatActivity implements
 
         //Receber os dados do estabelecimento da outra activity
         Intent i = getIntent();
-        String idServico = (String) i.getSerializableExtra("Servico");
+        String[] mServico = (String[]) i.getSerializableExtra("Servico");
 
-        // Busca as avaliações atribuidas ao fornecedor
-        buscaServico(idServico);
-        buscaAvaliacoes(idServico);
+              // Busca as avaliações atribuidas ao fornecedor
+        buscaAvaliacoes(mServico[9]);
         // Monta listview e mAdapter
-        mAdapter = new ListaAvaliacoesServicoAdapterView(this, mServico.getAvaliacoes());
+        mAdapter = new ListaAvaliacoesServicoAdapterView(this, mAvaliacoes);
 
         mExibeListaAvaliacao.setAdapter(mAdapter);
-        mNomeServico.setText(mServico.getNome());
+        mTipoServico.setText(mServico[1]+" : "+mServico[0]);
     }
 
     @Override
@@ -71,6 +66,7 @@ public class ExibiAvalicoesServicosActivity extends AppCompatActivity implements
     //Método que chama a activity para exibir as avaliações do estabelecimento
     public void buscaAvaliacoes(final String idServico){
         //Buscar avaliações do serviço selecionado
+        mAvaliacoes = new ArrayList<>();
         final DatabaseReference mFireBase;
         mFireBase = ConfiguracaoFirebase.getFirebase().child("servico_fornecedor").child(idServico).child("avaliacao");
         mFireBase.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -78,7 +74,7 @@ public class ExibiAvalicoesServicosActivity extends AppCompatActivity implements
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot dados : dataSnapshot.getChildren()) {
                     Avaliacao avaliacao = dados.getValue(Avaliacao.class);
-                    mServico.getAvaliacoes().add((avaliacao));
+                    mAvaliacoes.add((avaliacao));
                 }
                 mAdapter.notifyDataSetChanged();
             }
@@ -88,25 +84,4 @@ public class ExibiAvalicoesServicosActivity extends AppCompatActivity implements
             }
         });
     }
-
-    //Método que busca o servico por meio do id
-    public void buscaServico(final String idServico){
-        //Buscar servico
-        DatabaseReference mReferenciaFirebase;
-        mReferenciaFirebase = ConfiguracaoFirebase.getFirebase();
-        mReferenciaFirebase.child("servico_fornecedor").child(idServico).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if(dataSnapshot.getValue() != null){
-                    mServico = dataSnapshot.getValue(Servico.class);
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                // Vazio
-            }
-        });
-    }
-
 }

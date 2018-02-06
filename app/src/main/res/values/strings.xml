@@ -181,5 +181,7 @@
     <string name="api_key_google_matrix">AIzaSyBrKPS2exi5vhLYY1H1islk4UUlRb4Z9Rk</string>
     <string name="url_matrix_distance">https://maps.googleapis.com/maps/api/distancematrix/json?units=metric</string>
     <string name="title_activity_avaliar_servico">AvaliarServicoActivity</string>
+    <string name="avaliar_servico">Avaliar Serviço</string>
+    <string name="avaliacoes_do_servico">AVALIAÇÕES DO SERVIÇO</string>
 
 </resources>

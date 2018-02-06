@@ -8,6 +8,6 @@ import projetaobcc20172.com.projetopetemfoco.model.Servico;
  */
 
 public interface AvaliacaoServicoDao {
-    void inserir(Avaliacao avaliacao, Servico servico);
-    void inserirNota(String idServico, float nota);
+    void inserir(Avaliacao avaliacao, String idServico);
+    void inserirNota(String idServico, String nota);
 }

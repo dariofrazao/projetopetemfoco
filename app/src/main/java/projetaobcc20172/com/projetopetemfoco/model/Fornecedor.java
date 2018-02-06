@@ -24,6 +24,7 @@ public class Fornecedor implements Serializable {
     private String mSenha2;
     private String mEnderecoFornecedor = "1";
     private Endereco mEndereco;
+    private String mTipo;
     private ArrayList<Servico> mServicos = new ArrayList<Servico>();
     private float mNota = 0;
     private ArrayList<Avaliacao> mAvaliacoes = new ArrayList<>();
@@ -42,7 +43,7 @@ public class Fornecedor implements Serializable {
         this.mTelefone = telefone;
     }
 
-    public Fornecedor(String nome,String email,String  cpfCnpj,String horarios,float nota,String telefone,Endereco endereco){
+    public Fornecedor(String nome,String email,String  cpfCnpj,String horarios,float nota,String telefone,Endereco endereco,String tipo){
         this.mNome = nome;
         this.mEmail = email;
         this.mHorarios = horarios;
@@ -50,6 +51,7 @@ public class Fornecedor implements Serializable {
         this.mTelefone = telefone;
         this.mEndereco = endereco;
         this.mNota = nota;
+        this.mTipo = tipo;
     }
 
     @Exclude
@@ -185,4 +187,11 @@ public class Fornecedor implements Serializable {
         this.mDistancia = mDistancia;
     }
 
+    public void setTipo(String tipo){
+        this.mTipo = mTipo;
+    }
+
+    public String getTipo(){
+        return this.mTipo;
+    }
 }

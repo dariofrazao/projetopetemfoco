@@ -1,13 +1,19 @@
 package projetaobcc20172.com.projetopetemfoco.adapter;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.model.Fornecedor;
 
@@ -17,11 +23,14 @@ public class EstabelecimentoAdapter extends ArrayAdapter<Fornecedor> {
 
     private ArrayList<Fornecedor> mForncedores;
     private Context mContext;
+    private Map<String, Integer> mImagens = new HashMap<String, Integer>();
 
     public EstabelecimentoAdapter(Context c, ArrayList<Fornecedor> objects) {
         super(c, 0, objects);
         this.mContext = c;
         this.mForncedores = objects;
+        mImagens.put("Autônomo",R.drawable.ic_action_autonomo);
+        mImagens.put("Estabelecimento",R.drawable.ic_action_estabelecimentos);
     }
 
     @NonNull
@@ -40,6 +49,7 @@ public class EstabelecimentoAdapter extends ArrayAdapter<Fornecedor> {
             view = inflater.inflate(R.layout.lista_estabelecimentos_busca, parent, false);
 
             // recupera elemento para exibição
+            ImageView img = view.findViewById(R.id.ivFornecedorImg);
             TextView nome = view.findViewById(R.id.tvNomeForn);
             TextView bairro = view.findViewById(R.id.tvBairroForn);
             TextView cidade = view.findViewById(R.id.tvCidadeForn);
@@ -48,15 +58,15 @@ public class EstabelecimentoAdapter extends ArrayAdapter<Fornecedor> {
             TextView distancia = view.findViewById(R.id.tvTextDist);
 
             final Fornecedor fornecedor = mForncedores.get(position);
+            img.setImageResource(mImagens.get(fornecedor.getTipo()));
             nome.setText(fornecedor.getNome());
             bairro.setText(fornecedor.getEndereco().getBairro());
             cidade.setText(fornecedor.getEndereco().getLocalidade());
             uf.setText(" - " + fornecedor.getEndereco().getUf());
             distancia.setText("Distância: "+fornecedor.getDistancia()+" km");
             nota.setText(String.format("%.2f", fornecedor.getNota()));
-        }
 
+        }
         return view;
     }
-
 }

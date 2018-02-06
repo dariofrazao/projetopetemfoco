@@ -19,15 +19,11 @@
         <item
             android:id="@+id/nav_estabelecimentos"
             android:icon="@drawable/ic_action_estabelecimentos"
-            android:title="Estabelecimentos" />
+            android:title="Fornecedores" />
         <item
             android:id="@+id/nav_servicos"
             android:icon="@drawable/ic_action_servicos"
             android:title="Serviços" />
-        <item
-            android:id="@+id/nav_autonomos"
-            android:icon="@drawable/ic_action_autonomo"
-            android:title="Autônomos" />
         <item
             android:id="@+id/nav_mapa"
             android:icon="@drawable/ic_action_map"

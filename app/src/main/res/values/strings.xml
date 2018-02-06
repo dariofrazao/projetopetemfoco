@@ -126,7 +126,6 @@
     <string name="fb_login_protocol_scheme">fb1383454871782340</string>
 
 
-
     <!--Strings relacionadas ao estbelecimento-->
     <string name="estabelecimento">Estabelecimento:</string>
     <string name="tb_acesso_estabelecimento">Informações do Estabelecimento</string>
@@ -143,6 +142,8 @@
 
     <!--Strings relacionadas a tela de busca-->
     <string name="tb_estabelecimentos">Estabelecimentos</string>
+    <string name="tb_fornecedor">Fornecedores</string>
+    <string name="tb_autonomos">Autônomos</string>
     <string name="tb_servicos">Busca por serviços</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -165,5 +166,6 @@
 
     <string name="api_key_google_matrix">AIzaSyBrKPS2exi5vhLYY1H1islk4UUlRb4Z9Rk</string>
     <string name="url_matrix_distance">https://maps.googleapis.com/maps/api/distancematrix/json?units=metric</string>
+    <string name="title_activity_cadastro_fornecedor_tipo">CadastroFornecedorTipoActivity</string>
 
 </resources>

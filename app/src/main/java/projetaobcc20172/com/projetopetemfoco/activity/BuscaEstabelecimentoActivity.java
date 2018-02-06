@@ -58,7 +58,7 @@ public class BuscaEstabelecimentoActivity extends Fragment implements Serializab
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        getActivity().setTitle(R.string.tb_estabelecimentos);
+        getActivity().setTitle(R.string.tb_fornecedor);
         final ListView listView = getView().findViewById(R.id.lvBuscaEsta);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -183,7 +183,7 @@ public class BuscaEstabelecimentoActivity extends Fragment implements Serializab
 
                         forn = new Fornecedor(dados.child("nome").getValue(String.class), dados.child("email").getValue(String.class), dados.child("cpfCnpj").getValue(String.class)
                                 , dados.child("horarios").getValue(String.class), nota, dados.child("telefone").getValue(String.class),
-                                dados.child("endereco").getValue(Endereco.class));
+                                dados.child("endereco").getValue(Endereco.class),dados.child("tipo").getValue(String.class));
                         forn.setId(dados.getKey());
                         mForncedores.add(forn);
                     }
@@ -225,7 +225,8 @@ public class BuscaEstabelecimentoActivity extends Fragment implements Serializab
 
                         forn = new Fornecedor(dados.child("nome").getValue(String.class), dados.child("email").getValue(String.class), dados.child("cpfCnpj").getValue(String.class)
                                 , dados.child("horarios").getValue(String.class), nota, dados.child("telefone").getValue(String.class),
-                                dados.child("endereco").getValue(Endereco.class));
+                                dados.child("endereco").getValue(Endereco.class),dados.child("tipo").getValue(String.class));
+
                         forn.setId(dados.getKey());
                         mForncedores.add(forn);
                     }

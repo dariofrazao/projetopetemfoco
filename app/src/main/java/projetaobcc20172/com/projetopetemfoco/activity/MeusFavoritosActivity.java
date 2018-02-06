@@ -1,6 +1,5 @@
 package projetaobcc20172.com.projetopetemfoco.activity;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -26,15 +25,11 @@ import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.adapter.FavoritoAdapter;
 import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoFirebase;
 import projetaobcc20172.com.projetopetemfoco.model.Favorito;
-import projetaobcc20172.com.projetopetemfoco.model.Fornecedor;
-import projetaobcc20172.com.projetopetemfoco.model.Servico;
 
 public class MeusFavoritosActivity extends Fragment {
 
     private ArrayList<Favorito> mFavoritos;
-    private ArrayList<Fornecedor> mFornecedores;
     private ArrayAdapter<Favorito> mAdapter;
-    private ListView mListView;
     private String mIdUsuarioLogado;
 
     @Nullable
@@ -56,6 +51,7 @@ public class MeusFavoritosActivity extends Fragment {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         mIdUsuarioLogado = preferences.getString("id", "");
 
+        ListView mListView;
         mListView = getView().findViewById(R.id.lv_meus_favoritos);
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

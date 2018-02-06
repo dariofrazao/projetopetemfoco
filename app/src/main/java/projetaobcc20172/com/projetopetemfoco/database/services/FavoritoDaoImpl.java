@@ -2,7 +2,6 @@ package projetaobcc20172.com.projetopetemfoco.database.services;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -10,8 +9,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
 
 import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoFirebase;
@@ -229,7 +226,7 @@ public class FavoritoDaoImpl implements FavoritoDao {
 
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
-
+                        //vazio
                     }
                 });
     }

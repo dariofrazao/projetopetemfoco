@@ -1,9 +1,7 @@
 package projetaobcc20172.com.projetopetemfoco.model;
 
-import com.google.firebase.database.Exclude;
-
 import java.io.Serializable;
-import java.util.ArrayList;
+
 
 /**
  * Created by LuizAlberes on 12/01/2018.

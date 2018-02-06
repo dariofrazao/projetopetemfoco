@@ -14,7 +14,6 @@ import android.preference.PreferenceManager;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
@@ -162,23 +161,6 @@ public class AcessoInformacoesEstabelecimentoActivity extends AppCompatActivity 
         }
         return true;
 
-    }
-
-    //Método que remove o favorito no banco --LuizAlberes
-    private boolean removerFavorito(){
-        try {
-
-            //Chamada do DAO para remover no banco
-            FavoritoDaoImpl favoritoDao =  new FavoritoDaoImpl(AcessoInformacoesEstabelecimentoActivity.this);
-            //favoritoDao.remover(mFavorito, mIdUsuarioLogado);
-            //favoritoDao.compararRemover(mFavorito, mIdUsuarioLogado);
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-        return true;
     }
 
     //Método que chama a activity para realizar a avaliação

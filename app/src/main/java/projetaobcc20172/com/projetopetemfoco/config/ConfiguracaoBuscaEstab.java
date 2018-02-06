@@ -19,6 +19,7 @@ public class ConfiguracaoBuscaEstab {
 
     private static String sNomeEstabelecimento;
     private static Enumerates.Filtro sFiltro;
+    private static Enumerates.Estado sEstado;
     private static Raio sRaio;
 
     public static String getsNomeEstabelecimento() {
@@ -42,6 +43,7 @@ public class ConfiguracaoBuscaEstab {
     }
 
     public static void inicializar(){
+        sEstado = Enumerates.Estado.DEFAULT;
         sNomeEstabelecimento = null;
         sFiltro = Enumerates.Filtro.DISTANCIA;
         sRaio = new Raio();
@@ -69,5 +71,17 @@ public class ConfiguracaoBuscaEstab {
             Collections.sort(resultados, new FornecedorComparatorAvaliacao());
             Collections.reverse(resultados);
         }
+        sEstado = Enumerates.Estado.DEFAULT;
     }
+
+
+    public static Enumerates.Estado getsEstado(){
+        return sEstado;
+    }
+
+    public static void setsEstado(Enumerates.Estado sEstado) {
+        ConfiguracaoBuscaEstab.sEstado = sEstado;
+    }
+
+
 }

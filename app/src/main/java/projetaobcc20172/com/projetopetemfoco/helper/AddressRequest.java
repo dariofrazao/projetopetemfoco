@@ -1,8 +1,11 @@
 package projetaobcc20172.com.projetopetemfoco.helper;
 
 import android.os.AsyncTask;
+
 import com.google.gson.Gson;
+
 import java.lang.ref.WeakReference;
+
 import projetaobcc20172.com.projetopetemfoco.activity.CadastroEnderecoActivity;
 import projetaobcc20172.com.projetopetemfoco.model.Endereco;
 

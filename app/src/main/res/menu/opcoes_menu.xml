@@ -17,6 +17,11 @@
             android:icon="@drawable/ic_action_favoritos"
             android:title="Meus Favoritos" />
         <item
+            android:id="@+id/nav_promocoes"
+            android:icon="@drawable/ic_action_promocoes"
+            android:title="Promoções"
+            />
+        <item
             android:id="@+id/nav_estabelecimentos"
             android:icon="@drawable/ic_action_estabelecimentos"
             android:title="Fornecedores" />

@@ -25,8 +25,6 @@ import projetaobcc20172.com.projetopetemfoco.utils.Utils;
 
 public class BuscaServicosActivity extends Fragment {
 
-    private TiposServicoAdapterGrid mServAdpGrid;
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -51,7 +49,7 @@ public class BuscaServicosActivity extends Fragment {
             }
         });
         ArrayList<String> tiposServico =  Utils.recuperaArrayR(getActivity(),R.array.servicos);
-        mServAdpGrid = new TiposServicoAdapterGrid(getActivity(),tiposServico);
+        TiposServicoAdapterGrid mServAdpGrid = new TiposServicoAdapterGrid(getActivity(), tiposServico);
         gridView.setAdapter(mServAdpGrid);
         mServAdpGrid.notifyDataSetChanged();
         mFiltro.setOnClickListener(new View.OnClickListener() {

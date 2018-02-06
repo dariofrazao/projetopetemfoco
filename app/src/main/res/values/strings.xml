@@ -177,4 +177,8 @@
     <string name="url_matrix_distance">https://maps.googleapis.com/maps/api/distancematrix/json?units=metric</string>
     <string name="title_activity_cadastro_fornecedor_tipo">CadastroFornecedorTipoActivity</string>
 
+    <string name="hello_world">Hello world!</string>
+    <string name="tv_promocoes">Promoções</string>
+    <string name="tb_detalhes_promocao">Detalhes da promoção</string>
+
 </resources>

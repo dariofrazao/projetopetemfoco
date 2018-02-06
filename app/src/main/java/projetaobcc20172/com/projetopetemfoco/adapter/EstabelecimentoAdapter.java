@@ -8,7 +8,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -63,7 +65,6 @@ public class EstabelecimentoAdapter extends ArrayAdapter<Fornecedor> {
             uf.setText(" - " + fornecedor.getEndereco().getUf());
             distancia.setText("Distância: "+fornecedor.getDistancia()+" km");
             nota.setText(String.format("%.2f", fornecedor.getNota()));
-
         }
         return view;
     }

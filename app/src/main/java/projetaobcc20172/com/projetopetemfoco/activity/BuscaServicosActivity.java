@@ -8,9 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ProgressBar;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -46,6 +46,7 @@ public class BuscaServicosActivity extends Fragment {
         final GridView gridView = getActivity().findViewById(R.id.gridServicos);
         Button btnFiltro = getActivity().findViewById(R.id.btnFiltro);
 
+        ImageView mFiltro = getActivity().findViewById(R.id.ivFiltro);
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -57,7 +58,7 @@ public class BuscaServicosActivity extends Fragment {
         mServAdpGrid = new TiposServicoAdapterGrid(getActivity(),tiposServico);
         gridView.setAdapter(mServAdpGrid);
         mServAdpGrid.notifyDataSetChanged();
-        btnFiltro.setOnClickListener(new View.OnClickListener() {
+        mFiltro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent= new Intent(getActivity(), FiltroServicoDialog.class);

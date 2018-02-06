@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:checked="true"
             android:buttonTint="@color/colorPrimaryDark"
-            android:text="Próximidade" />
+            android:text="Proximidade" />
 
         <CheckBox
             android:id="@+id/cbAva"
@@ -51,7 +51,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:buttonTint="@color/colorPrimaryDark"
-            android:text="Preço" />
+            android:text="Preço (Do menor para o maior)" />
 
         <TextView
             android:id="@+id/textView4"

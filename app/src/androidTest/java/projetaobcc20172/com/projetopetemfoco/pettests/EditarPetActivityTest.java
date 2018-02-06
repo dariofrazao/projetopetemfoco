@@ -55,14 +55,15 @@ public class EditarPetActivityTest {
         mIdUsuarioLogado = getPreferences("id", context);
 
         //Chamada do DAO para salvar um pet no banco para fazer o teste de edição
-        petDao.inserir(pet, mIdUsuarioLogado,null);
+        //petDao.inserir(pet, mIdUsuarioLogado);
 
         Thread.sleep(4000);
         LoginActivityTest log = new LoginActivityTest();
         log.testeLoginComSucesso();
         Thread.sleep(4000);
         TestTools.clicarItemNavigationMenu(R.id.drawer_layout, R.id.nav_busca, R.id.nav_pets);
-        TestToolsPet.clicarIconeEditar();
+        TestTools.clicarEmITemListView(R.id.lv_pets, 0);
+        TestTools.clicarBotao(R.id.btnEditar);
     }
 
     //Teste que simula uma edição do pet com o campo nome em branco

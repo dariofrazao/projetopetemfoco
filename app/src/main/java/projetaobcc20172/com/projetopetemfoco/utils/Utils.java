@@ -114,7 +114,7 @@ public class Utils {
         return R.drawable.tipo_pet_todos;
     }
 
-    public static int escolherIconServico(String servico,View view){
+    public static int escolherIconServico(String servico, View view){
         String[] pets =  view.getResources().getStringArray(R.array.servicos);
         if(servico.equals(pets[1])){
             return R.drawable.servico_banho;

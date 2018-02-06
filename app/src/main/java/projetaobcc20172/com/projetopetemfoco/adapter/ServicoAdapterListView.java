@@ -1,8 +1,5 @@
 package projetaobcc20172.com.projetopetemfoco.adapter;
 
-
-
-
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
@@ -16,14 +13,9 @@ import java.util.ArrayList;
 import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.utils.Utils;
 
-
 /**
  * Created by raul1 on 05/01/2018.
  */
-
-
-
-
 
 public class ServicoAdapterListView extends ArrayAdapter<String[]> {
     private ArrayList<String[]> mResuBusca;

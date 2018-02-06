@@ -135,6 +135,9 @@
     <string name="horario">Horário:</string>
     <string name="email">Email:</string>
     <string name="avaliacoes">Avaliações</string>
+    <string name="tb_detalhes_servico">Detalhes do Serviço</string>
+    <string name="botao_ver_estabelecimento">Detalhes do Estabelecimento</string>
+    <string name="botao_contratar_servico">Contratar Serviço</string>
     <string name="sucesso_avaliacao_estabelecimento">Avaliação realizada com Sucesso!</string>
     <string name="sucesso_atualizacao_nota">Atualização Realizado com Sucesso!</string>
     <string name="sucesso_avaliacao_servico">Avaliação realizada com Sucesso!</string>
@@ -163,11 +166,17 @@
     <string name="avaliar">Avaliar</string>
     <string name="title_activity_filtro_busca">FiltroBuscaActivity</string>
     <string name="erro_timeout_msg">Operação demorou demais.Verfique sua conexão com a internet</string>
+
     <!--Strings relacionadas ao filtro de Serviço-->
     <string name="filtro_atualizado_servico">Filtro salvo com sucesso</string>
 
     <!--Strings relacionadas ao Serviço-->
     <string name="tb_avaliacoes_servico">Avaliações</string>
+
+    <!--Strings relacionadas a Contratação de Serviço-->
+    <string name="tb_agenda_estabelecimento">Agenda do Estabelecimento</string>
+    <string name="solicitacao_enviada">Os convites serão enviados.</string>
+    <string name="selecione_dia_horario">Selecione o dia e horário que deseja contratar o serviço</string>
 
     <string name="api_key_google_matrix">AIzaSyBrKPS2exi5vhLYY1H1islk4UUlRb4Z9Rk</string>
     <string name="url_matrix_distance">https://maps.googleapis.com/maps/api/distancematrix/json?units=metric</string>

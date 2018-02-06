@@ -138,4 +138,11 @@ public class AvaliarEstabelecimentoActivity extends AppCompatActivity {
 
     }
 
+    //Método do botão voltar
+    @Override
+    public void onBackPressed() {
+        AvaliarEstabelecimentoActivity.super.onBackPressed();
+    }
+
+
 }

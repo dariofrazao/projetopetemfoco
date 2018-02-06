@@ -12,13 +12,13 @@
     tools:context="projetaobcc20172.com.projetopetemfoco.activity.ExibiAvalicoesEstabelecimentoActivity">
 
     <include
-        android:id="@+id/tb_lista_avaliacoes_servico"
+        android:id="@+id/tb_lista_avaliacoes_estabelecimento"
         layout="@layout/toolbar"></include>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/tb_lista_avaliacoes_servico"
+        android:layout_below="@+id/tb_lista_avaliacoes_estabelecimento"
         android:orientation="vertical"
         android:paddingBottom="@dimen/activity_vertical_margin"
         android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -31,7 +31,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/tvExibeNomeServicoAvaliacao"
+                android:id="@+id/tvExibeNomeEstabelecimentoAvaliacao"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Nome"
@@ -40,7 +40,7 @@
 
 
             <ListView
-                android:id="@+id/lvListaAvaliacoesServico"
+                android:id="@+id/lvListaAvaliacoes"
                 android:layout_marginTop="6dp"
                 android:background="@color/black"
                 android:layout_width="match_parent"

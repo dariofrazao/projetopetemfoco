@@ -1,12 +1,9 @@
 package projetaobcc20172.com.projetopetemfoco.activity;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
@@ -25,7 +22,6 @@ import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoFirebase;
 import projetaobcc20172.com.projetopetemfoco.database.services.AvaliacaoServicoDaoImpl;
 import projetaobcc20172.com.projetopetemfoco.excecoes.CampoObrAusenteException;
 import projetaobcc20172.com.projetopetemfoco.model.Avaliacao;
-import projetaobcc20172.com.projetopetemfoco.model.Servico;
 import projetaobcc20172.com.projetopetemfoco.model.Usuario;
 import projetaobcc20172.com.projetopetemfoco.utils.VerificadorDeObjetos;
 

@@ -1,7 +1,5 @@
 package projetaobcc20172.com.projetopetemfoco.avaliacaoservicotest;
 
-
-import android.support.test.InstrumentationRegistry;
 import android.support.test.espresso.DataInteraction;
 import android.support.test.espresso.ViewInteraction;
 import android.support.test.rule.ActivityTestRule;

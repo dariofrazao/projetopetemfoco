@@ -13,6 +13,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.Query;
@@ -24,6 +26,7 @@ import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.adapter.ServicoAdapterListView;
 import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoFirebase;
 import projetaobcc20172.com.projetopetemfoco.config.ConfiguracoesBuscaServico;
+import projetaobcc20172.com.projetopetemfoco.utils.Enumerates;
 import projetaobcc20172.com.projetopetemfoco.utils.Utils;
 
 /**
@@ -128,6 +131,7 @@ public class ListaEstabServicoActivity extends AppCompatActivity {
                             Utils.mostrarMensagemCurta(projetaobcc20172.com.projetopetemfoco.activity.ListaEstabServicoActivity.this, getString(R.string.servicos_nao_encontrado));
                         }
                         mAdapter.notifyDataSetChanged();
+                        mProgresso.setVisibility(View.INVISIBLE);
                     }
 
                     @Override

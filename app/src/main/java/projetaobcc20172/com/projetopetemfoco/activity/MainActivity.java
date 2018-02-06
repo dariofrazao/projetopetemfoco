@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView =  (NavigationView)findViewById(R.id.nav_busca);
 
-        displaySelectedScreen(R.id.nav_servicos);//Determina qual tela será aberta primeiro ao entrar
+        displaySelectedScreen(R.id.nav_promocoes);//Determina qual tela será aberta primeiro ao entrar
 
         View header = navigationView.getHeaderView(0);
 

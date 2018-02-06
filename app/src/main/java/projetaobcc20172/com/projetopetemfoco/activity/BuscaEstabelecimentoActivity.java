@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -16,6 +17,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.SearchView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -58,12 +60,14 @@ public class BuscaEstabelecimentoActivity extends Fragment implements Serializab
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        RelativeLayout relativeLayout = getActivity().findViewById(R.id.relativeBuscaEstab);
+        Utils.hideSoftKeyboard(getActivity());
         getActivity().setTitle(R.string.tb_fornecedor);
         final ListView listView = getView().findViewById(R.id.lvBuscaEsta);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Utils.hideSoftKeyboard(getActivity());
                 exibirEstabelecimento(mForncedores.get(position));
             }
         });
@@ -75,6 +79,7 @@ public class BuscaEstabelecimentoActivity extends Fragment implements Serializab
 
             @Override
             public void onClick(View v) {
+                Utils.hideSoftKeyboard(getActivity());
                 buscarTodosEstabelecimentos();
             }
         });
@@ -107,6 +112,14 @@ public class BuscaEstabelecimentoActivity extends Fragment implements Serializab
             }
         });
 
+        relativeLayout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                Utils.hideSoftKeyboard(getActivity());
+                return false;
+            }
+        });
+
         mFiltro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -118,20 +131,21 @@ public class BuscaEstabelecimentoActivity extends Fragment implements Serializab
     }
 
     @Override
-    public void onResume(){
+    public void onResume() {
         super.onResume();
         verificarGPS();
-        if(ConfiguracaoBuscaEstab.getsNomeEstabelecimento()!=null && !ConfiguracaoBuscaEstab.getsNomeEstabelecimento().equals("TODOS"))
+        if (ConfiguracaoBuscaEstab.getsNomeEstabelecimento() != null && !ConfiguracaoBuscaEstab.getsNomeEstabelecimento().equals("TODOS"))
             buscarEstabelecimentos(ConfiguracaoBuscaEstab.getsNomeEstabelecimento());
-        else if (ConfiguracaoBuscaEstab.getsNomeEstabelecimento()!=null && ConfiguracaoBuscaEstab.getsNomeEstabelecimento().equals("TODOS")){
+        else if (ConfiguracaoBuscaEstab.getsNomeEstabelecimento() != null && ConfiguracaoBuscaEstab.getsNomeEstabelecimento().equals("TODOS")) {
 
             buscarTodosEstabelecimentos();
         }
+    }
 
 
     //Método que chama a activity para exibir informações do estabelecimento
     public void exibirEstabelecimento(final Fornecedor fornecedor) {
-
+        Utils.hideSoftKeyboard(getActivity());
         //Buscar servicos do estabelecimento selecionado
         Query query = ConfiguracaoFirebase.getFirebase().child("servicos").orderByChild("idFornecedor").equalTo(fornecedor.getId());
         query.addListenerForSingleValueEvent(new ValueEventListener() {

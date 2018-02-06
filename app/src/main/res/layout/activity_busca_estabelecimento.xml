@@ -17,42 +17,41 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/fundo_degrade"
-        android:orientation="horizontal">
-
-        <SearchView
-            android:id="@+id/svBusca"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:queryHint="@string/buscaEstabelecimento"
-            android:iconifiedByDefault="false"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:background="@drawable/fundo_degrade"
-            android:focusable="true"
-            android:focusableInTouchMode="true">
-        </SearchView>
+            android:orientation="horizontal">
 
-        <ImageView
-            android:id="@+id/ivFiltro"
-            android:layout_width="40dp"
-            android:layout_height="45dp"
-            android:paddingTop="10dp"
-            android:paddingRight="10dp"
-            android:adjustViewBounds="true"
-            android:src="@drawable/ic_action_filtro_preto"/>
+            <SearchView
+                android:id="@+id/svBusca"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:iconifiedByDefault="false"
+                android:background="@drawable/fundo_degrade"
+                android:queryHint="@string/buscaEstabelecimento"></SearchView>
 
-    </LinearLayout>
+            <ImageView
+                android:id="@+id/ivFiltro"
+                android:layout_width="40dp"
+                android:layout_height="45dp"
+                android:adjustViewBounds="true"
+                android:paddingRight="10dp"
+                android:paddingTop="10dp"
+                android:src="@drawable/ic_action_filtro_preto" />
+
+        </LinearLayout>
 
         <Button
             android:id="@+id/botao_todos_estabelecimentos"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:padding="8dp"
             android:layout_margin="8dp"
             android:background="@drawable/shapebutton"
+            android:padding="8dp"
             android:text="Buscar Todos"
             android:textColor="@color/branco"/>
 

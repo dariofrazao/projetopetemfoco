@@ -148,6 +148,8 @@
 
     <!--Strings relacionadas a tela de busca-->
     <string name="tb_estabelecimentos">Estabelecimentos</string>
+    <string name="tb_fornecedor">Fornecedores</string>
+    <string name="tb_autonomos">Autônomos</string>
     <string name="tb_servicos">Busca por serviços</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -183,5 +185,10 @@
     <string name="title_activity_avaliar_servico">AvaliarServicoActivity</string>
     <string name="avaliar_servico">Avaliar Serviço</string>
     <string name="avaliacoes_do_servico">AVALIAÇÕES DO SERVIÇO</string>
+    <string name="title_activity_cadastro_fornecedor_tipo">CadastroFornecedorTipoActivity</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="tv_promocoes">Promoções</string>
+    <string name="tb_detalhes_promocao">Detalhes da promoção</string>
 
 </resources>

@@ -3,10 +3,10 @@ package projetaobcc20172.com.projetopetemfoco.activity;
 import android.Manifest;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
@@ -105,7 +105,8 @@ public class InfoServicoActivity extends AppCompatActivity {
                                 nota = dados.child("nota").getValue(float.class);
                             }
                             fornecedor = new Fornecedor(dados.child("nome").getValue(String.class), dados.child("email").getValue(String.class), dados.child("cpfCnpj").getValue(String.class)
-                                    , dados.child("horarios").getValue(String.class), nota, dados.child("telefone").getValue(String.class),dados.child("endereco").getValue(Endereco.class));
+                                    , dados.child("horarios").getValue(String.class), nota, dados.child("telefone").getValue(String.class),
+                                    dados.child("endereco").getValue(Endereco.class),dados.child("tipo").getValue(String.class));
                             fornecedor.setId(dados.getKey());
                             Intent intent = new Intent(InfoServicoActivity.this, ContratarServicoActivity.class);
                             intent.putExtra("Fornecedor", fornecedor);
@@ -191,7 +192,8 @@ public class InfoServicoActivity extends AppCompatActivity {
                         nota = dados.child("nota").getValue(float.class);
                     }
                     fornecedor = new Fornecedor(dados.child("nome").getValue(String.class), dados.child("email").getValue(String.class), dados.child("cpfCnpj").getValue(String.class)
-                            , dados.child("horarios").getValue(String.class), nota, dados.child("telefone").getValue(String.class), dados.child("endereco").getValue(Endereco.class));
+                            , dados.child("horarios").getValue(String.class), nota, dados.child("telefone").getValue(String.class),
+                            dados.child("endereco").getValue(Endereco.class),dados.child("tipo").getValue(String.class));
                     fornecedor.setId(dados.getKey());
                     exibirServicos();
 

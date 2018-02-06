@@ -88,7 +88,7 @@ public class InfoServicoActivity extends AppCompatActivity {
                             }
                             fornecedor = new Fornecedor(dados.child("nome").getValue(String.class), dados.child("email").getValue(String.class), dados.child("cpfCnpj").getValue(String.class)
                                     , dados.child("horarios").getValue(String.class), nota, dados.child("telefone").getValue(String.class),
-                                    dados.child("endereco").getValue(Endereco.class));
+                                    dados.child("endereco").getValue(Endereco.class),dados.child("tipo").getValue(String.class));
                             fornecedor.setId(dados.getKey());
                             Intent intent = new Intent(InfoServicoActivity.this, ContratarServicoActivity.class);
                             intent.putExtra("Fornecedor", fornecedor);
@@ -163,7 +163,7 @@ public class InfoServicoActivity extends AppCompatActivity {
                     }
                     fornecedor = new Fornecedor(dados.child("nome").getValue(String.class), dados.child("email").getValue(String.class), dados.child("cpfCnpj").getValue(String.class)
                             , dados.child("horarios").getValue(String.class), nota, dados.child("telefone").getValue(String.class),
-                            dados.child("endereco").getValue(Endereco.class));
+                            dados.child("endereco").getValue(Endereco.class),dados.child("tipo").getValue(String.class));
                     fornecedor.setId(dados.getKey());
                     exibirServicos();
 

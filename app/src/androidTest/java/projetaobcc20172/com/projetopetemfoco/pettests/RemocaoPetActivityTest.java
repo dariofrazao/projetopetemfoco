@@ -56,14 +56,16 @@ public class RemocaoPetActivityTest {
         mIdUsuarioLogado = getPreferences("id", context);
 
         //Chamada do DAO para salvar um pet no banco para fazer o teste de remoção
-        petDao.inserir(pet, mIdUsuarioLogado);
+        //petDao.inserir(pet, mIdUsuarioLogado);
 
         Thread.sleep(4000);
         LoginActivityTest log = new LoginActivityTest();
         log.testeLoginComSucesso();
         Thread.sleep(4000);
         TestTools.clicarItemNavigationMenu(R.id.drawer_layout, R.id.nav_busca, R.id.nav_pets);
-        TestToolsPet.clicariconeExcluir();
+        Thread.sleep(4000);
+        TestTools.clicarEmITemListView(R.id.lv_pets, 0);
+        TestTools.clicarBotao(R.id.btnExcluir);
     }
 
     //Teste que simula a remoção de um pet confirmando a ação

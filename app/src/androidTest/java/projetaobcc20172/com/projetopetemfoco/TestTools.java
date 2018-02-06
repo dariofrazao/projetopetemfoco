@@ -8,6 +8,7 @@ import android.support.test.espresso.ViewAction;
 import android.support.test.espresso.action.ViewActions;
 import android.support.test.espresso.contrib.DrawerActions;
 import android.support.test.espresso.contrib.NavigationViewActions;
+import android.support.test.espresso.contrib.RecyclerViewActions;
 import android.support.test.espresso.matcher.ViewMatchers;
 import android.view.KeyEvent;
 import android.view.View;
@@ -18,9 +19,6 @@ import org.hamcrest.Matcher;
 
 import java.util.Random;
 
-
-
-
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.swipeLeft;
 import static android.support.test.espresso.action.ViewActions.swipeRight;
@@ -29,6 +27,7 @@ import static android.support.test.espresso.matcher.RootMatchers.withDecorView;
 import static android.support.test.espresso.matcher.ViewMatchers.isAssignableFrom;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
 import static org.hamcrest.CoreMatchers.is;
@@ -47,15 +46,15 @@ public class TestTools {
     //Verifica se a mensagem do toast é a correta
     public static void checarToast(int rMsg){
         Activity act = TestTools.activityAtual();
-        Espresso.onView(ViewMatchers.withText(act.getResources().getString(rMsg))).inRoot(withDecorView(not(is(act.getWindow().getDecorView())))).check(matches(isDisplayed()));
+        Espresso.onView(withText(act.getResources().getString(rMsg))).inRoot(withDecorView(not(is(act.getWindow().getDecorView())))).check(matches(isDisplayed()));
     }
 
     public static void checarToast(int rMsg,Activity act){
-        Espresso.onView(ViewMatchers.withText(act.getResources().getString(rMsg))).inRoot(withDecorView(not(is(act.getWindow().getDecorView())))).check(matches(isDisplayed()));
+        Espresso.onView(withText(act.getResources().getString(rMsg))).inRoot(withDecorView(not(is(act.getWindow().getDecorView())))).check(matches(isDisplayed()));
     }
     public static  void checarToast(String msg){
         Activity act = TestTools.activityAtual();
-        Espresso.onView(ViewMatchers.withText(msg)).inRoot(withDecorView(not(is(act.getWindow().getDecorView())))).check(matches(isDisplayed()));
+        Espresso.onView(withText(msg)).inRoot(withDecorView(not(is(act.getWindow().getDecorView())))).check(matches(isDisplayed()));
     }
     /*
     //Verifica se a mudança de activity(tela) ocorreu como esperada
@@ -91,7 +90,7 @@ public class TestTools {
 
     public static void clicarItemMenu(String idBotao){
         Espresso.openContextualActionModeOverflowMenu();
-        Espresso.onView(ViewMatchers.withText(idBotao)).perform(ViewActions.click());
+        Espresso.onView(withText(idBotao)).perform(ViewActions.click());
     }
 
     //Caso a tela contenha scroll e o botão não estaja visivel é necessario
@@ -122,6 +121,10 @@ public class TestTools {
         Espresso.onView(withId(android.R.id.button2)).perform(click());
     }
 
+    public static void clickItemRecyclerView(int id,int posicao){
+        Espresso.onView(withId(id))
+                .perform(RecyclerViewActions.actionOnItemAtPosition(posicao, click()));
+    }
 
 
     //Retorna activity que está atualmente instanciada
@@ -224,6 +227,10 @@ public class TestTools {
     public static int getTamanhoListView(Activity act,int idListView){
         ListView list =  act.findViewById(idListView);
         return list.getCount();
+    }
+
+    public static void checkText(int idTextView, String textoEsperado){
+        Espresso.onView(withId(idTextView)).check(matches(withText(textoEsperado)));
     }
 
 }

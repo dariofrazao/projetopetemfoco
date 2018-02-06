@@ -8,13 +8,16 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.SearchView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -32,6 +35,7 @@ import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoFirebase;
 import projetaobcc20172.com.projetopetemfoco.model.Endereco;
 import projetaobcc20172.com.projetopetemfoco.model.Fornecedor;
 import projetaobcc20172.com.projetopetemfoco.model.Servico;
+import projetaobcc20172.com.projetopetemfoco.utils.Enumerates;
 import projetaobcc20172.com.projetopetemfoco.utils.Utils;
 
 import static android.content.Context.LOCATION_SERVICE;
@@ -57,7 +61,7 @@ public class BuscaEstabelecimentoActivity extends Fragment implements Serializab
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        RelativeLayout relativeLayout = getActivity().findViewById(R.id.relativeBuscaEstab);
         getActivity().setTitle(R.string.tb_estabelecimentos);
         final ListView listView = getView().findViewById(R.id.lvBuscaEsta);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -67,32 +71,24 @@ public class BuscaEstabelecimentoActivity extends Fragment implements Serializab
             }
         });
         ConfiguracaoBuscaEstab.inicializar();
-        final SearchView buscaEst = getView().findViewById(R.id.svBusca);
-        buscaEst.setSubmitButtonEnabled(true);
-        Button btnBuscaFonecedorAvaliacao = getView().findViewById(R.id.botao_todos_estabelecimentos);
-        btnBuscaFonecedorAvaliacao.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                buscarTodosEstabelecimentos();
-            }
-        });
+        SearchView mBuscaEst = getView().findViewById(R.id.svBusca);
+        mBuscaEst.setSubmitButtonEnabled(true);
+        Button btnBuscaTodos = getView().findViewById(R.id.botao_todos_estabelecimentos);
 
         mProgresso = (ProgressBar) getView().findViewById(R.id.pbProgresso);
         mProgresso.setVisibility(View.INVISIBLE);
-        Button btnFiltro = getActivity().findViewById(R.id.btnFiltroEstabelecimento);
+        ImageView mFiltro = getActivity().findViewById(R.id.ivFiltro);
         // Monta listview e mAdapter
         mForncedores = new ArrayList<>();
         mAdapter = new EstabelecimentoAdapter(getActivity(), mForncedores);
         listView.setAdapter(mAdapter);
 
         //Realiza a busca por texto
-        buscaEst.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        mBuscaEst.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {//Quando clicar no botão de pesquisar
-                mProgresso.setVisibility(View.VISIBLE);
                 ConfiguracaoBuscaEstab.setsNomeEstabelecimento(s.toLowerCase());
-                buscarEstabelecimentos(ConfiguracaoBuscaEstab.getsNomeEstabelecimento());
+                buscarEstabelecimentos("");
                 return false;
             }
 
@@ -106,7 +102,34 @@ public class BuscaEstabelecimentoActivity extends Fragment implements Serializab
             }
         });
 
-        btnFiltro.setOnClickListener(new View.OnClickListener() {
+        btnBuscaTodos.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                mProgresso.setVisibility(View.VISIBLE);
+                ConfiguracaoBuscaEstab.setsNomeEstabelecimento("TODOS");
+                buscarEstabelecimentos("TODOS");
+                Utils.hideSoftKeyboard(getActivity());
+            }
+        });
+
+        relativeLayout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                Utils.hideSoftKeyboard(getActivity());
+                return false;
+            }
+        });
+
+        listView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                Utils.hideSoftKeyboard(getActivity());
+                return true;
+            }
+        });
+
+        mFiltro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent= new Intent(getActivity(), FiltroEstabelecimentoActivity.class);
@@ -120,11 +143,10 @@ public class BuscaEstabelecimentoActivity extends Fragment implements Serializab
     public void onResume(){
         super.onResume();
         verificarGPS();
-        if(ConfiguracaoBuscaEstab.getsNomeEstabelecimento()!=null && !ConfiguracaoBuscaEstab.getsNomeEstabelecimento().equals("TODOS"))
+        if(ConfiguracaoBuscaEstab.getsNomeEstabelecimento()!=null) {
             buscarEstabelecimentos(ConfiguracaoBuscaEstab.getsNomeEstabelecimento());
-        else{
-            buscarTodosEstabelecimentos();
         }
+
     }
 
     //Método que chama a activity para exibir informações do estabelecimento
@@ -157,9 +179,17 @@ public class BuscaEstabelecimentoActivity extends Fragment implements Serializab
     private void buscarEstabelecimentos(final String nomeBuscado){
         mForncedores.clear();
         verificarGPS();
-        if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+        mProgresso.setVisibility(View.VISIBLE);
+        if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) && ConfiguracaoBuscaEstab.getsEstado().equals(Enumerates.Estado.DEFAULT)) {
+            ConfiguracaoBuscaEstab.setsEstado(Enumerates.Estado.BUSCANDO);
             final String nome = nomeBuscado;
-            Query query1 = ConfiguracaoFirebase.getFirebase().child("fornecedor").orderByChild("nomeBusca").startAt(nome);
+            Query query1;
+            if(ConfiguracaoBuscaEstab.getsNomeEstabelecimento().equals("TODOS")) {
+                query1 = ConfiguracaoFirebase.getFirebase().child("fornecedor").orderByChild("nomeBusca");
+                }
+            else{
+                query1 = ConfiguracaoFirebase.getFirebase().child("fornecedor").orderByChild("nomeBusca").startAt(nome);
+            }
             query1.addListenerForSingleValueEvent(new ValueEventListener() {
 
                 @Override
@@ -168,7 +198,7 @@ public class BuscaEstabelecimentoActivity extends Fragment implements Serializab
 
                         String nomeT = dados.child("nomeBusca").getValue(String.class);
 
-                        if (!nomeT.contains(nome)) {
+                        if (!ConfiguracaoBuscaEstab.getsNomeEstabelecimento().equals("TODOS") && !nomeT.contains(nome)) {
                             continue;
                         }
 
@@ -178,7 +208,7 @@ public class BuscaEstabelecimentoActivity extends Fragment implements Serializab
                             nota = dados.child("nota").getValue(float.class);
                         }
 
-                        forn = new Fornecedor(dados.child("nome").getValue(String.class), dados.child("email").getValue(String.class), dados.child("cpfCnpj").getValue(String.class)
+                        forn = new Fornecedor(dados.child("titulo").getValue(String.class), dados.child("email").getValue(String.class), dados.child("cpfCnpj").getValue(String.class)
                                 , dados.child("horarios").getValue(String.class), nota, dados.child("telefone").getValue(String.class),
                                 dados.child("endereco").getValue(Endereco.class));
                         forn.setId(dados.getKey());
@@ -202,47 +232,6 @@ public class BuscaEstabelecimentoActivity extends Fragment implements Serializab
             });
         }
 
-    }
-
-    private void buscarTodosEstabelecimentos(){
-        ConfiguracaoBuscaEstab.setsNomeEstabelecimento("TODOS");
-        mForncedores.clear();
-        verificarGPS();
-        if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-            Query query1 = ConfiguracaoFirebase.getFirebase().child("fornecedor").orderByChild("nomeBusca");
-            query1.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    for (final DataSnapshot dados : dataSnapshot.getChildren()) {
-                        Fornecedor forn;
-                        float nota = 0;
-                        if (dados.child("nota").getValue(float.class) != null) {
-                            nota = dados.child("nota").getValue(float.class);
-                        }
-
-                        forn = new Fornecedor(dados.child("nome").getValue(String.class), dados.child("email").getValue(String.class), dados.child("cpfCnpj").getValue(String.class)
-                                , dados.child("horarios").getValue(String.class), nota, dados.child("telefone").getValue(String.class),
-                                dados.child("endereco").getValue(Endereco.class));
-                        forn.setId(dados.getKey());
-                        mForncedores.add(forn);
-                    }
-                    ConfiguracaoBuscaEstab.filtrar(getActivity(), mForncedores);
-                    mAdapter.notifyDataSetChanged();
-                    mProgresso.setVisibility(View.INVISIBLE);
-
-                    //Se a busca não retornar nada
-                    if (mAdapter.isEmpty()) {
-                        Utils.mostrarMensagemCurta(getContext(), getContext().getString(R.string.estabelecimento_nao_encontrado));
-                    }
-
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-                    assert true;
-                }
-            });
-        }
     }
 
     private void verificarGPS(){

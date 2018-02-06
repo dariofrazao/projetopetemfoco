@@ -20,6 +20,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -28,7 +29,9 @@ import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+
 import java.io.Serializable;
+
 import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.adapter.ServicoAdapterListaViewInformacoes;
 import projetaobcc20172.com.projetopetemfoco.database.services.FavoritoDaoImpl;
@@ -200,7 +203,7 @@ public class AcessoInformacoesEstabelecimentoActivity extends AppCompatActivity 
         Intent intent = new Intent(AcessoInformacoesEstabelecimentoActivity.this, AvaliarEstabelecimentoActivity.class);
         intent.putExtra("Fornecedor", fornecedor);
         startActivity(intent);
-        finish();
+        //finish();
     }
 
     @Override
@@ -214,7 +217,7 @@ public class AcessoInformacoesEstabelecimentoActivity extends AppCompatActivity 
         Intent intent = new Intent(AcessoInformacoesEstabelecimentoActivity.this, AvalicoesEstabelecimentoActivity.class);
         intent.putExtra("Fornecedor", fornecedor);
         startActivity(intent);
-        finish();
+        //finish();
     }
     //Método que recupera o id do usuário logado, para salvar o pet no nó do favorito que o está cadastrando--LuizAlberes
     public static String getPreferences(String key, Context context) {

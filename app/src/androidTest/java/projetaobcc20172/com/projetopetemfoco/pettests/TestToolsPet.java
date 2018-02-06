@@ -20,12 +20,12 @@ public class TestToolsPet {
     }
 
     protected static void clicariconeExcluir(){
-        TestTools.clicarEmItemDentroListView(R.id.lv_pets,0,R.id.ibtnRemover);
+        TestTools.clicarEmItemDentroListView(R.id.lv_pets,0,R.id.btnExcluir);
     }
 
 
     public static void clicarIconeEditar(){
-        TestTools.clicarEmItemDentroListView(R.id.lv_pets,0,R.id.ibtnEditar);
+        TestTools.clicarEmItemDentroListView(R.id.lv_pets,0,R.id.btnEditar);
     }
 
     public static void clicarMeusPets(){

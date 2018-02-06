@@ -67,7 +67,9 @@ public class RemocaoEnderecoActivityTest {
         log.testeLoginComSucesso();
         Thread.sleep(2000);
         TestTools.clicarItemNavigationMenu(R.id.drawer_layout, R.id.nav_busca, R.id.nav_endereco);
-        TestToolsEndereco.clicarIconeExcluir();
+        Thread.sleep(4000);
+        TestTools.clicarEmITemListView(R.id.lv_enderecos, 0);
+        TestTools.clicarBotao(R.id.btnExcluir);
     }
 
     //Teste que simula a remoção de um endereço cancelando a ação

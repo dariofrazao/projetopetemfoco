@@ -107,8 +107,9 @@ public class AvaliarEstabelecimentoActivity extends AppCompatActivity {
     }
 
     public void abrirMain() {
-        Intent intent = new Intent(AvaliarEstabelecimentoActivity.this, MainActivity.class);
-        startActivity(intent);
+        Intent intent = new Intent(AvaliarEstabelecimentoActivity.this, AcessoInformacoesEstabelecimentoActivity.class);
+        intent.putExtra("Fornecedor", mFornecedor);
+        //startActivity(intent);
         finish();
     }
 
@@ -137,5 +138,12 @@ public class AvaliarEstabelecimentoActivity extends AppCompatActivity {
         });
 
     }
+
+    //Método do botão voltar
+    @Override
+    public void onBackPressed() {
+        AvaliarEstabelecimentoActivity.super.onBackPressed();
+    }
+
 
 }

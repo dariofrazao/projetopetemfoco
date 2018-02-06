@@ -14,6 +14,6 @@ public class Enumerates {
 
     public enum Estado{
         DEFAULT,
-        ALTERADO;
+        BUSCANDO;
     }
 }

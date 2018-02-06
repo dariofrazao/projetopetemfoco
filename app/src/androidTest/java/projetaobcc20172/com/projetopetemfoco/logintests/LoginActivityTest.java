@@ -2,7 +2,6 @@ package projetaobcc20172.com.projetopetemfoco.logintests;
 
 import android.os.SystemClock;
 import android.support.test.InstrumentationRegistry;
-
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.uiautomator.UiDevice;
 import android.support.test.uiautomator.UiObject;

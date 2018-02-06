@@ -174,4 +174,8 @@
     <string name="api_key_google_matrix">AIzaSyBrKPS2exi5vhLYY1H1islk4UUlRb4Z9Rk</string>
     <string name="url_matrix_distance">https://maps.googleapis.com/maps/api/distancematrix/json?units=metric</string>
 
+    <string name="hello_world">Hello world!</string>
+    <string name="tv_promocoes">Promoções</string>
+    <string name="tb_detalhes_promocao">Detalhes da promoção</string>
+
 </resources>

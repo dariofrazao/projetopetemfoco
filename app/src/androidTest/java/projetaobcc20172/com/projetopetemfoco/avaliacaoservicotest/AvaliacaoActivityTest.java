@@ -7,9 +7,6 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import java.util.Arrays;
-import java.util.Collection;
 import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.TestTools;
 import projetaobcc20172.com.projetopetemfoco.activity.LoginActivity;
@@ -18,31 +15,26 @@ import projetaobcc20172.com.projetopetemfoco.logintests.LoginActivityTest;
 @LargeTest
 @RunWith(AndroidJUnit4.class)
 public class AvaliacaoActivityTest {
-    @Parameterized.Parameter(0)
-    public String mNomeServico;
-    @Parameterized.Parameter(1)
-    public String mTipoAnimal;
-
     @Rule
     public ActivityTestRule<LoginActivity> mActivityTestRule = new ActivityTestRule<>(LoginActivity.class);
 
-    @Parameterized.Parameters
-    public static Collection<Object[]> data() {
-        return Arrays.asList(new Object[][]{
-                {"Banho","Gato"},
-                {"Tosa","Gato"},
-                {"Hospedagem","Gato"},
-                {"Passeio","Gato"},
-                {"Vacinação","Gato"},
-                {"Banho","Cachorro"},
-                {"Tosa","Cachorro"},
-                {"Hospedagem","Cachorro"},
-                {"Passeio","Cachorro"},
-                {"Vacinação","Cachorro"}
-        });
-    }
+
+//    public static String[][] tipo = {
+//                {"Banho","Gato"},
+//                {"Tosa","Gato"},
+//                {"Hospedagem","Gato"},
+//                {"Passeio","Gato"},
+//                {"Vacinação","Gato"},
+//                {"Banho","Cachorro"},
+//                {"Tosa","Cachorro"},
+//                {"Hospedagem","Cachorro"},
+//                {"Passeio","Cachorro"},
+//                {"Vacinação","Cachorro"}
+//    }
+
+    private static String mNomeServico = "Banho";
     private static String mComentario[] = {"Muito Bom",""};
-    private static float  mNota[] = {4,0};
+   // private static float  mNota[] = {4,0};
 
     @Before
     public void setUp() throws Exception {
@@ -58,19 +50,25 @@ public class AvaliacaoActivityTest {
         Thread.sleep(4000);
         TestTools.clicarItemNavigationMenu(R.id.drawer_layout, R.id.nav_busca, R.id.nav_servicos);
         Thread.sleep(4000);
-        TestToolsAvaliacaoServico.selecionarServico("Banho");
+        TestToolsAvaliacaoServico.selecionarServico(mNomeServico);
         Thread.sleep(4000);
         TestTools.clicarEmITemListView(R.id.lvEstaServicoBusca, 0);
         Thread.sleep(4000);
         TestTools.clicarBotao(R.id.btnAvaliarServico);
         Thread.sleep(4000);
-        TestTools.editarTextoComScroll(R.id.etComentarioAvaliacaoServico);
+        TestTools.digitarCampo(R.id.etComentarioAvaliacaoServico , mComentario[0]);
         Thread.sleep(4000);
         TestTools.clicarBotao(R.id.botao_avaliar_servico);
+        Thread.sleep(2000);
+        TestTools.checarToast(R.string.sucesso_avaliacao_servico);
     }
 
     @Test
-    public void avaliacaoActivityTest() throws InterruptedException {
-        TestToolsAvaliacaoServico.avaliarServico(mNomeServico);
+    public void avaliacaoActivityTest() {
+        try {
+            TestToolsAvaliacaoServico.avaliarServico(mNomeServico);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }

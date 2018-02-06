@@ -18,7 +18,6 @@ public class TestToolsAvaliacaoServico {
             String text = t.getText().toString();
             if(text.equals(servico)){
                 TestTools.clicarEmITemListView(R.id.gridServicos,i);
-                TestTools.clicarBotao(R.id.btnAvaliarServico);
                 break;
             }
         }

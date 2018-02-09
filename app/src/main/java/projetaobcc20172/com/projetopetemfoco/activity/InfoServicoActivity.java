@@ -67,9 +67,9 @@ public class InfoServicoActivity extends AppCompatActivity {
         toolbar.setNavigationIcon(R.drawable.ic_action_arrow_left_white);
         setSupportActionBar(toolbar);
 
-        (InfoServicoActivity.this).setSupportActionBar(toolbar);
+        /*(InfoServicoActivity.this).setSupportActionBar(toolbar);
         ((InfoServicoActivity.this)).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        (InfoServicoActivity.this).getSupportActionBar().setDisplayShowHomeEnabled(true);
+        (InfoServicoActivity.this).getSupportActionBar().setDisplayShowHomeEnabled(true);*/
 
         final int callbackId = 42;
         checkPermissions(callbackId, Manifest.permission.READ_CALENDAR, Manifest.permission.WRITE_CALENDAR);
@@ -83,10 +83,10 @@ public class InfoServicoActivity extends AppCompatActivity {
 
         mServico = (String[]) getIntent().getSerializableExtra("Servico");
 
-        preco = mServico[2];
+        /*preco = mServico[2];
         preco = preco.substring(2);
         preco = preco.replaceAll(",", ".");
-        total = Double.parseDouble(preco);
+        total = Double.parseDouble(preco);*/
 
         preencherCampos();
 
@@ -135,8 +135,10 @@ public class InfoServicoActivity extends AppCompatActivity {
                 });
 
             }
+
         });
-        Button btnContratarServico;
+
+        /*Button btnContratarServico;
         btnContratarServico = findViewById(R.id.btnContratarServico);
         btnContratarServico.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -144,7 +146,7 @@ public class InfoServicoActivity extends AppCompatActivity {
                 Intent intent = new Intent(InfoServicoActivity.this, CardEditActivity.class);
                 startActivityForResult(intent,GET_NEW_CARD);
             }
-        });
+        });*/
     }
 
     public void preencherCampos() {
@@ -212,7 +214,7 @@ public class InfoServicoActivity extends AppCompatActivity {
             }
         });
     }
-
+/*
     //auxilia no recebimento dos dados de cartão de credito e da compra
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -250,7 +252,7 @@ public class InfoServicoActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-
+*/
     private void checkPermissions(int callbackId, String... permissionsId) {
         boolean permissions = true;
         for (String p : permissionsId) {

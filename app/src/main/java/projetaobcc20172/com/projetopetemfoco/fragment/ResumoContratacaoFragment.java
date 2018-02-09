@@ -22,8 +22,10 @@ import br.com.uol.pslibs.checkouttransparent.PSCheckout;
 import br.com.uol.pslibs.checkouttransparent.vo.PSCheckoutRequest;
 import br.com.uol.pslibs.checkouttransparent.vo.PSCheckoutResponse;
 import br.com.uol.pslibs.checkouttransparent.vo.SellerVO;
+import projetaobcc20172.com.projetopetemfoco.activity.ContratarServicoActivity;
 import projetaobcc20172.com.projetopetemfoco.activity.InfoServicoActivity;
 import projetaobcc20172.com.projetopetemfoco.R;
+import projetaobcc20172.com.projetopetemfoco.activity.MainActivity;
 
 import static projetaobcc20172.com.projetopetemfoco.activity.InfoServicoActivity.imagemServico;
 
@@ -62,6 +64,7 @@ public class ResumoContratacaoFragment extends Fragment{
     private String amount;
     private String precoUnitario;
     private Double totalValue;
+    private String activit;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -96,10 +99,9 @@ public class ResumoContratacaoFragment extends Fragment{
         Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
         toolbar.setTitle("Resumo do Pedido");
 
-        assert ((InfoServicoActivity)getActivity()) != null;
-        ((InfoServicoActivity)getActivity()).setSupportActionBar(toolbar);
-        ((InfoServicoActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        ((InfoServicoActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
+        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         Button btConfirm = (Button)view.findViewById(R.id.bt_confirm);
         btConfirm.setOnClickListener(new View.OnClickListener() {

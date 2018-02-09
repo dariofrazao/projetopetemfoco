@@ -16,6 +16,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -27,9 +28,16 @@ import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
 import java.io.Serializable;
 import projetaobcc20172.com.projetopetemfoco.R;
+import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoFirebase;
 import projetaobcc20172.com.projetopetemfoco.database.services.FavoritoDaoImpl;
+import projetaobcc20172.com.projetopetemfoco.model.Endereco;
 import projetaobcc20172.com.projetopetemfoco.model.Favorito;
 import projetaobcc20172.com.projetopetemfoco.adapter.ListaInformacoesAdapterView;
 import projetaobcc20172.com.projetopetemfoco.model.Fornecedor;
@@ -136,6 +144,50 @@ public class AcessoInformacoesEstabelecimentoActivity extends AppCompatActivity 
             }
         });
 
+        Button mAgendaEstabelecimento;
+        mAgendaEstabelecimento = findViewById(R.id.btnAgendaFornecedor);
+        mAgendaEstabelecimento.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Query query = ConfiguracaoFirebase.getFirebase().child("fornecedor").orderByChild("nome");
+                query.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot dados : dataSnapshot.getChildren()) {
+                            float nota = 0;
+                            if (dados.child("nota").getValue(float.class) != null) {
+                                nota = dados.child("nota").getValue(float.class);
+                            }
+                            mFornecedor = new Fornecedor(dados.child("nome").getValue(String.class), dados.child("email").getValue(String.class), dados.child("cpfCnpj").getValue(String.class)
+                                    , dados.child("horarios").getValue(String.class), nota, dados.child("telefone").getValue(String.class),
+                                    dados.child("endereco").getValue(Endereco.class),dados.child("tipo").getValue(String.class));
+                            mFornecedor.setId(dados.getKey());
+                            Intent intent = new Intent(AcessoInformacoesEstabelecimentoActivity.this, ContratarServicoActivity.class);
+                            intent.putExtra("Fornecedor", mFornecedor);
+                            //intent.putExtra("Servico", mServico);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(intent);
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        //vazio
+                    }
+                });
+
+            }
+
+        });
+
+    }
+
+    //Método do botão voltar
+    @Override
+    public void onBackPressed() {
+        AcessoInformacoesEstabelecimentoActivity.super.onBackPressed();
     }
 
 
@@ -235,5 +287,6 @@ public class AcessoInformacoesEstabelecimentoActivity extends AppCompatActivity 
         super.onPause();
         mapView.onPause();
     }
+
 }
 

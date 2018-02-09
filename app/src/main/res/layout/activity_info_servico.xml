@@ -93,11 +93,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
-            android:background="@drawable/shapebuttonborder"
-            android:paddingRight="40dp"
+            android:background="@drawable/shapebutton"
+            android:paddingRight="100dp"
             android:paddingLeft="15dp"
-            android:drawableLeft="@drawable/ic_action_check"
-            android:text="Agenda do Estabelecimento"
+            android:drawableLeft="@drawable/ic_action_check_white"
+            android:text="Agendar Serviço"
+            android:textColor="@color/branco"
             android:textAlignment="viewEnd"/>
 
         <View
@@ -123,7 +124,7 @@
             android:layout_marginTop="2dp"
             android:layout_marginBottom="2dp"/>
 
-        <Button
+        <!--><Button
             android:id="@+id/btnContratarServico"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -134,9 +135,7 @@
             android:drawableLeft="@drawable/ic_purchage"
             android:text="Contratar Serviço"
             android:textColor="@color/branco"
-            android:textAlignment="viewEnd" />
-
-
+            android:textAlignment="viewEnd" /><-->
 
     </LinearLayout>
 

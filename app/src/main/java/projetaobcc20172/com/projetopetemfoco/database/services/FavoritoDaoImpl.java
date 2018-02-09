@@ -30,112 +30,6 @@ public class FavoritoDaoImpl implements FavoritoDao {
 
     }
 
-//    public void checharBancoVazio(final Favorito favorito, final String idUsuarioLogado){
-//
-//        mReferenciaFirebase.addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//
-//                    favorito.setmIdUsuario(idUsuarioLogado);
-//                    favorito.setChecar("0");
-//
-//                    mReferenciaFirebase = mReferenciaFirebase.child("favoritos").push();
-//                    final String id = mReferenciaFirebase.getKey();
-//                    favorito.setIdFavorito(id);
-//
-//
-//                    mReferenciaFirebase.setValue(favorito).addOnCompleteListener(new OnCompleteListener<Void>() {
-//                        @Override
-//                        public void onComplete(@NonNull Task<Void> task) {
-//                            if (task.isSuccessful()) {
-//                                Utils.mostrarMensagemCurta(getContexto(), getContexto().getString(R.string.sucesso_cadastro));
-//                            } else {
-//                                Utils.mostrarMensagemCurta(getContexto(), getContexto().getString(R.string.erro_ao_cadastrar));
-//                                try {
-//                                    throw task.getException();
-//                                } catch (Exception e) {
-//                                    e.printStackTrace();
-//                                }
-//                            }
-//                        }
-//                    });
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        });
-//        Intent intent = new Intent(getContexto(), AcessoInformacoesEstabelecimentoActivity.class);
-//        intent.putExtra("Favoritos", favorito);
-//        getContexto().getApplicationContext().startActivity(intent);
-//    }
-//
-//
-//    @Override
-//    public void inserir(final Favorito favorito, final String idUsuarioLogado) {
-//
-//        mReferenciaFirebase.child("favoritos").orderByChild("mIdUsuario")
-//        .equalTo(idUsuarioLogado).addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//
-//                for (DataSnapshot child: dataSnapshot.getChildren()) {
-//                    String idFavorito = child.getKey();
-//                    child.child("f");
-//                    Log.d("User key", child.getKey());
-//                    Log.d("User ref", child.getRef().toString());
-//                    Log.d("User val", child.child("idFornecedor").getValue().toString());
-//
-//                    String idFornecedorBanco = child.child("idFornecedor").getValue().toString();
-//                    String idUsuarioBanco = child.child("mIdUsuario").getValue().toString();
-//
-//                    Log.d("aqq", idFornecedorBanco);
-//                    Log.d("aqq", favorito.getIdFornecedor());
-//
-//                    if(idFornecedorBanco.contains(favorito.getIdFornecedor())
-//                            && idUsuarioBanco.contains(idUsuarioLogado)) {
-//                        Log.d("User key", "Você já favoritou este estabelecimento");
-//                    }
-//
-//                    else{
-//
-//                        favorito.setmIdUsuario(idUsuarioLogado);
-//                        favorito.setChecar("1");
-//
-//                        mReferenciaFirebase = mReferenciaFirebase.child("favoritos").push();
-//                        final String id = mReferenciaFirebase.getKey();
-//                        favorito.setIdFavorito(id);
-//
-//
-//                        mReferenciaFirebase.setValue(favorito).addOnCompleteListener(new OnCompleteListener<Void>() {
-//                            @Override
-//                            public void onComplete(@NonNull Task<Void> task) {
-//                                if (task.isSuccessful()) {
-//                                    Utils.mostrarMensagemCurta(getContexto(), getContexto().getString(R.string.sucesso_cadastro));
-//                                } else {
-//                                    Utils.mostrarMensagemCurta(getContexto(), getContexto().getString(R.string.erro_ao_cadastrar));
-//                                    try {
-//                                        throw task.getException();
-//                                    } catch (Exception e) {
-//                                        e.printStackTrace();
-//                                    }
-//                                }
-//                            }
-//                        });
-//                    }
-//                }
-//
-//
-//                }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        });
-//}
-
     @Override
     public void inserir(final Favorito favorito, final String idUsuario) {
 
@@ -144,16 +38,11 @@ public class FavoritoDaoImpl implements FavoritoDao {
         final String id = mReferenciaFirebase.getKey();
         favorito.setIdFavorito(id);
 
-
-//        final String mGroupId = mReferenciaFirebase.getKey();
-//        mReferenciaFirebase.child(mGroupId).setValue(new ChatGroup());
-
-
         mReferenciaFirebase.setValue(favorito).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful()){
-                    Utils.mostrarMensagemCurta(getContexto(), getContexto().getString(R.string.favoritado));
+                    Utils.mostrarMensagemCurta(getContexto(), getContexto().getString(R.string.estabelecimento_favoritado));
                 }
                 else{
                     Utils.mostrarMensagemCurta(getContexto(), getContexto().getString(R.string.erro_ao_cadastrar));
@@ -168,40 +57,6 @@ public class FavoritoDaoImpl implements FavoritoDao {
 
     }
 
-        /*if (favorito.getChecar() == "0") {
-
-            favorito.setmIdUsuario(idUsuarioLogado);
-            favorito.setChecar("1");
-
-            mReferenciaFirebase = mReferenciaFirebase.child("favoritos").push();
-            final String id = mReferenciaFirebase.getKey();
-            favorito.setIdFavorito(id);
-
-
-            mReferenciaFirebase.setValue(favorito).addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    if (task.isSuccessful()) {
-                        Utils.mostrarMensagemCurta(getContexto(), getContexto().getString(R.string.sucesso_cadastro));
-                    } else {
-                        Utils.mostrarMensagemCurta(getContexto(), getContexto().getString(R.string.erro_ao_cadastrar));
-                        try {
-                            throw task.getException();
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-            });
-
-
-        }
-        else{
-            mReferenciaFirebase.child("favoritos").child(favorito.getIdFavorito()).child("checar")
-                    .setValue("1");
-        }*/
-
-
     public void compararInserir(final Favorito favorito, final String idUsuario) {
 
         mReferenciaFirebase.child("favoritos").orderByChild("idUsuario").equalTo(idUsuario).
@@ -209,12 +64,9 @@ public class FavoritoDaoImpl implements FavoritoDao {
 
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        //Favorito favoritos = dataSnapshot.getValue(Favorito.class);
                         for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                            //Log.d("User key12", (postSnapshot.child("idFornecedor").getValue()).toString());
-                            //Log.d("User key13", favorito.getIdFornecedor());
                             if(postSnapshot.child("idFornecedor").getValue().toString().equals(favorito.getIdFornecedor())){
-                                Utils.mostrarMensagemCurta(getContexto(), getContexto().getString(R.string.existente));
+                                Utils.mostrarMensagemCurta(getContexto(), getContexto().getString(R.string.estabelecimento_existente));
                                 favorito.setConfirma("1");
                                 break;
                             }
@@ -231,35 +83,8 @@ public class FavoritoDaoImpl implements FavoritoDao {
                 });
     }
 
-    public void compararRemover(final Favorito favorito, final String idUsuario) {
-
-        mReferenciaFirebase.child("favoritos").orderByChild("idUsuario").equalTo(idUsuario).
-                addListenerForSingleValueEvent(new ValueEventListener() {
-
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                            if(postSnapshot.child("idFornecedor").getValue().toString().equals(favorito.getIdFornecedor())){
-                                Utils.mostrarMensagemCurta(getContexto(), getContexto().getString(R.string.existente));
-                                //favorito.setConfirma("1");
-                                //remover(favorito, idUsuario);
-                                break;
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                        //vazio
-                    }
-                });
-    }
-
-
-
     @Override
     public void remover(final Favorito favorito, final String idUsuario) {
-
 
         //Adicionar um listener no nó do pet que será removido
         //O método orderByChild ordena os pets pelo seu id e o equalTo busca o id do pet que será removido
@@ -274,7 +99,7 @@ public class FavoritoDaoImpl implements FavoritoDao {
                     public void onComplete(@NonNull Task<Void> task) {
                         //Se a remoçao foi feita com sucesso
                         if(task.isSuccessful()){
-                            Utils.mostrarMensagemCurta(getContexto(), getContexto().getString(R.string.desfavoritado));
+                            Utils.mostrarMensagemCurta(getContexto(), getContexto().getString(R.string.estabelecimento_desfavoritado));
                         }
                         //Senão
                         else{
@@ -296,6 +121,28 @@ public class FavoritoDaoImpl implements FavoritoDao {
         });
     }
 
+    public void compararRemover(final Favorito favorito, final String idUsuario) {
+        mReferenciaFirebase.child("favoritos").orderByChild("idUsuario").equalTo(idUsuario).
+                addListenerForSingleValueEvent(new ValueEventListener() {
+
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                            if(postSnapshot.child("idFornecedor").getValue().toString().equals(favorito.getIdFornecedor())){
+                                String key = postSnapshot.getKey();
+                                favorito.setIdFavorito(key);
+                                remover(favorito, idUsuario);
+                                break;
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        //vazio
+                    }
+                });
+    }
 
     private Context getContexto(){
         return this.mContexto;

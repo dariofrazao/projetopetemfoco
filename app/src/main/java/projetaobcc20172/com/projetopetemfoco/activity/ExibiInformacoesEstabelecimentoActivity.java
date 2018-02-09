@@ -28,18 +28,22 @@ import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.Serializable;
 
 import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.adapter.ListaInformacoesAdapterView;
+import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoFirebase;
 import projetaobcc20172.com.projetopetemfoco.database.services.FavoritoDaoImpl;
 import projetaobcc20172.com.projetopetemfoco.model.Favorito;
 import projetaobcc20172.com.projetopetemfoco.model.Fornecedor;
 import projetaobcc20172.com.projetopetemfoco.model.Servico;
 
 public class ExibiInformacoesEstabelecimentoActivity extends AppCompatActivity implements Serializable {
-
     private Fornecedor mFornecedor;
     private Favorito mFavorito;
     private String mIdFavorito;
@@ -107,11 +111,6 @@ public class ExibiInformacoesEstabelecimentoActivity extends AppCompatActivity i
         //Recuperar id do usuário logado
         mIdUsuarioLogado = getPreferences("id", ExibiInformacoesEstabelecimentoActivity.this);
 
-        mFavorito = new Favorito(mIdFavorito, mFornecedor.getId(), mFornecedor.getNome(), mFornecedor.getTelefone(), mConfirma) ;
-
-
-        //Log.d("User key", mFavorito.getIdFornecedor());
-
         // Exibe a tela para avaliar
         ImageButton mBotaoAvaliarEstabelecimento = findViewById(R.id.botao_avaliar_estabelecimento);
         mBotaoAvaliarEstabelecimento.setOnClickListener(new View.OnClickListener() {
@@ -130,23 +129,66 @@ public class ExibiInformacoesEstabelecimentoActivity extends AppCompatActivity i
             }
         });
 
-        ImageButton mSalvarFavorito = findViewById(R.id.bt_salvar_favorito);
+        mFavorito = new Favorito(mIdFavorito, mFornecedor.getId(), mFornecedor.getNome(), mFornecedor.getTelefone(), mConfirma, mFornecedor.getCpfCnpj());
+
+        // botão para controlar troca de imagens do favorito
+        final ImageButton mSalvarFavorito = findViewById(R.id.bt_salvar_favorito);
         mSalvarFavorito.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Toast.makeText(AcessoInformacoesEstabelecimentoActivity.this, mFavorito.getIdFornecedor(), Toast.LENGTH_SHORT).show();
-                //salvar_favorito.setBackground("@drawable/ic_action_favoritar_true");
-                salvarFavorito();
+                if(mFavorito.getConfirma().equals("1")) {
+                    removerFavorito();
+                    mFavorito.setConfirma("0");
+                    mSalvarFavorito.setBackgroundResource(R.drawable.ic_action_favoritar_false);
+                } else{
+                    salvarFavorito();
+                    mSalvarFavorito.setBackgroundResource(R.drawable.ic_action_favoritar_true);
+                }
             }
         });
 
-    }
+        carregarFavorito(mFornecedor, mFavorito, mSalvarFavorito);
 
+    }
 
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
+    }
+
+    // Recuperar favorito do Firebase para saber se ele é existente
+    private void carregarFavorito(final Fornecedor fornecedor, Favorito favorito, final ImageButton mSalvarFavorito){
+
+        Query query = ConfiguracaoFirebase.getFirebase().child("favoritos").orderByChild("idUsuario").equalTo(mIdUsuarioLogado);
+
+        ValueEventListener mValueEventListenerFavorito;
+        mValueEventListenerFavorito = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // Recupera o favorito
+                for (DataSnapshot dados : dataSnapshot.getChildren()) {
+                    if(dados.child("idFornecedor").getValue().toString().equals(fornecedor.getId())) {
+                        mFavorito.setConfirma("1");
+                        break;
+                    }
+                }
+                if(mFavorito.getConfirma().equals("1")) {
+                    mSalvarFavorito.setBackgroundResource(R.drawable.ic_action_favoritar_true);
+                    mSalvarFavorito.setVisibility(View.VISIBLE);
+                } else{
+                    mSalvarFavorito.setBackgroundResource(R.drawable.ic_action_favoritar_false);
+                    mSalvarFavorito.setVisibility(View.VISIBLE);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                //vazio
+            }
+        };
+        query.addValueEventListener(mValueEventListenerFavorito);
     }
 
     //Método que salva o favorito no banco--LuizAlberes
@@ -157,7 +199,21 @@ public class ExibiInformacoesEstabelecimentoActivity extends AppCompatActivity i
             //Chamada do DAO para salvar no banco
             FavoritoDaoImpl favoritoDao =  new FavoritoDaoImpl(this);
             favoritoDao.compararInserir(mFavorito, mIdUsuarioLogado);
-            //favoritoDao.inserir(mFavorito, mIdUsuarioLogado);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+
+    }
+
+    //Método que remove o favorito no banco--LuizAlberes
+    private boolean removerFavorito(){
+        try {
+            //Chamada do DAO para salvar no banco
+            FavoritoDaoImpl favoritoDao =  new FavoritoDaoImpl(this);
+            favoritoDao.compararRemover(mFavorito, mIdUsuarioLogado);
 
         } catch (Exception e) {
             e.printStackTrace();

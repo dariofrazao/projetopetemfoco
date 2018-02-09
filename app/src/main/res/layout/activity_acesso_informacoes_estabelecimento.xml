@@ -78,7 +78,8 @@
                 android:layout_marginLeft="50dp"
                 android:layout_marginRight="35dp"
                 android:layout_weight="1"
-                android:background="@drawable/ic_action_favoritar_true" />
+                android:background="@drawable/ic_action_favoritar_false"
+                android:visibility="invisible" />
 
         </LinearLayout>
 

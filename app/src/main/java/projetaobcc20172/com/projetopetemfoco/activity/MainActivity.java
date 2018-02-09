@@ -33,6 +33,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.io.Serializable;
 
+import br.com.uol.pslibs.checkouttransparent.PSCheckout;
 import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoFirebase;
 import projetaobcc20172.com.projetopetemfoco.config.ConfiguracoesBuscaServico;
@@ -186,6 +187,11 @@ public class MainActivity extends AppCompatActivity
     public static String getPreferences(String key, Context context) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         return preferences.getString(key, null);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        PSCheckout.onRequestPermissionsResult((AppCompatActivity) MainActivity.this, requestCode, permissions, grantResults);
     }
 }
 

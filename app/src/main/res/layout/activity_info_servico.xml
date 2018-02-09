@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container_id"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/fundo_degrade"
@@ -92,7 +93,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
-            android:background="@drawable/shapebutton"
+            android:background="@drawable/shapebuttonborder"
             android:paddingRight="40dp"
             android:paddingLeft="15dp"
             android:drawableLeft="@drawable/ic_action_check"
@@ -115,6 +116,27 @@
             android:paddingLeft="15dp"
             android:drawableLeft="@drawable/ic_action_estabelecimentos"
             android:text="Detalhes do Estabelecimento"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"/>
+
+        <Button
+            android:id="@+id/btnContratarServico"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:background="@drawable/shapebutton"
+            android:paddingRight="90dp"
+            android:paddingLeft="15dp"
+            android:drawableLeft="@drawable/ic_purchage"
+            android:text="Contratar Serviço"
+            android:textColor="@color/branco"
+            android:textAlignment="viewEnd" />
+
+
 
     </LinearLayout>
 

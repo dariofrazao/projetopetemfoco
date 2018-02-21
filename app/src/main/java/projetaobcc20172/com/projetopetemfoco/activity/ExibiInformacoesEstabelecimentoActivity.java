@@ -17,6 +17,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -30,6 +31,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.adapter.ListaInformacoesAdapterView;
@@ -46,6 +49,7 @@ public class ExibiInformacoesEstabelecimentoActivity extends AppCompatActivity i
     private String mIdUsuarioLogado;
     private String mConfirma = "0";
     private MapView mapView;
+    private Map<String, Integer> mImagens = new HashMap<String, Integer>();
 
     @SuppressLint("WrongConstant")
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
@@ -55,6 +59,9 @@ public class ExibiInformacoesEstabelecimentoActivity extends AppCompatActivity i
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_acesso_informacoes_estabelecimento);
+
+        mImagens.put("Autônomo",R.drawable.ic_action_autonomo);
+        mImagens.put("Estabelecimento",R.drawable.ic_action_estabelecimentos);
 
         // lista de serviços pertencente ao fornecedor
         ArrayAdapter<Servico> mAdapter;
@@ -72,6 +79,8 @@ public class ExibiInformacoesEstabelecimentoActivity extends AppCompatActivity i
         TextView mExibeHorarioEstabelecimento = findViewById(R.id.tvHorario);
         TextView mExibeEnderecoEstabelecimento = findViewById(R.id.tvEnderecoEstabelecimentoCombinado);
         ListView mExibeListaServicos = findViewById(R.id.lvListaServicos);
+        ImageView img = findViewById(R.id.ivFotoDetalhesPet);
+        img.setImageResource(mImagens.get(mFornecedor.getTipo()));
         mapView = findViewById(R.id.map_view);
 
         // Configura toolbar

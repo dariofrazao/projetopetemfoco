@@ -9,6 +9,7 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.preference.PreferenceManager;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +19,20 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+
+import com.google.android.gms.maps.model.LatLng;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.database.services.EnderecoDaoImpl;
@@ -29,6 +44,7 @@ import projetaobcc20172.com.projetopetemfoco.utils.MaskUtil;
 import projetaobcc20172.com.projetopetemfoco.utils.Utils;
 import projetaobcc20172.com.projetopetemfoco.utils.VerificadorDeObjetos;
 
+
 /**
  * Activity de cadastro de endereço
  */
@@ -39,6 +55,7 @@ public class CadastroEnderecoActivity extends AppCompatActivity{
     private Util mUtil;
     private Endereco mEndereco;
     private String mIdUsuarioLogado;
+    private LatLng latLng;
 
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     //permite que essa variavel seja vista pela classe de teste
@@ -103,7 +120,6 @@ public class CadastroEnderecoActivity extends AppCompatActivity{
                 !mBairro.getText().toString().isEmpty());
     }
 
-
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
@@ -150,7 +166,10 @@ public class CadastroEnderecoActivity extends AppCompatActivity{
             //Recuperar id do usuário logado
             mIdUsuarioLogado = getPreferences("id", CadastroEnderecoActivity.this);
 
-            //Recuperar os campos do endereço informados pelo usuário
+            //busca a geolocalização baseada por CEP
+            latLng = coordinadasPorCep(mCep.getText().toString().replace("-",""));
+
+           //Recuperar os campos do endereço informados pelo usuário
             mEndereco = new Endereco();
             mEndereco.setLogradouro(mLogradouro.getText().toString());
             mEndereco.setNumero(mNumero.getText().toString());
@@ -159,6 +178,8 @@ public class CadastroEnderecoActivity extends AppCompatActivity{
             mEndereco.setLocalidade(mLocalidade.getText().toString());
             mEndereco.setCep(mCep.getText().toString());
             mEndereco.setUf(mSpinnerUf.getSelectedItem().toString());
+            mEndereco.setmLatitude(latLng.latitude);
+            mEndereco.setmLongitude(latLng.longitude);
 
             VerificadorDeObjetos.vDadosObrEndereco(mEndereco);
 
@@ -220,5 +241,56 @@ public class CadastroEnderecoActivity extends AppCompatActivity{
     public static String getPreferences(String key, Context context) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         return preferences.getString(key, null);
+    }
+
+    //Método que busca a geolocalização baseda no cep
+    public static LatLng coordinadasPorCep(String cep) {
+        LatLng locationPoint = null;
+
+        URL url = null;
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
+        try {
+            url = new URL("https://maps.google.com/maps/api/geocode/json?address=" + cep + "&key=AIzaSyA5ajs6LhgYb3YfbuQ-hyDrUq4GYMjMkT0");
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
+        HttpURLConnection urlConnection = null;
+        try {
+            urlConnection = (HttpURLConnection) url.openConnection();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        JSONObject json;
+        try {
+            InputStream in = new BufferedInputStream(urlConnection.getInputStream());
+            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+            String result, line = reader.readLine();
+            result = line;
+            while ((line = reader.readLine()) != null) {
+                result += line;
+            }
+
+            String lat, lon;
+            json = new JSONObject(result);
+            JSONObject geoMetryObject = new JSONObject();
+            JSONObject locations = new JSONObject();
+            JSONArray jarr = json.getJSONArray("results");
+            int i;
+            for (i = 0; i < jarr.length(); i++) {
+                json = jarr.getJSONObject(i);
+                geoMetryObject = json.getJSONObject("geometry");
+                locations = geoMetryObject.getJSONObject("location");
+                lat = locations.getString("lat");
+                lon = locations.getString("lng");
+                locationPoint = new LatLng(Double.parseDouble(lat), Double.parseDouble(lon));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return locationPoint;
     }
 }

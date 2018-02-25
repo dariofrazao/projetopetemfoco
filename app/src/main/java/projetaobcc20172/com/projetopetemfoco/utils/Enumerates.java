@@ -9,6 +9,7 @@ public class Enumerates {
     public enum Filtro {
         AVALICAO,
         DISTANCIA,
+        PROXIMO_MINHA_RESIDENCIA,
         PRECO;
     }
 

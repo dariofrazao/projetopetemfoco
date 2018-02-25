@@ -66,7 +66,8 @@ public class AvaliacaoActivityTest {
     @Test
     public void avaliacaoActivityTest() {
         try {
-            TestToolsAvaliacaoServico.avaliarServico(mNomeServico);
+            Thread.sleep(2000);
+            TestTools.checarToast(R.string.sucesso_avaliacao_servico);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

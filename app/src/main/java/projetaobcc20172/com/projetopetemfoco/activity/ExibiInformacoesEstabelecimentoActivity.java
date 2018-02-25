@@ -5,9 +5,12 @@ package projetaobcc20172.com.projetopetemfoco.activity;
 
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -16,6 +19,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -24,15 +28,23 @@ import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+
 import java.io.Serializable;
+
 import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.adapter.ListaInformacoesAdapterView;
+import projetaobcc20172.com.projetopetemfoco.database.services.FavoritoDaoImpl;
+import projetaobcc20172.com.projetopetemfoco.model.Favorito;
 import projetaobcc20172.com.projetopetemfoco.model.Fornecedor;
 import projetaobcc20172.com.projetopetemfoco.model.Servico;
 
 public class ExibiInformacoesEstabelecimentoActivity extends AppCompatActivity implements Serializable {
 
     private Fornecedor mFornecedor;
+    private Favorito mFavorito;
+    private String mIdFavorito;
+    private String mIdUsuarioLogado;
+    private String mConfirma = "0";
     private MapView mapView;
 
     @SuppressLint("WrongConstant")
@@ -92,6 +104,14 @@ public class ExibiInformacoesEstabelecimentoActivity extends AppCompatActivity i
         mAdapter = new ListaInformacoesAdapterView(this, mFornecedor.getServicos());
         mExibeListaServicos.setAdapter(mAdapter);
 
+        //Recuperar id do usuário logado
+        mIdUsuarioLogado = getPreferences("id", ExibiInformacoesEstabelecimentoActivity.this);
+
+        mFavorito = new Favorito(mIdFavorito, mFornecedor.getId(), mFornecedor.getNome(), mFornecedor.getTelefone(), mConfirma) ;
+
+
+        //Log.d("User key", mFavorito.getIdFornecedor());
+
         // Exibe a tela para avaliar
         ImageButton mBotaoAvaliarEstabelecimento = findViewById(R.id.botao_avaliar_estabelecimento);
         mBotaoAvaliarEstabelecimento.setOnClickListener(new View.OnClickListener() {
@@ -109,7 +129,19 @@ public class ExibiInformacoesEstabelecimentoActivity extends AppCompatActivity i
                 avaliacoes(mFornecedor);
             }
         });
+
+        ImageButton mSalvarFavorito = findViewById(R.id.bt_salvar_favorito);
+        mSalvarFavorito.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Toast.makeText(AcessoInformacoesEstabelecimentoActivity.this, mFavorito.getIdFornecedor(), Toast.LENGTH_SHORT).show();
+                //salvar_favorito.setBackground("@drawable/ic_action_favoritar_true");
+                salvarFavorito();
+            }
+        });
+
     }
+
 
     @Override
     public boolean onSupportNavigateUp() {
@@ -117,11 +149,30 @@ public class ExibiInformacoesEstabelecimentoActivity extends AppCompatActivity i
         return true;
     }
 
+    //Método que salva o favorito no banco--LuizAlberes
+    private boolean salvarFavorito(){
+        try {
+            //Toast.makeText(AcessoInformacoesEstabelecimentoActivity.this, mFavorito.getIdFavorito(), Toast.LENGTH_SHORT).show();
+
+            //Chamada do DAO para salvar no banco
+            FavoritoDaoImpl favoritoDao =  new FavoritoDaoImpl(this);
+            favoritoDao.compararInserir(mFavorito, mIdUsuarioLogado);
+            //favoritoDao.inserir(mFavorito, mIdUsuarioLogado);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+
+    }
+
     //Método que chama a activity para realizar a avaliação
     public void avaliar(Fornecedor fornecedor) {
         Intent intent = new Intent(ExibiInformacoesEstabelecimentoActivity.this, AvaliarEstabelecimentoActivity.class);
         intent.putExtra("Fornecedor", fornecedor);
         startActivity(intent);
+        finish();
     }
 
     @Override
@@ -135,6 +186,12 @@ public class ExibiInformacoesEstabelecimentoActivity extends AppCompatActivity i
         Intent intent = new Intent(ExibiInformacoesEstabelecimentoActivity.this, ExibiAvalicoesEstabelecimentoActivity.class);
         intent.putExtra("Fornecedor", fornecedor);
         startActivity(intent);
+        finish();
+    }
+    //Método que recupera o id do usuário logado, para salvar o pet no nó do favorito que o está cadastrando--LuizAlberes
+    public static String getPreferences(String key, Context context) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        return preferences.getString(key, null);
     }
 
     private void setUpMap(GoogleMap googleMap) {
@@ -183,3 +240,4 @@ public class ExibiInformacoesEstabelecimentoActivity extends AppCompatActivity i
         mapView.onPause();
     }
 }
+

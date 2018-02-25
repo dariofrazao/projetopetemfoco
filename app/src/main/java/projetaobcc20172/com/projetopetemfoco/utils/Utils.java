@@ -148,4 +148,16 @@ public class Utils {
                 activity.getCurrentFocus().getWindowToken(), 0);
     }
 
+    public static String limitarTexto(String texto,int qtCaracteres){
+        if(texto.length()>qtCaracteres){
+            String resultado = "";
+            for(int i=0;i<qtCaracteres;i++){
+                resultado+=texto.charAt(i);
+            }
+            return resultado+"...";
+        }
+
+        return texto;
+    }
+
 }

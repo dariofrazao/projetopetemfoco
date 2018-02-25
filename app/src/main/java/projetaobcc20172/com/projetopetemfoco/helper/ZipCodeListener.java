@@ -3,6 +3,7 @@ package projetaobcc20172.com.projetopetemfoco.helper;
 import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
+
 import projetaobcc20172.com.projetopetemfoco.activity.CadastroEnderecoActivity;
 
 //Classe que "ouve" o campo do cep enquanto o mesmo é digitado

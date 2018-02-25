@@ -10,8 +10,8 @@ import org.junit.Rule;
 import org.junit.Test;
 
 import projetaobcc20172.com.projetopetemfoco.R;
-import projetaobcc20172.com.projetopetemfoco.activity.LoginActivity;
 import projetaobcc20172.com.projetopetemfoco.TestTools;
+import projetaobcc20172.com.projetopetemfoco.activity.LoginActivity;
 import projetaobcc20172.com.projetopetemfoco.database.services.PetDaoImpl;
 import projetaobcc20172.com.projetopetemfoco.logintests.LoginActivityTest;
 import projetaobcc20172.com.projetopetemfoco.model.Pet;
@@ -66,7 +66,7 @@ public class EditarPetActivityTest {
         TestTools.clicarBotao(R.id.btnEditar);
     }
 
-    //Teste que simula uma edição do pet com o campo nome em branco
+    //Teste que simula uma edição do pet com o campo titulo em branco
     @Test
     public void testeNomeEmBranco() throws InterruptedException {
         TestTools.apagarCampo(R.id.etEditarNomePet);

@@ -125,7 +125,11 @@
     <string name="facebook_app_id">1383454871782340</string>
     <string name="fb_login_protocol_scheme">fb1383454871782340</string>
 
-
+    <!--Strings relacionadas aos favoritos-->
+    <string name="tb_meus_favoritos">Meus Favoritos</string>
+    <string name="favoritado">Estalecimento adicionado aos favoritos!</string>
+    <string name="desfavoritado">Estalecimento removido dos favoritos!:</string>
+    <string name="existente">Estalecimento já favoritado!</string>
     <!--Strings relacionadas ao estbelecimento-->
     <string name="estabelecimento">Estabelecimento:</string>
     <string name="tb_acesso_estabelecimento">Informações do Estabelecimento</string>
@@ -148,6 +152,8 @@
 
     <!--Strings relacionadas a tela de busca-->
     <string name="tb_estabelecimentos">Estabelecimentos</string>
+    <string name="tb_fornecedor">Fornecedores</string>
+    <string name="tb_autonomos">Autônomos</string>
     <string name="tb_servicos">Busca por serviços</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -183,5 +189,10 @@
     <string name="title_activity_avaliar_servico">AvaliarServicoActivity</string>
     <string name="avaliar_servico">Avaliar Serviço</string>
     <string name="avaliacoes_do_servico">AVALIAÇÕES DO SERVIÇO</string>
+    <string name="title_activity_cadastro_fornecedor_tipo">CadastroFornecedorTipoActivity</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="tv_promocoes">Promoções</string>
+    <string name="tb_detalhes_promocao">Detalhes da promoção</string>
 
 </resources>

@@ -48,6 +48,8 @@ public class ContratarServicoActivity extends AppCompatActivity {
     public static final String AMOUNT = "AMOUNT";
     public static final String TOTAL = "TOTAL";
     public static final String TOTAL_VALUE = "TOTAL_VALUE";
+    public static final String ID_SERVICO = "ID_SERVICO";
+
 
     private double total;
     private String preco;
@@ -73,7 +75,6 @@ public class ContratarServicoActivity extends AppCompatActivity {
 
         String email = mFornecedor.getEmail();
         String emailSplit = email.replace("@gmail.com", "%40gmail.com");
-
 
         if (mServico != null) {
             preco = mServico[2];
@@ -158,9 +159,9 @@ public class ContratarServicoActivity extends AppCompatActivity {
             bundle.putString(SERVICE, mServico[0]);
             bundle.putString(ESTABELECIMENTO, mServico[1]);
             bundle.putString(TIPOPET, mServico[3]);
-            //bundle.putString(AMOUNT, mTvQtd.getText().toString());
+            bundle.putString(TIPOPET, mServico[9]);
             bundle.putString(AMOUNT, "1");
-            bundle.putString(TOTAL, preco);
+            bundle.putString(TOTAL, mServico[2]);
             bundle.putDouble(TOTAL_VALUE, total);
 
             ResumoContratacaoFragment resumoContratacaoFragment = new ResumoContratacaoFragment();

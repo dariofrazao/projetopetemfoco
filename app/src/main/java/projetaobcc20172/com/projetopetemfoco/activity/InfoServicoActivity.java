@@ -51,8 +51,6 @@ public class InfoServicoActivity extends AppCompatActivity {
     private double total;
     private String preco;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,10 +65,6 @@ public class InfoServicoActivity extends AppCompatActivity {
         toolbar.setNavigationIcon(R.drawable.ic_action_arrow_left_white);
         setSupportActionBar(toolbar);
 
-        /*(InfoServicoActivity.this).setSupportActionBar(toolbar);
-        ((InfoServicoActivity.this)).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        (InfoServicoActivity.this).getSupportActionBar().setDisplayShowHomeEnabled(true);*/
-
         final int callbackId = 42;
         checkPermissions(callbackId, Manifest.permission.READ_CALENDAR, Manifest.permission.WRITE_CALENDAR);
 
@@ -79,14 +73,8 @@ public class InfoServicoActivity extends AppCompatActivity {
         mTvNomeFornecedor = findViewById(R.id.tvNomeFornecedor);
         mTvValor = findViewById(R.id.tvValor);
         mTvTipoAnimalServico = findViewById(R.id.tvTipoAnimalServico);
-        //mTvQtd = (TextView) findViewById(R.id.tv_amount);
 
         mServico = (String[]) getIntent().getSerializableExtra("Servico");
-
-        /*preco = mServico[2];
-        preco = preco.substring(2);
-        preco = preco.replaceAll(",", ".");
-        total = Double.parseDouble(preco);*/
 
         preencherCampos();
 
@@ -137,16 +125,6 @@ public class InfoServicoActivity extends AppCompatActivity {
             }
 
         });
-
-        /*Button btnContratarServico;
-        btnContratarServico = findViewById(R.id.btnContratarServico);
-        btnContratarServico.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(InfoServicoActivity.this, CardEditActivity.class);
-                startActivityForResult(intent,GET_NEW_CARD);
-            }
-        });*/
     }
 
     public void preencherCampos() {
@@ -214,45 +192,7 @@ public class InfoServicoActivity extends AppCompatActivity {
             }
         });
     }
-/*
-    //auxilia no recebimento dos dados de cartão de credito e da compra
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        if(resultCode == Activity.RESULT_OK) {
-            Bundle bundle = new Bundle();
-            bundle.putString(CreditCardUtils.EXTRA_CARD_HOLDER_NAME, data.getStringExtra(CreditCardUtils.EXTRA_CARD_HOLDER_NAME));
-            bundle.putString(CreditCardUtils.EXTRA_CARD_NUMBER, data.getStringExtra(CreditCardUtils.EXTRA_CARD_NUMBER));
-            bundle.putString(CreditCardUtils.EXTRA_CARD_EXPIRY, data.getStringExtra(CreditCardUtils.EXTRA_CARD_EXPIRY));
-            bundle.putString(CreditCardUtils.EXTRA_CARD_CVV, data.getStringExtra(CreditCardUtils.EXTRA_CARD_CVV));
-            bundle.putString(SERVICE, mServico[0]);
-            bundle.putString(ESTABELECIMENTO, mServico[1]);
-            bundle.putString(TIPOPET, mServico[3]);
-            //bundle.putString(AMOUNT, mTvQtd.getText().toString());
-            bundle.putString(AMOUNT, "1");
-            bundle.putString(TOTAL, preco);
-            bundle.putDouble(TOTAL_VALUE, total);
-
-            ResumoContratacaoFragment resumoContratacaoFragment = new ResumoContratacaoFragment();
-            resumoContratacaoFragment.setArguments(bundle);
-            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.container_id, resumoContratacaoFragment);
-            fragmentTransaction.addToBackStack(null);
-            fragmentTransaction.commitAllowingStateLoss();
-        }
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                onBackPressed();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-*/
     private void checkPermissions(int callbackId, String... permissionsId) {
         boolean permissions = true;
         for (String p : permissionsId) {

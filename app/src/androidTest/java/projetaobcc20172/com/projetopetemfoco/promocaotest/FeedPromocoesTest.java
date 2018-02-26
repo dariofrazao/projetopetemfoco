@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.TestTools;
-import projetaobcc20172.com.projetopetemfoco.activity.AcessoInformacoesEstabelecimentoActivity;
+import projetaobcc20172.com.projetopetemfoco.activity.ExibiInformacoesEstabelecimentoActivity;
 import projetaobcc20172.com.projetopetemfoco.activity.MainActivity;
 import projetaobcc20172.com.projetopetemfoco.activity.VisualizarPromocaoActivity;
 import projetaobcc20172.com.projetopetemfoco.model.Promocao;
@@ -45,7 +45,7 @@ public class FeedPromocoesTest {
         Thread.sleep(2000);
         TestToolsPromocao.clicarEstb();
         Thread.sleep(2000);
-        TestTools.verificarMudancaActivity(AcessoInformacoesEstabelecimentoActivity.class.getName());
+        TestTools.verificarMudancaActivity(ExibiInformacoesEstabelecimentoActivity.class.getName());
         TestTools.checkText(R.id.tvExibeNomeEstabelecimento,promocao.getmFornecedor().getNome());
 
     }

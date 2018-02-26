@@ -131,6 +131,8 @@
     <string name="estabelecimento_desfavoritado">Estalecimento removido dos favoritos!</string>
     <string name="estabelecimento_existente">Estalecimento já favoritado!</string>
     <string name="pergunta_confirma_remocao_favorito">O estabelecimento será removido dos favoritos. Confirma?</string>
+    <string name="pergunta_confirma_ligacao_favorito">Essa ligação pode gerar custos adicionais. Confirma?</string>
+    <string name="ligando_favorito">Discando...</string>
 
     <!--Strings relacionadas ao estbelecimento-->
     <string name="estabelecimento">Estabelecimento:</string>

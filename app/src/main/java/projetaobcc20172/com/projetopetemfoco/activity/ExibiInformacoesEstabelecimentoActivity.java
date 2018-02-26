@@ -15,6 +15,7 @@ import android.support.annotation.VisibleForTesting;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -44,12 +45,17 @@ import projetaobcc20172.com.projetopetemfoco.model.Fornecedor;
 import projetaobcc20172.com.projetopetemfoco.model.Servico;
 
 public class ExibiInformacoesEstabelecimentoActivity extends AppCompatActivity implements Serializable {
-    private Fornecedor mFornecedor;
+
+        private Fornecedor mFornecedor;
     private Favorito mFavorito;
     private String mIdFavorito;
     private String mIdUsuarioLogado;
     private String mConfirma = "0";
+    private String mKey;
     private MapView mapView;
+    private ArrayAdapter<Servico> mAdapter;
+    //private ArrayList<String[]> mResultado;
+    private ListView mExibeListaServicos;
 
     @SuppressLint("WrongConstant")
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
@@ -59,9 +65,6 @@ public class ExibiInformacoesEstabelecimentoActivity extends AppCompatActivity i
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_acesso_informacoes_estabelecimento);
-
-        // lista de serviços pertencente ao fornecedor
-        ArrayAdapter<Servico> mAdapter;
 
         // Receber os dados do estabelecimento da outra activity
         Intent i = getIntent();
@@ -75,7 +78,7 @@ public class ExibiInformacoesEstabelecimentoActivity extends AppCompatActivity i
         //TextView mExibeCpfCnpjEstabelecimento = findViewById(R.id.tvExibeCpfCnpjEstabelecimento);
         TextView mExibeHorarioEstabelecimento = findViewById(R.id.tvHorario);
         TextView mExibeEnderecoEstabelecimento = findViewById(R.id.tvEnderecoEstabelecimentoCombinado);
-        ListView mExibeListaServicos = findViewById(R.id.lvListaServicos);
+        mExibeListaServicos = findViewById(R.id.lvListaServicos);
         mapView = findViewById(R.id.map_view);
 
         // Configura toolbar
@@ -149,6 +152,8 @@ public class ExibiInformacoesEstabelecimentoActivity extends AppCompatActivity i
 
         carregarFavorito(mFornecedor, mFavorito, mSalvarFavorito);
 
+        this.chamarInfoServicosListener();
+
     }
 
     @Override
@@ -156,6 +161,55 @@ public class ExibiInformacoesEstabelecimentoActivity extends AppCompatActivity i
         onBackPressed();
         return true;
     }
+
+    //Método que passa as informações de um servico
+    public void chamarInfoServicosListener() {
+        this.mExibeListaServicos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                carregarKeyServico(mFornecedor.getServicos().get(position));
+            }
+        });
+    }
+
+    private void carregarKeyServico(final Servico servico){
+
+        Query query = ConfiguracaoFirebase.getFirebase().child("servicos").orderByChild("idFornecedor").equalTo(mFornecedor.getId());
+
+        ValueEventListener mValueEventListenerServico;
+        mValueEventListenerServico = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // Recupera o servico
+                for (DataSnapshot dados : dataSnapshot.getChildren()){
+                    if (dados.child("nome").getValue().equals(servico.getNome()) &
+                            dados.child("tipoPet").getValue().equals(servico.getTipoPet()) &
+                            dados.child("valor").getValue().equals(servico.getValor()) &
+                            dados.child("descricao").getValue().equals(servico.getDescricao())){
+                        mKey = dados.getKey();
+                        break;
+                    }
+                }
+                Intent intent = new Intent(ExibiInformacoesEstabelecimentoActivity.this, InfoServicoActivity.class);
+                String nome = servico.getNome();
+                String nomeFornecedor = mFornecedor.getNome();
+                String valor = servico.getValor();
+                String animal = servico.getTipoPet();
+                String idF = mFornecedor.getId();
+                String [] resultado = {nome, nomeFornecedor, valor, animal, null, null, null, null, idF, mKey};
+                intent.putExtra("Servico", resultado);
+                startActivity(intent);
+                finish();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                //vazio
+            }
+        };
+        query.addValueEventListener(mValueEventListenerServico);
+    }
+
 
     // Recuperar favorito do Firebase para saber se ele é existente
     private void carregarFavorito(final Fornecedor fornecedor, Favorito favorito, final ImageButton mSalvarFavorito){

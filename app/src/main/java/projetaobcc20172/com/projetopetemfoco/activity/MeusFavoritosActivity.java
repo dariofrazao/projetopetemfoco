@@ -1,10 +1,12 @@
 package projetaobcc20172.com.projetopetemfoco.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
+import android.support.annotation.VisibleForTesting;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,6 +32,11 @@ import projetaobcc20172.com.projetopetemfoco.model.Fornecedor;
 import projetaobcc20172.com.projetopetemfoco.model.Servico;
 
 public class MeusFavoritosActivity extends Fragment {
+
+
+    @SuppressLint("WrongConstant")
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    //permite que essa variavel seja vista pela classe de teste
 
     private ArrayList<Favorito> mFavoritos;
     private ArrayAdapter<Favorito> mAdapter;

@@ -17,4 +17,10 @@ public class Enumerates {
         DEFAULT,
         BUSCANDO;
     }
+
+    public enum Promocao{
+        PADRAO,
+        PROXIMO;
+    }
+
 }

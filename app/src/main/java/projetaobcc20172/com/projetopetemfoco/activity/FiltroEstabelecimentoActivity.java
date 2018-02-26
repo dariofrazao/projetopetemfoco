@@ -18,7 +18,7 @@ public class FiltroEstabelecimentoActivity extends Activity implements View.OnCl
 
     private CheckBox cbProx;
     private CheckBox cbAvaliacao;
-    private byte raio;
+    private int raio;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

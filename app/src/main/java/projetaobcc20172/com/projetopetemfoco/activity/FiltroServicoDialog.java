@@ -49,7 +49,7 @@ public class FiltroServicoDialog extends Activity implements View.OnClickListene
     private CheckBox cbAvaliacao;
     private CheckBox cbPreco;
     public Toast mToast;
-    private byte raio;
+    private int raio;
     private static String idUsuarioLogado;
     boolean geoCoordControle = false;
     private Endereco endereco;

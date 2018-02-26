@@ -107,9 +107,6 @@
         <activity android:name=".activity.ContratarServicoActivity" />
         <activity android:name=".activity.OpcoesPromocoes"
             android:theme="@style/Base.Theme.AppCompat.Light.Dialog"   />
-        <service
-            android:name=".activity.FeedPromocoesFragment$BuscarPromocaoAss"
-            android:exported="false"/>
     </application>
 
 </manifest>

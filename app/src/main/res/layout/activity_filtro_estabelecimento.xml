@@ -5,12 +5,48 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="230dp"
+        android:layout_height="340dp"
         android:orientation="vertical"
         android:paddingLeft="15dp"
         android:paddingRight="15dp">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:text="Filtrar por:"
+            android:textColor="@color/colorSecondaryText" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="95dp"
+        android:orientation="vertical">
+
+        <CheckBox
+            android:id="@+id/cbTipoTodos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:buttonTint="@color/colorPrimaryDark"
+            android:text="Todos" />
+
+        <CheckBox
+            android:id="@+id/cbTipoEstabelecimento"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/colorPrimaryDark"
+            android:text="Estabelecimento" />
+
+        <CheckBox
+            android:id="@+id/cbTipoAutonomo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/colorPrimaryDark"
+            android:text="Autônomo" />
+
+
+    </LinearLayout>
 
         <TextView
             android:layout_width="match_parent"

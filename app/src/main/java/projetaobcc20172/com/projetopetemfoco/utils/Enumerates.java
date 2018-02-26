@@ -13,6 +13,12 @@ public class Enumerates {
         PRECO;
     }
 
+    public enum TipoFornecedor {
+        AUTONOMO,
+        TODOS,
+        ESTABELECIMENTO;
+    }
+
     public enum Estado{
         DEFAULT,
         BUSCANDO;

@@ -53,7 +53,6 @@ public class ExibiInformacoesEstabelecimentoActivity extends AppCompatActivity i
     private String mConfirma = "0";
     private String mKey;
     private MapView mapView;
-    private ArrayAdapter<Servico> mAdapter;
     //private ArrayList<String[]> mResultado;
     private ListView mExibeListaServicos;
 
@@ -108,6 +107,7 @@ public class ExibiInformacoesEstabelecimentoActivity extends AppCompatActivity i
         mExibeEnderecoEstabelecimento.setText(mFornecedor.getmEnderecoCombinado());
 
         // Monta listview e mAdapter
+        ArrayAdapter<Servico> mAdapter;
         mAdapter = new ListaInformacoesAdapterView(this, mFornecedor.getServicos());
         mExibeListaServicos.setAdapter(mAdapter);
 
@@ -150,7 +150,7 @@ public class ExibiInformacoesEstabelecimentoActivity extends AppCompatActivity i
             }
         });
 
-        carregarFavorito(mFornecedor, mFavorito, mSalvarFavorito);
+        carregarFavorito(mFornecedor, mSalvarFavorito);
 
         this.chamarInfoServicosListener();
 
@@ -212,7 +212,7 @@ public class ExibiInformacoesEstabelecimentoActivity extends AppCompatActivity i
 
 
     // Recuperar favorito do Firebase para saber se ele é existente
-    private void carregarFavorito(final Fornecedor fornecedor, Favorito favorito, final ImageButton mSalvarFavorito){
+    private void carregarFavorito(final Fornecedor fornecedor, final ImageButton mSalvarFavorito){
 
         Query query = ConfiguracaoFirebase.getFirebase().child("favoritos").orderByChild("idUsuario").equalTo(mIdUsuarioLogado);
 

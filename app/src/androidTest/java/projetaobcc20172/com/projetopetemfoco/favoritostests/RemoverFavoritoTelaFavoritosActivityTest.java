@@ -53,7 +53,7 @@ public class RemoverFavoritoTelaFavoritosActivityTest {
         String mIdUsuarioLogado;
         mIdUsuarioLogado = getPreferences("id", context);
 
-        Favorito favorito = new Favorito(sIdFavorito, sIdFornecedor, sNome, sTelefone, sConfirma, sCpfCnpj);;
+        Favorito favorito = new Favorito(sIdFavorito, sIdFornecedor, sNome, sTelefone, sConfirma, sCpfCnpj);
         FavoritoDaoImpl favoritoDao =  new FavoritoDaoImpl(context);
 
         favoritoDao.inserir(favorito, mIdUsuarioLogado);

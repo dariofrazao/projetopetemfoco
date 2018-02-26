@@ -42,7 +42,6 @@ public class MeusFavoritosActivity extends Fragment {
     private ArrayAdapter<Favorito> mAdapter;
     private ListView mListView;
     private String mIdUsuarioLogado;
-    private Fornecedor mFornecedor;
 
     @Nullable
     @Override

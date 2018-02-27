@@ -11,15 +11,15 @@ import projetaobcc20172.com.projetopetemfoco.TestTools;
 
 public class TestToolsBuscaEstabelecimento {
 
-    protected static void digitarBuscar(String estabelecimento){
+    public static void digitarBuscar(String estabelecimento){
         TestTools.digitarCampo(R.id.svBusca,estabelecimento);
     }
 
-    protected static void realizarPesquisa(){
+    public static void realizarPesquisa(){
         TestTools.pressionarBuscarTeclado();
     }
 
-    protected static void avaliarListaEstabelecimentos(Activity act, String estabelecimento){
+    public static void avaliarListaEstabelecimentos(Activity act, String estabelecimento){
         TestTools.checarListViewComTextView(act,R.id.lvBuscaEsta,R.id.tvNomeForn,estabelecimento,15);
     }
 

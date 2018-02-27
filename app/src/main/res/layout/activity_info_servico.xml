@@ -126,7 +126,7 @@
             android:background="@drawable/shapebuttonborder"
             android:paddingRight="10dp"
             android:paddingLeft="15dp"
-            android:drawableLeft="@drawable/ic_action_avaliar"
+            android:drawableLeft="@drawable/ic_action_avaliar_new"
             android:text="@string/avaliar_servico"/>
 
         <Button
@@ -137,7 +137,7 @@
             android:background="@drawable/shapebuttonborder"
             android:paddingRight="10dp"
             android:paddingLeft="15dp"
-            android:drawableLeft="@drawable/ic_action_avaliacoes"
+            android:drawableLeft="@drawable/ic_action_avaliacoes_novo"
             android:text="@string/avaliacoes_do_servico"/>
     </LinearLayout>
 

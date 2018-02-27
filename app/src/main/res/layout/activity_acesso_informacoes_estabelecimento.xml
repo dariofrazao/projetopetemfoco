@@ -57,62 +57,27 @@
 
             <ImageButton
                 android:id="@+id/botao_mostrar_avaliacoes_estabelecimento"
-                android:layout_width="45dp"
-                android:layout_height="40dp"
-                android:layout_marginLeft="60dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:background="@drawable/ic_action_avaliacoes"
                 android:text="Avaliar" />
 
             <ImageButton
                 android:id="@+id/botao_avaliar_estabelecimento"
-                android:layout_width="45dp"
-                android:layout_height="40dp"
-                android:layout_marginLeft="50dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginLeft="40dp"
                 android:background="@drawable/ic_action_avaliar"
                 android:text="Avaliar" />
 
             <ImageButton
                 android:id="@+id/bt_salvar_favorito"
-                android:layout_width="20dp"
-                android:layout_height="40dp"
-                android:layout_marginLeft="50dp"
-                android:layout_marginRight="35dp"
+                android:layout_width="80dp"
+                android:layout_height="70dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
                 android:layout_weight="1"
                 android:background="@drawable/ic_action_favoritar_true" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="40dp"
-                android:text="Avaliações"
-                android:textColor="@android:color/black"
-                android:textSize="16sp"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-
-            <TextView
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="35dp"
-                android:text="Avaliar"
-                android:textColor="@android:color/black"
-                android:textSize="16sp"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-
-            <TextView
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="9dp"
-                android:text="Favoritar"
-                android:textColor="@android:color/black"
-                android:textSize="16sp"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
 
         </LinearLayout>
 

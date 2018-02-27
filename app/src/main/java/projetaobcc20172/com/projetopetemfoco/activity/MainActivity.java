@@ -166,8 +166,6 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
     }
 
-
-
     private void fecharTeclado(){
         View view = this.getCurrentFocus();
         if(view !=null){

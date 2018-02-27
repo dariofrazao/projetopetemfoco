@@ -19,6 +19,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -36,6 +37,8 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.adapter.ListaInformacoesAdapterView;
@@ -55,8 +58,12 @@ public class ExibiInformacoesEstabelecimentoActivity extends AppCompatActivity i
     private String mConfirma = "0";
     private String mKey;
     private MapView mapView;
+
+    private Map<String, Integer> mImagens = new HashMap<String, Integer>();
+
     //private ArrayList<String[]> mResultado;
     private ListView mExibeListaServicos;
+
 
     @SuppressLint("WrongConstant")
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
@@ -66,6 +73,14 @@ public class ExibiInformacoesEstabelecimentoActivity extends AppCompatActivity i
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_acesso_informacoes_estabelecimento);
+
+
+        mImagens.put("Autônomo",R.drawable.ic_action_autonomo);
+        mImagens.put("Estabelecimento",R.drawable.ic_action_estabelecimentos);
+
+        // lista de serviços pertencente ao fornecedor
+        ArrayAdapter<Servico> mAdapter;
+
 
         // Receber os dados do estabelecimento da outra activity
         Intent i = getIntent();
@@ -79,7 +94,13 @@ public class ExibiInformacoesEstabelecimentoActivity extends AppCompatActivity i
         //TextView mExibeCpfCnpjEstabelecimento = findViewById(R.id.tvExibeCpfCnpjEstabelecimento);
         TextView mExibeHorarioEstabelecimento = findViewById(R.id.tvHorario);
         TextView mExibeEnderecoEstabelecimento = findViewById(R.id.tvEnderecoEstabelecimentoCombinado);
+
+        ListView mExibeListaServicos = findViewById(R.id.lvListaServicos);
+        ImageView img = findViewById(R.id.ivFotoDetalhesPet);
+        img.setImageResource(mImagens.get(mFornecedor.getTipo()));
+
         mExibeListaServicos = findViewById(R.id.lvListaServicos);
+
         mapView = findViewById(R.id.map_view);
 
         // Configura toolbar

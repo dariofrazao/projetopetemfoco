@@ -9,11 +9,24 @@ public class Enumerates {
     public enum Filtro {
         AVALICAO,
         DISTANCIA,
+        PROXIMO_MINHA_RESIDENCIA,
         PRECO;
+    }
+
+    public enum TipoFornecedor {
+        AUTONOMO,
+        TODOS,
+        ESTABELECIMENTO;
     }
 
     public enum Estado{
         DEFAULT,
         BUSCANDO;
     }
+
+    public enum Promocao{
+        PADRAO,
+        PROXIMO;
+    }
+
 }

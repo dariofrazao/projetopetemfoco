@@ -57,18 +57,17 @@
 
             <ImageButton
                 android:id="@+id/botao_mostrar_avaliacoes_estabelecimento"
-                android:layout_width="55dp"
-                android:layout_height="40dp"
-                android:layout_marginLeft="50dp"
-                android:background="@drawable/ic_avaliacoes_novo"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@drawable/ic_action_avaliacoes"
                 android:text="Avaliar" />
 
             <ImageButton
                 android:id="@+id/botao_avaliar_estabelecimento"
-                android:layout_width="35dp"
-                android:layout_height="40dp"
-                android:layout_marginLeft="55dp"
-                android:background="@drawable/ic_avaliar_new"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginLeft="40dp"
+                android:background="@drawable/ic_action_avaliar"
                 android:text="Avaliar" />
 
             <ImageButton

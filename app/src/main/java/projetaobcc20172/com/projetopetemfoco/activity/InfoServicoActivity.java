@@ -1,23 +1,18 @@
 package projetaobcc20172.com.projetopetemfoco.activity;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.cooltechworks.creditcarddesign.CardEditActivity;
-import com.cooltechworks.creditcarddesign.CreditCardUtils;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.Query;
@@ -27,7 +22,6 @@ import java.util.ArrayList;
 
 import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoFirebase;
-import projetaobcc20172.com.projetopetemfoco.fragment.ResumoContratacaoFragment;
 import projetaobcc20172.com.projetopetemfoco.model.Endereco;
 import projetaobcc20172.com.projetopetemfoco.model.Fornecedor;
 import projetaobcc20172.com.projetopetemfoco.model.Servico;
@@ -39,17 +33,6 @@ public class InfoServicoActivity extends AppCompatActivity {
     private ImageView mImagemDetalhesServico;
     private String[] mServico;
     private Fornecedor fornecedor;
-
-    final int GET_NEW_CARD = 2;
-    public static final String SERVICE = "SERVICE";
-    public static final String ESTABELECIMENTO = "ESTABELECIMENTO";
-    public static final String TIPOPET = "TIPOPET";
-    public static final String AMOUNT = "AMOUNT";
-    public static final String TOTAL = "TOTAL";
-    public static final String TOTAL_VALUE = "TOTAL_VALUE";
-
-    private double total;
-    private String preco;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

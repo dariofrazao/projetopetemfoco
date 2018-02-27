@@ -37,7 +37,6 @@ import br.com.uol.pslibs.checkouttransparent.vo.PSCheckoutRequest;
 import br.com.uol.pslibs.checkouttransparent.vo.PSCheckoutResponse;
 import br.com.uol.pslibs.checkouttransparent.vo.SellerVO;
 import projetaobcc20172.com.projetopetemfoco.activity.ContratarServicoActivity;
-import projetaobcc20172.com.projetopetemfoco.activity.InfoServicoActivity;
 import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoFirebase;
 import projetaobcc20172.com.projetopetemfoco.model.Cupom;
@@ -168,7 +167,7 @@ public class ResumoContratacaoFragment extends Fragment{
 
         Query query = ConfiguracaoFirebase.getFirebase().child("cupons").orderByChild("idServico").equalTo(idServico);
 
-        if (usouCupom == false){
+        if (!usouCupom){
             query.addListenerForSingleValueEvent(new ValueEventListener() {
                 @SuppressLint({"SetTextI18n", "NewApi"})
                 @Override
@@ -184,7 +183,7 @@ public class ResumoContratacaoFragment extends Fragment{
                             toast.show();
                         }
                     }
-                    if (usouCupom == false){
+                    if (!usouCupom){
                         Toast toast = Toast.makeText(getActivity(), "Cupom Inválido!!" , Toast.LENGTH_SHORT);
                         toast.show();
                     }

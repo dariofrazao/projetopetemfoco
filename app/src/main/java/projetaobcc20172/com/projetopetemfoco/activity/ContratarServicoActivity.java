@@ -41,7 +41,7 @@ public class ContratarServicoActivity extends AppCompatActivity {
     private Fornecedor mFornecedor;
     private String[] mServico;
 
-    final int GET_NEW_CARD = 2;
+    private int GET_NEW_CARD = 2;
     public static final String SERVICE = "SERVICE";
     public static final String ESTABELECIMENTO = "ESTABELECIMENTO";
     public static final String TIPOPET = "TIPOPET";
@@ -184,7 +184,7 @@ public class ContratarServicoActivity extends AppCompatActivity {
         }
     }
 
-    private void checkPermissions(int callbackId, String... permissionsId) {
+    /*private void checkPermissions(int callbackId, String... permissionsId) {
         boolean permissions = true;
         for (String p : permissionsId) {
             permissions = permissions && ContextCompat.checkSelfPermission(this, p) == PERMISSION_GRANTED;
@@ -192,7 +192,7 @@ public class ContratarServicoActivity extends AppCompatActivity {
 
         if (!permissions)
             ActivityCompat.requestPermissions(this, permissionsId, callbackId);
-    }
+    }*/
 
     private class HelloWebViewClient extends WebViewClient{
 

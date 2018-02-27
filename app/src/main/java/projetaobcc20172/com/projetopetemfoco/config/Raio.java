@@ -13,40 +13,41 @@ import static com.facebook.FacebookSdk.getApplicationContext;
 
 public class Raio {
 
-    private static byte sRange = 5;
-    private static byte sInicial = 5;
-    private byte raioAtual;//usado no seekbar
-    private byte raioReal;//raio real em km que o usuário visualiza
+    private static int sRange = 5;
+    private static int sInicial = 5;
+    private int raioAtual = 5;//usado no seekbar
+    private int raioReal = 5;//raio real em km que o usuário visualiza
     private Preferencias pref;
 
     public Raio(){
         pref = new Preferencias(getApplicationContext());
-        this.raioAtual = pref.getRaio();
-        this.setRaioReal();
+        raioAtual = pref.getRaio();
+        setRaioReal();
     }
 
-    public  byte getRange() {
+    public  int getRange() {
         return sRange;
     }
 
-    public byte getInicial() {
+    public int getInicial() {
         return sInicial;
     }
 
-    public byte getRaioAtual() {
+    public int getRaioAtual() {
         return raioAtual;
     }
 
-    public void setRaioAtual(byte raioAtual) {
+    public void setRaioAtual(int raioAtual) {
         this.raioAtual = raioAtual;
-        this.setRaioReal();
+        setRaioReal();
         pref.salvarRaio(this.raioAtual);
     }
 
     private void setRaioReal(){
-        this.raioReal = (byte)(this.raioAtual+sInicial);
+        raioReal = raioAtual+sInicial;
     }
-    public byte getRaioReal() {
+
+    public int getRaioReal() {
         return raioReal;
     }
 }

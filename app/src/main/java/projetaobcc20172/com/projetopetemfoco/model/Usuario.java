@@ -52,4 +52,5 @@ public class Usuario implements Serializable {
     public void setmFoto(String mFoto) {
         this.mFoto = mFoto;
     }
+
 }

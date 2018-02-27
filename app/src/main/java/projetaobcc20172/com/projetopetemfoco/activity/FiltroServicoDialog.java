@@ -51,11 +51,8 @@ public class FiltroServicoDialog extends Activity implements View.OnClickListene
     public Toast mToast;
     private int raio;
     private static String idUsuarioLogado;
-    boolean geoCoordControle = false;
-    private Endereco endereco;
+    private boolean geoCoordControle = false;
     private ProgressBar mProgresso;
-
-
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -353,7 +350,6 @@ public class FiltroServicoDialog extends Activity implements View.OnClickListene
                 for (DataSnapshot dados : dataSnapshot.getChildren()) {
                     Endereco end = dados.getValue(Endereco.class);
                     enderecos.add(end);
-                    endereco = end;
                     ConfiguracoesBuscaServico.geoLocalizacaoEndenreco[0] = end.getmLatitude();
                     ConfiguracoesBuscaServico.geoLocalizacaoEndenreco[1] = end.getmLongitude();
                     geoCoordControle = true;

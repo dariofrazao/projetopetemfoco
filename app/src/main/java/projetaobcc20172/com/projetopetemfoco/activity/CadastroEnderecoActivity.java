@@ -55,7 +55,6 @@ public class CadastroEnderecoActivity extends AppCompatActivity{
     private Util mUtil;
     private Endereco mEndereco;
     private String mIdUsuarioLogado;
-    private LatLng latLng;
 
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     //permite que essa variavel seja vista pela classe de teste
@@ -167,7 +166,7 @@ public class CadastroEnderecoActivity extends AppCompatActivity{
             mIdUsuarioLogado = getPreferences("id", CadastroEnderecoActivity.this);
 
             //busca a geolocalização baseada por CEP
-            latLng = coordinadasPorCep(mCep.getText().toString().replace("-",""));
+            LatLng latLng = coordinadasPorCep(mCep.getText().toString().replace("-",""));
 
            //Recuperar os campos do endereço informados pelo usuário
             mEndereco = new Endereco();
@@ -268,13 +267,14 @@ public class CadastroEnderecoActivity extends AppCompatActivity{
         try {
             InputStream in = new BufferedInputStream(urlConnection.getInputStream());
             BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-            String result, line = reader.readLine();
-            result = line;
+            String line = reader.readLine();
+            String result = line;
             while ((line = reader.readLine()) != null) {
                 result += line;
             }
 
-            String lat, lon;
+            String lat;
+            String lng;
             json = new JSONObject(result);
             JSONObject geoMetryObject = new JSONObject();
             JSONObject locations = new JSONObject();
@@ -285,8 +285,8 @@ public class CadastroEnderecoActivity extends AppCompatActivity{
                 geoMetryObject = json.getJSONObject("geometry");
                 locations = geoMetryObject.getJSONObject("location");
                 lat = locations.getString("lat");
-                lon = locations.getString("lng");
-                locationPoint = new LatLng(Double.parseDouble(lat), Double.parseDouble(lon));
+                lng = locations.getString("lng");
+                locationPoint = new LatLng(Double.parseDouble(lat), Double.parseDouble(lng));
             }
         } catch (Exception e) {
             e.printStackTrace();

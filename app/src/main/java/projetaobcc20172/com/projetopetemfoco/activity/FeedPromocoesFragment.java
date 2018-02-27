@@ -41,7 +41,6 @@ import projetaobcc20172.com.projetopetemfoco.utils.Localizacao;
 public class FeedPromocoesFragment  extends Fragment implements Serializable {
 
     private List<Promocao> mPromocoes;
-    private PromocoesRecyclerViewAdapter mAdapter;
     private RecyclerView recyclerView ;
     private ArrayList<String> mListaPromocoes;
 
@@ -62,9 +61,8 @@ public class FeedPromocoesFragment  extends Fragment implements Serializable {
         recyclerView.setLayoutManager(layoutManager);
         mPromocoes = new ArrayList<>();
         mListaPromocoes = new ArrayList<>();
-        mAdapter = new PromocoesRecyclerViewAdapter(mPromocoes,getActivity());
-
-        recyclerView.setAdapter(this.mAdapter);
+        PromocoesRecyclerViewAdapter mAdapter = new PromocoesRecyclerViewAdapter(mPromocoes,getActivity());
+        recyclerView.setAdapter(mAdapter);
 
 
         ImageView mFiltro = getActivity().findViewById(R.id.ivOpcoesPromocao);

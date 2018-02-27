@@ -35,7 +35,7 @@ import projetaobcc20172.com.projetopetemfoco.model.Servico;
 public class InfoServicoActivity extends AppCompatActivity {
 
     private static final int PERMISSION_GRANTED = 1;
-    private TextView mTvNome, mTvNomeFornecedor, mTvValor, mTvTipoAnimalServico, mTvQtd;
+    private TextView mTvNome, mTvNomeFornecedor, mTvValor, mTvTipoAnimalServico;
     private ImageView mImagemDetalhesServico;
     private String[] mServico;
     private Fornecedor fornecedor;
@@ -56,15 +56,6 @@ public class InfoServicoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info_servico);
 
-        Toolbar toolbar;
-        toolbar = findViewById(R.id.tb_main);
-
-        // Configura toolbar
-        toolbar.setTitle(R.string.tb_detalhes_servico);
-        toolbar.setTitleTextColor(Color.WHITE);
-        toolbar.setNavigationIcon(R.drawable.ic_action_arrow_left_white);
-        setSupportActionBar(toolbar);
-
         final int callbackId = 42;
         checkPermissions(callbackId, Manifest.permission.READ_CALENDAR, Manifest.permission.WRITE_CALENDAR);
 
@@ -76,6 +67,15 @@ public class InfoServicoActivity extends AppCompatActivity {
 
         mServico = (String[]) getIntent().getSerializableExtra("Servico");
 
+        Toolbar toolbar;
+        toolbar = findViewById(R.id.tb_main);
+
+        // Configura toolbar
+        toolbar.setTitle(R.string.tb_detalhes_servico);
+        toolbar.setTitleTextColor(Color.WHITE);
+        toolbar.setNavigationIcon(R.drawable.ic_action_arrow_left_white);
+        setSupportActionBar(toolbar);
+
         preencherCampos();
 
         Button mEstabelecimento;
@@ -85,6 +85,24 @@ public class InfoServicoActivity extends AppCompatActivity {
             public void onClick(View view) {
                 exibirEstabelecimento();
 
+            }
+        });
+
+        Button mAvaliarServico;
+        mAvaliarServico = findViewById(R.id.btnAvaliarServico);
+        mAvaliarServico.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                exibirAvaliarServico();
+            }
+        });
+
+        Button mAvaliacoesServico;
+        mAvaliacoesServico = findViewById(R.id.btnAvaliacoesServico);
+        mAvaliacoesServico.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                exibirAvaliacoesServico();
             }
         });
 
@@ -123,8 +141,31 @@ public class InfoServicoActivity extends AppCompatActivity {
                 });
 
             }
-
         });
+
+
+    }
+
+    private void exibirAvaliacoesServico() {
+        Intent intent = new Intent(InfoServicoActivity.this, ExibiAvalicoesServicosActivity.class);
+        intent.putExtra("Servico", mServico);// id serviço
+        startActivity(intent);
+    }
+
+    private void exibirAvaliarServico() {
+        Intent intent = new Intent(InfoServicoActivity.this, AvaliarServicoActivity.class);
+        intent.putExtra("Servico", mServico[9]);// id serviço
+        startActivity(intent);
+    }
+
+    private void checkPermissions(int callbackId, String... permissionsId) {
+        boolean permissions = true;
+        for (String p : permissionsId) {
+            permissions = permissions && ContextCompat.checkSelfPermission(this, p) == PERMISSION_GRANTED;
+        }
+
+        if (!permissions)
+            ActivityCompat.requestPermissions(this, permissionsId, callbackId);
     }
 
     public void preencherCampos() {
@@ -145,7 +186,9 @@ public class InfoServicoActivity extends AppCompatActivity {
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+
                 for (DataSnapshot dados : dataSnapshot.getChildren()) {
+
                     float nota = 0;
                     if (dados.child("nota").getValue(float.class) != null) {
                         nota = dados.child("nota").getValue(float.class);
@@ -157,6 +200,7 @@ public class InfoServicoActivity extends AppCompatActivity {
                     exibirServicos();
 
                 }
+
             }
 
             @Override
@@ -179,9 +223,10 @@ public class InfoServicoActivity extends AppCompatActivity {
                 for (DataSnapshot dados : dataSnapshot.getChildren()) {
                     Servico servico = dados.getValue(Servico.class);
                     servicos.add(servico);
+
                 }
                 fornecedor.setServicos(servicos);
-                Intent intent = new Intent(InfoServicoActivity.this, AcessoInformacoesEstabelecimentoActivity.class);
+                Intent intent = new Intent(InfoServicoActivity.this, ExibiInformacoesEstabelecimentoActivity.class);
                 intent.putExtra("Fornecedor", fornecedor);
                 startActivity(intent);
             }
@@ -191,16 +236,6 @@ public class InfoServicoActivity extends AppCompatActivity {
                 //Método com corpo vazio
             }
         });
-    }
-
-    private void checkPermissions(int callbackId, String... permissionsId) {
-        boolean permissions = true;
-        for (String p : permissionsId) {
-            permissions = permissions && ContextCompat.checkSelfPermission(this, p) == PERMISSION_GRANTED;
-        }
-
-        if (!permissions)
-            ActivityCompat.requestPermissions(this, permissionsId, callbackId);
     }
 
     public static int imagemServico(String nomeServico){

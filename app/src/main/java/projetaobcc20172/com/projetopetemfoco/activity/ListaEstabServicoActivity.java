@@ -1,6 +1,5 @@
 package projetaobcc20172.com.projetopetemfoco.activity;
 
-
 import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.content.DialogInterface;
@@ -123,8 +122,7 @@ public class ListaEstabServicoActivity extends AppCompatActivity {
                         for (DataSnapshot dado : dataSnapshot.getChildren()) {
                             String tipoServico = dado.child("nome_tipoPet").getValue(String.class).split("_")[0];
                             String[] resultado = {tipoServico, dado.child("nomeFornecedor").getValue(String.class), dado.child("valor").getValue(String.class), dado.child("pet").getValue(String.class),
-                                    dado.child("latitude").getValue(String.class), dado.child("longitude").getValue(String.class), "0" , dado.child("nota").getValue(String.class),
-                                    dado.child("idFornecedor").getValue(String.class)};
+                                    dado.child("latitude").getValue(String.class), dado.child("longitude").getValue(String.class), "0" , dado.child("nota").getValue(String.class), dado.child("idFornecedor").getValue(String.class),dado.getKey()};
                             mResultado.add(resultado);
                         }
                         ConfiguracoesBuscaServico.filtrar(projetaobcc20172.com.projetopetemfoco.activity.ListaEstabServicoActivity.this, mResultado);

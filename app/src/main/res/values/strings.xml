@@ -144,8 +144,11 @@
     <string name="botao_contratar_servico">Contratar Serviço</string>
     <string name="sucesso_avaliacao_estabelecimento">Avaliação realizada com Sucesso!</string>
     <string name="sucesso_atualizacao_nota">Atualização Realizado com Sucesso!</string>
+    <string name="sucesso_avaliacao_servico">Avaliação realizada com Sucesso!</string>
     <string name="erro_atualizacao_nota">Atualização com problema!</string>
-    <string name="erro_avaliacao_estabelecimento">Erro ao realizar Avaliação</string>
+    <string name="erro_avaliacao_estabelecimento">Erro ao realizar Avaliação do Estabelecimento</string>
+    <string name="erro_avaliacao_servico">Erro ao realizar Avaliação do Serviço</string>
+
 
     <!--Strings relacionadas a tela de busca-->
     <string name="tb_estabelecimentos">Estabelecimentos</string>
@@ -162,6 +165,7 @@
 
     <!--Strings relacionadas a avaliação-->
     <string name="tb_avaliar_estabelecimento">Avaliação</string>
+    <string name="tb_avaliar_servico">Avaliação</string>
     <string name="tb_avaliacoes_estabelecimento">Avaliações</string>
     <string name="avaliador">Usuário</string>
     <string name="comentario">Comentário:</string>
@@ -172,6 +176,9 @@
     <!--Strings relacionadas ao filtro de Serviço-->
     <string name="filtro_atualizado_servico">Filtro salvo com sucesso</string>
 
+    <!--Strings relacionadas ao Serviço-->
+    <string name="tb_avaliacoes_servico">Avaliações</string>
+
     <!--Strings relacionadas a Contratação de Serviço-->
     <string name="tb_agenda_estabelecimento">Agenda do Estabelecimento</string>
     <string name="solicitacao_enviada">Os convites serão enviados.</string>
@@ -179,6 +186,9 @@
 
     <string name="api_key_google_matrix">AIzaSyBrKPS2exi5vhLYY1H1islk4UUlRb4Z9Rk</string>
     <string name="url_matrix_distance">https://maps.googleapis.com/maps/api/distancematrix/json?units=metric</string>
+    <string name="title_activity_avaliar_servico">AvaliarServicoActivity</string>
+    <string name="avaliar_servico">Avaliar Serviço</string>
+    <string name="avaliacoes_do_servico">AVALIAÇÕES DO SERVIÇO</string>
     <string name="title_activity_cadastro_fornecedor_tipo">CadastroFornecedorTipoActivity</string>
 
     <string name="hello_world">Hello world!</string>

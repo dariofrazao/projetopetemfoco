@@ -159,7 +159,7 @@ public class ContratarServicoActivity extends AppCompatActivity {
             bundle.putString(SERVICE, mServico[0]);
             bundle.putString(ESTABELECIMENTO, mServico[1]);
             bundle.putString(TIPOPET, mServico[3]);
-            bundle.putString(TIPOPET, mServico[9]);
+            bundle.putString(ID_SERVICO, mServico[9]);
             bundle.putString(AMOUNT, "1");
             bundle.putString(TOTAL, mServico[2]);
             bundle.putDouble(TOTAL_VALUE, total);

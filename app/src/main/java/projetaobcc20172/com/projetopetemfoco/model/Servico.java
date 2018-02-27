@@ -3,6 +3,7 @@ package projetaobcc20172.com.projetopetemfoco.model;
 import com.google.firebase.database.Exclude;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  * Created by Felipe Oliveira on 05/12/17.
@@ -15,6 +16,15 @@ public class Servico implements Serializable {
     private String mDescricao;
     private String mValor;
     private String mTipoPet;
+    private ArrayList<Avaliacao> mAvaliacoes = new ArrayList<>();
+
+    public ArrayList<Avaliacao> getAvaliacoes() {
+        return mAvaliacoes;
+    }
+
+    public void setAvaliacoes(ArrayList<Avaliacao> avaliacoes) {
+        this.mAvaliacoes = avaliacoes;
+    }
 
     public Servico(){
     }

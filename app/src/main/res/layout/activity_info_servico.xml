@@ -31,7 +31,7 @@
         <ImageView
             android:id="@+id/ivDetalhesServico"
             android:layout_width="match_parent"
-            android:layout_height="150dp"/>
+            android:layout_height="130dp"/>
 
         <TextView
             android:id="@+id/tvNome"
@@ -118,25 +118,27 @@
             android:drawableLeft="@drawable/ic_action_estabelecimentos"
             android:text="Detalhes do Estabelecimento"/>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="2dp"
-            android:layout_marginBottom="2dp"/>
-
-        <!--><Button
-            android:id="@+id/btnContratarServico"
+        <Button
+            android:id="@+id/btnAvaliarServico"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
-            android:background="@drawable/shapebutton"
-            android:paddingRight="90dp"
+            android:background="@drawable/shapebuttonborder"
+            android:paddingRight="10dp"
             android:paddingLeft="15dp"
-            android:drawableLeft="@drawable/ic_purchage"
-            android:text="Contratar Serviço"
-            android:textColor="@color/branco"
-            android:textAlignment="viewEnd" /><-->
+            android:drawableLeft="@drawable/ic_action_avaliar"
+            android:text="@string/avaliar_servico"/>
 
+        <Button
+            android:id="@+id/btnAvaliacoesServico"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:background="@drawable/shapebuttonborder"
+            android:paddingRight="10dp"
+            android:paddingLeft="15dp"
+            android:drawableLeft="@drawable/ic_action_avaliacoes"
+            android:text="@string/avaliacoes_do_servico"/>
     </LinearLayout>
 
 </RelativeLayout>

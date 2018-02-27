@@ -178,7 +178,7 @@ public class ResumoContratacaoFragment extends Fragment{
                         if (mCupom.equalsIgnoreCase(cupom.getmNome()) && cupomDataValida(cupom.getmDataInicio(), cupom.getmDataVencimento())) {
                             tvCupom.setText(cupom.getmValor());
                             totalValue = totalValue - convertStringForDouble(cupom.getmValor());
-                            tvTotal.setText("RS" + convertDoubleForString(totalValue));
+                            tvTotal.setText("R$" + convertDoubleForString(totalValue) + "0");
                             usouCupom = true;
                             Toast toast = Toast.makeText(getActivity(), "Desconto aderido com sucesso!!", Toast.LENGTH_SHORT);
                             toast.show();

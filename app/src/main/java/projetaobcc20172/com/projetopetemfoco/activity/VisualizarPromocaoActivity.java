@@ -39,7 +39,7 @@ public class VisualizarPromocaoActivity extends AppCompatActivity {
 
 
     private void exibirDetalhesEst(){
-        Intent intent = new Intent(this, AcessoInformacoesEstabelecimentoActivity.class);
+        Intent intent = new Intent(this, ExibiInformacoesEstabelecimentoActivity.class);
         intent.putExtra("Fornecedor", this.mPromocao.getmFornecedor());
         this.startActivity(intent);
     }

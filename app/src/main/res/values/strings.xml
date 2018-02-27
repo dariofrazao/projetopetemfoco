@@ -127,13 +127,9 @@
 
     <!--Strings relacionadas aos favoritos-->
     <string name="tb_meus_favoritos">Meus Favoritos</string>
-    <string name="estabelecimento_favoritado">Estalecimento adicionado aos favoritos!</string>
-    <string name="estabelecimento_desfavoritado">Estalecimento removido dos favoritos!</string>
-    <string name="estabelecimento_existente">Estalecimento já favoritado!</string>
-    <string name="pergunta_confirma_remocao_favorito">O estabelecimento será removido dos favoritos. Confirma?</string>
-    <string name="pergunta_confirma_ligacao_favorito">Essa ligação pode gerar custos adicionais. Confirma?</string>
-    <string name="ligando_favorito">Discando...</string>
-
+    <string name="favoritado">Estalecimento adicionado aos favoritos!</string>
+    <string name="desfavoritado">Estalecimento removido dos favoritos!:</string>
+    <string name="existente">Estalecimento já favoritado!</string>
     <!--Strings relacionadas ao estbelecimento-->
     <string name="estabelecimento">Estabelecimento:</string>
     <string name="tb_acesso_estabelecimento">Informações do Estabelecimento</string>

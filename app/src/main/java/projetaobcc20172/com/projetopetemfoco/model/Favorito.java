@@ -15,18 +15,17 @@ public class Favorito implements Serializable {
     private String mTelefone;
     private String mNome;
     private String mConfirma;
-    private String mCpfCnpj;
+
 
     public Favorito() {
     }
 
-    public Favorito(String idFavorito, String idFornecedor, String nome, String telefone, String confirma, String cpfCnpj) {
+    public Favorito(String idFavorito, String idFornecedor, String nome, String telefone, String confirma) {
         this.mIdFavorito = idFavorito;
         this.mIdFornecedor = idFornecedor;
         this.mTelefone = telefone;
         this.mNome = nome;
         this.mConfirma = confirma;
-        this.mCpfCnpj = cpfCnpj;
     }
 
     public String getIdUsuario() {
@@ -77,11 +76,6 @@ public class Favorito implements Serializable {
         this.mConfirma = confirma;
     }
 
-    public String getCpfCnpj() {return mCpfCnpj;
-    }
-
-    public void setCpfCnpj(String cpfCnpj) {this.mCpfCnpj = cpfCnpj;
-    }
 
     @Override
     public boolean equals(Object o)

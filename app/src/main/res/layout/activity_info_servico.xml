@@ -95,7 +95,7 @@
             android:background="@drawable/shapebutton"
             android:paddingRight="40dp"
             android:paddingLeft="15dp"
-            android:drawableLeft="@drawable/ic_action_agenda"
+            android:drawableLeft="@drawable/ic_action_check"
             android:text="Agenda do Estabelecimento"
             android:textAlignment="viewEnd"/>
 
@@ -124,7 +124,7 @@
             android:background="@drawable/shapebuttonborder"
             android:paddingRight="10dp"
             android:paddingLeft="15dp"
-            android:drawableLeft="@drawable/ic_action_avaliar_new"
+            android:drawableLeft="@drawable/ic_action_avaliar"
             android:text="@string/avaliar_servico"/>
 
         <Button
@@ -135,7 +135,7 @@
             android:background="@drawable/shapebuttonborder"
             android:paddingRight="10dp"
             android:paddingLeft="15dp"
-            android:drawableLeft="@drawable/ic_action_avaliacoes_novo"
+            android:drawableLeft="@drawable/ic_action_avaliacoes"
             android:text="@string/avaliacoes_do_servico"/>
     </LinearLayout>
 

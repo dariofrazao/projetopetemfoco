@@ -118,6 +118,7 @@
                 android:background="@drawable/shapebutton"
                 android:paddingRight="20dp"
                 android:paddingLeft="10dp"
+                android:drawableLeft="@drawable/ic_action_favoritos"
                 android:text="  Avaliar" />
 
         </LinearLayout>

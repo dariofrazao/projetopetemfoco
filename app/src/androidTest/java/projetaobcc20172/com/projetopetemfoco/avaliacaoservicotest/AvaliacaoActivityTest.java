@@ -1,7 +1,9 @@
 package projetaobcc20172.com.projetopetemfoco.avaliacaoservicotest;
 
+import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
+import android.support.test.uiautomator.UiDevice;
 import android.test.suitebuilder.annotation.LargeTest;
 
 import org.junit.Before;
@@ -17,6 +19,9 @@ import projetaobcc20172.com.projetopetemfoco.logintests.LoginActivityTest;
 @LargeTest
 @RunWith(AndroidJUnit4.class)
 public class AvaliacaoActivityTest {
+
+    private UiDevice mDevice;
+
     @Rule
     public ActivityTestRule<LoginActivity> mActivityTestRule = new ActivityTestRule<>(LoginActivity.class);
 
@@ -36,10 +41,13 @@ public class AvaliacaoActivityTest {
 
     private static String mNomeServico = "Banho";
     private static String mComentario[] = {"Muito Bom",""};
-   // private static float  mNota[] = {4,0};
+    // private static float  mNota[] = {4,0};
 
     @Before
     public void setUp() throws Exception {
+
+        mDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation());
+
         //Desloga caso já esteja logado.
         //Evita erros nos testes
         try{
@@ -57,21 +65,21 @@ public class AvaliacaoActivityTest {
         TestTools.clicarEmITemListView(R.id.lvEstaServicoBusca, 0);
         Thread.sleep(4000);
         TestTools.clicarBotao(R.id.btnAvaliarServico);
-        Thread.sleep(4000);
+
+    }
+
+    @Test
+    public void avaliarComSucesso() throws InterruptedException {
         TestTools.digitarCampo(R.id.etComentarioAvaliacaoServico , mComentario[0]);
         Thread.sleep(4000);
         TestTools.clicarBotao(R.id.botao_avaliar_servico);
-        Thread.sleep(2000);
         TestTools.checarToast(R.string.sucesso_avaliacao_servico);
     }
 
     @Test
-    public void avaliacaoActivityTest() {
-        try {
-            Thread.sleep(2000);
-            TestTools.checarToast(R.string.sucesso_avaliacao_servico);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+    public void cancelarAvaliacao() throws InterruptedException {
+        TestTools.digitarCampo(R.id.etComentarioAvaliacaoServico , mComentario[0]);
+        Thread.sleep(4000);
+        mDevice.pressBack();
     }
 }

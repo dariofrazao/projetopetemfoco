@@ -105,7 +105,7 @@ public class ExibiInformacoesEstabelecimentoActivity extends AppCompatActivity i
         mExibeListaServicos.setAdapter(mAdapter);
 
         //Recuperar id do usuário logado
-        mIdUsuarioLogado = getPreferences("id", ExibiInformacoesEstabelecimentoActivity.this);
+        mIdUsuarioLogado = getPreferences("id", this);
 
         mFavorito = new Favorito(mIdFavorito, mFornecedor.getId(), mFornecedor.getNome(), mFornecedor.getTelefone(), mConfirma) ;
 
@@ -164,7 +164,6 @@ public class ExibiInformacoesEstabelecimentoActivity extends AppCompatActivity i
             return false;
         }
         return true;
-
     }
 
     //Método que chama a activity para realizar a avaliação
@@ -172,21 +171,23 @@ public class ExibiInformacoesEstabelecimentoActivity extends AppCompatActivity i
         Intent intent = new Intent(ExibiInformacoesEstabelecimentoActivity.this, AvaliarEstabelecimentoActivity.class);
         intent.putExtra("Fornecedor", fornecedor);
         startActivity(intent);
-        finish();
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
+        outState.putAll(outState);
         super.onSaveInstanceState(outState);
         mapView.onSaveInstanceState(outState);
     }
 
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+    }
     //Método que chama a activity para exibir as avaliações
     public void avaliacoes(Fornecedor fornecedor) {
         Intent intent = new Intent(ExibiInformacoesEstabelecimentoActivity.this, ExibiAvalicoesEstabelecimentoActivity.class);
         intent.putExtra("Fornecedor", fornecedor);
         startActivity(intent);
-        finish();
     }
     //Método que recupera o id do usuário logado, para salvar o pet no nó do favorito que o está cadastrando--LuizAlberes
     public static String getPreferences(String key, Context context) {
@@ -239,5 +240,6 @@ public class ExibiInformacoesEstabelecimentoActivity extends AppCompatActivity i
         super.onPause();
         mapView.onPause();
     }
+
 }
 

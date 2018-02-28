@@ -86,7 +86,7 @@ public class ConfiguracaoBuscaEstab {
 
         if(sTipoFornecedor.equals(Enumerates.TipoFornecedor.ESTABELECIMENTO)){
             for(Fornecedor forn:resultados){
-                if(forn.getTipo().equals("Estabeleciemnto")){//Só add a lista se for Estabelecimento
+                if(forn.getTipo().equals("Estabelecimento")){//Só add a lista se for Estabelecimento
                     resultadoFiltrados.add(forn);
                 }
             }

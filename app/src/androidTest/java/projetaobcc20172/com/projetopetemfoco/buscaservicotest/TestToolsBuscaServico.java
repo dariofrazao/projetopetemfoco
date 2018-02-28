@@ -32,6 +32,7 @@ public class TestToolsBuscaServico {
     protected static void selecionarPet(String pet) throws InterruptedException {
         TestTools.moverAbaDireita(R.id.container);
         Thread.sleep(1000);
+        TestTools.selicionarOpcaoCheckBox(R.id.cbProxMinhaResidencia);
         GridView gridPet = TestTools.activityAtual().findViewById(R.id.gridOpPet);
         for(int i=0;i<gridPet.getCount();i++){
             TextView t = gridPet.getChildAt(i).findViewById(R.id.tvGridTextPet);
@@ -46,5 +47,6 @@ public class TestToolsBuscaServico {
     protected static void validarListaServicos(String servico,String pet){
         TestTools.checarListViewComTextView(TestTools.activityAtual(),R.id.lvEstaServicoBusca,R.id.tvExibirServico,servico,5);
     }
+
 
 }

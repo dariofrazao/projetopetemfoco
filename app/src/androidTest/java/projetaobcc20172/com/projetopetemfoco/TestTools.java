@@ -12,6 +12,7 @@ import android.support.test.espresso.contrib.RecyclerViewActions;
 import android.support.test.espresso.matcher.ViewMatchers;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -233,4 +234,7 @@ public class TestTools {
         Espresso.onView(withId(idTextView)).check(matches(withText(textoEsperado)));
     }
 
+    public static void selicionarOpcaoCheckBox(int cbProxMinhaResidencia) {
+        Espresso.onView(withId(cbProxMinhaResidencia)).perform(click());
+    }
 }

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:tools="http://schemas.android.com/tools"
     package="projetaobcc20172.com.projetopetemfoco">
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
@@ -14,6 +16,10 @@
     <uses-permission android:name="com.example.permission.MAPS_RECEIVE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="com.example.permission.MAPS_RECEIVE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
 
     <application
         android:allowBackup="false"
@@ -21,7 +27,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:replace="android:allowBackup">
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
@@ -67,16 +74,12 @@
         <activity
             android:name=".activity.ExibiInformacoesEstabelecimentoActivity"
             android:windowSoftInputMode="stateHidden" />
-        android:name=".activity.AcessoInformacoesEstabelecimentoActivity"
-        android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".activity.AvaliarEstabelecimentoActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".activity.ExibiAvalicoesEstabelecimentoActivity"
             android:windowSoftInputMode="stateHidden" />
-        android:name=".activity.AvalicoesEstabelecimentoActivity"
-        android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".activity.EditarPetActivity"
             android:windowSoftInputMode="stateHidden" />
@@ -87,10 +90,7 @@
             android:name=".activity.EditarEnderecoActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity android:name=".activity.ListaEstabServicoActivity" />
-        <![CDATA[
 
-            android:windowSoftInputMode="stateHidden" />
-        ]]>
         <activity android:name=".activity.InfoVacinaActivity" />
         <activity android:name=".activity.InfoEnderecoActivity" />
         <activity
@@ -99,14 +99,17 @@
         <activity
             android:name=".activity.FiltroEstabelecimentoActivity"
             android:theme="@style/Base.Theme.AppCompat.Light.Dialog" />
-        <activity android:name=".activity.VisualizarPromocaoActivity" />
+        <activity android:name=".activity.VisualizarPromocaoActivity"></activity>
         <activity
             android:name=".activity.AvaliarServicoActivity"
             android:label="@string/title_activity_avaliar_servico"
             android:theme="@style/AppTheme" />
-        <activity android:name=".activity.ExibiAvalicoesServicosActivity" />
+        <activity android:name=".activity.ExibiAvalicoesServicosActivity"></activity>
         <activity android:name=".activity.InfoServicoActivity" />
-        <activity android:name=".activity.ContratarServicoActivity" />
+        <activity android:name=".activity.ContratarServicoActivity"></activity>
+        <activity android:name="com.cooltechworks.creditcarddesign.CardEditActivity"
+            android:screenOrientation="portrait"
+            />
         <activity android:name=".activity.OpcoesPromocoes"
             android:theme="@style/Base.Theme.AppCompat.Light.Dialog"   />
     </application>

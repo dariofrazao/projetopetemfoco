@@ -4,8 +4,9 @@ buildscript {
 
     repositories {
         google()
-        mavenCentral()
         jcenter()
+        mavenCentral()
+        mavenLocal()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.0.1'
@@ -22,7 +23,17 @@ buildscript {
 allprojects {
     repositories {
         google()
+        maven {
+            url "https://jitpack.io"
+        }
+
+        maven {
+            url "https://github.com/pagseguro/android-checkout-transparent-in-app/raw/master/repositorio"
+        }
+
         jcenter()
+        mavenCentral()
+        mavenLocal()
     }
 }
 

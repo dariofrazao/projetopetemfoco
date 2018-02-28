@@ -153,22 +153,7 @@ public class InfoServicoActivity extends AppCompatActivity {
 
     public void preencherCampos() {
 
-        if(mServico[0].equals("Banho")){
-            mImagemDetalhesServico.setImageResource(R.drawable.servico_banho);
-        }
-        if(mServico[0].equals("Tosa")){
-            mImagemDetalhesServico.setImageResource(R.drawable.servico_tosa);
-        }
-        if(mServico[0].equals("Hospedagem")){
-            mImagemDetalhesServico.setImageResource(R.drawable.servico_hospedagem);
-        }
-        if(mServico[0].equals("Passeio")){
-            mImagemDetalhesServico.setImageResource(R.drawable.servico_passeio);
-        }
-        if(mServico[0].equals("Vacinação")){
-            mImagemDetalhesServico.setImageResource(R.drawable.servico_vacinacao);
-        }
-
+        mImagemDetalhesServico.setImageResource(imagemServico(mServico[0]));
         mTvNome.setText("Serviço: " + mServico[0]);
         mTvNomeFornecedor.setText("Estabelecimento: " + mServico[1]);
         mTvTipoAnimalServico.setText("Tipo de Animal: " + mServico[3]);
@@ -234,6 +219,22 @@ public class InfoServicoActivity extends AppCompatActivity {
                 //Método com corpo vazio
             }
         });
+    }
+
+    public static int imagemServico(String nomeServico){
+        if(nomeServico.equalsIgnoreCase("Banho")){
+           return (R.drawable.servico_banho);
+        }else if(nomeServico.equalsIgnoreCase("Tosa")){
+            return (R.drawable.servico_tosa);
+        }else if(nomeServico.equalsIgnoreCase("Hospedagem")){
+            return (R.drawable.servico_hospedagem);
+        }else if(nomeServico.equalsIgnoreCase("Passeio")){
+            return (R.drawable.servico_passeio);
+        }else if(nomeServico.equalsIgnoreCase("Vacinação")){
+            return (R.drawable.servico_vacinacao);
+        }else{
+            return (R.drawable.servico_todos);
+        }
     }
 
     //Método do botão voltar

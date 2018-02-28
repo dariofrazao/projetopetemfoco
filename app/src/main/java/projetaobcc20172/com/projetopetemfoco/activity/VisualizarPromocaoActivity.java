@@ -10,8 +10,19 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+
 import projetaobcc20172.com.projetopetemfoco.R;
+import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoFirebase;
+import projetaobcc20172.com.projetopetemfoco.model.Fornecedor;
 import projetaobcc20172.com.projetopetemfoco.model.Promocao;
+import projetaobcc20172.com.projetopetemfoco.model.Servico;
+import projetaobcc20172.com.projetopetemfoco.utils.Utils;
 
 public class VisualizarPromocaoActivity extends AppCompatActivity {
 
@@ -21,27 +32,13 @@ public class VisualizarPromocaoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_visualizar_promocao);
-        Button btnEst = findViewById(R.id.btnPromocaoEst);
         Toolbar toolbar = findViewById(R.id.tb_acesso_infomacoes_estabelecimento);
-        btnEst.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                exibirDetalhesEst();
-            }
-        });
         toolbar.setTitle(R.string.tb_detalhes_promocao);
         toolbar.setTitleTextColor(Color.WHITE);
         toolbar.setNavigationIcon(R.drawable.ic_action_arrow_left_white);
         setSupportActionBar(toolbar);
         this.mPromocao = (Promocao) getIntent().getSerializableExtra("promocao");
         inicializarTela();
-    }
-
-
-    private void exibirDetalhesEst(){
-        Intent intent = new Intent(this, ExibiInformacoesEstabelecimentoActivity.class);
-        intent.putExtra("Fornecedor", this.mPromocao.getmFornecedor());
-        this.startActivity(intent);
     }
 
     private void inicializarTela(){
@@ -58,5 +55,4 @@ public class VisualizarPromocaoActivity extends AppCompatActivity {
         onBackPressed();
         return true;
     }
-
 }

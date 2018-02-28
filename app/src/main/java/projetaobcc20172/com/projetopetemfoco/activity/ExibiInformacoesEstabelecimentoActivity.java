@@ -51,7 +51,7 @@ import projetaobcc20172.com.projetopetemfoco.model.Servico;
 
 public class ExibiInformacoesEstabelecimentoActivity extends AppCompatActivity implements Serializable {
 
-        private Fornecedor mFornecedor;
+    private Fornecedor mFornecedor;
     private Favorito mFavorito;
     private String mIdFavorito;
     private String mIdUsuarioLogado;
@@ -78,10 +78,6 @@ public class ExibiInformacoesEstabelecimentoActivity extends AppCompatActivity i
         mImagens.put("Autônomo",R.drawable.ic_action_autonomo);
         mImagens.put("Estabelecimento",R.drawable.ic_action_estabelecimentos);
 
-        // lista de serviços pertencente ao fornecedor
-        ArrayAdapter<Servico> mAdapter;
-
-
         // Receber os dados do estabelecimento da outra activity
         Intent i = getIntent();
         mFornecedor = (Fornecedor) i.getSerializableExtra("Fornecedor");
@@ -95,11 +91,10 @@ public class ExibiInformacoesEstabelecimentoActivity extends AppCompatActivity i
         TextView mExibeHorarioEstabelecimento = findViewById(R.id.tvHorario);
         TextView mExibeEnderecoEstabelecimento = findViewById(R.id.tvEnderecoEstabelecimentoCombinado);
 
-        ListView mExibeListaServicos = findViewById(R.id.lvListaServicos);
+        mExibeListaServicos = findViewById(R.id.lvListaServicos);
         ImageView img = findViewById(R.id.ivFotoDetalhesPet);
         img.setImageResource(mImagens.get(mFornecedor.getTipo()));
 
-        mExibeListaServicos = findViewById(R.id.lvListaServicos);
 
         mapView = findViewById(R.id.map_view);
 
@@ -231,7 +226,7 @@ public class ExibiInformacoesEstabelecimentoActivity extends AppCompatActivity i
 
     //Método que passa as informações de um servico
     public void chamarInfoServicosListener() {
-        this.mExibeListaServicos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        mExibeListaServicos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 carregarKeyServico(mFornecedor.getServicos().get(position));

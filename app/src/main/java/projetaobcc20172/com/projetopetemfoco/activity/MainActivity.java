@@ -33,7 +33,9 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.io.Serializable;
 
+import br.com.uol.pslibs.checkouttransparent.PSCheckout;
 import projetaobcc20172.com.projetopetemfoco.R;
+import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoExibirPromocao;
 import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoFirebase;
 import projetaobcc20172.com.projetopetemfoco.config.ConfiguracoesBuscaServico;
 import projetaobcc20172.com.projetopetemfoco.model.Usuario;
@@ -51,6 +53,7 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ConfiguracoesBuscaServico.inicializar();
+        ConfiguracaoExibirPromocao.inicializar();
         Localizacao.getCurrentLocation(this);
         setContentView(R.layout.activity_main);//Activity em que se encontra o navigator
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);//toolbar do navigator
@@ -163,8 +166,6 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
     }
 
-
-
     private void fecharTeclado(){
         View view = this.getCurrentFocus();
         if(view !=null){
@@ -186,6 +187,11 @@ public class MainActivity extends AppCompatActivity
     public static String getPreferences(String key, Context context) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         return preferences.getString(key, null);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        PSCheckout.onRequestPermissionsResult((AppCompatActivity) MainActivity.this, requestCode, permissions, grantResults);
     }
 }
 

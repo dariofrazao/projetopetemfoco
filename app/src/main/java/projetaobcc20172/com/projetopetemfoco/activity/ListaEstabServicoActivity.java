@@ -48,12 +48,15 @@ public class ListaEstabServicoActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.tbBuscaServicos);
         ImageView mFiltro = findViewById(R.id.ivFiltro);
         mProgresso = findViewById(R.id.pbProgressoBuscaServico);
+
         // Configura toolbar
         toolbar.setTitle("Serviços");
         toolbar.setTitleTextColor(Color.WHITE);
         toolbar.setNavigationIcon(R.drawable.ic_action_arrow_left_white);
         setSupportActionBar(toolbar);
+
         mListView = findViewById(R.id.lvEstaServicoBusca);
+
         mResultado = new ArrayList<String[]>();
         mAdapter = new ServicoAdapterListView(ListaEstabServicoActivity.this,mResultado);
         mListView.setAdapter(mAdapter);

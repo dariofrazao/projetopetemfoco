@@ -1,6 +1,8 @@
 package projetaobcc20172.com.projetopetemfoco.config;
 
 import android.app.Activity;
+import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,7 +19,7 @@ import projetaobcc20172.com.projetopetemfoco.utils.ServicoFornecedorComparatorPr
  * Como qual servico está sendo procurado,quais os tipos de pet
  */
 
-public class ConfiguracoesBuscaServico {
+public class ConfiguracoesBuscaServico extends AppCompatActivity {
 
     private static ArrayList<String> sOpcaosPet;
     private static Enumerates.Filtro sFiltro;
@@ -25,6 +27,9 @@ public class ConfiguracoesBuscaServico {
     private static Enumerates.Estado sEstado;
     private static String sOpTodos = "Todos";
     private static Raio sRaio;
+    public static double[] geoLocalizacaoEndenreco = new double[2];
+    public static Toast mToast;
+
 
     public static ArrayList<String> getsOpcaosPet() {
         return sOpcaosPet;
@@ -74,6 +79,11 @@ public class ConfiguracoesBuscaServico {
     public static void filtrar(Activity act, ArrayList<String[]> resultados){
         ArrayList<String[]> resultadoFiltrados = new ArrayList<>();
         double [] posicaoAtual = Localizacao.getCurrentLocation(act);
+
+        if (sFiltro==Enumerates.Filtro.PROXIMO_MINHA_RESIDENCIA){
+            posicaoAtual = geoLocalizacaoEndenreco;
+        }
+
         for(String[] valores:resultados){
             try {//Evita qualquer erro relacioanado com distância ou a latitude e longitude
                 double dist = Localizacao.distanciaEntreDoisPontos(act, posicaoAtual[0], posicaoAtual[1], Double.parseDouble(valores[4]), Double.parseDouble(valores[5]));
@@ -94,6 +104,10 @@ public class ConfiguracoesBuscaServico {
         //Ordena por preço
         else if(sFiltro.equals(Enumerates.Filtro.PRECO)){
             Collections.sort(resultados, new ServicoFornecedorComparatorPreco());
+        }
+        //Ordena por distância minmha residencia
+        else if(sFiltro.equals(Enumerates.Filtro.PROXIMO_MINHA_RESIDENCIA)){
+            Collections.sort(resultados, new ServicoFornecedorComparatorDist());
         }
         //Ordena por avaliação
         else if(sFiltro.equals(Enumerates.Filtro.AVALICAO)){

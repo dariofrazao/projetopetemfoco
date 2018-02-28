@@ -1,6 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/container_id"
     tools:context=".activity.ContratarServicoActivity">
 
     <include
@@ -28,12 +29,12 @@
         <WebView
             android:id="@+id/activity_main_webview"
             android:layout_width="match_parent"
-            android:layout_height="450dp"/>
+            android:layout_height="375dp"/>
 
         <Button
             android:id="@+id/btnAgendar"
             android:visibility="gone"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/shapebutton"
@@ -41,6 +42,34 @@
             android:paddingLeft="15dp"
             android:drawableLeft="@drawable/ic_action_check"
             android:text="Agendar Serviço" />
+
+        <Button
+            android:id="@+id/btnContratarServico"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/shapebutton"
+            android:paddingRight="100dp"
+            android:paddingLeft="15dp"
+            android:drawableLeft="@drawable/ic_purchage"
+            android:text="Pagar Serviço"
+            android:textColor="@color/branco"
+            android:textAlignment="viewEnd" />
+
+        <Button
+            android:id="@+id/btnBack"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/shapebutton"
+            android:paddingRight="145dp"
+            android:paddingLeft="15dp"
+            android:text="Voltar"
+            android:textColor="@color/branco"
+            android:layout_alignParentBottom="true"
+            android:textAlignment="viewEnd" />
 
     </LinearLayout>
 

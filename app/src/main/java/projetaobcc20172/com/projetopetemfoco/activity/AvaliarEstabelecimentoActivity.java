@@ -109,9 +109,7 @@ public class AvaliarEstabelecimentoActivity extends AppCompatActivity {
     }
 
     public void abrirActivityAnterior() {
-        Intent intent = new Intent(AvaliarEstabelecimentoActivity.this, MainActivity.class);
-        startActivity(intent);
-        finish();
+        onBackPressed();
     }
 
 

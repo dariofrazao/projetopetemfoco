@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container_id"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/fundo_degrade"
@@ -30,7 +31,7 @@
         <ImageView
             android:id="@+id/ivDetalhesServico"
             android:layout_width="match_parent"
-            android:layout_height="150dp"/>
+            android:layout_height="130dp"/>
 
         <TextView
             android:id="@+id/tvNome"
@@ -93,10 +94,11 @@
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
             android:background="@drawable/shapebutton"
-            android:paddingRight="40dp"
+            android:paddingRight="100dp"
             android:paddingLeft="15dp"
-            android:drawableLeft="@drawable/ic_action_agenda"
-            android:text="Agenda do Estabelecimento"
+            android:drawableLeft="@drawable/ic_action_check_white"
+            android:text="Agendar Serviço"
+            android:textColor="@color/branco"
             android:textAlignment="viewEnd"/>
 
         <View

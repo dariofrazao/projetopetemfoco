@@ -17,7 +17,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -35,11 +37,14 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 import projetaobcc20172.com.projetopetemfoco.R;
 import projetaobcc20172.com.projetopetemfoco.adapter.ListaInformacoesAdapterView;
 import projetaobcc20172.com.projetopetemfoco.config.ConfiguracaoFirebase;
 import projetaobcc20172.com.projetopetemfoco.database.services.FavoritoDaoImpl;
+import projetaobcc20172.com.projetopetemfoco.model.Endereco;
 import projetaobcc20172.com.projetopetemfoco.model.Favorito;
 import projetaobcc20172.com.projetopetemfoco.model.Fornecedor;
 import projetaobcc20172.com.projetopetemfoco.model.Servico;
@@ -53,8 +58,12 @@ public class ExibiInformacoesEstabelecimentoActivity extends AppCompatActivity i
     private String mConfirma = "0";
     private String mKey;
     private MapView mapView;
+
+    private Map<String, Integer> mImagens = new HashMap<String, Integer>();
+
     //private ArrayList<String[]> mResultado;
     private ListView mExibeListaServicos;
+
 
     @SuppressLint("WrongConstant")
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
@@ -64,6 +73,14 @@ public class ExibiInformacoesEstabelecimentoActivity extends AppCompatActivity i
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_acesso_informacoes_estabelecimento);
+
+
+        mImagens.put("Autônomo",R.drawable.ic_action_autonomo);
+        mImagens.put("Estabelecimento",R.drawable.ic_action_estabelecimentos);
+
+        // lista de serviços pertencente ao fornecedor
+        ArrayAdapter<Servico> mAdapter;
+
 
         // Receber os dados do estabelecimento da outra activity
         Intent i = getIntent();
@@ -77,7 +94,13 @@ public class ExibiInformacoesEstabelecimentoActivity extends AppCompatActivity i
         //TextView mExibeCpfCnpjEstabelecimento = findViewById(R.id.tvExibeCpfCnpjEstabelecimento);
         TextView mExibeHorarioEstabelecimento = findViewById(R.id.tvHorario);
         TextView mExibeEnderecoEstabelecimento = findViewById(R.id.tvEnderecoEstabelecimentoCombinado);
+
+        ListView mExibeListaServicos = findViewById(R.id.lvListaServicos);
+        ImageView img = findViewById(R.id.ivFotoDetalhesPet);
+        img.setImageResource(mImagens.get(mFornecedor.getTipo()));
+
         mExibeListaServicos = findViewById(R.id.lvListaServicos);
+
         mapView = findViewById(R.id.map_view);
 
         // Configura toolbar
@@ -112,7 +135,7 @@ public class ExibiInformacoesEstabelecimentoActivity extends AppCompatActivity i
         mExibeListaServicos.setAdapter(mAdapter);
 
         //Recuperar id do usuário logado
-        mIdUsuarioLogado = getPreferences("id", ExibiInformacoesEstabelecimentoActivity.this);
+        mIdUsuarioLogado = getPreferences("id", this);
 
         // Exibe a tela para avaliar
         ImageButton mBotaoAvaliarEstabelecimento = findViewById(R.id.botao_avaliar_estabelecimento);
@@ -154,6 +177,50 @@ public class ExibiInformacoesEstabelecimentoActivity extends AppCompatActivity i
 
         this.chamarInfoServicosListener();
 
+        Button mAgendaEstabelecimento;
+        mAgendaEstabelecimento = findViewById(R.id.btnAgendaFornecedor);
+        mAgendaEstabelecimento.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Query query = ConfiguracaoFirebase.getFirebase().child("fornecedor").orderByChild("nome");
+                query.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot dados : dataSnapshot.getChildren()) {
+                            float nota = 0;
+                            if (dados.child("nota").getValue(float.class) != null) {
+                                nota = dados.child("nota").getValue(float.class);
+                            }
+                            mFornecedor = new Fornecedor(dados.child("nome").getValue(String.class), dados.child("email").getValue(String.class), dados.child("cpfCnpj").getValue(String.class)
+                                    , dados.child("horarios").getValue(String.class), nota, dados.child("telefone").getValue(String.class),
+                                    dados.child("endereco").getValue(Endereco.class),dados.child("tipo").getValue(String.class));
+                            mFornecedor.setId(dados.getKey());
+                            Intent intent = new Intent(ExibiInformacoesEstabelecimentoActivity.this, ContratarServicoActivity.class);
+                            intent.putExtra("Fornecedor", mFornecedor);
+                            //intent.putExtra("Servico", mServico);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(intent);
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        //vazio
+                    }
+                });
+
+            }
+
+        });
+
+    }
+
+    //Método do botão voltar
+    @Override
+    public void onBackPressed() {
+        ExibiInformacoesEstabelecimentoActivity.super.onBackPressed();
     }
 
     @Override
@@ -274,7 +341,6 @@ public class ExibiInformacoesEstabelecimentoActivity extends AppCompatActivity i
             return false;
         }
         return true;
-
     }
 
     //Método que chama a activity para realizar a avaliação
@@ -282,21 +348,23 @@ public class ExibiInformacoesEstabelecimentoActivity extends AppCompatActivity i
         Intent intent = new Intent(ExibiInformacoesEstabelecimentoActivity.this, AvaliarEstabelecimentoActivity.class);
         intent.putExtra("Fornecedor", fornecedor);
         startActivity(intent);
-        finish();
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
+        outState.putAll(outState);
         super.onSaveInstanceState(outState);
         mapView.onSaveInstanceState(outState);
     }
 
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+    }
     //Método que chama a activity para exibir as avaliações
     public void avaliacoes(Fornecedor fornecedor) {
         Intent intent = new Intent(ExibiInformacoesEstabelecimentoActivity.this, ExibiAvalicoesEstabelecimentoActivity.class);
         intent.putExtra("Fornecedor", fornecedor);
         startActivity(intent);
-        finish();
     }
     //Método que recupera o id do usuário logado, para salvar o pet no nó do favorito que o está cadastrando--LuizAlberes
     public static String getPreferences(String key, Context context) {
@@ -349,5 +417,6 @@ public class ExibiInformacoesEstabelecimentoActivity extends AppCompatActivity i
         super.onPause();
         mapView.onPause();
     }
+
 }
 

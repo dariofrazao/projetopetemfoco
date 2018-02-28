@@ -18,7 +18,10 @@ public class FiltroEstabelecimentoActivity extends Activity implements View.OnCl
 
     private CheckBox cbProx;
     private CheckBox cbAvaliacao;
-    private byte raio;
+    private CheckBox cbTipoTodos;
+    private CheckBox cbTipoEtabelecimento;
+    private CheckBox cbTipoAutonomo;
+    private int raio;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,21 +30,45 @@ public class FiltroEstabelecimentoActivity extends Activity implements View.OnCl
         Button btnSalvarFiltro = findViewById(R.id.btnSalvarFiltro);
         cbProx = findViewById(R.id.cbProx);
         cbAvaliacao = findViewById(R.id.cbAva);
-        this.configurarSeekBar();
 
-        this.cbAvaliacao.setOnClickListener(new View.OnClickListener() {
+        cbTipoTodos = findViewById(R.id.cbTipoTodos);
+        cbTipoEtabelecimento = findViewById(R.id.cbTipoEstabelecimento);
+        cbTipoAutonomo = findViewById(R.id.cbTipoAutonomo);
+
+        configurarSeekBar();
+
+        cbAvaliacao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 controleCheckBox(1);
             }
         });
-
-        this.cbProx.setOnClickListener(new View.OnClickListener() {
+        cbProx.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 controleCheckBox(0);
             }
         });
+
+        cbTipoTodos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                controleCheckBoxTipo(0);
+            }
+        });
+        cbTipoEtabelecimento.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                controleCheckBoxTipo(1);
+            }
+        });
+        cbTipoAutonomo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                controleCheckBoxTipo(2);
+            }
+        });
+
 
         btnSalvarFiltro.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,6 +90,16 @@ public class FiltroEstabelecimentoActivity extends Activity implements View.OnCl
         }else if(ConfiguracaoBuscaEstab.getsFiltro().equals(Enumerates.Filtro.AVALICAO)){
             controleCheckBox(1);
         }
+
+        if(ConfiguracaoBuscaEstab.getsTipoFornecedor().equals(Enumerates.TipoFornecedor.TODOS)) {
+            controleCheckBox(0);
+        }else if(ConfiguracaoBuscaEstab.getsTipoFornecedor().equals(Enumerates.TipoFornecedor.ESTABELECIMENTO)){
+            controleCheckBox(1);
+        }else if(ConfiguracaoBuscaEstab.getsTipoFornecedor().equals(Enumerates.TipoFornecedor.AUTONOMO)){
+            controleCheckBox(2);
+        }
+
+
     }
     private void salvarOpcoes(){
         if(this.cbAvaliacao.isChecked()){
@@ -71,6 +108,19 @@ public class FiltroEstabelecimentoActivity extends Activity implements View.OnCl
         else if(this.cbProx.isChecked()){
             ConfiguracaoBuscaEstab.setsFiltro(Enumerates.Filtro.DISTANCIA);
         }
+
+
+        if(this.cbTipoTodos.isChecked()){
+            ConfiguracaoBuscaEstab.setsTipoFornecedor(Enumerates.TipoFornecedor.TODOS);
+        }
+        else if(this.cbTipoEtabelecimento.isChecked()){
+            ConfiguracaoBuscaEstab.setsTipoFornecedor(Enumerates.TipoFornecedor.ESTABELECIMENTO);
+        }
+        else if(this.cbTipoAutonomo.isChecked()){
+            ConfiguracaoBuscaEstab.setsTipoFornecedor(Enumerates.TipoFornecedor.AUTONOMO);
+        }
+
+
         ConfiguracaoBuscaEstab.getRaio().setRaioAtual((this.raio));
 
     }
@@ -121,5 +171,22 @@ public class FiltroEstabelecimentoActivity extends Activity implements View.OnCl
         else if(i==1){
             this.cbAvaliacao.setChecked(true);
         }
+    }
+
+    private void controleCheckBoxTipo(int i){
+        cbTipoTodos.setChecked(false);
+        cbTipoEtabelecimento.setChecked(false);
+        cbTipoAutonomo.setChecked(false);
+
+        if(i==0){
+            cbTipoTodos.setChecked(true);
+        }
+        else if(i==1){
+            cbTipoEtabelecimento.setChecked(true);
+        }
+        else if(i==2){
+            cbTipoAutonomo.setChecked(true);
+        }
+
     }
 }
